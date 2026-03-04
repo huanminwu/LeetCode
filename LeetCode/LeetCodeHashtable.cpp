@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 /// <summary>
 /// The class is to implement some string algorithm 
 /// </summary>
@@ -611,7 +611,7 @@ string LeetCodeHashtable::frequencySort(string s)
 }
 
 /// <summary>
-/// Leet code #500. Keyboard Row         
+/// Leet code #500. Keyboard Row  ?????? 
 /// 
 /// Given a List of words, return the words that can be typed using letters of alphabet 
 /// on only one row's of American keyboard like the image below. 
@@ -655,7 +655,7 @@ vector<string> LeetCodeHashtable::findWordsInOneRow(vector<string>& words)
 }
 
 /// <summary>
-/// Leet code #506. Relative Ranks         
+/// Leet code #506. Relative Ranks  ?????? 
 /// 
 /// Given scores of N athletes, find their relative ranks and the people with the top three highest 
 /// scores, who will be awarded medals: "Gold Medal", "Silver Medal" and "Bronze Medal".
@@ -764,7 +764,7 @@ int LeetCodeHashtable::findPairs(vector<int>& nums, int k)
 }
 
 /// <summary>
-/// Leet code #575. Distribute Candies       
+/// Leet code #575. Distribute Candies?????? 
 /// 
 /// Given an integer array with even length, where different numbers in 
 /// this array represent different kinds of candies. Each number means one
@@ -7131,5 +7131,295 @@ int LeetCodeHashtable::mostFrequentEven(vector<int>& nums)
         }
     }
     return result;
+}
+
+/// <summary>
+ /// Leet Code 3839. Number of Prefix Connected Groups
+ ///                                                  
+ /// Medium
+ ///
+ /// You are given an array of strings words and an integer k.
+ /// Two words a and b at distinct indices are prefix - connected if 
+ /// a[0..k - 1] == b[0..k - 1].
+ ///
+ /// A connected group is a set of words such that each pair of words 
+ /// is prefix - connected.
+ /// Return the number of connected groups that contain at least two words, 
+ /// formed from the given words.
+ ///
+ /// Note:
+ /// Words with length less than k cannot join any group and are ignored.
+ /// Duplicate strings are treated as separate words.
+ ///
+ /// Example 1:
+ /// Input: words = ["apple", "apply", "banana", "bandit"], k = 2
+ /// Output : 2
+ /// Explanation :
+ /// Words sharing the same first k = 2 letters are grouped together :
+ /// words[0] = "apple" and words[1] = "apply" share prefix "ap".
+ /// words[2] = "banana" and words[3] = "bandit" share prefix "ba".
+ /// Thus, there are 2 connected groups, each containing at least two 
+ /// words.
+ ///     
+ /// Example 2:
+ /// Input: words = ["car", "cat", "cartoon"], k = 3
+ /// Output : 1
+ ///
+ /// Explanation :
+ /// Words are evaluated for a prefix of length k = 3 :
+ /// words[0] = "car" and words[2] = "cartoon" share prefix "car".
+ /// words[1] = "cat" does not share a 3 - length prefix with any 
+ /// other word.
+ /// Thus, there is 1 connected group.
+ ///
+ /// Example 3:
+ /// Input: words = ["bat", "dog", "dog", "doggy", "bat"], k = 3
+ /// Output : 2
+ ///
+ /// Explanation :
+ /// Words are evaluated for a prefix of length k = 3 :
+ /// words[0] = "bat" and words[4] = "bat" form a group.
+ /// words[1] = "dog", words[2] = "dog" and words[3] = "doggy" 
+ /// share prefix "dog".
+ /// Thus, there are 2 connected groups, each containing at 
+ /// least two words.
+ /// 
+ /// Constraints:
+ /// 1. 1 <= words.length <= 5000
+ /// 2. 1 <= words.length <= 5000
+ /// 3. 1 <= words[i].length <= 100
+ /// 4. 1 <= k <= 100
+ /// 5. All strings in words consist of lowercase English letters.
+ /// </summary>
+int LeetCodeHashtable::prefixConnected(vector<string>& words, int k)
+{
+    unordered_map<string, int> prefix_count;
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        string prefix = words[i].substr(0, k);
+        prefix_count[prefix]++;
+    }
+    int result = 0;
+    for (auto itr : prefix_count)
+    {
+        if (itr.first.size() < k) continue;
+        if (itr.second > 1) result++;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3843. First Element with Unique Frequency
+///                                                  
+/// Medium
+///
+/// You are given an integer array nums.
+///
+/// Return an integer denoting the first element(scanning from left to 
+/// right) in nums whose frequency is unique.That is, no other integer 
+/// appears the same number of times in nums.If there is no such element, 
+/// return -1.
+///
+/// Example 1:
+/// Input: nums = [20, 10, 30, 30]
+/// Output : 30
+///
+/// Explanation :
+/// 20 appears once.
+/// 10 appears once.
+/// 30 appears twice.
+/// The frequency of 30 is unique because no other integer appears exactly 
+/// twice.
+/// 
+/// Example 2:
+/// Input: nums = [20, 20, 10, 30, 30, 30]
+/// Output : 20
+/// Explanation :
+/// 20 appears twice.
+/// 10 appears once.
+/// 30 appears 3 times.
+/// The frequency of 20, 10, and 30 are unique.The first element 
+/// that has unique frequency is 20.
+///
+/// Example 3:
+/// Input: nums = [10, 10, 20, 20]
+/// Output : -1
+/// Explanation :
+/// 10 appears twice.
+/// 20 appears twice.
+/// No element has a unique frequency.
+/// 
+/// Constraints :
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeHashtable::firstUniqueFreq(vector<int>& nums)
+{
+    unordered_map<int, int> num_count;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        num_count[nums[i]]++;
+    }
+    unordered_map<int, int> freq_count;
+    int result = -1;
+    for (auto itr : num_count)
+    {
+        freq_count[itr.second]++;
+    }
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (freq_count[num_count[nums[i]]] == 1)
+        {
+            result = nums[i];
+            break;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3846. Total Distance to Type a String Using One Finger
+///                                                  
+/// Medium
+///
+/// There is a special keyboard where keys are arranged in a rectangular 
+/// grid as follows.
+/// q	w	e	r	t	y	u	i	o	p
+/// a	s	d	f	g	h	j	k	l
+/// z	x	c	v	b	n	m
+/// You are given a string s that consists of lowercase English letters 
+/// only.Return an integer denoting the total distance to type s using 
+/// only one finger.Your finger starts on the key 'a'.
+/// The distance between two keys at(r1, c1) and (r2, c2) is 
+/// | r1 - r2 | +| c1 - c2 | .
+///
+/// Example 1:
+/// Input: s = "hello"
+/// Output : 17
+/// Explanation :
+/// Your finger starts at 'a', which is at(1, 0).
+/// Move to 'h', which is at(1, 5).The distance is 
+/// | 1 - 1 | +| 0 - 5 | = 5.
+/// Move to 'e', which is at(0, 2).The distance is 
+/// | 1 - 0 | +| 5 - 2 | = 4.
+/// Move to 'l', which is at(1, 8).The distance is 
+/// | 0 - 1 | +| 2 - 8 | = 7.
+/// Move to 'l', which is at(1, 8).The distance is 
+/// | 1 - 1 | +| 8 - 8 | = 0.
+/// Move to 'o', which is at(0, 8).The distance is 
+/// | 1 - 0 | +| 8 - 8 | = 1.
+/// Total distance is 5 + 4 + 7 + 0 + 1 = 17.
+///
+/// Example 2:
+/// Input: s = "a"
+/// Output : 0
+/// Explanation :
+/// Your finger starts at 'a', which is at(1, 0).
+/// Move to 'a', which is at(1, 0).The distance is 
+/// | 1 - 1 | +| 0 - 0 | = 0.
+/// Total distance is 0.
+///
+/// Constraints :
+/// 1. 1 <= s.length <= 10^4
+/// 2. s consists of lowercase English letters only.
+/// </summary>
+int LeetCodeHashtable::totalDistance(string s)
+{
+    vector<pair<int, int>> key_pos(26);
+    vector<string> keyboard = { "qwertyuiop", "asdfghjkl", "zxcvbnm" };
+    for (size_t i = 0; i < keyboard.size(); i++)
+    {
+        for (size_t j = 0; j < keyboard[i].size(); j++)
+        {
+            char c = keyboard[i][j];
+            key_pos[c - 'a'] = make_pair(i, j);
+        }
+    }
+    int result = 0;
+    pair<int, int> current_pos = key_pos[0];
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        pair<int, int> next_pos = key_pos[s[i] - 'a'];
+        result += abs(current_pos.first - next_pos.first) + 
+                  abs(current_pos.second - next_pos.second);
+        current_pos = next_pos;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3852. Smallest Pair With Different Frequencies
+/// 
+/// Easy
+///
+/// You are given an integer array nums.
+///
+/// Consider all pairs of distinct values x and y from nums such that :
+///
+/// x < y
+/// x and y have different frequencies in nums.
+/// Among all such pairs :
+/// Choose the pair with the smallest possible value of x.
+/// If multiple pairs have the same x, choose the one with the smallest 
+/// possible value of y.
+/// Return an integer array[x, y].If no valid pair exists, return[-1, -1].
+///
+/// The frequency of a value x is the number of times it occurs in the 
+/// array.
+///
+/// Example 1:
+/// Input: nums = [1, 1, 2, 2, 3, 4]
+/// Output : [1, 3]
+/// Explanation :
+/// The smallest value is 1 with a frequency of 2, and the smallest value 
+/// greater than 1 that has a different frequency from 1 is 3 with a 
+/// frequency of 1. Thus, the answer is[1, 3].
+///
+/// Example 2 :
+/// Input : nums = [1, 5]
+/// Output : [-1, -1]
+/// Explanation :
+/// Both values have the same frequency, so no valid pair exists.
+/// Return [-1, -1].
+///
+/// Example 3 :
+/// Input : nums = [7]
+/// Output : [-1, -1]
+/// Explanation :
+/// There is only one value in the array, so no valid pair exists.
+/// Return[-1, -1].
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2.  1 <= nums[i] <= 100
+/// </summary>
+vector<int> LeetCodeHashtable::minDistinctFreqPair(vector<int>& nums)
+{
+    map<int, int> num_count;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        num_count[nums[i]]++;
+    }
+    int a = -1, b = -1;
+    for (auto itr : num_count)
+    {
+        if (a == -1)
+        {
+            a = itr.first;
+        }
+        else if (itr.second != num_count[a])
+        {
+            b = itr.first;
+            break;
+        }
+    }
+    if (a != -1 && b != -1)
+    {
+        return {a, b};
+    }
+    else
+    {
+        return { -1, -1 };
+    }
 }
 #pragma endregion

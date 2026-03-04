@@ -14359,9 +14359,9 @@ int LeetCodeTree::treeQueries(int parent, int node, vector<vector<pair<int, int>
 /// an undirected edge from node ui to vi with weight wi.
 /// You are also given a 2D integer array queries of length q, 
 /// where each queries[i] is either:
-/// [1, u, v, w'] ? Update the weight of the edge between nodes u and v 
+/// [1, u, v, w] Update the weight of the edge between nodes u and v 
 /// to w', where (u, v) is guaranteed to be an edge present in edges.
-/// [2, x] ? Compute the shortest path distance from the root node 1 to 
+/// [2, x] Compute the shortest path distance from the root node 1 to 
 /// node x.
 /// Return an integer array answer, where answer[i] is the shortest 
 /// path distance from node 1 to x for the ith query of [2, x].

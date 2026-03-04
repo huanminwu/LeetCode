@@ -43,9 +43,9 @@ int LeetCodeBit::getSum(int a, int b)
 /// <summary>
 /// Leet code # 191. Number of 1 Bits
 /// 
-/// Write a function that takes an unsigned integer and returns the number of ¡¯1' 
+/// Write a function that takes an unsigned integer and returns the number of ??1' 
 /// bits it has (also known as the Hamming weight). 
-/// For example, the 32-bit integer ¡¯11' has binary representation 
+/// For example, the 32-bit integer ??11' has binary representation 
 /// 00000000000000000000000000001011, so the function should return 3. 
 /// </summary>
 int LeetCodeBit::hammingWeight(uint32_t n)
@@ -61,17 +61,20 @@ int LeetCodeBit::hammingWeight(uint32_t n)
 
 /// <summary>
 /// Leet code #338. Counting Bits    
-/// Given a non negative integer number num. For every numbers i in the range 0 ¡Ü i ¡Ü num 
+/// Given a non negative integer number num. For every numbers i in the range 0 ?? i ?? num 
 /// calculate the number of 1's in their binary representation and return them as an array. 
 /// Example:
 /// For num = 5 you should return [0,1,1,2,1,2].
 /// Follow up: 
-/// It is very easy to come up with a solution with run time O(n*sizeof(integer)). But can you do it in linear time O(n) /possibly in a single pass?
+/// It is very easy to come up with a solution with run time O(n*sizeof(integer)).
+/// But can you do it in linear time O(n) /possibly in a single pass?
 /// Space complexity should be O(n).
-/// Can you do it like a boss? Do it without using any builtin function like __builtin_popcount in c++ or in any other language.
+/// Can you do it like a boss? Do it without using any builtin function 
+/// like __builtin_popcount in c++ or in any other language.
 /// Hint:
 /// 1.You should make use of what you have produced already.
-/// 2.Divide the numbers in ranges like [2-3], [4-7], [8-15] and so on. And try to generate new range from previous.
+/// 2.Divide the numbers in ranges like [2-3], [4-7], [8-15] and so on. And try to 
+///   generate new range from previous.
 /// 3.Or does the odd/even status of the number help you in calculating the number of 1s?
 /// </summary>
 vector<int> LeetCodeBit::countBits(int num)
@@ -185,7 +188,7 @@ vector<int> LeetCodeBit::grayCode(int n)
 
 /// <summary>
 /// Leet code #405. Convert a Number to Hexadecimal 
-/// Given an integer, write an algorithm to convert it to hexadecimal. For negative integer, two¡¯s complement method is used.  
+/// Given an integer, write an algorithm to convert it to hexadecimal. For negative integer, two??s complement method is used.  
 /// Note: 
 /// 1.All letters in hexadecimal (a-f) must be in lowercase.
 /// 2.The hexadecimal string must not contain extra leading 0s. If the number is zero, it is represented by a single zero character '0'; otherwise, 
@@ -457,8 +460,8 @@ vector<int> LeetCodeBit::singleNumberIII(vector<int>& nums)
 
 /// <summary>
 /// Leet code #421. Maximum XOR of Two Numbers in an Array Add to List 
-/// Given a non-empty array of numbers, a0, a1, a2, ¡­ , an-1, where 0 ¡Ü ai < 231.
-/// Find the maximum result of ai XOR aj, where 0 ¡Ü i, j < n. 
+/// Given a non-empty array of numbers, a0, a1, a2, ?? , an-1, where 0 ?? ai < 231.
+/// Find the maximum result of ai XOR aj, where 0 ?? i, j < n. 
 ///
 /// Could you do this in O(n) runtime? 
 /// Example:
@@ -501,7 +504,7 @@ int LeetCodeBit::findMaximumXOR(vector<int>& nums)
 /// corresponding bits are different.
 /// Given two integers x and y, calculate the Hamming distance.
 /// Note:
-/// 0 ¡Ü x, y < 231. 
+/// 0 ?? x, y < 231. 
 /// Example: 
 /// Input: x = 1, y = 4
 /// Output: 2
@@ -613,7 +616,7 @@ int LeetCodeBit::lastRemaining(int n)
 /// strategy is to flip the bits of its binary representation.
 /// Note:
 /// 1.The given integer is guaranteed to fit within the range of a 32-bit signed integer.
-/// 2.You could assume no leading zero bit in the integer¡¯s binary representation.
+/// 2.You could assume no leading zero bit in the integer??s binary representation.
 /// Example 1:
 /// Input: 5
 /// Output: 2
@@ -5391,7 +5394,7 @@ long long LeetCodeBit::maximizeXorAndXor(vector<int>& nums)
 ///
 /// Hard
 ///
-/// Given an array of positive integers nums of length n and a non‑negative 
+/// Given an array of positive integers nums of length n and a non?negative 
 /// integer k.
 ///
 /// Return the number of contiguous subarrays whose bitwise XOR of all 
@@ -6178,4 +6181,208 @@ int LeetCodeBit::maximumAND(vector<int>& nums, int k, int m)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3845. Maximum Subarray XOR with Bounded Range
+///
+/// Hard
+/// 
+/// You are given a non - negative integer array nums and an integer k.
+/// You must select a subarray of nums such that the difference between 
+/// its maximum and minimum elements is at most k.The value of this 
+/// subarray is the bitwise XOR of all elements in the subarray.
+///
+/// Return an integer denoting the maximum possible value of the selected 
+/// subarray.
+///
+/// Example 1:
+/// Input: nums = [5, 4, 5, 6], k = 2
+/// Output : 7
+/// Explanation :
+/// Select the subarray[5, 4, 5, 6].
+/// The difference between its maximum and minimum elements is 6 - 4 = 2 <= k.
+/// The value is 4 XOR 5 XOR 6 = 7.
+///
+/// Example 2 :
+/// Input: nums = [5, 4, 5, 6], k = 1
+/// Output : 6
+/// Explanation :
+/// Select the subarray[5, 4, 5, 6].
+/// The difference between its maximum and minimum elements is 6 - 5 = 1 <= k.
+/// The value is 5 XOR 4 XOR 5 XOR 6 = 6
+/// 
+/// Constraints :
+/// 1. 1 <= nums.length <= 4 * 10^4
+/// 2. 0 <= nums[i] < 2^15
+/// 3. 0 <= k < 2^15
+/// </summary>
+int LeetCodeBit::maxXor(vector<int>& nums, int k)
+{
+    set<pair<int, int>> heap;
+    int left = -1;
+    int right = 0;
+    int n = nums.size();
+    int result = 0;
+    TrieBitNode trie(15);
+    trie.increase(0, 1);
+    vector<int> nums_xor(n);
+    for (right = 0; right < n; right++)
+    {
+        heap.insert({ nums[right], right });
+        nums_xor[right] = nums[right];
+        if (right > 0)
+        {
+            nums_xor[right] ^= nums_xor[right - 1];
+        }
+        trie.increase(nums_xor[right], 1);
+        while (heap.rbegin()->first - heap.begin()->first > k)
+        {
+
+            if (left == -1) trie.decrease(0, 1);
+            else trie.decrease(nums_xor[left], 1);
+            left++;
+            heap.erase({ nums[left], left });
+        }
+        result = max(result, (int)trie.maxXorFind(nums_xor[right]));
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3849. Maximum Bitwise XOR After Rearrangement
+///
+/// Medium
+///
+/// You are given two binary strings s and t, each of length n.
+///
+/// You may rearrange the characters of t in any order, but s must remain 
+/// unchanged.
+///
+/// Return a binary string of length n representing the maximum integer 
+/// value obtainable by taking the bitwise XOR of s and rearranged t.
+///
+/// Example 1:
+/// Input: s = "101", t = "011"
+/// Output : "110"
+/// Explanation :
+/// One optimal rearrangement of t is "011".
+/// The bitwise XOR of s and rearranged t is "101" XOR "011" = "110", 
+/// which is the maximum possible.
+///
+/// Example 2:
+/// Input : s = "0110", t = "1110"
+/// Output : "1101"
+/// Explanation :
+/// One optimal rearrangement of t is "1011".
+/// The bitwise XOR of s and rearranged t is "0110" XOR "1011" = "1101", 
+/// which is the maximum possible.
+///
+/// Example 3 :
+/// Input : s = "0101", t = "1001"
+/// Output : "1111"
+/// Explanation :
+/// One optimal rearrangement of t is "1010".
+/// The bitwise XOR of s and rearranged t is "0101" XOR "1010" = "1111", 
+/// which is the maximum possible.
+///
+/// Constraints :
+/// 1. 1 <= n == s.length == t.length <= 2 * 10^5
+/// 2. s[i] and t[i] are either '0' or '1'.
+/// </summary>
+string LeetCodeBit::maximumXor(string s, string t)
+{
+    vector<int> count(2);
+    for (size_t i = 0; i < t.size(); i++)
+    {
+        count[t[i] - '0']++;
+    }
+    string result;
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        int bit = s[i] - '0';
+        if (count[1 - bit] > 0)
+        {
+            result += '1';
+            count[1 - bit]--;
+        }
+        else
+        {
+            result += '0';
+            count[bit]--;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3858. Minimum Bitwise OR From Grid
+///
+/// Medium
+///
+/// You are given a 2D integer array grid of size m x n.
+/// 
+/// You must select exactly one integer from each row of the grid.
+///
+/// Return an integer denoting the minimum possible bitwise OR of 
+/// the selected integers from each row.
+///
+/// Example 1:
+/// Input: grid = [[1, 5], [2, 4]]
+/// Output : 3
+/// Explanation :
+/// Choose 1 from the first row and 2 from the second row.
+/// The bitwise OR of 1 | 2 = 3, which is the minimum possible.
+///
+/// Example 2 :
+/// Input : grid = [[3, 5], [6, 4]]
+/// Output : 5
+/// Explanation :
+/// Choose 5 from the first row and 4 from the second row.
+/// The bitwise OR of 5 | 4 = 5, which is the minimum possible.
+/// 
+/// Example 3 :
+/// Input : grid = [[7, 9, 8]]
+/// Output : 7
+/// Explanation :
+/// Choosing 7 gives the minimum bitwise OR.
+/// 
+/// Constraints :
+/// 1. 1 <= m == grid.length <= 10^5
+/// 2. 1 <= n == grid[i].length <= 10^5
+/// 3. m * n <= 10^5
+/// 4. 1 <= grid[i][j] <= 10^5
+/// </summary>
+int LeetCodeBit::minimumOR(vector<vector<int>>& grid)
+{
+    int result = 0, mask = 0;
+    for (int i = 20; i >= 0; i--)
+    {
+        int bit = 1 << i;
+        for (size_t j = 0; j < grid.size(); j++)
+        {
+            bool bSet = true;
+            for (size_t k = 0; k < grid[j].size(); k++)
+            {
+                if (((grid[j][k] & mask) | result) != result)
+                {
+                    continue;
+                }
+                if ((grid[j][k] & bit) == 0)
+                {
+                    bSet = false;
+                    break;
+                }
+            }
+            if (bSet)
+            {
+                result |= bit;
+                break;
+            }
+        }
+        mask |= bit;
+    }
+    return result;
+}
+
+
 #pragma endregion

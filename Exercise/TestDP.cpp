@@ -6498,8 +6498,56 @@ void TestLeetCode3836(void)
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3840(void)
+{
+    Logger::WriteMessage("Test Leet Code 3840");
+    LeetCodeDP leetCode;
+    vector<int> nums = {1, 4, 3, 5};
+    vector<int> colors = {1, 1, 2, 2};
+    long long result = leetCode.robV(nums, colors);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(colors);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,1,2,4 };
+    colors = { 2,3,2,2 };
+    result = leetCode.robV(nums, colors);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(colors);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 10,1,3,9 };
+    colors = { 1,1,1,2 };
+    result = leetCode.robV(nums, colors);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(colors);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3844(void)
+{
+    Logger::WriteMessage("Test Leet Code 3844");
+    LeetCodeDP leetCode;
+    string s = "abca";
+    int result = leetCode.almostPalindromic(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "abba";
+    result = leetCode.almostPalindromic(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "zzabba";
+    result = leetCode.almostPalindromic(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3844();
+    TestLeetCode3840();
     TestLeetCode3836();
     TestLeetCode3473();
     TestLeetCode3801();

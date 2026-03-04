@@ -1120,8 +1120,55 @@ void TestLeetCode3835(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3853(void)
+{
+    Logger::WriteMessage("Test Leet Code 3853");
+    LeetCodeTwoPointer leetCode;
+    string s = "abca";
+    int k = 3;
+    string result = leetCode.mergeCharacters(s, k);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + result);
+
+    s = "aabca";
+    k = 2;
+    result = leetCode.mergeCharacters(s, k);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + result);
+
+    s = "yybyzybz";
+    k = 2;
+    result = leetCode.mergeCharacters(s, k);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + result);
+}
+
+void TestLeetCode3859(void)
+{
+    Logger::WriteMessage("Test Leet Code 3859");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = {1, 2, 1, 2, 2};
+    int k = 2, m = 2;
+    long long result = leetCode.countSubarrays(nums, k, m);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; m = " + to_string(m));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,1,2,4 };
+    k = 2, m = 1;
+    result = leetCode.countSubarrays(nums, k, m);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; m = " + to_string(m));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode3859();
+    TestLeetCode3853();
     TestLeetCode3835();
     TestLeetCode3795();
     TestLeetCode3679();

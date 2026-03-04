@@ -13014,8 +13014,135 @@ void TestLeetCode3833(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3837(void)
+{
+    Logger::WriteMessage("Test Leet Code 3837");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 1, 1 };
+    int k = 1;
+    vector<int> result = leetCode.delayedCount(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    nums = { 3, 1, 3, 1 };
+    k = 0;
+    result = leetCode.delayedCount(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3842(void)
+{
+    Logger::WriteMessage("Test Leet Code 3842");
+    LeetCodeArray leetCode;
+    vector<int> bulbs = { 10, 30, 20, 10 };
+    vector<int> result = leetCode.toggleLightBulbs(bulbs);
+    Logger::WriteMessage(bulbs);
+    Logger::WriteMessage(result);
+
+    bulbs = { 100,100 };
+    result = leetCode.toggleLightBulbs(bulbs);
+    Logger::WriteMessage(bulbs);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3847(void)
+{
+    Logger::WriteMessage("Test Leet Code 3847");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 3 };
+    int result = leetCode.scoreDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,4,2,1,2,1 };
+    result = leetCode.scoreDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1 };
+    result = leetCode.scoreDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3851(void)
+{
+    Logger::WriteMessage("Test Leet Code 3851");
+    LeetCodeArray leetCode;
+    vector<vector<int>> requests = {{1, 1}, {2, 1}, {1, 7}, {2, 8}};
+    int k = 1;
+    int window = 4; 
+    int result = leetCode.maxRequests(requests, k, window);
+    Logger::WriteMessage(requests);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("window = " + to_string(window));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    requests = {{1, 2}, {1, 5}, {1, 2}, {1, 6}};
+    k = 2;
+    window = 5;
+    result = leetCode.maxRequests(requests, k, window);
+    Logger::WriteMessage(requests);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("window = " + to_string(window));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    requests = {{1, 1}, {2, 5}, {1, 2}, {3, 9}};
+    k = 1;
+    window = 1;
+    result = leetCode.maxRequests(requests, k, window);
+    Logger::WriteMessage(requests);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("window = " + to_string(window));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
+void TestLeetCode3854(void)
+{
+    Logger::WriteMessage("Test Leet Code 3854");
+    LeetCodeArray leetCode;
+    vector<int> nums = { -2, -3, 1, 4 };
+    vector<int> result = leetCode.makeParityAlternating(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 0,2,-2 };
+    result = leetCode.makeParityAlternating(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 1,1,1,1 };
+    result = leetCode.makeParityAlternating(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 7, 7, 4 };
+    result = leetCode.makeParityAlternating(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { -8, 6, 3 };
+    result = leetCode.makeParityAlternating(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { -2, -4 };
+    result = leetCode.makeParityAlternating(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3854();
+    TestLeetCode3851();
+    TestLeetCode3847();
+    TestLeetCode3842();
+    TestLeetCode3837();
     TestLeetCode3833();
     TestLeetCode3830();
     TestLeetCode3819();

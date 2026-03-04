@@ -23281,5 +23281,249 @@ long long LeetCodeDP::maxScore(vector<int>& nums1, vector<int>& nums2, int k)
     }
     return dp[n - 1][m - 1][k - 1];
 }
+
+/// <summary>
+/// Leet Code 3840. House Robber V
+/// 
+/// Medium
+/// 
+/// You are a professional robber planning to rob houses along a street.
+/// Each house has a certain amount of money stashed and is protected by 
+/// a security system with a color code.
+///
+/// You are given two integer arrays nums and colors, both of length n, 
+/// where nums[i] is the amount of money in the ith house and colors[i] 
+/// is the color code of that house.
+///
+/// You cannot rob two adjacent houses if they share the same color code.
+///
+/// Return the maximum amount of money you can rob.
+///
+/// Example 1:
+/// Input: nums = [1, 4, 3, 5], colors = [1, 1, 2, 2]
+/// Output : 9
+///
+/// Explanation :
+///
+/// Choose houses i = 1 with nums[1] = 4 and i = 3 with nums[3] = 5 
+/// because they are non - adjacent.
+/// Thus, the total amount robbed is 4 + 5 = 9.
+///
+/// Example 2 :
+/// Input : nums = [3, 1, 2, 4], colors = [2, 3, 2, 2]
+/// Output : 8
+/// Explanation :
+///
+/// Choose houses i = 0 with nums[0] = 3, i = 1 with nums[1] = 1, 
+/// and i = 3 with nums[3] = 4.
+/// This selection is valid because houses i = 0 and i = 1 have 
+/// different colors, and house i = 3 is non - adjacent to i = 1.
+/// Thus, the total amount robbed is 3 + 1 + 4 = 8.
+///
+/// Example 3 :
+/// Input : nums = [10, 1, 3, 9], colors = [1, 1, 1, 2]
+/// Output : 22
+/// Explanation :
+///
+/// Choose houses i = 0 with nums[0] = 10, i = 2 with nums[2] = 3, 
+/// and i = 3 with nums[3] = 9.
+/// This selection is valid because houses i = 0 and i = 2 are 
+/// non - adjacent, and houses i = 2 and i = 3 have different colors.
+/// Thus, the total amount robbed is 10 + 3 + 9 = 22.
+//
+/// Constraints :
+/// 1. 1 <= n == nums.length == colors.length <= 10^5
+/// 2. 1 <= nums[i], colors[i] <= 10^5
+/// </summary>
+long long LeetCodeDP::robV(vector<int>& nums, vector<int>& colors)
+{
+    int n = nums.size();
+    vector<long long> dp(n + 1);
+    for (int i = 0; i < n; i++)
+    {
+        if (i == 0)
+        {
+            dp[i+1] = nums[i];
+        }
+        else
+        {
+            if (colors[i] == colors[i - 1])
+            {
+                dp[i+1] = max(dp[i], dp[i-1] + nums[i]);
+            }
+            else
+            {
+                dp[i+1] = dp[i] + nums[i];
+            }
+        }
+    }
+    return dp[n];
+}
+
+
+/// <summary>
+/// Leet Code 3844. Longest Almost - Palindromic Substring
+/// 
+/// Medium
+/// 
+/// You are given a string s consisting of lowercase English letters.
+///
+/// A substring is almost - palindromic if it becomes a palindrome 
+/// after removing exactly one character from it.
+///
+/// Return an integer denoting the length of the longest almost - 
+/// palindromic substring in s.
+///
+/// Example 1:
+/// Input: s = "abca"
+/// Output : 4
+/// Explanation :
+/// Choose the substring "abca".
+/// Remove "abca".
+/// The string becomes "aba", which is a palindrome.
+/// Therefore, "abca" is almost - palindromic.
+///
+/// Example 2:
+/// Input: s = "abba"
+/// Output : 4
+/// Explanation :
+/// Choose the substring "abba".
+/// Remove "abba".
+/// The string becomes "aba", which is a palindrome.
+/// Therefore, "abba" is almost - palindromic.
+///
+/// Example 3:
+/// Input: s = "zzabba"
+/// Output : 5
+/// Explanation :
+/// Choose the substring "zzabba".
+/// Remove "zabba".
+/// The string becomes "abba", which is a palindrome.
+/// Therefore, "zabba" is almost - palindromic.
+///
+/// Constraints:
+/// 1. 2 <= s.length <= 2500
+/// 2. s consists of only lowercase English letters.
+/// </summary>
+int LeetCodeDP::almostPalindromic(string s)
+{
+    int n = s.size();
+    vector<vector<int>> dp(n, vector<int>(n, n));
+    int result = 0;
+    for (int i = n - 1; i >= 0; i--)
+    {
+        for (int j = i; j < n; j++)
+        {
+            if (s[i] == s[j])
+            {
+                if (j - i <= 2)
+                {
+                    dp[i][j] = 0;
+                }
+                else
+                {
+                    dp[i][j] = dp[i + 1][j - 1];
+                }
+            }
+            if (i < n - 1) dp[i][j] = min(dp[i][j], dp[i + 1][j] + 1);
+            if (j > 0) dp[i][j] = min(dp[i][j], dp[i][j - 1] + 1);
+            if (dp[i][j] < 2) result = max(result, j - i + 1);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3850. Count Sequences to K
+/// 
+/// Hard
+/// 
+/// You are given an integer array nums, and an integer k.
+///
+/// Start with an initial value val = 1 and process nums from left to 
+/// right.At each index i, you must choose exactly one of the following 
+/// actions :
+///
+/// Multiply val by nums[i].
+/// Divide val by nums[i].
+/// Leave val unchanged.
+/// After processing all elements, val is considered equal to k only if 
+/// its final rational value exactly equals k.
+///
+/// Return the count of distinct sequences of choices that result in 
+/// val == k.
+/// Note: Division is rational(exact), not integer division.For 
+/// example, 2 / 4 = 1 / 2.
+///
+/// Example 1 :
+/// Input : nums = [2, 3, 2], k = 6
+/// Output : 2
+/// Explanation :
+/// The following 2 distinct sequences of choices result in val == k :
+///
+/// Sequence Operation on nums[0] Operation on nums[1] 
+/// Operation on nums[2] Final val
+/// 1 Multiply : val = 1 * 2 = 2 Multiply : val = 2 * 3 = 6 Leave val 
+/// unchanged 6
+/// 2 Leave val unchanged Multiply : val = 1 * 3 = 3 Multiply : 
+/// val = 3 * 2 = 6 6
+/// 
+/// Example 2 :
+/// Input : nums = [4, 6, 3], k = 2
+/// Output : 2
+/// Explanation :
+/// The following 2 distinct sequences of choices result in val == k :
+/// Sequence Operation on nums[0] Operation on nums[1] Operation on 
+/// nums[2] Final val
+/// 1 Multiply : val = 1 * 4 = 4 Divide : val = 4 / 6 = 2 / 3 
+/// Multiply : val = (2 / 3) * 3 = 2 2
+/// 2 Leave val unchanged Multiply : val = 1 * 6 = 6 
+/// Divide : val = 6 / 3 = 2 2
+///    
+/// Example 3 :
+/// Input : nums = [1, 5], k = 1
+/// Output : 3
+/// Explanation :
+/// The following 3 distinct sequences of choices result in val == k :
+/// Sequence Operation on nums[0] Operation on nums[1] Final val
+/// 1 Multiply : val = 1 * 1 = 1 Leave val unchanged 1
+/// 2 Divide : val = 1 / 1 = 1 Leave val unchanged 1
+/// 3 Leave val unchanged Leave val unchanged 1
+/// Constraints :
+/// 1. 1 <= nums.length <= 19
+/// 2. 1 <= nums[i] <= 6
+/// 3. 1 <= k <= 10^15
+/// </summary>
+int LeetCodeDP::countSequences(vector<int>& nums, long long k)
+{
+    unordered_map<string, int> curr, next;
+    curr["1_1"] = 1;
+    for (int i = 0; i < nums.size(); i++)
+    {
+        for (auto& pair : curr)
+        {
+            int pos = pair.first.find('_');
+            long long a = stol(pair.first.substr(0, pos));
+            long long b = stol(pair.first.substr(pos + 1));
+            next[to_string(a) + "_" + to_string(b)] += pair.second;
+            long long next_a = a * nums[i];
+            long long next_b = b;
+            long long g = std::gcd(next_a, next_b);
+            next_a = next_a / g;
+            next_b = next_b / g;
+            next[to_string(next_a) + "_" + to_string(next_b)] += pair.second;
+            next_a = a;
+            next_b = b * nums[i];
+            g = std::gcd(next_a, next_b);
+            next_a = next_a / g;
+            next_b = next_b / g;
+            next[to_string(next_a) + "_" + to_string(next_b)] += pair.second;
+        }
+        curr = next;
+        next.clear();
+    }
+    int result = curr[to_string(k) + '_' + to_string(1)];
+    return result;
+}
 #pragma endregion
 

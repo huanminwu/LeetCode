@@ -1050,7 +1050,7 @@ public:
     /// Leet code #656. Coin Path
     /// 
     /// Given an array A (index starts at 1) consisting of N integers: A1, A2,
-    ///	..., AN and an integer B. The integer B denotes that from any place 
+    /// ..., AN and an integer B. The integer B denotes that from any place 
     /// (suppose the index is i) in the array A, you can jump to any one of 
     /// the place in the array A indexed i+1, i+2,  i+B if this place can 
     /// be jumped to. Also, if you step on the index i, you have to pay Ai 
@@ -1456,7 +1456,7 @@ public:
     ///
     /// 1. 0 < prices.length <= 50000.
     /// 2. 0 < prices[i] < 50000.
-    /// 3. 0 <= fee < 50000.	
+    /// 3. 0 <= fee < 50000. 
     /// </summary>
     int maxProfitWithFee(vector<int>& prices, int fee);
 
@@ -2153,7 +2153,7 @@ public:
     /// Note:
     /// 
     /// 1. 3 <= A.length <= 1000
-    /// 2. 1 <= A[0] < A[1] < ... < A[A.length - 1] <= 10^9	/// </summary>
+    /// 2. 1 <= A[0] < A[1] < ... < A[A.length - 1] <= 10^9 /// </summary>
     /// </summary>
     int lenLongestFibSubseq(vector<int>& A);
 
@@ -3908,7 +3908,7 @@ public:
     /// The robot can only move either down or right at any point in time. 
     /// The robot is trying to reach the bottom-right corner of the grid 
     /// (marked 'Finish' in the diagram below). 
-    ///	How many possible unique paths are there?
+    /// How many possible unique paths are there?
     /// Above is a 3 x 7 grid. How many possible unique paths are there?  
     /// Note: m and n will be at most 100.
     /// </summary>
@@ -3921,7 +3921,7 @@ public:
     /// Now consider if some obstacles are added to the grids. How many unique 
     /// paths would there be? 
     /// An obstacle and empty space is marked as 1 and 0 respectively in the grid. 
-    ///	For example,
+    /// For example,
     /// [
     ///   [0,0,0],
     ///   [0,1,0],
@@ -3939,7 +3939,7 @@ public:
     /// Given a m x n grid filled with non-negative numbers, find a path from 
     /// top left to bottom right 
     /// which minimizes the sum of all numbers along its path.
-    ///	Note: You can only move either down or right at any point in time. 
+    /// Note: You can only move either down or right at any point in time. 
     /// </summary>
     int minPathSum(vector<vector<int>>& grid);
 
@@ -4168,7 +4168,7 @@ public:
     /// Given [3, 1, 5, 8] 
     /// Return 167 
     /// nums = [3,1,5,8] --> [3,5,8] -->   [3,8]   -->  [8]  --> []
-    /// coins =  3*1*5      +  3*5*8    +  1*3*8      + 1*8*1   = 167	
+    /// coins =  3*1*5      +  3*5*8    +  1*3*8      + 1*8*1   = 167 
     /// </summary>   
     int maxBurstBalloonCoins(vector<int>& nums);
 
@@ -8007,7 +8007,7 @@ public:
     /// Leet Code 2495. Number of Subarrays Having Even Product
     /// 
     /// Medium
-    ///	
+    /// 
     /// Given a 0-indexed integer array nums, return the number of subarrays
     /// of nums having an even product.
     /// 
@@ -8037,7 +8037,7 @@ public:
     /// Leet Code 2484. Count Palindromic Subsequences
     /// 
     /// Hard
-    ///	
+    /// 
     /// Given a string of digits s, return the number of palindromic 
     /// subsequences of s having length 5. Since the answer may be very 
     /// large, return it modulo 10^9 + 7.
@@ -8078,7 +8078,7 @@ public:
     /// Leet Code 2478. Number of Beautiful Partitions
     /// 
     /// Hard
-    ///	
+    /// 
     /// You are given a string s that consists of the digits '1' to '9' and 
     /// two integers k and minLength.
     ///
@@ -8125,7 +8125,7 @@ public:
     /// Leet Code 2464. Minimum Subarrays in a Valid Split
     /// 
     /// Hard
-    ///	
+    /// 
     /// You are given an integer array nums.
     /// Splitting of an integer array nums into subarrays is valid if:
     /// the greatest common divisor of the first and last elements of 
@@ -8180,7 +8180,7 @@ public:
     /// Leet Code 2466. Count Ways To Build Good Strings
     /// 
     /// Medium
-    ///	
+    /// 
     /// Given the integers zero, one, low, and high, we can construct a string 
     /// by starting with an empty string, and then at each step perform either 
     /// of the following:
@@ -8222,7 +8222,7 @@ public:
     /// Leet Code 2501. Longest Square Streak in an Array
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given an integer array nums. A subsequence of nums is called a 
     /// square streak if:
     ///
@@ -8262,7 +8262,7 @@ public:
     /// Leet Code 2472. Maximum Number of Non-overlapping Palindrome Substrings
     /// 
     /// Hard
-    ///	
+    /// 
     /// You are given a string s and a positive integer k.
     ///
     /// Select a set of non-overlapping substrings from the string s that 
@@ -8305,7 +8305,7 @@ public:
     /// Leet Code 2463. Minimum Total Distance Traveled
     /// 
     /// Hard
-    ///	
+    /// 
     /// There are some robots and factories on the X-axis. You are given an 
     /// integer array robot where robot[i] is the position of the ith robot. 
     /// You are also given a 2D integer array factory where 
@@ -8384,7 +8384,7 @@ public:
     ///                    And 1's
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given a 0-indexed m x n binary matrix grid. You can move from 
     /// a cell (row, col) to any of the cells (row + 1, col) or (row, col + 1).
     ///
@@ -8416,7 +8416,7 @@ public:
     /// Leet Code 2518. Number of Great Partitions
     /// 
     /// Hard
-    ///	
+    /// 
     /// You are given an array nums consisting of positive integers and an 
     /// integer k.
     ///
@@ -8517,7 +8517,7 @@ public:
     /// Leet Code 2533. Number of Good Binary Strings
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given four integers minLenght, maxLength, oneGroup and 
     /// zeroGroup.
     ///
@@ -8560,7 +8560,7 @@ public:
     /// Leet Code 2547. Minimum Cost to Split an Array
     /// 
     /// Hard
-    ///	
+    /// 
     /// You are given an integer array nums and an integer k.
     ///
     /// Split the array into some number of non-empty subarrays. The cost of 
@@ -8616,7 +8616,7 @@ public:
     /// Leet Code 2585. Number of Ways to Earn Points
     /// 
     /// Hard
-    ///	
+    /// 
     /// There is a test that has n types of questions. You are given an integer
     /// target and a 0-indexed 2D integer array types where types[i] = 
     /// [counti, marksi] indicates that there are counti questions of the ith 
@@ -8676,7 +8676,7 @@ public:
     /// Leet Code 2638. Count the Number of K-Free Subsets
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given an integer array nums, which contains distinct elements 
     /// and an integer k.
     ///
@@ -10040,13 +10040,13 @@ public:
     /// Input: initial = "axxy", target = "yabx"
     /// Output: 6
     /// Explanation:
-    /// Operation	Resulting String
-    /// Add 'y' to the beginning	"yaxxy"
-    /// Remove from end	"yaxx"
-    /// Remove from end	"yax"
-    /// Remove from end	"ya"
-    /// Add 'b' to the end	"yab"
-    /// Add 'x' to the end	"yabx"
+    /// Operation Resulting String
+    /// Add 'y' to the beginning "yaxxy"
+    /// Remove from end "yaxx"
+    /// Remove from end "yax"
+    /// Remove from end "ya"
+    /// Add 'b' to the end "yab"
+    /// Add 'x' to the end "yabx"
     ///
     /// Example 3:
     /// Input: initial = "xyz", target = "xyz"
@@ -10696,13 +10696,13 @@ public:
     /// [5,6]]
     /// Output: [7,14,11,14,5]
     /// Explanation:
-    /// Index	nums[li..ri]	Maximum XOR Score Subarray	Maximum Subarray 
+    /// Index nums[li..ri] Maximum XOR Score Subarray Maximum Subarray 
     /// XOR Score
-    /// 0	[0, 7, 3, 2]	[7]	7
-    /// 1	[7, 3, 2, 8, 5]	[7, 3, 2, 8]	14
-    /// 2	[3, 2, 8]	[3, 2, 8]	11
-    /// 3	[3, 2, 8, 5, 1]	[2, 8, 5, 1]	14
-    /// 4	[5, 1]	[5]	5
+    /// 0 [0, 7, 3, 2] [7] 7
+    /// 1 [7, 3, 2, 8, 5] [7, 3, 2, 8] 14
+    /// 2 [3, 2, 8] [3, 2, 8] 11
+    /// 3 [3, 2, 8, 5, 1] [2, 8, 5, 1] 14
+    /// 4 [5, 1] [5] 5
     /// 
     /// Constraints:
     /// 1. 1 <= n == nums.length <= 2000
@@ -10969,7 +10969,7 @@ public:
     /// 
     /// Medium
     ///
-    /// 	
+    ///  
     /// You are given two integers, n and k, along with two 2D integer 
     /// arrays, stayScore and travelScore.
     ///
@@ -11016,21 +11016,21 @@ public:
 
     /// <summary>
     /// Leet Code 3333. Find the Original Typed String II 
-	/// 
-	/// Hard
-	///
-	/// 	
-	/// Alice is attempting to type a specific string on her computer. 
-	/// However, she tends to be clumsy and may press a key for too long, 
-	/// resulting in a character being typed multiple times.
+ /// 
+ /// Hard
+ ///
+ ///  
+ /// Alice is attempting to type a specific string on her computer. 
+ /// However, she tends to be clumsy and may press a key for too long, 
+ /// resulting in a character being typed multiple times.
     ///
     /// You are given a string word, which represents the final output 
-	/// displayed on Alice's screen. You are also given a positive 
-	/// integer k.
+ /// displayed on Alice's screen. You are also given a positive 
+ /// integer k.
     ///
     /// Return the total number of possible original strings that Alice 
-	/// might have intended to type, if she was trying to type a string 
-	/// of size at least k.
+ /// might have intended to type, if she was trying to type a string 
+ /// of size at least k.
     ///
     /// Since the answer may be very large, return it modulo 10^9 + 7.
     ///
@@ -11039,7 +11039,7 @@ public:
     /// Output: 5
     /// Explanation:
     /// The possible strings are: "aabbccdd", "aabbccd", "aabbcdd", "aabccdd", 
-	/// and "abbccdd".
+ /// and "abbccdd".
     ///
     /// Example 2:
     /// Input: word = "aabbccdd", k = 8
@@ -11056,7 +11056,7 @@ public:
     /// 2. word consists only of lowercase English letters.
     /// 3. 1 <= k <= 2000
     /// </summary>
-	int possibleStringCount(string word, int k);
+ int possibleStringCount(string word, int k);
 
     /// <summary>
     /// Leet Code 3336. Find the Number of Subsequences With Equal GCD
@@ -11875,12 +11875,12 @@ public:
     /// Input: skill = [1,5,2,4], mana = [5,1,4,2]
     /// Output: 110
     /// Explanation:
-    /// Potion Number	Start time	Wizard 0 done by	Wizard 1 done by	
-    /// Wizard 2 done by	Wizard 3 done by
-    /// 0	0	5	30	40	60
-    /// 1	52	53	58	60	64
-    /// 2	54	58	78	86	102
-    /// 3	86	88	98	102	110
+    /// Potion Number Start time Wizard 0 done by Wizard 1 done by 
+    /// Wizard 2 done by Wizard 3 done by
+    /// 0 0 5 30 40 60
+    /// 1 52 53 58 60 64
+    /// 2 54 58 78 86 102
+    /// 3 86 88 98 102 110
     /// As an example for why wizard 0 cannot start working on the 1st potion 
     /// before time t = 52, consider the case where the wizards started preparing 
     /// the 1st potion at time t = 50. At time t = 58, wizard 2 is done with the 
@@ -12615,7 +12615,7 @@ public:
     /// Input: grid = [[0,0],[0,0]]
     /// Output: 2
     /// Explanation:
-    /// Number	Full Path
+    /// Number Full Path
     /// 1   (0, 0) -> (0, 1) -> (1, 1)
     /// 2   (0, 0) -> (1, 0) -> (1, 1)
     ///
@@ -12789,10 +12789,10 @@ public:
     /// Output: 13
     /// Explanation:
     /// One optimal path is 0 -> 1 -> 2 -> 4
-    /// Jump	Cost Calculation				Cost
-    /// 0 -> 1	costs[1] + (1 - 0)^2 = 1 + 1	2
-    /// 1 -> 2	costs[2] + (2 - 1)^2 = 2 + 1	3
-    /// 2 -> 4	costs[4] + (4 - 2)^2 = 4 + 4	8
+    /// Jump Cost Calculation    Cost
+    /// 0 -> 1 costs[1] + (1 - 0)^2 = 1 + 1 2
+    /// 1 -> 2 costs[2] + (2 - 1)^2 = 2 + 1 3
+    /// 2 -> 4 costs[4] + (4 - 2)^2 = 4 + 4 8
     /// Thus, the minimum total cost is 2 + 3 + 8 = 13
     ///
     /// Example 2:
@@ -12801,10 +12801,10 @@ public:
     /// Explanation:
     /// One optimal path is 0 -> 2 -> 4
     /// 
-    ///	Jump	Cost Calculation				Cost
-    ///	0 -> 2	costs[2] + (2 - 0)^2 = 1 + 4	5
-    ///	2 -> 4	costs[4] + (4 - 2)^2 = 2 + 4	6
-    ///	Thus, the minimum total cost is 5 + 6 = 11
+    /// Jump Cost Calculation    Cost
+    /// 0 -> 2 costs[2] + (2 - 0)^2 = 1 + 4 5
+    /// 2 -> 4 costs[4] + (4 - 2)^2 = 2 + 4 6
+    /// Thus, the minimum total cost is 5 + 6 = 11
     ///
     /// Example 3:
     /// Input: n = 3, costs = [9,8,3]
@@ -13167,6 +13167,170 @@ public:
     /// 4. 1 <= k <= min(n, m)
     /// </summary>
     long long maxScore(vector<int>& nums1, vector<int>& nums2, int k);
-  
+
+    /// <summary>
+    /// Leet Code 3840. House Robber V
+    /// 
+    /// Medium
+    /// 
+    /// You are a professional robber planning to rob houses along a street.
+    /// Each house has a certain amount of money stashed and is protected by 
+    /// a security system with a color code.
+    ///
+    /// You are given two integer arrays nums and colors, both of length n, 
+    /// where nums[i] is the amount of money in the ith house and colors[i] 
+    /// is the color code of that house.
+    ///
+    /// You cannot rob two adjacent houses if they share the same color code.
+    ///
+    /// Return the maximum amount of money you can rob.
+    ///
+    /// Example 1:
+    /// Input: nums = [1, 4, 3, 5], colors = [1, 1, 2, 2]
+    /// Output : 9
+    ///
+    /// Explanation :
+    ///
+    /// Choose houses i = 1 with nums[1] = 4 and i = 3 with nums[3] = 5 
+    /// because they are non - adjacent.
+    /// Thus, the total amount robbed is 4 + 5 = 9.
+    ///
+    /// Example 2 :
+    /// Input : nums = [3, 1, 2, 4], colors = [2, 3, 2, 2]
+    /// Output : 8
+    /// Explanation :
+    ///
+    /// Choose houses i = 0 with nums[0] = 3, i = 1 with nums[1] = 1, 
+    /// and i = 3 with nums[3] = 4.
+    /// This selection is valid because houses i = 0 and i = 1 have 
+    /// different colors, and house i = 3 is non - adjacent to i = 1.
+    /// Thus, the total amount robbed is 3 + 1 + 4 = 8.
+    ///
+    /// Example 3 :
+    /// Input : nums = [10, 1, 3, 9], colors = [1, 1, 1, 2]
+    /// Output : 22
+    /// Explanation :
+    ///
+    /// Choose houses i = 0 with nums[0] = 10, i = 2 with nums[2] = 3, 
+    /// and i = 3 with nums[3] = 9.
+    /// This selection is valid because houses i = 0 and i = 2 are 
+    /// non - adjacent, and houses i = 2 and i = 3 have different colors.
+    /// Thus, the total amount robbed is 10 + 3 + 9 = 22.
+    //
+    /// Constraints :
+    /// 1. 1 <= n == nums.length == colors.length <= 10^5
+    /// 2. 1 <= nums[i], colors[i] <= 10^5
+    /// </summary>
+    long long robV(vector<int>& nums, vector<int>& colors);
+
+    /// <summary>
+    /// Leet Code 3844. Longest Almost - Palindromic Substring
+    /// 
+    /// Medium
+    /// 
+    /// You are given a string s consisting of lowercase English letters.
+    ///
+    /// A substring is almost - palindromic if it becomes a palindrome 
+    /// after removing exactly one character from it.
+    ///
+    /// Return an integer denoting the length of the longest almost - 
+    /// palindromic substring in s.
+    ///
+    /// Example 1:
+    /// Input: s = "abca"
+    /// Output : 4
+    /// Explanation :
+    /// Choose the substring "abca".
+    /// Remove "abca".
+    /// The string becomes "aba", which is a palindrome.
+    /// Therefore, "abca" is almost - palindromic.
+    ///
+    /// Example 2:
+    /// Input: s = "abba"
+    /// Output : 4
+    /// Explanation :
+    /// Choose the substring "abba".
+    /// Remove "abba".
+    /// The string becomes "aba", which is a palindrome.
+    /// Therefore, "abba" is almost - palindromic.
+    ///
+    /// Example 3:
+    /// Input: s = "zzabba"
+    /// Output : 5
+    /// Explanation :
+    /// Choose the substring "zzabba".
+    /// Remove "zabba".
+    /// The string becomes "abba", which is a palindrome.
+    /// Therefore, "zabba" is almost - palindromic.
+    ///
+    /// Constraints:
+    /// 1. 2 <= s.length <= 2500
+    /// 2. s consists of only lowercase English letters.
+    /// </summary>
+    int almostPalindromic(string s);
+
+    /// <summary>
+    /// Leet Code 3850. Count Sequences to K
+    /// 
+    /// Hard
+    /// 
+    /// You are given an integer array nums, and an integer k.
+    ///
+    /// Start with an initial value val = 1 and process nums from left to 
+    /// right.At each index i, you must choose exactly one of the following 
+    /// actions :
+    ///
+    /// Multiply val by nums[i].
+    /// Divide val by nums[i].
+    /// Leave val unchanged.
+    /// After processing all elements, val is considered equal to k only if 
+    /// its final rational value exactly equals k.
+    ///
+    /// Return the count of distinct sequences of choices that result in 
+    /// val == k.
+    /// Note: Division is rational(exact), not integer division.For 
+    /// example, 2 / 4 = 1 / 2.
+    ///
+    /// Example 1 :
+    /// Input : nums = [2, 3, 2], k = 6
+    /// Output : 2
+    /// Explanation :
+    /// The following 2 distinct sequences of choices result in val == k :
+    ///
+    /// Sequence Operation on nums[0] Operation on nums[1] 
+    /// Operation on nums[2] Final val
+    /// 1 Multiply : val = 1 * 2 = 2 Multiply : val = 2 * 3 = 6 Leave val 
+    /// unchanged 6
+    /// 2 Leave val unchanged Multiply : val = 1 * 3 = 3 Multiply : 
+    /// val = 3 * 2 = 6 6
+    /// 
+    /// Example 2 :
+    /// Input : nums = [4, 6, 3], k = 2
+    /// Output : 2
+    /// Explanation :
+    /// The following 2 distinct sequences of choices result in val == k :
+    /// Sequence Operation on nums[0] Operation on nums[1] Operation on 
+    /// nums[2] Final val
+    /// 1 Multiply : val = 1 * 4 = 4 Divide : val = 4 / 6 = 2 / 3 
+    /// Multiply : val = (2 / 3) * 3 = 2 2
+    /// 2 Leave val unchanged Multiply : val = 1 * 6 = 6 
+    /// Divide : val = 6 / 3 = 2 2
+    ///    
+    /// Example 3 :
+    /// Input : nums = [1, 5], k = 1
+    /// Output : 3
+    /// Explanation :
+    /// The following 3 distinct sequences of choices result in val == k :
+    /// Sequence Operation on nums[0] Operation on nums[1] Final val
+    /// 1 Multiply : val = 1 * 1 = 1 Leave val unchanged 1
+    /// 2 Divide : val = 1 / 1 = 1 Leave val unchanged 1
+    /// 3 Leave val unchanged Leave val unchanged 1
+    /// Constraints :
+    /// 1. 1 <= nums.length <= 19
+    /// 2. 1 <= nums[i] <= 6
+    /// 3. 1 <= k <= 10^15
+    /// </summary>
+    int countSequences(vector<int>& nums, long long k);
+
  };
 #endif  // LeetCodeDP

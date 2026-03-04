@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #ifndef Leetcode_H
 #define LeetCode_H
 #include <stdint.h>
@@ -458,6 +458,89 @@ class SegmentTreeLazy
         }
 };
 
+/// <summary>
+/// The class is to implement bit operation related algorithm  
+/// </summary>
+struct TrieBitNode
+{
+    TrieBitNode* m_Child[2] = {};
+    int m_Count = 0;
+    int m_MaxBits = 31;
+    TrieBitNode(int max_bits)
+    {
+        m_MaxBits = max_bits;
+    }
+
+    void increase(long long number, int d)
+    {
+        TrieBitNode* cur = this;
+        for (int i = m_MaxBits; i >= 0; --i)
+        {
+            int bit = (int)((number >> i) & 1);
+            if (cur->m_Child[bit] == nullptr) cur->m_Child[bit] = new TrieBitNode(m_MaxBits);
+            cur = cur->m_Child[bit];
+            cur->m_Count += d;
+        }
+    }
+
+    void decrease(long long number, int d)
+    {
+        TrieBitNode* cur = this;
+        for (int i = m_MaxBits; i >= 0; --i)
+        {
+            int bit = (int)((number >> i) & 1);
+            cur = cur->m_Child[bit];
+            cur->m_Count -= d;
+        }
+    }
+
+    long long maxXorFind(long long number)
+    {
+        TrieBitNode* cur = this;
+        long long result = 0;
+        for (int i = m_MaxBits; i >= 0; --i)
+        {
+            if (cur == nullptr) break;
+            int bit = (number >> i) & 1;
+            if (cur->m_Child[1 - bit] != nullptr && cur->m_Child[1 - bit]->m_Count > 0)
+            {
+                cur = cur->m_Child[1 - bit];
+                result |= ((long long)1 << (long long)i);
+            }
+            else
+            {
+                cur = cur->m_Child[bit];
+            }
+        }
+        return result;
+    }
+
+    long long countXorGreater(long long number, long long k)
+    {
+        TrieBitNode* cur = this;
+        long long result = 0;
+        for (int i = m_MaxBits; i >= 0; --i)
+        {
+            if (cur == nullptr) break;
+            int bit_number = (number >> i) & 1;
+            int bit_k = (k >> i) & 1;
+            if (bit_k == 0)
+            {
+                if (cur->m_Child[1 - bit_number] != nullptr)
+                {
+                    result += cur->m_Child[1 - bit_number]->m_Count;
+                }
+                cur = cur->m_Child[bit_number];
+            }
+            else
+            {
+                cur = cur->m_Child[1 - bit_number];
+            }
+        }
+        if (cur != nullptr) result += cur->m_Count;
+        return result;
+    }
+};
 
 /// <summary>
 /// Leet code #592. Fraction Addition and Subtraction

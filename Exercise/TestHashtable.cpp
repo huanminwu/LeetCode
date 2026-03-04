@@ -211,7 +211,7 @@ void TestLeetCode1207(void)
     vector<int> arr = { 1, 2, 2, 1, 1, 3 };
     bool result = leetCode.uniqueOccurrences(arr);
     Logger::WriteMessage(arr);
-    Logger::WriteMessage("result = " + (string) (result ? "true" : "false"));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
 
     arr = { 1, 2 };
     result = leetCode.uniqueOccurrences(arr);
@@ -260,7 +260,7 @@ void TestLeetCode1224(void)
     result = leetCode.maxEqualFreq(nums);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("result = " + to_string(result));
-    
+
     nums = { 1,1,1,2,2,2 };
     result = leetCode.maxEqualFreq(nums);
     Logger::WriteMessage(nums);
@@ -667,7 +667,7 @@ void TestLeetCode205(void)
     result = leetCode.isIsomorphic(s, t);
     Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + (string)(result ? "true" : "false"));
 
-    s = "paper"; 
+    s = "paper";
     t = "title";
     result = leetCode.isIsomorphic(s, t);
     Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + (string)(result ? "true" : "false"));
@@ -986,7 +986,7 @@ void TestLeetCode1512(void)
 {
     Logger::WriteMessage("Test Leet Code 1512");
     LeetCodeHashtable leetCode;
-    
+
     vector<int> nums = { 1, 2, 3, 1, 1, 3 };
     int result = leetCode.numIdenticalPairs(nums);
     Logger::WriteMessage(nums);
@@ -1208,8 +1208,8 @@ void TestLeetCode1733(void)
     result = leetCode.minimumTeachings(n, languages, friendships);
     Logger::WriteMessage(languages);
     Logger::WriteMessage(friendships);
-    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));   
- }
+    Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
+}
 
 void TestLeetCode1773(void)
 {
@@ -1221,7 +1221,7 @@ void TestLeetCode1773(void)
         {"computer", "silver", "lenovo"},
         {"phone", "gold", "iphone"}
     };
-    string ruleKey = "color"; 
+    string ruleKey = "color";
     string ruleValue = "silver";
     int result = leetCode.countMatches(items, ruleKey, ruleValue);
     Logger::WriteMessage(items);
@@ -1292,7 +1292,7 @@ void TestLeetCode2053(void)
     LeetCodeHashtable leetCode;
     vector<string> arr = { "d", "b", "c", "b", "c", "a" };
     int k = 2;
-    string result = leetCode.kthDistinct(arr, k);   
+    string result = leetCode.kthDistinct(arr, k);
     Logger::WriteMessage("k = " + to_string(k) + "; result = " + result);
 
     arr = { "aaa","aa","a" };
@@ -1580,7 +1580,7 @@ void TestLeetCode2456(void)
 {
     Logger::WriteMessage("Test Leet Code 2456");
     LeetCodeHashtable leetCode;
-    vector<string> creators =  { "alice", "bob", "alice", "chris" }; 
+    vector<string> creators = { "alice", "bob", "alice", "chris" };
     vector<string> ids = { "one", "two", "three", "four" };
     vector<int> views = { 5, 10, 5, 4 };
     vector<vector<string>> result = leetCode.mostPopularCreator(creators, ids, views);
@@ -1768,8 +1768,8 @@ void TestLeetCode2961(void)
     Logger::WriteMessage("Test Leet Code 2961");
     LeetCodeHashtable leetCode;
     vector<vector<int>> variables =
-    { 
-        {2, 3, 3, 10},{3, 3, 3, 1},{6, 1, 1, 4} 
+    {
+        {2, 3, 3, 10},{3, 3, 3, 1},{6, 1, 1, 4}
     };
     int target = 2;
     vector<int> result = leetCode.getGoodIndices(variables, target);
@@ -1812,7 +1812,7 @@ void TestLeetCode2964(void)
 {
     Logger::WriteMessage("Test Leet Code 2964");
     LeetCodeHashtable leetCode;
-    vector<int> nums = {3,3,4,7,8};
+    vector<int> nums = { 3,3,4,7,8 };
     int d = 5;
     int result = leetCode.divisibleTripletCount(nums, d);
     Logger::WriteMessage(nums);
@@ -2071,7 +2071,7 @@ void TestLeetCode3450(void)
     vector<vector<int>> students = { {1, 2},{2, 2},{3, 3},{1, 3},{2, 3} };
     int result = leetCode.maxStudentsOnBench(students);
     Logger::WriteMessage(students);
-    Logger::WriteMessage("result = "  + to_string(result));
+    Logger::WriteMessage("result = " + to_string(result));
 
     students = { {1, 1},{2, 1},{3, 1},{4, 2},{5, 2} };
     result = leetCode.maxStudentsOnBench(students);
@@ -2137,8 +2137,8 @@ void TestLeetCode3527(void)
     Logger::WriteMessage("Test Leet Code 3527");
     LeetCodeHashtable leetCode;
     vector<vector<string>> responses =
-    { 
-        {"good", "ok", "good", "ok"},{"ok", "bad", "good", "ok", "ok"},{"good"},{"bad"} 
+    {
+        {"good", "ok", "good", "ok"},{"ok", "bad", "good", "ok", "ok"},{"good"},{"bad"}
     };
     string result = leetCode.findCommonResponse(responses);
     Logger::WriteMessage(responses);
@@ -2239,7 +2239,7 @@ void TestLeetCode3692(void)
     LeetCodeHashtable leetCode;
     string s = "aaabbbccdddde";
     string result = leetCode.majorityFrequencyGroup(s);
-    Logger::WriteMessage("s = "+ s + "; result = " + result);
+    Logger::WriteMessage("s = " + s + "; result = " + result);
 
     s = "abcd";
     result = leetCode.majorityFrequencyGroup(s);
@@ -2376,9 +2376,89 @@ void TestLeetCode2404(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3839(void)
+{
+    Logger::WriteMessage("Test Leet Code 3839");
+    LeetCodeHashtable leetCode;
+    vector<string> words = { "apple", "apply", "banana", "bandit" };
+    int k = 2;
+    int result = leetCode.prefixConnected(words, k);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    words = { "car","cat","cartoon" };
+    k = 3;
+    result = leetCode.prefixConnected(words, k);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    words = { "bat","dog","dog","doggy","bat" };
+    k = 3;
+    result = leetCode.prefixConnected(words, k);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3843(void)
+{
+    Logger::WriteMessage("Test Leet Code 3843");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 20, 10, 30, 30 };
+    int result = leetCode.firstUniqueFreq(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 20,20,10,30,30,30 };
+    result = leetCode.firstUniqueFreq(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 10,10,20,20 };
+    result = leetCode.firstUniqueFreq(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3846(void)
+{
+    Logger::WriteMessage("Test Leet Code 3846");
+    LeetCodeHashtable leetCode;
+    string s = "hello";
+    int result = leetCode.totalDistance(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "a";
+    result = leetCode.totalDistance(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3852(void)
+{
+    Logger::WriteMessage("Test Leet Code 3852");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = {1, 1, 2, 2, 3, 4};
+    vector<int> result = leetCode.minDistinctFreqPair(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 1,5 };
+    result = leetCode.minDistinctFreqPair(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 7 };
+    result = leetCode.minDistinctFreqPair(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
 
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode3852();
+    TestLeetCode3843();
+    TestLeetCode3839();
     TestLeetCode2404();
     TestLeetCode3810();
     TestLeetCode3761();

@@ -1,4 +1,4 @@
-﻿#include <ctype.h>  /* is space */
+#include <ctype.h>  /* is space */
 #include <stdio.h>     /* printf */
 #include <stdlib.h>  
 #include <time.h>  
@@ -75,7 +75,7 @@ string LeetCodeMath::convertZigZag(string s, int numRows)
 /// Output: 21
 /// Note:
 /// Assume we are dealing with an environment which could only store integers 
-/// within the 32-bit signed integer range: [−231,  231 − 1]. For the purpose 
+/// within the 32-bit signed integer range: [?231,  231 ? 1]. For the purpose 
 /// of this problem, assume that your function returns 0 when the reversed 
 /// integer overflows.
 /// </summary>
@@ -124,9 +124,9 @@ int LeetCodeMath::reverse(int x)
 /// Note:
 /// Only the space character ' ' is considered as whitespace character.
 /// Assume we are dealing with an environment which could only store integers 
-/// within the 32-bit signed integer range: [−2^31,  2^31 − 1]. If the  
+/// within the 32-bit signed integer range: [?2^31,  2^31 ? 1]. If the  
 /// numerical value is out of the range of representable values, 
-/// INT_MAX (2^31 − 1) or INT_MIN (−2^31) is returned.
+/// INT_MAX (2^31 ? 1) or INT_MIN (?2^31) is returned.
 /// Example 1:
 /// Input: "42"
 /// Output: 42
@@ -154,7 +154,7 @@ int LeetCodeMath::reverse(int x)
 /// Input: "-91283472332"
 /// Output: -2147483648
 /// Explanation: The number "-91283472332" is out of the range of a 32-bit 
-/// signed integer. Thefore INT_MIN (−231) is returned.
+/// signed integer. Thefore INT_MIN (?231) is returned.
 /// </summary>
 int LeetCodeMath::myAtoi(string str)
 {
@@ -546,29 +546,33 @@ string LeetCodeMath::convertToTitle(int n)
 }
 
 /// <summary>
-/// Leet code #412. Fizz Buzz 
-/// Write a program that outputs the string representation of numbers from 1 to n.
-/// But for multiples of three it should output 揊izz?instead of the number and for the multiples of five output 揃uzz? 
-/// For numbers which are multiples of both three and five output 揊izzBuzz?
-/// Example: 
-/// Return:
-/// [
-///    "1",
-///    "2",
-///    "Fizz",
-///    "4",
-///    "Buzz",
-///    "Fizz",
-///    "7",
-///    "8",
-///    "Fizz",
-///    "Buzz",
-///    "11",
-///    "Fizz",
-///    "13",
-///    "14",
-///    "FizzBuzz"
-/// ]
+/// 412. Fizz Buzz
+///
+/// Easy
+///
+/// Given an integer n, return a string array answer(1 - indexed) where:
+///
+/// answer[i] == "FizzBuzz" if i is divisible by 3 and 5.
+/// answer[i] == "Fizz" if i is divisible by 3.
+/// answer[i] == "Buzz" if i is divisible by 5.
+/// answer[i] == i(as a string) if none of the above conditions are true.
+/// 
+/// Example 1: 
+/// Input: n = 3
+/// Output : ["1", "2", "Fizz"]
+/// 
+/// Example 2 :
+/// Input : n = 5
+/// Output : ["1", "2", "Fizz", "4", "Buzz"]
+///    
+/// Example 3 :
+/// Input : n = 15
+/// Output : ["1", "2", "Fizz", "4", "Buzz", "Fizz", "7", "8", "Fizz", "Buzz", 
+/// "11", "Fizz", "13", "14", "FizzBuzz"]
+///
+///
+/// Constraints :
+/// 1. 1 <= n <= 10^4
 /// </summary>
 vector<string> LeetCodeMath::fizzBuzz(int n)
 {
@@ -616,9 +620,9 @@ vector<string> LeetCodeMath::fizzBuzz(int n)
 /// Both dividend and divisor will be 32-bit signed integers.
 /// The divisor will never be 0.
 /// Assume we are dealing with an environment which could only store 
-/// integers within the 32-bit signed integer range: [−2^31,  2^31 − 1]. 
+/// integers within the 32-bit signed integer range: [?2^31,  2^31 ? 1]. 
 /// For the purpose of this problem, assume that your function 
-/// returns 2^31 − 1 when the division result overflows.
+/// returns 2^31 ? 1 when the division result overflows.
 /// </summary>
 int LeetCodeMath::divide(int dividend, int divisor)
 {
@@ -756,28 +760,28 @@ int LeetCodeMath::maxPoints(vector<Point>& points)
 /// your path crosses itself, or not.
 ///
 /// Example 1:
-/// ┌───┐
-/// │   │
-/// └───┼──>
-///     │
+/// ?????
+/// ?   ?
+/// ???????>
+///     ?
 /// 
 /// Input: [2,1,1,2]
 /// Output: true
 ///
 /// Example 2:
-/// ┌──────┐
-/// │      │
-/// │
-/// │
-/// └────────────>
+/// ????????
+/// ?      ?
+/// ?
+/// ?
+/// ?????????????>
 ///
 /// Input: [1,2,3,4]
 /// Output: false 
 /// 
 /// Example 3:
-/// ┌───┐
-/// │   │
-/// └───┼>
+/// ?????
+/// ?   ?
+/// ?????>
 ///
 /// Input: [1,1,1,1]
 /// Output: true 
@@ -850,7 +854,7 @@ bool LeetCodeMath::isUgly(int num)
 /// Note:
 ///
 /// 1. -100.0 < x < 100.0
-/// 2. n is a 32-bit signed integer, within the range [−2^31, 2^31 − 1]
+/// 2. n is a 32-bit signed integer, within the range [?2^31, 2^31 ? 1]
 /// </summary>
 double LeetCodeMath::myPow(double x, int n)
 {
@@ -1283,13 +1287,13 @@ int LeetCodeMath::arrangeCoins(int n)
 ///
 /// Input: 2
 /// Output: 1
-/// Explanation: 2 = 1 + 1, 1 × 1 = 1.
+/// Explanation: 2 = 1 + 1, 1 ? 1 = 1.
 ///
 /// Example 2:
 ///
 /// Input: 10
 /// Output: 36
-/// Explanation: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36.
+/// Explanation: 10 = 3 + 3 + 4, 3 ? 3 ? 4 = 36.
 /// Note: You may assume that n is not less than 2 and not larger than 58.
 /// </summary>
 int LeetCodeMath::integerBreak(int n)
@@ -1321,9 +1325,9 @@ int LeetCodeMath::integerBreak(int n)
 
 /// <summary>
 /// Leet code #357. Count Numbers with Unique Digits 
-/// Given a non-negative integer n, count all numbers with unique digits, x, where 0 ≤ x < 10^n.
+/// Given a non-negative integer n, count all numbers with unique digits, x, where 0 ? x < 10^n.
 /// Example: 
-/// Given n = 2, return 91. (The answer should be the total numbers in the range of 0 ≤ x < 100, excluding [11,22,33,44,55,66,77,88,99]) 
+/// Given n = 2, return 91. (The answer should be the total numbers in the range of 0 ? x < 100, excluding [11,22,33,44,55,66,77,88,99]) 
 /// Return 6, because digit 1 occurred in the following numbers: 1, 10, 11, 12, 13. 
 /// Hint:
 /// 1.A direct way is to use the backtracking approach.
@@ -1859,7 +1863,7 @@ bool LeetCodeMath::isRectangleCover(vector<vector<int>>& rectangles)
 }
 
 /// <summary>
-/// Leet code #356. Line Reflection       
+/// Leet code #356. Line Reflection?????? 
 /// 
 /// Given n points on a 2D plane, find if there is such a line parallel 
 /// to y-axis that reflect the given points.
@@ -1917,7 +1921,7 @@ long LeetCodeMath::det2(vector<int> &point0, vector<int>& point1, vector<int>& p
 }
 
 /// <summary>
-/// Leet code #469. Convex Polygon       
+/// Leet code #469. Convex Polygon?????? 
 /// 
 /// Given a list of points that form a polygon when joined sequentially, 
 /// find if this polygon is convex 
@@ -1953,7 +1957,7 @@ long LeetCodeMath::det2(vector<int> &point0, vector<int>& point1, vector<int>& p
 /// which is the determinant of 2x2 matrix [v1, v2]. And the sign of 
 /// det([v1, v2]) represents 
 /// the positive z-direction of right-hand system from v1 to v2. 
-/// So det([v1, v2]) ≥ 0 
+/// So det([v1, v2]) ? 0 
 /// if and only if v1 turns at most 180 degrees counterclockwise to v2.
 bool LeetCodeMath::isConvex(vector<vector<int>>& points)
 {
@@ -1976,7 +1980,7 @@ bool LeetCodeMath::isConvex(vector<vector<int>>& points)
 }
 
 /// <summary>
-/// Leet code #483. Smallest Good Base       
+/// Leet code #483. Smallest Good Base?????? 
 /// </summary>
 unsigned long long LeetCodeMath::sumBase(unsigned long long base, int digits)
 {
@@ -1991,7 +1995,7 @@ unsigned long long LeetCodeMath::sumBase(unsigned long long base, int digits)
 }
 
 /// <summary>
-/// Leet code #483. Smallest Good Base       
+/// Leet code #483. Smallest Good Base?????? 
 /// 
 /// For an integer n, we call k>=2 a good base of n, if all digits of n 
 /// base k are 1. 
@@ -2038,7 +2042,7 @@ string LeetCodeMath::smallestGoodBase(string n)
 }
 
 /// <summary>
-/// Leet code #360. Sort Transformed Array        
+/// Leet code #360. Sort Transformed Array ?????? 
 /// 
 /// Given a sorted array of integers nums and integer values a, b and c. 
 /// Apply a function of the form f(x) = ax2 + bx + c to each element x in 
@@ -2096,11 +2100,11 @@ vector<int> LeetCodeMath::sortTransformedArray(vector<int>& nums, int a, int b, 
 }
 
 /// <summary>
-/// Leet code #492. Construct the Rectangle       
+/// Leet code #492. Construct the Rectangle?????? 
 /// 
 /// For a web developer, it is very important to know how to design a 
 /// web page's size. 
-/// So, given a specific rectangular web page’s area, your job by now is 
+/// So, given a specific rectangular web page?s area, your job by now is 
 /// to design a rectangular web page, whose length L and width W satisfy 
 /// the following requirements:
 ///
@@ -2147,7 +2151,7 @@ vector<int> LeetCodeMath::constructRectangle(int area)
 }
 
 /// <summary>
-/// Leet code #504. Base 7         
+/// Leet code #504. Base 7  ?????? 
 /// 
 /// Given an integer, return its base 7 string representation.
 /// Example 1:
@@ -2190,7 +2194,7 @@ string LeetCodeMath::convertToBase7(int num)
 }
 
 /// <summary>
-/// Leet code #507. Perfect Number          
+/// Leet code #507. Perfect Number   ?????? 
 /// 
 /// We define the Perfect Number is a positive integer that is equal to the 
 /// sum of all its positive divisors except itself. 
@@ -2218,7 +2222,7 @@ bool LeetCodeMath::checkPerfectNumber(int num)
 }
 
 /// <summary>
-/// Leet code #537. Complex Number Multiplication       
+/// Leet code #537. Complex Number Multiplication?????? 
 /// </summary>
 void LeetCodeMath::parseComplexNumber(string str, pair<int, int> &complex)
 {
@@ -2248,7 +2252,7 @@ void LeetCodeMath::parseComplexNumber(string str, pair<int, int> &complex)
 }
 
 /// <summary>
-/// Leet code #537. Complex Number Multiplication       
+/// Leet code #537. Complex Number Multiplication?????? 
 /// 
 /// Given two strings representing two complex numbers. 
 /// You need to return a string representing their multiplication. 
@@ -2329,7 +2333,7 @@ bool LeetCodeMath::validSquare(vector<int>& p1, vector<int>& p2, vector<int>& p3
 }
 
 /// <summary>
-/// Leet code #564. Find the Closest Palindrome          
+/// Leet code #564. Find the Closest Palindrome   ?????? 
 /// 
 /// Given an integer n, find the closest integer (not including itself), which 
 /// is a palindrome. 
@@ -2396,7 +2400,7 @@ string LeetCodeMath::nearestPalindromic(string n)
 }
 
 /// <summary>
-/// Leet code #587. Erect the Fence          
+/// Leet code #587. Erect the Fence   ?????? 
 /// </summary>
 int LeetCodeMath::orientation(Point p, Point q, Point r)
 {
@@ -2404,7 +2408,7 @@ int LeetCodeMath::orientation(Point p, Point q, Point r)
 }
 
 /// <summary>
-/// Leet code #587. Erect the Fence          
+/// Leet code #587. Erect the Fence   ?????? 
 /// 
 /// There are some trees, where each tree is represented by (x,y) coordinate 
 /// in a two-dimensional garden. Your job is to fence the entire garden 
@@ -4163,7 +4167,7 @@ vector<int> LeetCodeMath::pancakeSort(vector<int>& A)
 /// Explanation: F(4) = F(3) + F(2) = 2 + 1 = 3.
 ///  
 /// Note:
-/// 1. 0 ≤ N ≤ 30.
+/// 1. 0 ? N ? 30.
 /// </summary>
 int LeetCodeMath::fib(int N)
 {
@@ -4672,7 +4676,7 @@ bool LeetCodeMath::confusingNumber(int N)
 /// be either Floor(pi) or Ceil(pi).
 /// Return the string "-1" if the rounded array is impossible to sum to 
 /// target. Otherwise, return the smallest rounding error, which is 
-/// defined as Σ |Roundi(pi) - (pi)| for i from 1 to n, as a string with 
+/// defined as ? |Roundi(pi) - (pi)| for i from 1 to n, as a string with 
 /// three places after the decimal.
 ///
 /// Example 1:
@@ -5031,7 +5035,7 @@ void LeetCodeMath::addFraction(int n_a, int d_a, int n_b, int d_b, int& numerato
 /// Note:
 /// 1.The input string only contains '0' to '9', '/', '+' and '-'. So does the 
 ///   output.
-/// 2. Each fraction (input and output) has format ±numerator/denominator. If 
+/// 2. Each fraction (input and output) has format ?numerator/denominator. If 
 ///    the first input fraction or the output is positive, then '+' will be 
 ///    omitted.
 /// 3. The input only contains valid irreducible fractions, where the numerator
@@ -12256,7 +12260,7 @@ int LeetCodeMath::nextBeautifulNumber(int n)
 /// Input: left = 1, right = 4
 /// Output: "24e0"
 /// Explanation:
-/// The product is 1 × 2 × 3 × 4 = 24.
+/// The product is 1 ? 2 ? 3 ? 4 = 24.
 /// There are no trailing zeros, so 24 remains the same. The abbreviation 
 /// will end with "e0".
 /// Since the number of digits is 2, which is less than 10, we do not 
@@ -17259,7 +17263,7 @@ int LeetCodeMath::kItemsWithMaximumSum(int numOnes, int numZeros, int numNegOnes
 ///
 /// You can perform the following operation as many times as you want:
 ///
-/// Pick an index i that you haven’t picked before, and pick a prime p 
+/// Pick an index i that you haven?t picked before, and pick a prime p 
 /// strictly less than nums[i], then subtract p from nums[i].
 /// Return true if you can make nums a strictly increasing array using the 
 /// above operation and false otherwise.
@@ -18027,7 +18031,7 @@ int LeetCodeMath::buyChoco(vector<int>& prices, int money)
 /// Example 2:
 /// Input: nums = [-4,-5,-4]
 /// Output: 20
-/// Explanation: Group the students at indices [0, 1] . Then, we’ll have 
+/// Explanation: Group the students at indices [0, 1] . Then, we?ll have 
 /// a resulting strength of 20. We cannot achieve greater strength.
 ///
 /// Constraints:
@@ -20194,7 +20198,7 @@ int LeetCodeMath::mostExpensiveItem(int primeOne, int primeTwo)
 /// Output: 48
 /// Explanation: 
 /// For index = 0, length = 9 and width = 3. Diagonal 
-/// length = sqrt(9 * 9 + 3 * 3) = sqrt(90) ≈ 9.487.
+/// length = sqrt(9 * 9 + 3 * 3) = sqrt(90) ? 9.487.
 /// For index = 1, length = 8 and width = 6. Diagonal 
 /// length = sqrt(8 * 8 + 6 * 6) = sqrt(100) = 10.
 /// So, the rectangle at index 1 has a greater diagonal length therefore we 
@@ -24566,7 +24570,7 @@ int LeetCodeMath::minMaxSums(vector<int>& nums, int k)
 ///
 /// You are given three integers m, n, and k.
 ///
-/// There is a rectangular grid of size m × n containing k identical 
+/// There is a rectangular grid of size m ? n containing k identical 
 /// pieces. Return the sum of Manhattan distances between every pair 
 /// of pieces over all valid arrangements of pieces.
 ///
@@ -25119,7 +25123,7 @@ bool LeetCodeMath::maxDistance_canPlace(const vector<long long>& t, int k, int s
             pos = ext[idx];
             count++;
         }
-        // After selecting k points, check the wrap–around gap:
+        // After selecting k points, check the wrap?around gap:
         // The gap from the last chosen point (at pos) to (first + L) must be at least d.
         if (count == k && (ext[i] + L - pos) >= d) return true;
     }
@@ -25304,7 +25308,7 @@ int LeetCodeMath::totalNumbers(vector<int>& digits)
 /// containers that can be loaded without exceeding maxWeight is 4.
 /// 
 /// Constraints:
-/// 1。 1 <= n <= 1000
+/// 1? 1 <= n <= 1000
 /// 2. 1 <= w <= 1000
 /// 3. 1 <= maxWeight <= 10^9
 /// </summary>
@@ -25654,7 +25658,7 @@ void  LeetCodeMath::multiply_fft(vector<Complex>& a, int inv, int tot, vector<in
         }
     }
 
-    // Cooley–Tukey
+    // Cooley?Tukey
     for (int len = 1; len < tot; len <<= 1)
     {
         double ang = PI / len * inv;
@@ -26086,7 +26090,7 @@ vector<int> LeetCodeMath::maximumCount(vector<int>& nums, vector<vector<int>>& q
 /// Explanation:
 /// Double nums[0] to 4 using one operation. The modified array becomes [4, 4].
 /// The GCD of the subarray [4, 4] is 4, and the length is 2.
-/// Thus, the maximum possible score is 2 × 4 = 8.
+/// Thus, the maximum possible score is 2 ? 4 = 8.
 ///
 /// Example 2:
 /// Input: nums = [3,5,7], k = 2
@@ -26095,7 +26099,7 @@ vector<int> LeetCodeMath::maximumCount(vector<int>& nums, vector<vector<int>>& q
 /// Double nums[2] to 14 using one operation. The modified array becomes 
 /// [3, 5, 14].
 /// The GCD of the subarray [14] is 14, and the length is 1.
-/// Thus, the maximum possible score is 1 × 14 = 14.
+/// Thus, the maximum possible score is 1 ? 14 = 14.
 ///
 /// Example 3:
 /// Input: nums = [5,5,5], k = 1
@@ -26103,7 +26107,7 @@ vector<int> LeetCodeMath::maximumCount(vector<int>& nums, vector<vector<int>>& q
 /// Explanation:
 /// The subarray [5, 5, 5] has a GCD of 5, and its length is 3.
 /// Since doubling any element doesn't improve the score, the maximum score 
-/// is 3 × 5 = 15.
+/// is 3 ? 5 = 15.
 /// 
 /// Constraints:
 /// 1. 1 <= n == nums.length <= 1500
@@ -26426,11 +26430,11 @@ int LeetCodeMath::minCost(int m, int n)
 /// hexatrigesimal representation of n^3.
 ///
 /// A hexadecimal number is defined as a base-16 numeral system that uses the 
-/// digits 0 – 9 and the uppercase letters A - F to represent values from 0 
+/// digits 0 ? 9 and the uppercase letters A - F to represent values from 0 
 /// to 15.
 ///
 /// A hexatrigesimal number is defined as a base-36 numeral system that uses 
-/// the digits 0 – 9 and the uppercase letters A - Z to represent values 
+/// the digits 0 ? 9 and the uppercase letters A - Z to represent values 
 /// from 0 to 35.
 ///
 /// Example 1:
@@ -26625,7 +26629,7 @@ int LeetCodeMath::minMoves(int sx, int sy, int tx, int ty)
 /// There is only one trapezoid which can be formed.
 /// Constraints:
 /// 1. 4 <= points.length <= 500
-/// 2. –1000 <= xi, yi <= 1000
+/// 2. ?1000 <= xi, yi <= 1000
 /// 3. All points are pairwise distinct.
 /// </summary>
 int LeetCodeMath::countTrapezoidsII(vector<vector<int>>& points)
@@ -26739,7 +26743,7 @@ int LeetCodeMath::countTrapezoidsII(vector<vector<int>>& points)
 /// There is only one horizontal trapezoid that can be formed.
 /// Constraints:
 /// 1. 4 <= points.length <= 10^5
-/// 2. –10^8 <= xi, yi <= 10^8
+/// 2. ?10^8 <= xi, yi <= 10^8
 /// 3. All points are pairwise distinct.
 /// </summary>
 int LeetCodeMath::countTrapezoidsI(vector<vector<int>>& points)
@@ -26973,13 +26977,13 @@ long long LeetCodeMath::specialPalindrome(long long n)
 ///
 /// Medium
 ///
-/// You are given n × m grid and an integer k.
+/// You are given n ? m grid and an integer k.
 ///
 /// A sensor placed on cell (r, c) covers all cells whose Chebyshev distance 
 /// from (r, c) is at most k.
 ///
 /// The Chebyshev distance between two cells (r1, c1) and (r2, c2) is 
-/// max(|r1 − r2|,|c1 − c2|).
+/// max(|r1 ? r2|,|c1 ? c2|).
 ///
 /// Your task is to return the minimum number of sensors required to cover 
 /// every cell of the grid.
@@ -27033,20 +27037,20 @@ int LeetCodeMath::minSensors(int n, int m, int k)
 /// Output: 2
 /// Explanation:
 /// There are 2 perfect pairs:
-/// (i, j)  (a, b)  min(|a − b|, |a + b|)   min(|a|, |b|)   
-/// max(|a − b|, |a + b|)   max(|a|, |b|)
-/// (1, 2)  (1, 2)  min(|1 − 2|, |1 + 2|) = 1   1   
-/// max(|1 − 2|, |1 + 2|) = 3   2
-/// (2, 3)  (2, 3)  min(|2 − 3|, |2 + 3|) = 1   2   
-/// max(|2 − 3|, |2 + 3|) = 5   3
+/// (i, j)  (a, b)  min(|a ? b|, |a + b|)   min(|a|, |b|)   
+/// max(|a ? b|, |a + b|)   max(|a|, |b|)
+/// (1, 2)  (1, 2)  min(|1 ? 2|, |1 + 2|) = 1   1   
+/// max(|1 ? 2|, |1 + 2|) = 3   2
+/// (2, 3)  (2, 3)  min(|2 ? 3|, |2 + 3|) = 1   2   
+/// max(|2 ? 3|, |2 + 3|) = 5   3
 ///
 /// Example 2:
 /// Input: nums = [-3,2,-1,4]
 /// Output: 4
 /// Explanation:
 /// There are 4 perfect pairs:
-/// (i, j)  (a, b)  min(|a − b|, |a + b|)   min(|a|, |b|)   
-/// max(|a − b|, |a + b|)   max(|a|, |b|)
+/// (i, j)  (a, b)  min(|a ? b|, |a + b|)   min(|a|, |b|)   
+/// max(|a ? b|, |a + b|)   max(|a|, |b|)
 /// (0, 1)  (-3, 2) min(|-3 - 2|, |-3 + 2|) = 1 2   
 /// max(|-3 - 2|, |-3 + 2|) = 5 3
 /// (0, 3)  (-3, 4) min(|-3 - 4|, |-3 + 4|) = 1 3   
@@ -27570,8 +27574,8 @@ int LeetCodeMath::countCoprime(vector<vector<int>>& mat)
 /// Output: 1200000
 /// Explanation:
 /// Two ways to achieve the maximum product include: 
-/// [-4, -2, -3] → replace -2 with 105 → product = (-4) * 105 * (-3) = 1200000.
-/// [-4, -1, -3] → replace -1 with 105 → product = (-4) * 105 * (-3) = 1200000.
+/// [-4, -2, -3] ? replace -2 with 105 ? product = (-4) * 105 * (-3) = 1200000.
+/// [-4, -1, -3] ? replace -1 with 105 ? product = (-4) * 105 * (-3) = 1200000.
 /// The maximum product is 1200000.
 ///
 /// Example 3:
@@ -28771,9 +28775,9 @@ pair<long long, int> LeetCodeMath::minPartitionScore_solveWithPenalty(int n, con
 /// Explanation :
 /// We must partition the array into k = 2 subarrays.One optimal partition 
 /// is[5] and [1, 2, 1].
-/// The first subarray has sumArr = 5 and value = 5 × 6 / 2 = 15.
+/// The first subarray has sumArr = 5 and value = 5 ? 6 / 2 = 15.
 /// The second subarray has sumArr = 1 + 2 + 1 = 4 and 
-/// value = 4 × 5 / 2 = 10.
+/// value = 4 ? 5 / 2 = 10.
 /// The score of this partition is 15 + 10 = 25, which is the minimum 
 /// possible score.
 ///
@@ -28784,7 +28788,7 @@ pair<long long, int> LeetCodeMath::minPartitionScore_solveWithPenalty(int n, con
 /// Since we must partition the array into k = 1 subarray, all elements 
 /// belong to the same subarray : [1, 2, 3, 4] .
 /// This subarray has sumArr = 1 + 2 + 3 + 4 = 10 and 
-/// value = 10 × 11 / 2 = 55.
+/// value = 10 ? 11 / 2 = 55.
 /// The score of this partition is 55, which is the minimum possible score.
 ///
 /// Example 3 :
@@ -28793,7 +28797,7 @@ pair<long long, int> LeetCodeMath::minPartitionScore_solveWithPenalty(int n, con
 /// Explanation :
 /// We must partition the array into k = 3 subarrays.The only valid 
 /// partition is[1], [1], [1].
-/// Each subarray has sumArr = 1 and value = 1 × 2 / 2 = 1.
+/// Each subarray has sumArr = 1 and value = 1 ? 2 / 2 = 1.
 /// The score of this partition is 1 + 1 + 1 = 3, which is the minimum 
 /// possible score.
 ///
@@ -28878,6 +28882,169 @@ int LeetCodeMath::countMonobit(int n)
         result++;
     }
     return result;
+}
+
+/// <summary>
+/// Leet Code 3848. Check Digitorial Permutation
+///
+/// Medium
+///
+/// You are given an integer n.
+///
+/// A number is called digitorial if the sum of the factorials of its 
+/// digits is equal to the number itself.
+///
+/// Determine whether any permutation of n(including the original order) 
+/// forms a digitorial number.
+///
+/// Return true if such a permutation exists, otherwise return false.
+///
+/// Note:
+///
+/// The factorial of a non - negative integer x, denoted as x!, is the 
+/// product of all positive integers less than or equal to x, and 0 != 1.
+/// A permutation is a rearrangement of all the digits of a number that 
+/// does not start with zero.Any arrangement starting with zero is invalid.
+///
+/// Example 1:
+/// Input: n = 145
+/// Output : true
+/// Explanation :
+/// The number 145 itself is digitorial since 
+/// 1!+ 4!+ 5 != 1 + 24 + 120 = 145. Thus, the answer is true.
+///
+/// Example 2 :
+/// Input : n = 10
+/// Output : false
+/// Explanation :
+/// 10 is not digitorial since 1!+ 0 != 2 is not equal to 10, and the 
+/// permutation "01" is invalid because it starts with zero.
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^9
+/// </summary>
+bool LeetCodeMath::isDigitorial(int n)
+{
+    vector<int> factorials = { 1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880 };
+    vector<int> digitCount(10);
+    int sumFactorials = 0;
+    while (n > 0)
+    {
+        int digit = n % 10;
+        sumFactorials += factorials[digit];
+        digitCount[digit]++;
+        n /= 10;
+    }
+    while (sumFactorials > 0)
+    {
+        int digit = sumFactorials % 10;
+        if (digitCount[digit] == 0) return false;
+        digitCount[digit]--;
+        sumFactorials /= 10;
+    }
+    for (size_t i = 0; i < digitCount.size(); i++)
+    {
+        if (digitCount[i] > 0) return false;
+    }
+    return true;
+}
+
+/// <summary>
+/// Leet Code 3857. Minimum Cost to Split into Ones 
+///
+/// Medium
+///
+/// You are given an integer n.
+///
+/// In one operation, you may split an integer x into two positive 
+/// integers a and b such that a + b = x.
+///
+/// The cost of this operation is a * b.
+///
+/// Return an integer denoting the minimum total cost required to 
+/// split the integer n into n ones.
+///
+/// Example 1:
+/// Input: n = 3
+/// Output : 3
+/// Explanation :
+/// One optimal set of operations is :
+/// x a b a + b a * b Cost
+/// 3 1 2 3 2 2
+/// 2 1 1 2 1 1
+/// Thus, the minimum total cost is 2 + 1 = 3.
+///
+/// Example 2:
+/// Input: n = 4
+/// Output : 6
+/// Explanation :
+/// One optimal set of operations is :
+/// x a b a + b a * b Cost
+/// 4 2 2 4 4 4
+/// 2 1 1 2 1 1
+/// 2 1 1 2 1 1
+/// Thus, the minimum total cost is 4 + 1 + 1 = 6.
+///
+/// Constraints:
+/// 1. 1 <= n <= 500
+/// </summary>
+int LeetCodeMath::minCost_Split(int n)
+{
+    int result = n * (n - 1) / 2;
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3855. Sum of K - Digit Numbers in a Range
+///
+/// Hard
+///
+/// You are given three integers l, r, and k.
+///
+/// Consider all possible integers consisting of exactly k digits, where 
+/// each digit is chosen independently from the integer range[l, r]
+/// (inclusive).If 0 is included in the range, leading zeros are allowed.
+///
+/// Return an integer representing the sum of all such numbers.
+/// Since the answer may be very large, return it modulo 10^9 + 7.
+///
+/// Example 1:
+/// Input: l = 1, r = 2, k = 2
+/// Output : 66
+/// Explanation :
+/// All numbers formed using k = 2 digits in the range[1, 2] 
+/// are 11, 12, 21, 22.
+/// The total sum is 11 + 12 + 21 + 22 = 66.
+///
+/// Example 2 :
+/// Input : l = 0, r = 1, k = 3
+/// Output : 444
+/// Explanation :
+/// All numbers formed using k = 3 digits in the range[0, 1] are 
+/// 000, 001, 010, 011, 100, 101, 110, 111
+/// These numbers without leading zeros are 0, 1, 10, 11, 100, 101, 110, 
+/// 111.
+/// The total sum is 444.
+///
+/// Example 3 :
+/// Input : l = 5, r = 5, k = 10
+/// Output : 555555520
+/// Explanation : 
+/// 5555555555 is the only valid number consisting of k = 10 digits in the 
+/// range[5, 5].
+/// The total sum is 5555555555 % (109 + 7) = 555555520.
+///
+/// Constraints :
+/// 1. 0 <= l <= r <= 9
+/// 2. 1 <= k <= 10^9
+int LeetCodeMath::sumOfNumbers(int l, int r, int k)
+{
+    long long M = 1000000007;
+    long long allPositionSum = (modPow(10, k, M) - 1) * modPowInv(9, M) % M;
+    long long digitsSum = ((long long)l + r) * (r - l + 1) / 2 % M;
+    long long countSum = modPow(r - l + 1, k-1, M);
+    long long result = (digitsSum * countSum % M) * allPositionSum % M;
+    return (int)result;
 }
 
 #pragma endregion

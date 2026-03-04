@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <ctype.h>  /* is space */
 #include <stdio.h>     /* printf */
 #include <stdlib.h>  
@@ -40,21 +40,21 @@ vector<int> LeetCodeString::kmp(string& s)
 /// <summary>
 /// generate z_function array
 /// </summary>
-vector<int>  LeetCodeString::z_function (const string& s)
+vector<int>  LeetCodeString::z_function(const string& s)
 {
     int n = s.size(), l = 0, r = 0;
     vector<int> z(n, 0);
-    for (int i = 1; i < n; ++i) 
+    for (int i = 1; i < n; ++i)
     {
-        if (i < r) 
+        if (i < r)
         {
             z[i] = min(r - i, z[i - l]);
         }
-        while (i + z[i] < n && s[z[i]] == s[i + z[i]]) 
+        while (i + z[i] < n && s[z[i]] == s[i + z[i]])
         {
             ++z[i];
         }
-        if (i + z[i] - 1 > r) 
+        if (i + z[i] - 1 > r)
         {
             l = i;
             r = i + z[i] - 1;
@@ -188,7 +188,7 @@ string LeetCodeString::reverseWords(string s)
     std::reverse(s.begin(), s.end());
 
     // start from begining of the sentence
-    size_t begin = 0; 
+    size_t begin = 0;
     size_t end = 0;
     int pos = -1;
     while (begin < s.size())
@@ -233,7 +233,7 @@ string LeetCodeString::reverseWords(string s)
 /// return "blue is sky the".
 /// Could you do it in-place without allocating extra space? 
 /// </summary>
-void LeetCodeString::reverseWordsII(string &s)
+void LeetCodeString::reverseWordsII(string& s)
 {
     std::reverse(s.begin(), s.end());
     // start from begining of the sentence
@@ -957,7 +957,7 @@ string LeetCodeString::originalDigits(string s)
     vector<int> alphabet_count(26);
     for (size_t i = 0; i < s.size(); i++)
     {
-        alphabet_count[s[i] - 'a'] ++;
+        alphabet_count[s[i] - 'a']++;
     }
     digits[0] = alphabet_count['z' - 'a'];
     digits[2] = alphabet_count['w' - 'a'];
@@ -1622,7 +1622,7 @@ string LeetCodeString::shortestPalindrome(string s)
     std::reverse(reverse_s.begin(), reverse_s.end());
     string str_s = s + "#" + reverse_s;
     vector<int> dp = kmp(str_s);
-    
+
     string result;
     for (size_t i = 0; i < s.size() - dp.back(); i++)
     {
@@ -1707,7 +1707,7 @@ vector<vector<int>> LeetCodeString::palindromePairs(vector<string>& words)
         {
             string left = words[i].substr(0, k + 1);
             string right = words[i].substr(k + 1);
-            if (left == string(left.rbegin(), left.rend()) && 
+            if (left == string(left.rbegin(), left.rend()) &&
                 (reverse_map.count(right) > 0))
             {
                 int j = reverse_map[right];
@@ -1717,7 +1717,7 @@ vector<vector<int>> LeetCodeString::palindromePairs(vector<string>& words)
                     if (right.empty()) result.push_back({ i, j });
                 }
             }
-            if (right == string(right.rbegin(), right.rend()) && 
+            if (right == string(right.rbegin(), right.rend()) &&
                 (reverse_map.count(left) > 0))
             {
                 int j = reverse_map[left];
@@ -1844,11 +1844,11 @@ int LeetCodeString::longestSubstring(string s, int k)
             {
                 begin++;
                 char_map[s[begin] - 'a']--;
-                if (char_map[s[begin] - 'a'] == k -1)
+                if (char_map[s[begin] - 'a'] == k - 1)
                 {
                     not_meet++;
                 }
-                if (char_map[s[begin]- 'a'] == 0)
+                if (char_map[s[begin] - 'a'] == 0)
                 {
                     char_count--;
                     not_meet--;
@@ -1883,7 +1883,7 @@ bool LeetCodeString::canPermutePalindrome(string s)
         char_count[ch]++;
     }
     int odd_count = 0;
-    for (auto &x : char_count)
+    for (auto& x : char_count)
     {
         odd_count += (x.second % 2 == 1) ? 1 : 0;
         if (odd_count > 1) return false;
@@ -2026,7 +2026,7 @@ bool LeetCodeString::validWordAbbreviation(string word, string abbr)
     size_t word_index = 0;
     size_t abbr_index = 0;
     string number = "";
-    while (word_index < word.size() && abbr_index <abbr.size())
+    while (word_index < word.size() && abbr_index < abbr.size())
     {
         if (isdigit(abbr[abbr_index]))
         {
@@ -2139,7 +2139,7 @@ string LeetCodeString::licenseKeyFormatting(string S, int K)
 /// A magical string S consists of only '1' and '2' and obeys the following rules:  
 /// The string S is magical because concatenating the number of contiguous occurrences of 
 /// characters '1' and '2' generates the string S itself.  
-/// The first few elements of string S is the following: S = "1221121221221121122……" 
+/// The first few elements of string S is the following: S = "1221121221221121122??" 
 /// If we group the consecutive '1's and '2's in S, it will be:  
 ///
 /// 1 22 11 2 1 22 1 22 11 2 11 22 ...... 
@@ -2202,7 +2202,7 @@ int LeetCodeString::magicalString(int n)
 /// <summary>
 /// Leet code #157. Read N Characters Given Read4  
 /// </summary>
-int LeetCodeString::read4(char *buff, string& s, int& index)
+int LeetCodeString::read4(char* buff, string& s, int& index)
 {
     int i;
     for (i = index; (i < index + 4) && (i < (int)s.size()); i++)
@@ -2225,7 +2225,7 @@ int LeetCodeString::read4(char *buff, string& s, int& index)
 /// Note:
 /// The read function will only be called once for each test case. 
 /// </summary>
-int LeetCodeString::readNChars(char *buf, int n, string &s)
+int LeetCodeString::readNChars(char* buf, int n, string& s)
 {
     int index = 0;
     while (index < n)
@@ -2258,7 +2258,7 @@ int LeetCodeString::readNChars(char *buf, int n, string &s)
 /// Note:
 /// The read function may be called multiple times. 
 /// </summary>
-int LeetCodeString::readNCharsII(char *buf, int n, string& s, int& index, string&m_buffer)
+int LeetCodeString::readNCharsII(char* buf, int n, string& s, int& index, string& m_buffer)
 {
     int i = 0;
     while (i < (int)m_buffer.size() && i < n)
@@ -2323,7 +2323,7 @@ int LeetCodeString::lengthOfLongestSubstringKDistinct(string s, int k)
 }
 
 /// <summary>
-/// Leet code #467. Unique Substrings in Wraparound String        
+/// Leet code #467. Unique Substrings in Wraparound String ?????? 
 /// 
 /// Consider the string s to be the infinite wraparound string of 
 /// "abcdefghijklmnopqrstuvwxyz",
@@ -2372,7 +2372,7 @@ int LeetCodeString::findSubstringInWraproundString(string p)
         }
     }
     int count = 0;
-    for (auto &itr : str_map)
+    for (auto& itr : str_map)
     {
         count += itr.second;
     }
@@ -2678,7 +2678,7 @@ int LeetCodeString::findLUSlength(vector<string>& strs)
     map<int, map<string, int>>::iterator itr;
     for (itr = str_map.begin(); itr != str_map.end(); itr++)
     {
-        for (auto &str_cnt : itr->second)
+        for (auto& str_cnt : itr->second)
         {
             // unique string in same length
             if (str_cnt.second == 1)
@@ -2904,7 +2904,7 @@ vector<vector<string>> LeetCodeString::findDuplicate(vector<string>& paths)
             last++;
         }
     }
-    for (auto &itr : file_map)
+    for (auto& itr : file_map)
     {
         if (itr.second.size() > 1) result.push_back(itr.second);
     }
@@ -2995,7 +2995,7 @@ string LeetCodeString::addBoldTag(string s, vector<string>& dict)
 /// <summary>
 /// Leet code #591. Tag Validator
 /// </summary>
-string LeetCodeString::getTag(string code, size_t &pos)
+string LeetCodeString::getTag(string code, size_t& pos)
 {
     string tag;
     while (pos < code.size() && (code[pos] != '>'))
@@ -3262,7 +3262,7 @@ string LeetCodeString::solveEquation(string equation)
 /// <summary>
 /// Leet code #648. Replace Words
 /// </summary>
-string LeetCodeString::replaceWord(unordered_map<int, unordered_set<string>>&dict_map, const string&word)
+string LeetCodeString::replaceWord(unordered_map<int, unordered_set<string>>& dict_map, const string& word)
 {
     string result = word;
     for (size_t i = 0; i < word.size(); i++)
@@ -3600,7 +3600,7 @@ vector<string> LeetCodeString::removeComments(vector<string>& source)
 /// <summary>
 /// Leet code #726. Number of Atoms
 /// </summary>
-string LeetCodeString::parseAtom(string &formula, int& index)
+string LeetCodeString::parseAtom(string& formula, int& index)
 {
     string token;
     while (index < (int)formula.size())
@@ -3626,7 +3626,7 @@ string LeetCodeString::parseAtom(string &formula, int& index)
 /// <summary>
 /// Leet code #726. Number of Atoms
 /// </summary>
-int LeetCodeString::parseAtomCount(string &formula, int& index)
+int LeetCodeString::parseAtomCount(string& formula, int& index)
 {
     string token;
     while (isdigit(formula[index]))
@@ -3642,9 +3642,9 @@ int LeetCodeString::parseAtomCount(string &formula, int& index)
 /// <summary>
 /// Leet code #726. Number of Atoms
 /// </summary>
-void LeetCodeString::multiplyFormula(map<string, int> &atom_count, int& count)
+void LeetCodeString::multiplyFormula(map<string, int>& atom_count, int& count)
 {
-    for (auto &itr : atom_count)
+    for (auto& itr : atom_count)
     {
         atom_count[itr.first] = itr.second * count;
     }
@@ -3653,10 +3653,10 @@ void LeetCodeString::multiplyFormula(map<string, int> &atom_count, int& count)
 /// <summary>
 /// Leet code #726. Number of Atoms
 /// </summary>
-void LeetCodeString::mergeFormula(map<string, int> &atom_count, vector<map<string, int>>& formula_array)
+void LeetCodeString::mergeFormula(map<string, int>& atom_count, vector<map<string, int>>& formula_array)
 {
     int index = formula_array.size() - 1;
-    for (auto &itr : atom_count)
+    for (auto& itr : atom_count)
     {
         formula_array[index][itr.first] += atom_count[itr.first];
     }
@@ -3758,7 +3758,7 @@ string LeetCodeString::countOfAtoms(string formula)
             index++;
         }
     }
-    for (auto &itr : formula_array.back())
+    for (auto& itr : formula_array.back())
     {
         result += itr.first;
         if (itr.second > 1) result += to_string(itr.second);
@@ -3801,7 +3801,7 @@ string LeetCodeString::parseLispToken(string& expression, int& index)
 /// <summary>
 /// Leet code #736. Parse Lisp Expression
 /// </summary>
-int LeetCodeString::calculateLispCommand(string& command, vector<string>& parameters, unordered_map<string, int>&variables)
+int LeetCodeString::calculateLispCommand(string& command, vector<string>& parameters, unordered_map<string, int>& variables)
 {
     int result = 0;
     for (size_t i = 0; i < parameters.size(); i++)
@@ -4450,12 +4450,12 @@ int LeetCodeString::calculateIII(string s)
 /// <summary>
 /// Leet code #770. Basic Calculator IV   
 /// </summary>
-vector<string> LeetCodeString::polyToString(map<vector<string>, int> &ploy_map)
+vector<string> LeetCodeString::polyToString(map<vector<string>, int>& ploy_map)
 {
     vector<pair<vector<string>, int>> poly_vector;
     typedef struct _greater_poly
     {
-        bool operator() (pair<vector<string>, int>&a, pair<vector<string>, int> &b)
+        bool operator() (pair<vector<string>, int>& a, pair<vector<string>, int>& b)
         {
             if (a.first.size() != b.first.size())
             {
@@ -4508,7 +4508,7 @@ void LeetCodeString::calculatePolyExpression(
     if (op == "+")
     {
         result = poly1;
-        for (auto &itr : poly2)
+        for (auto& itr : poly2)
         {
             result[itr.first] += itr.second;
         }
@@ -4523,9 +4523,9 @@ void LeetCodeString::calculatePolyExpression(
     }
     else if (op == "*")
     {
-        for (auto &itr1 : poly1)
+        for (auto& itr1 : poly1)
         {
-            for (auto &itr2 : poly2)
+            for (auto& itr2 : poly2)
             {
                 vector<string> term = itr1.first;
                 term.insert(term.end(), itr2.first.begin(), itr2.first.end());
@@ -4950,7 +4950,7 @@ string LeetCodeString::customSortString(string S, string T)
         }
     }
 
-    for (auto &itr : char_map)
+    for (auto& itr : char_map)
     {
         result.append(itr.second);
     }
@@ -5276,7 +5276,7 @@ string LeetCodeString::mostCommonWord(string paragraph, vector<string>& banned)
     }
     int max_count = 0;
     string result;
-    for (auto &itr : word_map)
+    for (auto& itr : word_map)
     {
         if (itr.second > max_count)
         {
@@ -5814,7 +5814,7 @@ string LeetCodeString::shiftingLetters(string S, vector<int>& shifts)
     vector<int> sh = shifts;
     for (int i = shifts.size() - 2; i >= 0; i--)
     {
-        sh[i] = (int) (((long)sh[i] + (long)sh[i + 1]) % 26);
+        sh[i] = (int)(((long)sh[i] + (long)sh[i + 1]) % 26);
     }
     for (size_t i = 0; i < S.size(); i++)
     {
@@ -6033,7 +6033,7 @@ int LeetCodeString::countkDist(string str, int k)
 /// </summary>
 string LeetCodeString::orderlyQueue(string S, int K)
 {
-    string result ;
+    string result;
     if (K == 1)
     {
         result = S;
@@ -6192,7 +6192,7 @@ int LeetCodeString::numUniqueEmails(vector<string>& emails)
 /// <summary>
 /// Leet code #9904. CSV Parser
 /// </summary>
-string LeetCodeString::parsePhrase(string& line, int &pos)
+string LeetCodeString::parsePhrase(string& line, int& pos)
 {
     string result;
     bool in_quote = false;
@@ -6336,11 +6336,11 @@ vector<string> LeetCodeString::reorderLogFiles(vector<string>& logs)
 
     sort(letter_logs.begin(), letter_logs.end());
 
-    for (auto &itr : letter_logs)
+    for (auto& itr : letter_logs)
     {
         result.push_back(itr.second + " " + itr.first);
     }
-    for (auto &itr : digit_logs)
+    for (auto& itr : digit_logs)
     {
         result.push_back(itr.second + " " + itr.first);
     }
@@ -6469,7 +6469,7 @@ vector<string> LeetCodeString::spellchecker(vector<string>& wordlist, vector<str
 /// <summary>
 /// Leet code #972. Equal Rational Numbers
 /// </summary>
-string LeetCodeString::parseRationalInteger(string S, size_t &index)
+string LeetCodeString::parseRationalInteger(string S, size_t& index)
 {
     string result;
     while (index < S.size())
@@ -6485,11 +6485,11 @@ string LeetCodeString::parseRationalInteger(string S, size_t &index)
 /// <summary>
 /// Leet code #972. Equal Rational Numbers
 /// </summary>
-string LeetCodeString::parseRationalDecimal(string S, size_t &index)
+string LeetCodeString::parseRationalDecimal(string S, size_t& index)
 {
     string non_repeating_part;
     string repeating_part;
-  
+
     bool is_repeat = false;
     while (index < S.size())
     {
@@ -6517,8 +6517,8 @@ string LeetCodeString::parseRationalDecimal(string S, size_t &index)
     }
 
     // shift non-repeating part to repeating part 
-    while (!non_repeating_part.empty() && !repeating_part.empty() && 
-            (non_repeating_part.back() == repeating_part.back()))
+    while (!non_repeating_part.empty() && !repeating_part.empty() &&
+        (non_repeating_part.back() == repeating_part.back()))
     {
         repeating_part.insert(repeating_part.begin(), non_repeating_part.back());
         non_repeating_part.pop_back();
@@ -6536,7 +6536,7 @@ string LeetCodeString::parseRationalDecimal(string S, size_t &index)
         }
     }
     if (repeating_part == "0") repeating_part = "";
-    
+
     // (9) theory
     if (repeating_part == "9" && !non_repeating_part.empty())
     {
@@ -6551,7 +6551,7 @@ string LeetCodeString::parseRationalDecimal(string S, size_t &index)
             non_repeating_part.pop_back();
         }
     }
-    
+
     string result = non_repeating_part;
     if (!repeating_part.empty()) result += "(" + repeating_part + ")";
     return result;
@@ -6868,7 +6868,7 @@ vector<bool> LeetCodeString::camelMatch(vector<string>& queries, string pattern)
 string LeetCodeString::longestDupSubstring(string S)
 {
     unsigned long long M = 1000000007;
-    int first = 1; 
+    int first = 1;
     int last = S.size();
     string result;
     while (first < last)
@@ -6880,13 +6880,13 @@ string LeetCodeString::longestDupSubstring(string S)
             pow = pow * 26 % M;
         }
         bool match = false;
-        unordered_map<int, vector<int>> hash;     
+        unordered_map<int, vector<int>> hash;
         unsigned long long sum = 0;
         for (int i = 0; i < (int)S.size(); i++)
         {
             if (i < middle - 1)
             {
-                sum = (sum * 26 %M + S[i] - 'a') % M;
+                sum = (sum * 26 % M + S[i] - 'a') % M;
             }
             else
             {
@@ -6912,10 +6912,10 @@ string LeetCodeString::longestDupSubstring(string S)
                             break;
                         }
                     }
-                    if (match == true) 
+                    if (match == true)
                     {
-                       result = target;
-                       break;
+                        result = target;
+                        break;
                     }
                 }
                 hash[key].push_back(i - middle + 1);
@@ -6954,9 +6954,9 @@ string LeetCodeString::getRepeatedOfStrings(string str)
             i++;
         }
     }
-    if ((len > 0) && (size % (size-len) == 0))
+    if ((len > 0) && (size % (size - len) == 0))
     {
-        return str.substr(0, size-len);
+        return str.substr(0, size - len);
     }
     else
     {
@@ -7201,7 +7201,7 @@ vector<string> LeetCodeString::findOcurrences(string text, string first, string 
                 }
                 else
                 {
-                   step = 0;
+                    step = 0;
                 }
                 str.clear();
             }
@@ -7217,7 +7217,7 @@ vector<string> LeetCodeString::findOcurrences(string text, string first, string 
 /// <summary>
 /// Leet code #1096. Brace Expansion II
 /// </summary>
-void LeetCodeString::braceExpansionIIProduct(string &expression, size_t& pos, unordered_set<string> &result)
+void LeetCodeString::braceExpansionIIProduct(string& expression, size_t& pos, unordered_set<string>& result)
 {
     pos++;
     braceExpansionIIUnion(expression, pos, result);
@@ -7227,7 +7227,7 @@ void LeetCodeString::braceExpansionIIProduct(string &expression, size_t& pos, un
 /// <summary>
 /// Leet code #1096. Brace Expansion II
 /// </summary>
-void LeetCodeString::braceExpansionIIUnion(string &expression, size_t& pos, unordered_set<string> &result)
+void LeetCodeString::braceExpansionIIUnion(string& expression, size_t& pos, unordered_set<string>& result)
 {
     while (pos <= expression.size())
     {
@@ -7245,9 +7245,9 @@ void LeetCodeString::braceExpansionIIUnion(string &expression, size_t& pos, unor
             unordered_set<string> right;
             braceExpansionIIProduct(expression, pos, right);
             if (result.empty()) result.insert("");
-            for (auto &left_str : result)
+            for (auto& left_str : result)
             {
-                for (auto &right_str : right)
+                for (auto& right_str : right)
                 {
                     left.insert(left_str + right_str);
                 }
@@ -7272,7 +7272,7 @@ void LeetCodeString::braceExpansionIIUnion(string &expression, size_t& pos, unor
             unordered_set<string> right;
             pos++;
             braceExpansionIIUnion(expression, pos, right);
-            for (auto &right_str : right)
+            for (auto& right_str : right)
             {
                 result.insert(right_str);
             }
@@ -7340,7 +7340,7 @@ vector<string> LeetCodeString::braceExpansionII(string expression)
     unordered_set<string> left;
     size_t pos = 0;
     braceExpansionIIUnion(expression, pos, left);
-    for (auto &str : left) result.push_back(str);
+    for (auto& str : left) result.push_back(str);
 
     sort(result.begin(), result.end());
     return result;
@@ -7349,7 +7349,7 @@ vector<string> LeetCodeString::braceExpansionII(string expression)
 /// <summary>
 /// Leet code #1106. Parsing A Boolean Expression
 /// </summary>
-bool LeetCodeString::parseBoolExpr(string expression, int &pos)
+bool LeetCodeString::parseBoolExpr(string expression, int& pos)
 {
     if (expression[pos] == 't')
     {
@@ -7378,7 +7378,7 @@ bool LeetCodeString::parseBoolExpr(string expression, int &pos)
 /// <summary>
 /// Leet code #1106. Parsing A Boolean Expression
 /// </summary>
-bool LeetCodeString::parseBoolExprNot(string expression, int &pos)
+bool LeetCodeString::parseBoolExprNot(string expression, int& pos)
 {
     pos++; // skip !
     pos++; // skip (
@@ -7390,7 +7390,7 @@ bool LeetCodeString::parseBoolExprNot(string expression, int &pos)
 /// <summary>
 /// Leet code #1106. Parsing A Boolean Expression
 /// </summary>
-bool LeetCodeString::parseBoolExprOr(string expression, int &pos)
+bool LeetCodeString::parseBoolExprOr(string expression, int& pos)
 {
     pos++; // skip |
     pos++; // skip (
@@ -7411,7 +7411,7 @@ bool LeetCodeString::parseBoolExprOr(string expression, int &pos)
 /// <summary>
 /// Leet code #1106. Parsing A Boolean Expression
 /// </summary>
-bool LeetCodeString::parseBoolExprAnd(string expression, int &pos)
+bool LeetCodeString::parseBoolExprAnd(string expression, int& pos)
 {
     pos++; // skip |
     pos++; // skip (
@@ -7635,7 +7635,7 @@ int LeetCodeString::calculate(string s)
         {
             num = num * 10 + (s[i] - '0');
         }
-        else 
+        else
         {
             result += sign * num;
             num = 0;
@@ -7712,7 +7712,7 @@ int LeetCodeString::calculateII(string s)
         {
             num = num * 10 + (c - '0');
         }
-        else 
+        else
         {
             while (!ops.empty())
             {
@@ -7953,8 +7953,8 @@ vector<int> LeetCodeString::numSmallerByFrequency(vector<string>& queries, vecto
     {
         int frequency = numSmallerByFrequency(queries[i]);
 
-        result[i] = word_frequency.end() - 
-                    std::upper_bound(word_frequency.begin(), word_frequency.end(), frequency);
+        result[i] = word_frequency.end() -
+            std::upper_bound(word_frequency.begin(), word_frequency.end(), frequency);
     }
     return result;
 }
@@ -8077,7 +8077,7 @@ vector<int> LeetCodeString::findNumOfValidWords(vector<string>& words, vector<st
             int n = j;
             while (n > 0)
             {
-                if (n % 2 == 1) b |= 1 << (puzzles[i][k+1] - 'a');
+                if (n % 2 == 1) b |= 1 << (puzzles[i][k + 1] - 'a');
                 n /= 2;
                 k++;
             }
@@ -8146,9 +8146,9 @@ vector<string> LeetCodeString::beforeAndAfterPuzzles(vector<string>& phrases)
     }
     vector<string> result;
     set<string> out_set;
-    for (auto &first : phrase_map)
+    for (auto& first : phrase_map)
     {
-        for (auto &itr : first.second)
+        for (auto& itr : first.second)
         {
             string sentence = itr.first;
             size_t pos = sentence.find_last_of(' ');
@@ -8158,7 +8158,7 @@ vector<string> LeetCodeString::beforeAndAfterPuzzles(vector<string>& phrases)
             }
             string last = sentence.substr(pos + 1);
 
-            if (phrase_map.count(last) == 0) 
+            if (phrase_map.count(last) == 0)
             {
                 continue;
             }
@@ -8212,7 +8212,7 @@ int LeetCodeString::maxNumberOfBalloons(string text)
     result = min(result, char_count['a' - 'a']);
     result = min(result, char_count['l' - 'a'] / 2);
     result = min(result, char_count['o' - 'a'] / 2);
-    result = min(result, char_count['n' - 'a']);    
+    result = min(result, char_count['n' - 'a']);
     return result;
 }
 
@@ -8261,7 +8261,7 @@ vector<string> LeetCodeString::removeSubfolders(vector<string>& folder)
     priority_queue<pair<int, string>> pq;
     for (size_t i = 0; i < folder.size(); i++)
     {
-        pq.push(make_pair(0-(int)folder[i].size(), folder[i]));
+        pq.push(make_pair(0 - (int)folder[i].size(), folder[i]));
     }
     set<string> result;
     while (!pq.empty())
@@ -9743,7 +9743,7 @@ string LeetCodeString::entityParser(string text)
             {
                 token.push_back(text[index]);
                 index++;
-                if (text[index-1] == ';') break;
+                if (text[index - 1] == ';') break;
             }
             if (token == "&quot;") result.append("\"");
             else if (token == "&apos;") result.append("\'");
@@ -10116,7 +10116,7 @@ string LeetCodeString::arrangeWords(string text)
         {
             if (!word.empty())
             {
-                pq.push(make_pair(0 - (int)word.size(), 0-words.size()));
+                pq.push(make_pair(0 - (int)word.size(), 0 - words.size()));
                 words.push_back(word);
                 word.clear();
             }
@@ -10278,7 +10278,7 @@ int LeetCodeString::maxVowels(string s, int k)
         }
         if (i >= k)
         {
-            if (s[i-k] == 'a' || s[i-k] == 'e' || s[i-k] == 'i' || s[i-k] == 'o' || s[i-k] == 'u')
+            if (s[i - k] == 'a' || s[i - k] == 'e' || s[i - k] == 'i' || s[i - k] == 'o' || s[i - k] == 'u')
             {
                 vowels--;
             }
@@ -10476,7 +10476,7 @@ int LeetCodeString::getMaxRepetitions(string s1, int n1, string s2, int n2)
 /// 3.Two consecutive words in a line must be separated by a single space.
 /// 4.Total words in the sentence won't exceed 100.
 /// 5.Length of each word is greater than 0 and won't exceed 10.
-/// 6.1 ≤ rows, cols ≤ 20,000.
+/// 6.1 ? rows, cols ? 20,000.
 /// 
 /// Example 1: 
 /// Input:
@@ -10872,10 +10872,10 @@ string LeetCodeString::reformatDate(string date)
     };
     size_t offset = 0;
     size_t pos = date.find(' ', offset);
-    string day_str = date.substr(offset, pos-offset);
+    string day_str = date.substr(offset, pos - offset);
     offset = pos + 1;
     pos = date.find(' ', offset);
-    string month_str = date.substr(offset, pos-offset);
+    string month_str = date.substr(offset, pos - offset);
     offset = pos + 1;
     string year = date.substr(offset);
 
@@ -10899,7 +10899,7 @@ string LeetCodeString::reformatDate(string date)
 /// <summary>
 /// Leet code #1531. String Compression II
 /// </summary>
-int LeetCodeString::getLengthOfOptimalCompression(string& s, int left, int k, vector<vector<int>> &dp)
+int LeetCodeString::getLengthOfOptimalCompression(string& s, int left, int k, vector<vector<int>>& dp)
 {
     int n = s.size();
     // delete all remaining
@@ -10928,7 +10928,7 @@ int LeetCodeString::getLengthOfOptimalCompression(string& s, int left, int k, ve
             int next_len = (most + 1 < 10) ? 1 : (most + 1 < 100) ? 2 : 3;
             if (len == next_len) continue;
         }
-        dp[left][k] = min(dp[left][k], 1+ len + getLengthOfOptimalCompression(s, i + 1, remaining, dp));
+        dp[left][k] = min(dp[left][k], 1 + len + getLengthOfOptimalCompression(s, i + 1, remaining, dp));
     }
     return dp[left][k];
 }
@@ -11328,7 +11328,7 @@ int LeetCodeString::longestAwesome(string s)
             int next_bits = bits ^ (1 << j);
             if (pos_map[next_bits] > 0)
             {
-                result = max(result, i + 1- pos_map[next_bits]);
+                result = max(result, i + 1 - pos_map[next_bits]);
             }
         }
     }
@@ -11688,7 +11688,7 @@ int LeetCodeString::minCost(string s, vector<int>& cost)
     for (size_t i = 1; i <= s.size(); i++)
     {
         last++;
-        if (i == s.size() || s[i] != s[i-1])
+        if (i == s.size() || s[i] != s[i - 1])
         {
             if (last - first > 1)
             {
@@ -12090,7 +12090,7 @@ bool LeetCodeString::checkPalindromeFormation(string a, string b)
 /// </summary>
 int LeetCodeString::maxFont(string text, int w, int h, vector<int>& fonts)
 {
-    int first = 0; 
+    int first = 0;
     int last = fonts.size() - 1;
     int result = -1;
     while (first <= last)
@@ -12251,7 +12251,7 @@ string LeetCodeString::findLexSmallestString(string s, int a, int b)
         string str_a = str;
         for (size_t i = 1; i < str_a.size(); i += 2)
         {
-            str_a[i] ='0' + (str_a[i] - '0' + a) % 10;
+            str_a[i] = '0' + (str_a[i] - '0' + a) % 10;
         }
         if (visited.count(str_a) == 0)
         {
@@ -12871,7 +12871,7 @@ string LeetCodeString::maximumBinaryString(string binary)
     int n = binary.size();
     string result = binary;
     int next = 0;
-    for (int i = 0; i < n-1; i++)
+    for (int i = 0; i < n - 1; i++)
     {
         // skip all '1'
         if (result[i] == '1') continue;
@@ -12885,7 +12885,7 @@ string LeetCodeString::maximumBinaryString(string binary)
         while (next < n && result[next] == '1') next++;
         // no more zero for swap
         if (next >= n) break;
-        
+
         swap(result[i + 1], result[next]);
         result[i] = '1';
     }
@@ -13384,8 +13384,8 @@ string LeetCodeString::longestNiceSubstring(string s)
         else
         {
             int pos = lower[i] + upper[i];
-            
-            string str1 = longestNiceSubstring(s.substr(0, pos-1));
+
+            string str1 = longestNiceSubstring(s.substr(0, pos - 1));
             string str2 = longestNiceSubstring(s.substr(pos));
             result = str1;
             if (str1.size() < str2.size())
@@ -14124,9 +14124,9 @@ int LeetCodeString::countQuadruples(string firstString, string secondString)
 /// </summary>
 int LeetCodeString::longestBeautifulSubstring(string word)
 {
-    unordered_map<char, int> vowels = 
-    { 
-        { 'a', 0, }, {'e', 1}, {'i', 2}, {'o', 3 }, {'u', 4} 
+    unordered_map<char, int> vowels =
+    {
+        { 'a', 0, }, {'e', 1}, {'i', 2}, {'o', 3 }, {'u', 4}
     };
     int first = -1;
     int prev = -1;
@@ -14225,7 +14225,7 @@ void LeetCodeString::minOperationsToFlip_FreeTree(LogicOperation* tree)
 /// <summary>
 /// Leet code 1896. Minimum Cost to Change the Final Value of Expression
 /// </summary>
-LogicOperation* LeetCodeString::minOperationsToFlip_BuildTree(string& expression, int &index)
+LogicOperation* LeetCodeString::minOperationsToFlip_BuildTree(string& expression, int& index)
 {
     LogicOperation* root = nullptr;
     while (index < (int)expression.size())
@@ -14286,14 +14286,14 @@ int LeetCodeString::minOperationsToFlip_FlipTree(LogicOperation* root)
             if ((left | right) == 1) return 1;
             else
             {
-                result = 1 + min(minOperationsToFlip_FlipTree(root->left), 
-                                 minOperationsToFlip_FlipTree(root->right));
+                result = 1 + min(minOperationsToFlip_FlipTree(root->left),
+                    minOperationsToFlip_FlipTree(root->right));
             }
         }
         else
         {
-            result =  min(minOperationsToFlip_FlipTree(root->left), 
-                          minOperationsToFlip_FlipTree(root->right));
+            result = min(minOperationsToFlip_FlipTree(root->left),
+                minOperationsToFlip_FlipTree(root->right));
         }
     }
     else
@@ -14304,13 +14304,13 @@ int LeetCodeString::minOperationsToFlip_FlipTree(LogicOperation* root)
             else
             {
                 result = 1 + min(minOperationsToFlip_FlipTree(root->left),
-                                 minOperationsToFlip_FlipTree(root->right));
+                    minOperationsToFlip_FlipTree(root->right));
             }
         }
         else
         {
             result = min(minOperationsToFlip_FlipTree(root->left),
-                         minOperationsToFlip_FlipTree(root->right));
+                minOperationsToFlip_FlipTree(root->right));
         }
     }
     return result;
@@ -15923,7 +15923,7 @@ int LeetCodeString::scoreOfStudents(string s, vector<int>& answers)
     int n = s.size() / 2;
     vector<vector<unordered_set<int>>> dp(n, vector<unordered_set<int>>(n));
 
-    for (size_t k = 0; k < s.size(); k+=2)
+    for (size_t k = 0; k < s.size(); k += 2)
     {
         for (size_t i = 0; i + k < s.size(); i += 2)
         {
@@ -15948,7 +15948,7 @@ int LeetCodeString::scoreOfStudents(string s, vector<int>& answers)
                             ans = x * y;
                         }
                         if (ans <= 1000)
-                        dp[i / 2][(i + k) / 2].insert(ans);
+                            dp[i / 2][(i + k) / 2].insert(ans);
                     }
                 }
             }
@@ -15961,7 +15961,7 @@ int LeetCodeString::scoreOfStudents(string s, vector<int>& answers)
         {
             result += 5;
         }
-        else if (dp[0][s.size() / 2-1].count(answers[i]) > 0)
+        else if (dp[0][s.size() / 2 - 1].count(answers[i]) > 0)
         {
             result += 2;
         }
@@ -16129,7 +16129,7 @@ vector<string> LeetCodeString::sortFeatures(vector<string>& features, vector<str
     {
         auto& itr = pq.top();
         pq.pop();
-        result.push_back(features[0-itr.second]);
+        result.push_back(features[0 - itr.second]);
     }
     return result;
 }
@@ -16542,7 +16542,7 @@ bool LeetCodeString::winnerOfGame(string colors)
             if (prevA > 2) countA++;
             prevB = 0;
         }
-        else 
+        else
         {
             prevB++;
             if (prevB > 2) countB++;
@@ -17402,7 +17402,7 @@ bool LeetCodeString::canBeValid(string s, string locked)
 bool LeetCodeString::checkString(string s)
 {
     bool is_b = false;
-    for (auto ch: s)
+    for (auto ch : s)
     {
         if (ch == 'b') is_b = true;
         else if (is_b == true) return false;
@@ -17614,8 +17614,8 @@ vector<string> LeetCodeString::divideString(string s, int k, char fill)
 int LeetCodeString::wordCount(vector<string>& startWords, vector<string>& targetWords)
 {
     unordered_set<string> source;
-    for (string word: startWords)
-    {  
+    for (string word : startWords)
+    {
         sort(word.begin(), word.end());
         source.insert(word);
     }
@@ -17683,7 +17683,7 @@ int LeetCodeString::longestPalindrome(vector<string>& words)
 {
     unordered_map<string, int> word_map;
     int result = 0;
-    for (string&  word : words)
+    for (string& word : words)
     {
         string reverse_word = word;
         std::reverse(reverse_word.begin(), reverse_word.end());
@@ -17699,7 +17699,7 @@ int LeetCodeString::longestPalindrome(vector<string>& words)
         else
         {
             word_map[word]++;
-        } 
+        }
     }
 
     int central = 0;
@@ -17785,7 +17785,7 @@ int LeetCodeString::longestPalindrome(vector<string>& words)
 vector<int> LeetCodeString::groupStringsII(vector<string>& words)
 {
     vector<int> bit_masks(words.size());
-    unordered_map<int, vector<int>> word_map; 
+    unordered_map<int, vector<int>> word_map;
     for (size_t i = 0; i < words.size(); i++)
     {
         int bitmask = 0;
@@ -19685,7 +19685,7 @@ int LeetCodeString::longestSubsequence(string s, int k)
 ///    asterisks '*'.
 /// 3. s contains an even number of vertical bars '|'.
 /// </summary>
-int LeetCodeString::countAsterisks(string s) 
+int LeetCodeString::countAsterisks(string s)
 {
     int flag = 0;
     int result = 0;
@@ -20835,7 +20835,7 @@ int LeetCodeString::similarPairs(vector<string>& words)
         str_groups[str]++;
     }
     int result = 0;
-    for (auto &itr : str_groups)
+    for (auto& itr : str_groups)
     {
         result += itr.second * (itr.second - 1) / 2;
     }
@@ -20935,7 +20935,7 @@ vector<int> LeetCodeString::topStudents(
         }
     }
     priority_queue<pair<int, int>> pq;
-    for (auto &itr : scores)
+    for (auto& itr : scores)
     {
         pq.push(make_pair(itr.second, -itr.first));
     }
@@ -21287,7 +21287,7 @@ int LeetCodeString::minimumScore(string s, string t)
 /// </summary>
 int LeetCodeString::vowelStrings(vector<string>& words, int left, int right)
 {
-    unordered_set<char> vowels = {'a','e','i','o','u'};
+    unordered_set<char> vowels = { 'a','e','i','o','u' };
     int result = 0;
     for (int i = left; i <= right; i++)
     {
@@ -21828,7 +21828,7 @@ int LeetCodeString::longestSemiRepetitiveSubstring(string s)
         }
         if (curr > 0 && s[curr] == s[curr - 1])
         {
-            if (prev != -1) left = prev -1;
+            if (prev != -1) left = prev - 1;
             result = max(result, curr - left);
             prev = curr;
         }
@@ -22376,7 +22376,7 @@ string LeetCodeString::minimumString(string a, string b, string c)
     if (str.size() < result.size() || (str.size() == result.size() && str < result)) result = str;
     str = minimumString(minimumString(c, b), a);
     if (str.size() < result.size() || (str.size() == result.size() && str < result)) result = str;
-    
+
     return result;
 }
 
@@ -23178,7 +23178,7 @@ vector<int> LeetCodeString::beautifulIndicesII(string s, string a, string b, int
     for (size_t i = 0; i < kmp_a.size(); i++)
     {
         if (kmp_a[i] >= (int)a.size())
-        queue_a.push(i - 2 * a.size());
+            queue_a.push(i - 2 * a.size());
     }
     for (size_t i = 0; i < kmp_b.size(); i++)
     {
@@ -23536,7 +23536,7 @@ int LeetCodeString::maxPalindromesAfterOperations(vector<string>& words)
     {
         if (dp[i] % 2 == 1)
         {
-            odd ++;
+            odd++;
             even += dp[i] - 1;
         }
         else
@@ -23983,7 +23983,7 @@ int LeetCodeString::longestCommonPrefix(vector<int>& arr1, vector<int>& arr2)
             {
                 curr = curr->children[c - '0'];
                 if (curr == nullptr) break;
-                result ++;
+                result++;
             }
             return result;
         }
@@ -24170,7 +24170,7 @@ vector<string> LeetCodeString::shortestSubstrings(vector<string>& arr)
                 for (size_t k = 0; k < arr.size(); k++)
                 {
                     if (i == k) continue;
-                    if (j < string_tables[k].size() && 
+                    if (j < string_tables[k].size() &&
                         string_tables[k][j].count(s) > 0)
                     {
                         str.clear();
@@ -24910,7 +24910,7 @@ int LeetCodeString::numberOfSpecialCharsII(string word)
 /// </summary>
 bool LeetCodeString::isValidWord(string word)
 {
-    unordered_set<char> vowel = { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'};
+    unordered_set<char> vowel = { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' };
     bool is_vowel = false, is_consonant = false;
     bool is_lower = false, is_upper = false, is_digit = false;
     for (size_t i = 0; i < word.size(); i++)
@@ -24958,7 +24958,7 @@ bool LeetCodeString::isValidWord(string word)
 ///
 /// We say that word is k-periodic if there is some string s of length 
 /// k such that word can be obtained by concatenating s an arbitrary 
-/// number of times. For example, if word == “ababab”, then word is 
+/// number of times. For example, if word == ?ababab?, then word is 
 /// 2-periodic for s = "ab".
 ///
 /// Example 1:
@@ -25104,7 +25104,7 @@ int LeetCodeString::minAnagramLength(string s)
 /// </summary>
 int LeetCodeString::findPermutationDifference(string s, string t)
 {
-    vector<int> s_index(26,-1), t_index(26, -1);
+    vector<int> s_index(26, -1), t_index(26, -1);
     for (size_t i = 0; i < s.size(); i++)
     {
         s_index[s[i] - 'a'] = i;
@@ -25495,7 +25495,7 @@ int LeetCodeString::minimumCostII(string target, vector<string>& words, vector<i
             else curr->cost = cost;
         }
 
-        void search(string& w, int pos, int initial, vector<int>&dp)
+        void search(string& w, int pos, int initial, vector<int>& dp)
         {
             Trie* curr = this;
             for (size_t i = pos; i < w.size(); i++)
@@ -25527,7 +25527,7 @@ int LeetCodeString::minimumCostII(string target, vector<string>& words, vector<i
         }
         else if (dp[i - 1] != INT_MAX)
         {
-            trie.search(target, i, dp[i-1], dp);
+            trie.search(target, i, dp[i - 1], dp);
         }
     }
     if (dp[target.size() - 1] != INT_MAX)
@@ -25692,7 +25692,7 @@ int LeetCodeString::numberOfDominantSubstrings(string s)
 {
     int n = s.size();
     int result = 0;
-    vector<int> sum(n+1);
+    vector<int> sum(n + 1);
     for (int i = 0; i < n; i++)
     {
         if (s[i] == '1') sum[i + 1] = 1;
@@ -26538,7 +26538,7 @@ int LeetCodeString::minStartingIndex(string s, string pattern)
     string rev_pattern(pattern.rbegin(), pattern.rend());
     string rev_s(s.rbegin(), s.rend());
     vector<int> z1 = z_function(pattern + "#" + s);
-    vector<int> z2 = z_function(rev_pattern + "#"+ rev_s);
+    vector<int> z2 = z_function(rev_pattern + "#" + rev_s);
     vector<int> prefix(z1.begin() + m + 1, z1.end());
     vector<int> suffix(z2.rbegin(), z2.rend() - m - 1);
     for (int i = 0; i <= n - m; ++i)
@@ -26620,7 +26620,7 @@ char LeetCodeString::kthCharacter(long long k, vector<int>& operations)
         {
             offset += operations[index];
         }
-        k = k % (size / 2); 
+        k = k % (size / 2);
         size /= 2;
     }
     char result = 'a' + offset % 26;
@@ -26699,7 +26699,7 @@ pair<long long, int> LeetCodeString::findAnswerDFS(vector<long long>& hash, long
 {
     int count = 0;
     long long hash_code = 0;
-    for (int child : children[curr]) 
+    for (int child : children[curr])
     {
         pair<long long, int> p = findAnswerDFS(hash, mod, children, child, s, pow);
         hash_code = (hash_code + (p.first * pow[count]) % mod) % mod;
@@ -26720,7 +26720,7 @@ pair<long long, int> LeetCodeString::findAnswerRevDFS(vector<long long>& hash, l
     int count = 1;
     long long hash_code = s[curr] - 'a';
 
-    for (int i = children[curr].size() - 1; i > -1; i--) 
+    for (int i = children[curr].size() - 1; i > -1; i--)
     {
         int child = children[curr][i];
         pair<long long, int> p = findAnswerRevDFS(hash, mod, children, child, s, pow);
@@ -26800,9 +26800,9 @@ vector<bool> LeetCodeString::findAnswer(vector<int>& parent, string s)
     int n = parent.size();
     vector<long long > hash(n, -1), rev_hash(n, -1);
     vector<vector<int>> children(n);
-    for (int i = 0; i < n; i++) 
+    for (int i = 0; i < n; i++)
     {
-        if (parent[i] != -1) 
+        if (parent[i] != -1)
         {
             children[parent[i]].push_back(i);
         }
@@ -26812,14 +26812,14 @@ vector<bool> LeetCodeString::findAnswer(vector<int>& parent, string s)
         sort(children[i].begin(), children[i].end());
     }
     vector<long long> pow(n + 1, 1);
-    for (int i = 1; i <= n; i++) 
+    for (int i = 1; i <= n; i++)
     {
         pow[i] = (pow[i - 1] * 29) % M;
     }
     vector<bool> result(n, 0);
     findAnswerDFS(hash, M, children, 0, s, pow);
     findAnswerRevDFS(rev_hash, M, children, 0, s, pow);
-    for (int i = 0; i < n; i++) 
+    for (int i = 0; i < n; i++)
     {
         result[i] = (rev_hash[i] == hash[i]);
     }
@@ -27139,8 +27139,8 @@ int LeetCodeString::makeStringGood(string s)
             if (count[j] <= target) insertion = target - count[j];
             else insertion = INT_MAX;
             dp[j] = min(insertion, deletion) + dp[j + 1];
-            if (j < 25 &&  count[j + 1] < target)
-            {   
+            if (j < 25 && count[j + 1] < target)
+            {
                 int move = 0;
                 int delta = 0;
                 if (count[j] >= target)
@@ -27610,11 +27610,11 @@ string LeetCodeString::findValidPair(string s)
 
     for (size_t i = 1; i < s.size(); i++)
     {
-        if (digits[s[i-1] - '0'] == s[i-1] - '0' && 
-            digits[s[i] - '0'] == s[i] - '0' && 
+        if (digits[s[i - 1] - '0'] == s[i - 1] - '0' &&
+            digits[s[i] - '0'] == s[i] - '0' &&
             s[i - 1] != s[i])
         {
-            result.push_back(s[i-1]);
+            result.push_back(s[i - 1]);
             result.push_back(s[i]);
             break;
         }
@@ -27750,8 +27750,8 @@ int LeetCodeString::shortestMatchingSubstring(string s, string p)
     int p1 = str1.size() + 1, p2 = str2.size() + 1, p3 = str3.size() + 1;
     int result = INT_MAX;
     while (p1 - (int)str1.size() - 1 < (int)s.size() &&
-           p2 - (int)str2.size() - 1 < (int)s.size() &&
-           p3 - (int)str3.size() - 1 < (int)s.size())
+        p2 - (int)str2.size() - 1 < (int)s.size() &&
+        p3 - (int)str3.size() - 1 < (int)s.size())
     {
         int offset1 = p1 - (int)str1.size() - 1;
         int offset2 = p2 - (int)str2.size() - 1;
@@ -28245,7 +28245,7 @@ string LeetCodeString::generateString(string str1, string str2)
     long long sum_str2 = 0;
     for (int i = 0; i < m; i++)
     {
-        sum_str2 = (sum_str2 + power[i+1] * (str2[i] - 'a' + 1) % M) % M;
+        sum_str2 = (sum_str2 + power[i + 1] * (str2[i] - 'a' + 1) % M) % M;
     }
 
     // fill all 'T'
@@ -28288,7 +28288,7 @@ string LeetCodeString::generateString(string str1, string str2)
 
     deque<int> deque;
     long long accumulated_sum = 0;
-    for (int i = 0; i < n+m-1; i++)
+    for (int i = 0; i < n + m - 1; i++)
     {
         if (i < n && str1[i] == 'F')
         {
@@ -28299,14 +28299,14 @@ string LeetCodeString::generateString(string str1, string str2)
             for (char ch = 'a'; ch <= 'z'; ch++)
             {
                 result[i] = ch;
-                int prefix_sum = (int)(long long)power[i+1] * (ch - 'a' + 1) % M;
+                int prefix_sum = (int)(long long)power[i + 1] * (ch - 'a' + 1) % M;
                 while (!deque.empty() && deque.front() <= i - m) deque.pop_front();
                 bool ok = true;
                 for (size_t j = 0; j < deque.size(); j++)
                 {
                     int pos = deque[j];
                     if (((long long)prefix[pos + m] - prefix[pos] + accumulated_sum + prefix_sum + M) % M ==
-                        sum_str2 * power[pos+1] % M)
+                        sum_str2 * power[pos + 1] % M)
                     {
                         ok = false;
                         break;
@@ -28426,7 +28426,7 @@ vector<int> LeetCodeString::longestCommonPrefix(vector<string>& words, int k)
                         break;
                     }
                     curr = curr->children[c - 'a'];
-                }                    
+                }
                 depth++;
             }
             max_length = max(max_length, depth);
@@ -28553,7 +28553,7 @@ int LeetCodeString::longestPalindromeI(string s, string t)
         {
             if (s[i] == s[i + j])
             {
-                if ((j < 2) || (i < n - 1 && dpS[i + 1][i + j-1] == 1))
+                if ((j < 2) || (i < n - 1 && dpS[i + 1][i + j - 1] == 1))
                 {
                     dpS[i][i + j] = 1;
                     left[i] = j + 1;
@@ -28570,7 +28570,7 @@ int LeetCodeString::longestPalindromeI(string s, string t)
             {
                 if ((j < 2) || (i > 0 && dpT[i - j + 1][i - 1] == 1))
                 {
-                    dpT[i-j][i] = 1;
+                    dpT[i - j][i] = 1;
                     right[i] = j + 1;
                     result = max(result, j + 1);
                 }
@@ -28739,13 +28739,13 @@ int LeetCodeString::longestPalindromeII(string s, string t)
 /// Input: s = "babab"
 /// Output: "abbba"
 /// Explanation:
-/// Rearranging "babab" → "abbba" gives the smallest lexicographic palindrome.
+/// Rearranging "babab" ? "abbba" gives the smallest lexicographic palindrome.
 ///
 /// Example 3:
 /// Input: s = "daccad"
 /// Output: "acddca"
 /// Explanation:
-/// Rearranging "daccad" → "acddca" gives the smallest lexicographic 
+/// Rearranging "daccad" ? "acddca" gives the smallest lexicographic 
 /// palindrome.
 /// 
 /// Constraints:
@@ -29105,7 +29105,7 @@ string LeetCodeString::lexicographicallySmallestString(string s)
     {
         for (int i = 0; i + len < n; i++)
         {
-            dp[i][i + len] = s.substr(i, 1) + dp[i+1][i+len];
+            dp[i][i + len] = s.substr(i, 1) + dp[i + 1][i + len];
             for (int k = i + 1; k <= i + len; k++)
             {
                 if ((i + 1 > k - 1) || (dp[i + 1][k - 1] == ""))
@@ -29301,7 +29301,7 @@ int LeetCodeString::minOperations_dp(string& word1, string& word2, int start, ve
         reverse(rev_s.begin(), rev_s.end());
         int count2 = 1 + minOperations_match(rev_s, t);
         result = min(result, min(count1, count2) + minOperations_dp(word1, word2, i + 1, dp));
-     }
+    }
     dp[start] = result;
     return result;
 }
@@ -30114,7 +30114,7 @@ int LeetCodeString::score(vector<string>& cards, char x)
         }
         else if (cards[i][0] == x && cards[i][1] != x)
         {
-            match1[cards[i][1]-'a']++;
+            match1[cards[i][1] - 'a']++;
         }
         else if (cards[i][0] != x && cards[i][1] == x)
         {
@@ -30197,7 +30197,7 @@ int LeetCodeString::minOperationsEqualize(string s)
     vector<int> dp(26);
     for (size_t i = 0; i < s.size(); i++)
     {
-        dp[s[i] - 'a']=1;
+        dp[s[i] - 'a'] = 1;
     }
     int result = 0;
     for (int i = 1; i < 26; i++)
@@ -30376,8 +30376,8 @@ int LeetCodeString::maxDistanceI(vector<string>& words)
 /// </summary>
 int LeetCodeString::maxDistanceII(vector<string>& words)
 {
-    vector<pair<string, int>> min_index = { {"#", -1}, {"#", -1}};
-    vector<pair<string, int>> max_index = { {"#", -1}, {"#", -1}};
+    vector<pair<string, int>> min_index = { {"#", -1}, {"#", -1} };
+    vector<pair<string, int>> max_index = { {"#", -1}, {"#", -1} };
     int n = words.size();
     for (size_t i = 0; i < words.size(); i++)
     {
@@ -30840,7 +30840,7 @@ string LeetCodeString::lexPalindromicPermutation(string s, string target)
             odd_index = i;
         }
     }
-    if (odd_count > 1 || (odd_count == 1 && target.size() % 2 == 0) || 
+    if (odd_count > 1 || (odd_count == 1 && target.size() % 2 == 0) ||
         (odd_count == 0 && target.size() % 2 == 1))
     {
         return "";  // No palindromic permutation possible
@@ -30875,13 +30875,13 @@ string LeetCodeString::lexPalindromicPermutation(string s, string target)
                     {
                         left.push_back(odd_index + 'a');
                     }
-                    result =  left + right;
+                    result = left + right;
                     return result;
                 }
             }
             for (char c = 'z'; c >= 'a'; c--)
             {
-               left.append(string(char_count[c - 'a'] / 2, c));
+                left.append(string(char_count[c - 'a'] / 2, c));
             }
             break;
         }
@@ -30977,7 +30977,7 @@ string LeetCodeString::lexSmallestII(string s)
         std::reverse(t.begin(), t.begin() + j + 1);
         result = min(result, t);
     }
-    
+
     string s1 = string(s.begin() + 1, s.end());
     reverse(s1.begin(), s1.end());
     vector<int> kmp_table = kmp(s1);
@@ -31822,7 +31822,7 @@ long long LeetCodeString::countPairs(vector<string>& words)
     {
         if (itr.second > 1)
         {
-            result += (long long)itr.second* (itr.second - 1) / 2;
+            result += (long long)itr.second * (itr.second - 1) / 2;
         }
     }
     return result;
@@ -32151,4 +32151,231 @@ string LeetCodeString::reverseByType(string s)
     return result;
 }
 
+/// <summary> 
+/// Leet Code 3838. Weighted Word Mapping
+///         
+/// Easy
+///   
+/// You are given an array of strings words, where each string represents 
+/// a word containing lowercase English letters.
+///
+/// You are also given an integer array weights of length 26, where 
+/// weights[i] represents the weight of the ith lowercase English letter.
+///
+/// The weight of a word is defined as the sum of the weights of its 
+/// characters.
+///
+/// For each word, take its weight modulo 26 and map the result to a 
+/// lowercase English letter using reverse alphabetical 
+/// order(0 -> 'z', 1 -> 'y', ..., 25 -> 'a').
+/// Return a string formed by concatenating the mapped characters for all 
+/// words in order.
+///
+/// Example 1:
+/// Input: words = ["abcd", "def", "xyz"], weights = [5, 3, 12, 14, 1, 
+/// 2, 3, 2, 10, 6, 6, 9, 7, 8, 7, 10, 8, 9, 6, 9, 9, 8, 3, 7, 7, 2]
+/// Output : "rij"
+///
+/// Explanation :
+/// The weight of "abcd" is 5 + 3 + 12 + 14 = 34. The result modulo 26 
+/// is 34 % 26 = 8, which maps to 'r'.
+/// The weight of "def" is 14 + 1 + 2 = 17. The result modulo 26 is 
+/// 17 % 26 = 17, which maps to 'i'.
+/// The weight of "xyz" is 7 + 7 + 2 = 16. The result modulo 26 is 
+/// 16 % 26 = 16, which maps to 'j'.
+/// Thus, the string formed by concatenating the mapped characters 
+/// is "rij".
+///
+/// Example 2:
+/// Input: words = ["a", "b", "c"], weights = [1, 1, 1, 1, 1, 1, 1, 
+/// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+/// Output : "yyy"
+/// Explanation :
+/// Each word has weight 1. The result modulo 26 is 1 % 26 = 1, which 
+/// maps to 'y'.
+///
+/// Thus, the string formed by concatenating the mapped characters 
+/// is "yyy".
+///
+/// Example 3:
+/// Input: words = ["abcd"], weights = [7, 5, 3, 4, 3, 5, 4, 9, 4, 2, 
+/// 2, 7, 10, 2, 5, 10, 6, 1, 2, 2, 4, 1, 3, 4, 4, 5]
+/// Output : "g"
+/// Explanation : 
+///
+/// The weight of "abcd" is 7 + 5 + 3 + 4 = 19. The result modulo 26 
+/// is 19 % 26 = 19, which maps to 'g'.
+/// Thus, the string formed by concatenating the mapped characters 
+/// is "g".
+///
+/// Constraints:
+/// 1. 1 <= words.length <= 100
+/// 2. 1 <= words[i].length <= 10
+/// 3. weights.length == 26
+/// 4. 1 <= weights[i] <= 100
+/// 5. words[i] consists of lowercase English letters.
+/// </summary>
+string LeetCodeString::mapWordWeights(vector<string>& words, vector<int>& weights)
+{
+    string result;
+    for (size_t i = 0; i < words.size(); i++)
+    {
+        int weight_sum = 0;
+        for (size_t j = 0; j < words[i].size(); j++)
+        {
+            weight_sum += weights[words[i][j] - 'a'];
+        }
+        result.push_back('z' - (weight_sum % 26));
+    }
+    return result;
+}
+
+/// <summary> 
+/// Leet Code 3856. Trim Trailing Vowels
+/// 
+/// Easy
+/// 
+/// You are given a string s that consists of lowercase English letters.
+/// Return the string obtained by removing all trailing vowels from s.
+///The vowels consist of the characters 'a', 'e', 'i', 'o', and 'u'.
+///
+/// Example 1:
+/// Input: s = "idea"
+/// Output : "id"
+/// Explanation :
+/// Removing "idea", we obtain the string "id".
+/// 
+/// Example 2 :
+/// Input : s = "day"
+/// Output : "day"
+/// Explanation :
+/// There are no trailing vowels in the string "day".
+///
+/// Example 3:
+/// Input: s = "aeiou"
+/// Output : ""
+/// Explanation :
+/// Removing "aeiou", we obtain the string "".
+/// 
+/// Constraints:
+/// 1. 1 <= s.length <= 100
+/// 2. s consists of lowercase English letters only.
+/// </summary>
+string LeetCodeString::trimTrailingVowels(string s)
+{
+    int end = s.size() - 1;
+    while (end >= 0 && (s[end] == 'a' || s[end] == 'e' || 
+           s[end] == 'i' || s[end] == 'o' || s[end] == 'u'))
+    {
+        end--;
+    }
+    return s.substr(0, end + 1);
+}
+
+/// <summary> 
+/// Leet Code 3860. Unique Email Groups
+/// 
+/// Medium
+///
+/// You are given an array of strings emails, where each string is a 
+/// valid email address.
+///
+/// Two email addresses belong to the same group if both their normalized 
+/// local names and normalized domain names are identical.
+///
+/// The normalization rules are as follows :
+///
+/// The local name is the part before the '@' symbol.
+/// Ignore all dots '.'.
+/// Ignore everything after the first '+', if present.
+/// Convert to lowercase.
+/// The domain name is the part after the '@' symbol.
+/// Convert to lowercase.
+/// Return an integer denoting the number of unique email groups after 
+/// normalization.
+///
+/// Example 1:
+/// Input: emails = ["test.email+alex@leetcode.com", 
+/// "test.e.mail+bob.cathy@leetcode.com", "testemail+david@lee.tcode.com"]
+/// Output : 2
+/// Explanation :
+/// Email Local Normalized Local Domain Normalized Domain Final Email
+/// test.email + alex@leetcode.com test.email + alex testemail leetcode.com 
+/// leetcode.com testemail@leetcode.com
+/// test.e.mail + bob.cathy@leetcode.com test.e.mail + bob.cathy testemail 
+/// leetcode.com leetcode.com testemail@leetcode.com
+/// testemail + david@lee.tcode.com testemail + david testemail 
+/// lee.tcode.com lee.tcode.com testemail@lee.tcode.com
+/// Unique emails are["testemail@leetcode.com", "testemail@lee.tcode.com"].
+/// Thus, the answer is 2.
+///
+/// Example 2:
+/// Input: emails = ["A@B.com", "a@b.com", "ab+xy@b.com", "a.b@b.com"]
+/// Output : 2
+/// Explanation :
+/// Email Local Normalized Local Domain Normalized Domain Final Email
+/// A@B.com A a B.com b.com a@b.com
+/// a@b.com a a b.com b.com a@b.com
+/// ab + xy@b.com ab + xy ab b.com b.com ab@b.com
+/// a.b@b.com a.b ab b.com b.com ab@b.com
+/// Unique emails are["a@b.com", "ab@b.com"].Thus, the answer is 2.
+///
+/// Example 3:
+/// Input: emails = ["a.b+c.d+e@DoMain.com", "ab+xyz@domain.com", 
+/// "ab@domain.com"]
+/// Output : 1
+/// Explanation :
+/// Email Local Normalized Local Domain Normalized Domain Final Email
+/// a.b + c.d + e@DoMain.com a.b + c.d + e ab DoMain.com 
+/// domain.com ab@domain.com
+/// ab + xyz@domain.com ab + xyz ab domain.com domain.com ab@domain.com
+/// ab@domain.com ab ab domain.com domain.com ab@domain.com
+/// All emails normalize to "ab@domain.com".Thus, the answer is 1.
+///
+/// Constraints:
+/// 1. 1 <= emails.length <= 1000
+/// 2. 1 <= emails[i].length <= 100
+/// 3. emails[i] consists of lowercase and uppercase English letters, 
+///    digits, and the characters '.', '+', and '@'.
+/// 4. Each emails[i] contains exactly one '@' character.
+/// 5. All local and domain names are non - empty; local names do not start
+///    with '+'.
+/// 6. Domain names end with the ".com" suffix and contain at least one 
+///    character before ".com".
+/// </summary>
+int LeetCodeString::uniqueEmailGroups(vector<string>& emails)
+{
+    unordered_set<string> email_set;
+    for (size_t i = 0; i < emails.size(); i++)
+    {
+        string local, domain;
+        bool plus_found = false;
+        bool at_found = false;
+        for (size_t j = 0; j < emails[i].size(); j++)
+        {
+            if (emails[i][j] == '@')
+            {
+                at_found = true;
+            }
+            else if (at_found)
+            {
+                domain.push_back(tolower(emails[i][j]));
+            }
+            else if (plus_found)
+            {
+                continue;
+            }
+            else if (emails[i][j] == '+')
+            {
+                plus_found = true;
+            }
+            else if (emails[i][j] != '.')
+            {
+                local.push_back(tolower(emails[i][j]));
+            }
+        }
+        email_set.insert(local + "@" + domain);
+    }
+    return email_set.size();
+}
 #pragma endregion

@@ -8830,8 +8830,99 @@ void TestLeetCode3823(void)
     Logger::WriteMessage("result = " + result);
 }
 
+void TestLeetCode3838(void)
+{
+    Logger::WriteMessage("Test Leet Code 3838");
+    LeetCodeString leetCode;
+    vector<string> words = { "abcd", "def", "xyz" };
+    vector<int> weights =
+    {
+        5, 3, 12, 14, 1, 2, 3, 2, 10, 6, 6, 9, 7,
+        8, 7, 10, 8, 9, 6, 9, 9, 8, 3, 7, 7, 2
+    };
+    string result = leetCode.mapWordWeights(words, weights);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(weights);
+    Logger::WriteMessage("result = " + result);
+
+    words = { "a","b","c" };
+    weights =
+    {
+        1,1,1,1,1,1,1,1,1,1,1,1,1,
+        1,1,1,1,1,1,1,1,1,1,1,1,1
+    };
+    result = leetCode.mapWordWeights(words, weights);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(weights);
+    Logger::WriteMessage("result = " + result);
+
+    words = {"abcd"};
+    weights =
+    {
+        7, 5, 3, 4, 3, 5, 4, 9, 4, 2, 2, 7, 10,
+        2, 5, 10, 6, 1, 2, 2, 4, 1, 3, 4, 4, 5
+    };
+    result = leetCode.mapWordWeights(words, weights);
+    Logger::WriteMessage(words);
+    Logger::WriteMessage(weights);
+    Logger::WriteMessage("result = " + result);
+}
+
+void TestLeetCode3856(void)
+{
+    Logger::WriteMessage("Test Leet Code 3856");
+    LeetCodeString leetCode;
+    string s = "idea";
+    string result = leetCode.trimTrailingVowels(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + result);
+
+    s = "day";
+    result = leetCode.trimTrailingVowels(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + result);
+
+    s = "aeiou";
+    result = leetCode.trimTrailingVowels(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + result);
+}
+
+void TestLeetCode3860(void)
+{
+    Logger::WriteMessage("Test Leet Code 3860");
+    LeetCodeString leetCode;
+    vector<string> emails =
+    {
+        "test.email+alex@leetcode.com", "test.e.mail+bob.cathy@leetcode.com",
+        "testemail+david@lee.tcode.com"
+    };
+    int result = leetCode.uniqueEmailGroups(emails);
+    Logger::WriteMessage(emails);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    emails =
+    {
+        "A@B.com", "a@b.com", "ab+xy@b.com", "a.b@b.com"
+    };
+    result = leetCode.uniqueEmailGroups(emails);
+    Logger::WriteMessage(emails);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    emails =
+    {
+        "a.b+c.d+e@DoMain.com", "ab+xyz@domain.com", "ab@domain.com"
+    };
+    result = leetCode.uniqueEmailGroups(emails);
+    Logger::WriteMessage(emails);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3860();
+    TestLeetCode3856();
+    TestLeetCode3838();
     TestLeetCode3823();
     TestLeetCode3816();
     TestLeetCode3817();

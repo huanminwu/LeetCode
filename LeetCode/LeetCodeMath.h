@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #ifndef LeetcodeMath_H
 #define LeetCodeMath_H
 #include <stdint.h>
@@ -83,7 +83,7 @@ public:
     /// Output: 21
     /// Note:
     /// Assume we are dealing with an environment which could only store integers 
-    /// within the 32-bit signed integer range: [−231,  231 − 1]. For the purpose 
+    /// within the 32-bit signed integer range: [-2^31,  2^31-1]. For the purpose 
     /// of this problem, assume that your function returns 0 when the reversed 
     /// integer overflows.
     /// </summary>
@@ -109,9 +109,9 @@ public:
     /// Note:
     /// Only the space character ' ' is considered as whitespace character.
     /// Assume we are dealing with an environment which could only store integers 
-    /// within the 32-bit signed integer range: [−2^31,  2^31 − 1]. If the  
+    /// within the 32-bit signed integer range: [?2^31,  2^31 ? 1]. If the  
     /// numerical value is out of the range of representable values, 
-    /// INT_MAX (2^31 − 1) or INT_MIN (−2^31) is returned.
+    /// INT_MAX (2^31 - 1) or INT_MIN (-2^31) is returned.
     /// Example 1:
     /// Input: "42"
     /// Output: 42
@@ -139,7 +139,7 @@ public:
     /// Input: "-91283472332"
     /// Output: -2147483648
     /// Explanation: The number "-91283472332" is out of the range of a 32-bit 
-    /// signed integer. Thefore INT_MIN (−231) is returned.
+    /// signed integer. Therefore INT_MIN (-2^31) is returned.
     /// </summary>
     int myAtoi(string str);
 
@@ -163,7 +163,7 @@ public:
     ///
     /// A = [4, 3, 2, 6]
     /// F(0) = (0 * 4) + (1 * 3) + (2 * 2) + (3 * 6) = 0 + 3 + 4 + 18 = 25
-    ///	F(1) = (0 * 6) + (1 * 4) + (2 * 3) + (3 * 2) = 0 + 4 + 6 + 6 = 16
+    /// F(1) = (0 * 6) + (1 * 4) + (2 * 3) + (3 * 2) = 0 + 4 + 6 + 6 = 16
     /// F(2) = (0 * 2) + (1 * 6) + (2 * 4) + (3 * 3) = 0 + 6 + 8 + 9 = 23
     /// F(3) = (0 * 3) + (1 * 2) + (2 * 6) + (3 * 4) = 0 + 2 + 12 + 12 = 26
     /// So the maximum value of F(0), F(1), F(2), F(3) is F(3) = 26.
@@ -205,7 +205,7 @@ public:
     int findContentChildren(vector<int>& g, vector<int>& s);
 
     /// <summary>
-    /// Leet code #507. Perfect Number          
+    /// Leet code #507. Perfect Number   
     /// 
     /// We define the Perfect Number is a positive integer that is equal to the 
     /// sum of all its positive divisors except itself. 
@@ -221,12 +221,12 @@ public:
     bool checkPerfectNumber(int num);
 
     /// <summary>
-    /// Leet code #537. Complex Number Multiplication       
+    /// Leet code #537. Complex Number Multiplication?????? 
     /// </summary>
     void parseComplexNumber(string str, pair<int, int>& complex);
 
     /// <summary>
-    /// Leet code #537. Complex Number Multiplication       
+    /// Leet code #537. Complex Number Multiplication?????? 
     /// 
     /// Given two strings representing two complex numbers. 
     /// You need to return a string representing their multiplication. 
@@ -247,12 +247,12 @@ public:
     /// The input strings will not have extra blank.
     /// The input strings will be given in the form of a+bi, where the integer 
     /// a and b will both belong to the range of [-100, 100]. And the output 
-    /// should be also in this form.	 
+    /// should be also in this form.  
     /// </summary>
     string complexNumberMultiply(string a, string b);
 
     /// <summary>
-    /// Leet code #564. Find the Closest Palindrome          
+    /// Leet code #564. Find the Closest Palindrome   ?????? 
     /// 
     /// Given an integer n, find the closest integer (not including itself), which 
     /// is a palindrome. 
@@ -304,7 +304,7 @@ public:
     /// Note:
     /// 1.The input string only contains '0' to '9', '/', '+' and '-'. So does the 
     ///   output.
-    /// 2. Each fraction (input and output) has format ±numerator/denominator. If 
+    /// 2. Each fraction (input and output) has format ?numerator/denominator. If 
     ///    the first input fraction or the output is positive, then '+' will be 
     ///    omitted.
     /// 3. The input only contains valid irreducible fractions, where the numerator
@@ -910,7 +910,7 @@ public:
     /// be either Floor(pi) or Ceil(pi).
     /// Return the string "-1" if the rounded array is impossible to sum to 
     /// target. Otherwise, return the smallest rounding error, which is 
-    /// defined as Σ |Roundi(pi) - (pi)| for i from 1 to n, as a string with 
+    /// defined as ? |Roundi(pi) - (pi)| for i from 1 to n, as a string with 
     /// three places after the decimal.
     ///
     /// Example 1:
@@ -1120,28 +1120,28 @@ public:
     /// your path crosses itself, or not.
     ///
     /// Example 1:
-    /// ┌───┐
-    /// │   │
-    /// └───┼──>
-    ///     │
+    /// ?????
+    /// ?   ?
+    /// ???????>
+    ///     ?
     /// 
     /// Input: [2,1,1,2]
     /// Output: true
     ///
     /// Example 2:
-    /// ┌──────┐
-    /// │      │
-    /// │
-    /// │
-    /// └────────────>
+    /// ????????
+    /// ?      ?
+    /// ?
+    /// ?
+    /// ?????????????>
     ///
     /// Input: [1,2,3,4]
     /// Output: false 
     /// 
     /// Example 3:
-    /// ┌───┐
-    /// │   │
-    /// └───┼>
+    /// ?????
+    /// ?   ?
+    /// ?????>
     ///
     /// Input: [1,1,1,1]
     /// Output: true 
@@ -1195,9 +1195,9 @@ public:
     /// Both dividend and divisor will be 32-bit signed integers.
     /// The divisor will never be 0.
     /// Assume we are dealing with an environment which could only store 
-    /// integers within the 32-bit signed integer range: [−2^31,  2^31 − 1]. 
+    /// integers within the 32-bit signed integer range: [?2^31,  2^31 ? 1]. 
     /// For the purpose of this problem, assume that your function 
-    /// returns 2^31 − 1 when the division result overflows.
+    /// returns 2^31 ? 1 when the division result overflows.
     /// </summary>
     int divide(int dividend, int divisor);
 
@@ -1512,7 +1512,7 @@ public:
     /// Note:
     ///
     /// 1. -100.0 < x < 100.0
-    /// 2. n is a 32-bit signed integer, within the range [−2^31, 2^31 − 1]
+    /// 2. n is a 32-bit signed integer, within the range [?2^31, 2^31 ? 1]
     /// </summary>
     double myPow(double x, int n);
 
@@ -1585,7 +1585,7 @@ public:
     /// 
     /// Example 2:
     /// Input: x = 2, y = 6, z = 5
-    /// Output: False 	
+    /// Output: False  
     /// </summary>
     bool canMeasureWater(int x, int y, int z);
 
@@ -1632,7 +1632,7 @@ public:
     int superPow(int a, vector<int>& b);
 
     /// <summary>
-    /// Leet code #356. Line Reflection       
+    /// Leet code #356. Line Reflection?????? 
     /// 
     /// Given n points on a 2D plane, find if there is such a line parallel 
     /// to y-axis that reflect the given points.
@@ -1653,13 +1653,13 @@ public:
     bool isReflected(vector<pair<int, int>>& points);
 
     /// <summary>
-    /// Leet code #469. Convex Polygon 
+    /// Leet code #469. Convex Polygon?
     /// determinant of 2x2 matrix [point1-point0, point2-point0]
     /// </summary>
     long det2(vector<int>& point0, vector<int>& point1, vector<int>& point2);
 
     /// <summary>
-    /// Leet code #469. Convex Polygon       
+    /// Leet code #469. Convex Polygon?????? 
     /// 
     /// Given a list of points that form a polygon when joined sequentially, 
     /// find if this polygon is convex 
@@ -1695,17 +1695,17 @@ public:
     /// which is the determinant of 2x2 matrix [v1, v2]. And the sign of 
     /// det([v1, v2]) represents 
     /// the positive z-direction of right-hand system from v1 to v2. 
-    /// So det([v1, v2]) ≥ 0 
+    /// So det([v1, v2]) ? 0 
     /// if and only if v1 turns at most 180 degrees counterclockwise to v2.
     bool isConvex(vector<vector<int>>& points);
 
     /// <summary>
-    /// Leet code #483. Smallest Good Base       
+    /// Leet code #483. Smallest Good Base?????? 
     /// </summary>
     unsigned long long sumBase(unsigned long long base, int digits);
 
     /// <summary>
-    /// Leet code #483. Smallest Good Base       
+    /// Leet code #483. Smallest Good Base?????? 
     /// 
     /// For an integer n, we call k>=2 a good base of n, if all digits of n 
     /// base k are 1. 
@@ -1736,7 +1736,7 @@ public:
     string smallestGoodBase(string n);
 
     /// <summary>
-    /// Leet code #360. Sort Transformed Array        
+    /// Leet code #360. Sort Transformed Array ?????? 
     /// 
     /// Given a sorted array of integers nums and integer values a, b and c. 
     /// Apply a function of the form f(x) = ax2 + bx + c to each element x in 
@@ -1764,13 +1764,13 @@ public:
     ///
     /// Input: 2
     /// Output: 1
-    /// Explanation: 2 = 1 + 1, 1 × 1 = 1.
+    /// Explanation: 2 = 1 + 1, 1 ? 1 = 1.
     ///
     /// Example 2:
     ///
     /// Input: 10
     /// Output: 36
-    /// Explanation: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36.
+    /// Explanation: 10 = 3 + 3 + 4, 3 ? 3 ? 4 = 36.
     /// Note: You may assume that n is not less than 2 and not larger than 58.
     /// </summary>
     int integerBreak(int n);
@@ -1783,7 +1783,7 @@ public:
     /// 1 is read off as "one 1" or 11. 
     /// 11 is read off as "two 1s" or 21.
     /// 21 is read off as "one 2, then one 1" or 1211.
-    /// Given an integer n, generate the nth sequence.	
+    /// Given an integer n, generate the nth sequence. 
     /// Note: The sequence of integers will be represented as a string. 
     /// </summary>
     string countAndSay(int n);
@@ -1867,11 +1867,11 @@ public:
     int poorPigs(int buckets, int minutesToDie, int minutesToTest);
 
     /// <summary>
-    /// Leet code #492. Construct the Rectangle       
+    /// Leet code #492. Construct the Rectangle?????? 
     /// 
     /// For a web developer, it is very important to know how to design a 
     /// web page's size. 
-    /// So, given a specific rectangular web page’s area, your job by now is 
+    /// So, given a specific rectangular web page?s area, your job by now is 
     /// to design a rectangular web page, whose length L and width W satisfy 
     /// the following requirements:
     ///
@@ -1879,7 +1879,7 @@ public:
     ///    given target area.
     /// 2. The width W should not be larger than the length L, which 
     ///    means L >= W.
-    ///	3. The difference between length L and width W should be as small as 
+    /// 3. The difference between length L and width W should be as small as 
     ///   possible.
     /// 
     /// You need to output the length L and the width W of the web page you 
@@ -1902,7 +1902,7 @@ public:
     vector<int> constructRectangle(int area);
 
     /// <summary>
-    /// Leet code #504. Base 7         
+    /// Leet code #504. Base 7  ?????? 
     /// 
     /// Given an integer, return its base 7 string representation.
     /// Example 1:
@@ -1945,17 +1945,17 @@ public:
     /// Explanation: F(4) = F(3) + F(2) = 2 + 1 = 3.
     ///  
     /// Note:
-    /// 1. 0 ≤ N ≤ 30.
+    /// 1. 0 ? N ? 30.
     /// </summary>
     int fib(int N);
 
     /// <summary>
-    /// Leet code #587. Erect the Fence          
+    /// Leet code #587. Erect the Fence   ?????? 
     /// </summary>
     int orientation(Point p, Point q, Point r);
 
     /// <summary>
-    /// Leet code #587. Erect the Fence          
+    /// Leet code #587. Erect the Fence   ?????? 
     /// 
     /// There are some trees, where each tree is represented by (x,y) coordinate 
     /// in a two-dimensional garden. Your job is to fence the entire garden 
@@ -2437,29 +2437,33 @@ public:
     vector<int> numOfBurgers(int tomatoSlices, int cheeseSlices);
 
     /// <summary>
-    /// Leet code #412. Fizz Buzz 
-    /// Write a program that outputs the string representation of numbers from 1 to n.
-    /// But for multiples of three it should output 揊izz?instead of the number and for the multiples of five output 揃uzz? 
-    /// For numbers which are multiples of both three and five output 揊izzBuzz?
-    /// Example: 
-    /// Return:
-    /// [
-    ///    "1",
-    ///    "2",
-    ///    "Fizz",
-    ///    "4",
-    ///    "Buzz",
-    ///    "Fizz",
-    ///    "7",
-    ///    "8",
-    ///    "Fizz",
-    ///    "Buzz",
-    ///    "11",
-    ///    "Fizz",
-    ///    "13",
-    ///    "14",
-    ///    "FizzBuzz"
-    /// ]
+    /// 412. Fizz Buzz
+    ///
+    /// Easy
+    ///
+    /// Given an integer n, return a string array answer(1 - indexed) where:
+    ///
+    /// answer[i] == "FizzBuzz" if i is divisible by 3 and 5.
+    /// answer[i] == "Fizz" if i is divisible by 3.
+    /// answer[i] == "Buzz" if i is divisible by 5.
+    /// answer[i] == i(as a string) if none of the above conditions are true.
+    /// 
+    /// Example 1: 
+    /// Input: n = 3
+    /// Output : ["1", "2", "Fizz"]
+    /// 
+    /// Example 2 :
+    /// Input : n = 5
+    /// Output : ["1", "2", "Fizz", "4", "Buzz"]
+    ///    
+    /// Example 3 :
+    /// Input : n = 15
+    /// Output : ["1", "2", "Fizz", "4", "Buzz", "Fizz", "7", "8", "Fizz", "Buzz", 
+    /// "11", "Fizz", "13", "14", "FizzBuzz"]
+    ///
+    ///
+    /// Constraints :
+    /// 1. 1 <= n <= 10^4
     /// </summary>
     vector<string> fizzBuzz(int n);
 
@@ -3239,7 +3243,7 @@ public:
     /// <summary>
     /// Leetcode #1304. Find N Unique Integers Sum up to Zero
     ///
-    /// Easy	
+    /// Easy 
     ///
     /// Given an integer n, return any array containing n unique integers 
     /// such that they add up to 0.
@@ -4164,7 +4168,7 @@ public:
     /// Example 2:
     /// Input:
     /// 11
-    ///	Output:
+    /// Output:
     /// 0
     /// Explanation:
     /// The 11th digit of the sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 
@@ -7468,7 +7472,7 @@ public:
     /// Input: left = 1, right = 4
     /// Output: "24e0"
     /// Explanation:
-    /// The product is 1 × 2 × 3 × 4 = 24.
+    /// The product is 1 ? 2 ? 3 ? 4 = 24.
     /// There are no trailing zeros, so 24 remains the same. The abbreviation 
     /// will end with "e0".
     /// Since the number of digits is 2, which is less than 10, we do not 
@@ -7852,7 +7856,7 @@ public:
     /// Explanation:
     /// The 14 integers less than or equal to 30 whose digit sums are even are
     /// 2, 4, 6, 8, 11, 13, 15, 17, 19, 20, 22, 24, 26, and 28.
-    ///	
+    /// 
     /// Constraints:
     /// 1. 1 <= num <= 1000
     /// </summary>
@@ -9577,7 +9581,7 @@ public:
     /// Leet Code 2469. Convert the Temperature
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given a non-negative floating point number rounded to two 
     /// decimal places celsius, that denotes the temperature in Celsius.
     ///
@@ -9613,7 +9617,7 @@ public:
     /// Leet Code 2481. Minimum Cuts to Divide a Circle
     /// 
     /// Easy
-    ///	
+    /// 
     /// A valid cut in a circle can be:
     ///
     /// A cut that is represented by a straight line that touches two points 
@@ -9651,7 +9655,7 @@ public:
     /// Leet Code 2485. Find the Pivot Integer
     /// 
     /// Easy
-    ///	
+    /// 
     /// Given a positive integer n, find the pivot integer x such that:
     ///  
     /// The sum of all elements between 1 and x inclusively equals the sum 
@@ -9686,7 +9690,7 @@ public:
     ///                 Factors
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given a positive integer n.
     ///
     /// Continuously replace n with the sum of its prime factors.
@@ -9725,7 +9729,7 @@ public:
     /// Leet Code 2514. Count Anagrams
     /// 
     /// Hard
-    ///	
+    /// 
     /// You are given a string s containing one or more words. Every 
     /// consecutive pair of words is separated by a single space ' '.
     ///
@@ -9807,7 +9811,7 @@ public:
     /// Leet Code 2523. Closest Prime Numbers in Range
     /// 
     /// Medium
-    ///	
+    /// 
     /// Given two positive integers left and right, find the two integers num1 
     /// and num2 such that:
     ///
@@ -9847,7 +9851,7 @@ public:
     /// Leet Code 2520. Count the Digits That Divide a Number
     /// 
     /// Easy
-    ///	
+    /// 
     /// Given an integer num, return the number of digits in num that divide 
     /// num.
     ///
@@ -9880,7 +9884,7 @@ public:
     /// Leet Code 2521. Distinct Prime Factors of Product of Array
     /// 
     /// Medium
-    ///	
+    /// 
     /// Given an array of positive integers nums, return the number of 
     /// distinct prime factors in the product of the elements of nums.
     ///
@@ -9917,7 +9921,7 @@ public:
     /// Leet Code 2525. Categorize Box According to Criteria
     /// 
     /// Easy
-    ///	
+    /// 
     /// Given four integers length, width, height, and mass, representing 
     /// the dimensions and mass of a box, respectively, return a string 
     /// representing the category of the box.
@@ -9963,7 +9967,7 @@ public:
     /// Leet Code 2529. Maximum Count of Positive Integer and Negative Integer
     /// 
     /// Easy
-    ///	
+    /// 
     /// Given an array nums sorted in non-decreasing order, return the maximum 
     /// between the number of positive integers and the number of negative 
     /// integers. 
@@ -10002,7 +10006,7 @@ public:
     /// Leet Code 2524. Maximum Frequency Score of a Subarray
     /// 
     /// Hard
-    ///	
+    /// 
     /// You are given an integer array nums and a positive integer k.
     /// 
     /// The frequency score of an array is the sum of the distinct values in 
@@ -10039,7 +10043,7 @@ public:
     /// Leet Code 2543. Check if Point Is Reachable
     /// 
     /// Hard
-    ///	
+    /// 
     /// There exists an infinitely large grid. You are currently at 
     /// point (1, 1), and you need to reach the point (targetX, targetY) 
     /// using a finite number of steps.
@@ -10077,7 +10081,7 @@ public:
     /// Leet Code 2544. Alternating Digit Sum
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given a positive integer n. Each digit of n has a sign 
     /// according to the following rules:
     ///
@@ -10109,7 +10113,7 @@ public:
     /// Leet Code 2539. Count the Number of Good Subsequences
     /// 
     /// Medium
-    ///	
+    /// 
     /// A subsequence of a string is good if it is not empty and the frequency 
     /// of each one of its characters is the same.
     ///
@@ -10151,7 +10155,7 @@ public:
     /// Leet Code 2549. Count Distinct Numbers on Board
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given a positive integer n, that is initially placed on a 
     /// board. Every day, for 109 days, you perform the following procedure:
     ///
@@ -10192,7 +10196,7 @@ public:
     /// Leet Code 2550. Count Collisions of Monkeys on a Polygon
     /// 
     /// Medium
-    ///	
+    /// 
     /// There is a regular convex polygon with n vertices. The vertices are 
     /// labeled from 0 to n - 1 in a clockwise direction, and each vertex 
     /// has exactly one monkey. The following figure shows a convex polygon 
@@ -10240,7 +10244,7 @@ public:
     /// Leet Code 2553. Separate the Digits in an Array
     /// 
     /// Easy
-    ///	
+    /// 
     /// Given an array of positive integers nums, return an array answer that 
     /// consists of the digits of each integer in nums after separating them 
     /// in the same order they appear in nums.
@@ -10279,7 +10283,7 @@ public:
     /// Leet Code 2554. Maximum Number of Integers to Choose From a Range I
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given an integer array banned and two integers n and maxSum. 
     /// You are choosing some number of integers following the below rules:
     ///
@@ -10321,7 +10325,7 @@ public:
     /// Leet Code 2557. Maximum Number of Integers to Choose From a Range II
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given an integer array banned and two integers n and maxSum. 
     /// You are choosing some number of integers following the below rules:
     ///
@@ -10357,7 +10361,7 @@ public:
     /// Leet Code 2566. Maximum Difference by Remapping a Digit
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given an integer num. You know that Danny Mittal will sneakily 
     /// remap one of the 10 possible digits (0 to 9) to another digit.
     ///
@@ -10402,7 +10406,7 @@ public:
     /// Leet Code 2575. Find the Divisibility Array of a String
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given a 0-indexed string word of length n consisting of 
     /// digits, and a positive integer m.
     ///
@@ -10437,7 +10441,7 @@ public:
     /// Leet Code 2578. Split With Minimum Sum
     /// 
     /// Easy
-    ///	
+    /// 
     /// Given a positive integer num, split it into two non-negative integers 
     /// num1 and num2 such that:
     ///
@@ -10475,7 +10479,7 @@ public:
     /// Leet Code 2582. Pass the Pillow
     /// 
     /// Easy
-    ///	
+    /// 
     /// There are n people standing in a line labeled from 1 to n. The first 
     /// person in the line is holding a pillow initially. Every second, the 
     /// person holding the pillow passes it to the next person standing in 
@@ -10511,7 +10515,7 @@ public:
     /// Leet Code 2579. Count Total Number of Colored Cells
     /// 
     /// Medium
-    ///	
+    /// 
     /// There exists an infinitely large two-dimensional grid of uncolored 
     /// unit cells. You are given a positive integer n, indicating that you 
     /// must do the following routine for n minutes:
@@ -10544,7 +10548,7 @@ public:
     /// Leet Code 2584. Split the Array to Make Coprime Products
     /// 
     /// Hard
-    ///	
+    /// 
     /// You are given a 0-indexed integer array nums of length n.
     ///
     /// A split at an index i where 0 <= i <= n - 2 is called valid if the 
@@ -10588,7 +10592,7 @@ public:
     /// Leet Code 2591. Distribute Money to Maximum Children
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given an integer money denoting the amount of money 
     /// (in dollars) that you have and another integer children denoting 
     /// the number of children that you must distribute the money to.
@@ -10629,7 +10633,7 @@ public:
     /// Leet Code 2595. Number of Even and Odd Bits
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given a positive integer n.
     /// Let even denote the number of even indices in the binary 
     /// representation of n (0-indexed) with value 1.
@@ -10662,7 +10666,7 @@ public:
     /// Leet Code 2598. Smallest Missing Non-negative Integer After Operations
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given a 0-indexed integer array nums and an integer value.
     ///
     /// In one operation, you can add or subtract value from any element of 
@@ -10707,7 +10711,7 @@ public:
     /// Leet Code 2600. K Items With the Maximum Sum
     /// 
     /// Easy
-    ///	
+    /// 
     /// There is a bag that consists of items, each item has a number 1, 0, 
     /// or -1 written on it.
     ///
@@ -10748,12 +10752,12 @@ public:
     /// Leet Code 2601. Prime Subtraction Operation
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given a 0-indexed integer array nums of length n.
     ///
     /// You can perform the following operation as many times as you want:
     ///
-    /// Pick an index i that you haven’t picked before, and pick a prime p 
+    /// Pick an index i that you haven?t picked before, and pick a prime p 
     /// strictly less than nums[i], then subtract p from nums[i].
     /// Return true if you can make nums a strictly increasing array using the 
     /// above operation and false otherwise.
@@ -10795,23 +10799,23 @@ public:
     /// Leet Code 2605. Form Smallest Number From Two Digit Arrays
     /// 
     /// Easy
-    ///	
-	/// Given two arrays of unique digits nums1 and nums2, return the smallest 
-	/// number that contains at least one digit from each array.
+    /// 
+ /// Given two arrays of unique digits nums1 and nums2, return the smallest 
+ /// number that contains at least one digit from each array.
     ///
     ///
     /// Example 1:
     /// Input: nums1 = [4,1,3], nums2 = [5,7]
     /// Output: 15
     /// Explanation: The number 15 contains the digit 1 from nums1 and the 
-	/// digit 5 from nums2. It can be proven that 15 is the smallest number 
-	/// we can have.
+ /// digit 5 from nums2. It can be proven that 15 is the smallest number 
+ /// we can have.
     ///
-	/// Example 2:
+ /// Example 2:
     /// Input: nums1 = [3,5,2,6], nums2 = [3,1,7]
     /// Output: 3
     /// Explanation: The number 3 contains the digit 3 which exists in 
-	/// both arrays.
+ /// both arrays.
     ///
     /// Constraints:
     /// 1. 1 <= nums1.length, nums2.length <= 9
@@ -10824,7 +10828,7 @@ public:
     /// Leet Code 2614. Prime In Diagonal
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given a 0-indexed two-dimensional integer array nums.
     ///
     /// Return the largest prime number that lies on at least one of the 
@@ -10865,7 +10869,7 @@ public:
     /// Leet Code 2644. Find the Maximum Divisibility Score
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given two 0-indexed integer arrays nums and divisors.
     /// 
     /// The divisibility score of divisors[i] is the number of indices j 
@@ -10921,7 +10925,7 @@ public:
     /// Leet Code 2647. Color the Triangle Red
     /// 
     /// Hard
-    ///	
+    /// 
     /// You are given an integer n. Consider an equilateral triangle of side 
     /// length n, broken up into n2 unit equilateral triangles. The triangle 
     /// has n 1-indexed rows where the ith row has 2i - 1 unit equilateral 
@@ -10982,7 +10986,7 @@ public:
     /// Leet Code 2651. Calculate Delayed Arrival Time
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given a positive integer arrivalTime denoting the arrival 
     /// time of a train in hours, and another positive integer delayedTime 
     /// denoting the amount of delay in hours.
@@ -11013,7 +11017,7 @@ public:
     /// Leet Code 2652. Sum Multiples
     /// 
     /// Easy
-    ///	
+    /// 
     /// Given a positive integer n, find the sum of all integers in the range 
     /// [1, n] inclusive that are divisible by 3, 5, or 7.
     ///
@@ -11048,7 +11052,7 @@ public:
     ///                 Elements Equal to 1
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given a 0-indexed array nums consisiting of positive integers. 
     /// You can do the following operation on the array any number of times:
     ///
@@ -11088,7 +11092,7 @@ public:
     /// Leet Code 2656. Maximum Sum With Exactly K Elements
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given a 0-indexed integer array nums and an integer k. Your 
     /// task is to perform the following operation exactly k times in order 
     /// to maximize your score:
@@ -11136,7 +11140,7 @@ public:
     /// Leet Code 2682. Find the Losers of the Circular Game
     /// 
     /// Easy
-    ///	
+    /// 
     /// There are n friends that are playing a game. The friends are sitting 
     /// in a circle and are numbered from 1 to n in clockwise order. More 
     /// formally, moving clockwise from the ith friend brings you to the 
@@ -11201,7 +11205,7 @@ public:
     /// Leet Code 2698. Find the Punishment Number of an Integer
     /// 
     /// Medium
-    ///	
+    /// 
     /// Given a positive integer n, return the punishment number of n.
     ///
     /// The punishment number of n is defined as the sum of the squares of all 
@@ -11242,7 +11246,7 @@ public:
     /// Leet Code 2706. Buy Two Chocolates
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given an integer array prices representing the prices of 
     /// various chocolates in a store. You are also given a single integer 
     /// money, which represents your initial amount of money.
@@ -11297,7 +11301,7 @@ public:
     /// Example 2:
     /// Input: nums = [-4,-5,-4]
     /// Output: 20
-    /// Explanation: Group the students at indices [0, 1] . Then, we’ll have 
+    /// Explanation: Group the students at indices [0, 1] . Then, we?ll have 
     /// a resulting strength of 20. We cannot achieve greater strength.
     ///
     /// Constraints:
@@ -12718,7 +12722,7 @@ public:
     /// Output: 48
     /// Explanation: 
     /// For index = 0, length = 9 and width = 3. Diagonal 
-    /// length = sqrt(9 * 9 + 3 * 3) = sqrt(90) ≈ 9.487.
+    /// length = sqrt(9 * 9 + 3 * 3) = sqrt(90) ? 9.487.
     /// For index = 1, length = 8 and width = 6. Diagonal 
     /// length = sqrt(8 * 8 + 6 * 6) = sqrt(100) = 10.
     /// So, the rectangle at index 1 has a greater diagonal length therefore we 
@@ -13972,35 +13976,35 @@ public:
     /// Input: n = 3, k = 5
     /// Output: 1
     /// Explanation:
-    /// Time elapsed	Children
-    /// 0	[0, 1, 2]
-    /// 1	[0, 1, 2]
-    /// 2	[0, 1, 2]
-    /// 3	[0, 1, 2]
-    /// 4	[0, 1, 2]
-    /// 5	[0, 1, 2]
+    /// Time elapsed Children
+    /// 0 [0, 1, 2]
+    /// 1 [0, 1, 2]
+    /// 2 [0, 1, 2]
+    /// 3 [0, 1, 2]
+    /// 4 [0, 1, 2]
+    /// 5 [0, 1, 2]
     ///
     /// Example 2:
     /// Input: n = 5, k = 6
     /// Output: 2
     /// Explanation:
-    /// Time elapsed	Children
-    /// 0	[0, 1, 2, 3, 4]
-    /// 1	[0, 1, 2, 3, 4]
-    /// 2	[0, 1, 2, 3, 4]
-    /// 3	[0, 1, 2, 3, 4]
-    /// 4	[0, 1, 2, 3, 4]
-    /// 5	[0, 1, 2, 3, 4]
-    /// 6	[0, 1, 2, 3, 4]
+    /// Time elapsed Children
+    /// 0 [0, 1, 2, 3, 4]
+    /// 1 [0, 1, 2, 3, 4]
+    /// 2 [0, 1, 2, 3, 4]
+    /// 3 [0, 1, 2, 3, 4]
+    /// 4 [0, 1, 2, 3, 4]
+    /// 5 [0, 1, 2, 3, 4]
+    /// 6 [0, 1, 2, 3, 4]
     ///
     /// Example 3:
     /// Input: n = 4, k = 2
     /// Output: 2
     /// Explanation:
-    /// Time elapsed	Children
-    /// 0	[0, 1, 2, 3]
-    /// 1	[0, 1, 2, 3]
-    /// 2	[0, 1, 2, 3]
+    /// Time elapsed Children
+    /// 0 [0, 1, 2, 3]
+    /// 1 [0, 1, 2, 3]
+    /// 2 [0, 1, 2, 3]
     ///
     /// Constraints:
     /// 1. 2 <= n <= 50
@@ -14547,21 +14551,21 @@ public:
     /// Input: nums = [2,1,3,5,6], k = 5, multiplier = 2
     /// Output: [8,4,6,5,6]
     /// Explanation:
-    /// Operation	Result
-    /// After operation 1	[2, 2, 3, 5, 6]
-    /// After operation 2	[4, 2, 3, 5, 6]
-    /// After operation 3	[4, 4, 3, 5, 6]
-    /// After operation 4	[4, 4, 6, 5, 6]
-    /// After operation 5	[8, 4, 6, 5, 6]
+    /// Operation Result
+    /// After operation 1 [2, 2, 3, 5, 6]
+    /// After operation 2 [4, 2, 3, 5, 6]
+    /// After operation 3 [4, 4, 3, 5, 6]
+    /// After operation 4 [4, 4, 6, 5, 6]
+    /// After operation 5 [8, 4, 6, 5, 6]
     ///
     /// Example 2:
     /// Input: nums = [1,2], k = 3, multiplier = 4
     /// Output: [16,8]
     /// Explanation:
-    /// Operation	Result
-    /// After operation 1	[4, 2]
-    /// After operation 2	[4, 8]
-    /// After operation 3	[16, 8]
+    /// Operation Result
+    /// After operation 1 [4, 2]
+    /// After operation 2 [4, 8]
+    /// After operation 3 [16, 8]
     ///
     /// Constraints:
     /// 1. 1 <= nums.length <= 100
@@ -14593,22 +14597,22 @@ public:
     /// Input: nums = [2,1,3,5,6], k = 5, multiplier = 2
     /// Output: [8,4,6,5,6]
     /// Explanation:
-    /// Operation	Result
-    /// After operation 1	[2, 2, 3, 5, 6]
-    /// After operation 2	[4, 2, 3, 5, 6]
-    /// After operation 3	[4, 4, 3, 5, 6]
-    /// After operation 4	[4, 4, 6, 5, 6]
-    /// After operation 5	[8, 4, 6, 5, 6]
-    /// After applying modulo	[8, 4, 6, 5, 6]
+    /// Operation Result
+    /// After operation 1 [2, 2, 3, 5, 6]
+    /// After operation 2 [4, 2, 3, 5, 6]
+    /// After operation 3 [4, 4, 3, 5, 6]
+    /// After operation 4 [4, 4, 6, 5, 6]
+    /// After operation 5 [8, 4, 6, 5, 6]
+    /// After applying modulo [8, 4, 6, 5, 6]
     ///
     /// Example 2:
     /// Input: nums = [100000,2000], k = 2, multiplier = 1000000
     /// Output: [999999307,999999993]
     /// Explanation:
-    /// Operation	Result
-    /// After operation 1	[100000, 2000000000]
-    /// After operation 2	[100000000000, 2000000000]
-    /// After applying modulo	[999999307, 999999993]
+    /// Operation Result
+    /// After operation 1 [100000, 2000000000]
+    /// After operation 2 [100000000000, 2000000000]
+    /// After applying modulo [999999307, 999999993]
     /// 
     /// Constraints:
     /// 1. 1 <= nums.length <= 10^4
@@ -15471,14 +15475,14 @@ public:
     /// Output: 24
     /// Explanation:
     /// The subsequences of nums with at most 2 elements are:
-    /// Subsequence	Minimum	Maximum	Sum
-    /// [1]	1	1	2
-    /// [2]	2	2	4
-    /// [3]	3	3	6
-    /// [1, 2]	1	2	3
-    /// [1, 3]	1	3	4
-    /// [2, 3]	2	3	5
-    /// Final Total	 	 	24
+    /// Subsequence Minimum Maximum Sum
+    /// [1] 1 1 2
+    /// [2] 2 2 4
+    /// [3] 3 3 6
+    /// [1, 2] 1 2 3
+    /// [1, 3] 1 3 4
+    /// [2, 3] 2 3 5
+    /// Final Total     24
     /// The output would be 24.
     ///
     /// Example 2:
@@ -15510,7 +15514,7 @@ public:
     ///
     /// You are given three integers m, n, and k.
     ///
-    /// There is a rectangular grid of size m × n containing k identical 
+    /// There is a rectangular grid of size m ? n containing k identical 
     /// pieces. Return the sum of Manhattan distances between every pair 
     /// of pieces over all valid arrangements of pieces.
     ///
@@ -15943,7 +15947,7 @@ public:
     /// containers that can be loaded without exceeding maxWeight is 4.
     /// 
     /// Constraints:
-    /// 1。 1 <= n <= 1000
+    /// 1? 1 <= n <= 1000
     /// 2. 1 <= w <= 1000
     /// 3. 1 <= maxWeight <= 10^9
     /// </summary>
@@ -16360,7 +16364,7 @@ public:
     /// Explanation:
     /// Double nums[0] to 4 using one operation. The modified array becomes [4, 4].
     /// The GCD of the subarray [4, 4] is 4, and the length is 2.
-    /// Thus, the maximum possible score is 2 × 4 = 8.
+    /// Thus, the maximum possible score is 2 ? 4 = 8.
     ///
     /// Example 2:
     /// Input: nums = [3,5,7], k = 2
@@ -16369,7 +16373,7 @@ public:
     /// Double nums[2] to 14 using one operation. The modified array becomes 
     /// [3, 5, 14].
     /// The GCD of the subarray [14] is 14, and the length is 1.
-    /// Thus, the maximum possible score is 1 × 14 = 14.
+    /// Thus, the maximum possible score is 1 ? 14 = 14.
     ///
     /// Example 3:
     /// Input: nums = [5,5,5], k = 1
@@ -16377,7 +16381,7 @@ public:
     /// Explanation:
     /// The subarray [5, 5, 5] has a GCD of 5, and its length is 3.
     /// Since doubling any element doesn't improve the score, the maximum score 
-    /// is 3 × 5 = 15.
+    /// is 3 ? 5 = 15.
     /// 
     /// Constraints:
     /// 1. 1 <= n == nums.length <= 1500
@@ -16574,11 +16578,11 @@ public:
     /// hexatrigesimal representation of n^3.
     ///
     /// A hexadecimal number is defined as a base-16 numeral system that uses the 
-    /// digits 0 – 9 and the uppercase letters A - F to represent values from 0 
+    /// digits 0 ? 9 and the uppercase letters A - F to represent values from 0 
     /// to 15.
     ///
     /// A hexatrigesimal number is defined as a base-36 numeral system that uses 
-    /// the digits 0 – 9 and the uppercase letters A - Z to represent values 
+    /// the digits 0 ? 9 and the uppercase letters A - Z to represent values 
     /// from 0 to 35.
     ///
     /// Example 1:
@@ -16691,7 +16695,7 @@ public:
     /// There is only one trapezoid which can be formed.
     /// Constraints:
     /// 1. 4 <= points.length <= 500
-    /// 2. –1000 <= xi, yi <= 1000
+    /// 2. ?1000 <= xi, yi <= 1000
     /// 3. All points are pairwise distinct.
     /// </summary>
     int countTrapezoidsII(vector<vector<int>>& points);
@@ -16732,7 +16736,7 @@ public:
     /// There is only one horizontal trapezoid that can be formed.
     /// Constraints:
     /// 1. 4 <= points.length <= 10^5
-    /// 2. –10^8 <= xi, yi <= 10^8
+    /// 2. ?10^8 <= xi, yi <= 10^8
     /// 3. All points are pairwise distinct.
     /// </summary>
     int countTrapezoidsI(vector<vector<int>>& points);
@@ -16847,13 +16851,13 @@ public:
     ///
     /// Medium
     ///
-    /// You are given n × m grid and an integer k.
+    /// You are given n ? m grid and an integer k.
     ///
     /// A sensor placed on cell (r, c) covers all cells whose Chebyshev distance 
     /// from (r, c) is at most k.
     ///
     /// The Chebyshev distance between two cells (r1, c1) and (r2, c2) is 
-    /// max(|r1 − r2|,|c1 − c2|).
+    /// max(|r1 ? r2|,|c1 ? c2|).
     ///
     /// Your task is to return the minimum number of sensors required to cover 
     /// every cell of the grid.
@@ -16902,20 +16906,20 @@ public:
     /// Output: 2
     /// Explanation:
     /// There are 2 perfect pairs:
-    /// (i, j)  (a, b)  min(|a − b|, |a + b|)   min(|a|, |b|)   
-    /// max(|a − b|, |a + b|)   max(|a|, |b|)
-    /// (1, 2)  (1, 2)  min(|1 − 2|, |1 + 2|) = 1   1   
-    /// max(|1 − 2|, |1 + 2|) = 3   2
-    /// (2, 3)  (2, 3)  min(|2 − 3|, |2 + 3|) = 1   2   
-    /// max(|2 − 3|, |2 + 3|) = 5   3
+    /// (i, j)  (a, b)  min(|a ? b|, |a + b|)   min(|a|, |b|)   
+    /// max(|a ? b|, |a + b|)   max(|a|, |b|)
+    /// (1, 2)  (1, 2)  min(|1 ? 2|, |1 + 2|) = 1   1   
+    /// max(|1 ? 2|, |1 + 2|) = 3   2
+    /// (2, 3)  (2, 3)  min(|2 ? 3|, |2 + 3|) = 1   2   
+    /// max(|2 ? 3|, |2 + 3|) = 5   3
     ///
     /// Example 2:
     /// Input: nums = [-3,2,-1,4]
     /// Output: 4
     /// Explanation:
     /// There are 4 perfect pairs:
-    /// (i, j)  (a, b)  min(|a − b|, |a + b|)   min(|a|, |b|)   
-    /// max(|a − b|, |a + b|)   max(|a|, |b|)
+    /// (i, j)  (a, b)  min(|a ? b|, |a + b|)   min(|a|, |b|)   
+    /// max(|a ? b|, |a + b|)   max(|a|, |b|)
     /// (0, 1)  (-3, 2) min(|-3 - 2|, |-3 + 2|) = 1 2   
     /// max(|-3 - 2|, |-3 + 2|) = 5 3
     /// (0, 3)  (-3, 4) min(|-3 - 4|, |-3 + 4|) = 1 3   
@@ -17268,8 +17272,8 @@ public:
     /// Output: 1200000
     /// Explanation:
     /// Two ways to achieve the maximum product include: 
-    /// [-4, -2, -3] → replace -2 with 105 → product = (-4) * 105 * (-3) = 1200000.
-    /// [-4, -1, -3] → replace -1 with 105 → product = (-4) * 105 * (-3) = 1200000.
+    /// [-4, -2, -3] ? replace -2 with 105 ? product = (-4) * 105 * (-3) = 1200000.
+    /// [-4, -1, -3] ? replace -1 with 105 ? product = (-4) * 105 * (-3) = 1200000.
     /// The maximum product is 1200000.
     ///
     /// Example 3:
@@ -18056,9 +18060,9 @@ public:
     /// Explanation :
     /// We must partition the array into k = 2 subarrays.One optimal partition 
     /// is[5] and [1, 2, 1].
-    /// The first subarray has sumArr = 5 and value = 5 × 6 / 2 = 15.
+    /// The first subarray has sumArr = 5 and value = 5 ? 6 / 2 = 15.
     /// The second subarray has sumArr = 1 + 2 + 1 = 4 and 
-    /// value = 4 × 5 / 2 = 10.
+    /// value = 4 ? 5 / 2 = 10.
     /// The score of this partition is 15 + 10 = 25, which is the minimum 
     /// possible score.
     ///
@@ -18069,7 +18073,7 @@ public:
     /// Since we must partition the array into k = 1 subarray, all elements 
     /// belong to the same subarray : [1, 2, 3, 4] .
     /// This subarray has sumArr = 1 + 2 + 3 + 4 = 10 and 
-    /// value = 10 × 11 / 2 = 55.
+    /// value = 10 ? 11 / 2 = 55.
     /// The score of this partition is 55, which is the minimum possible score.
     ///
     /// Example 3 :
@@ -18078,7 +18082,7 @@ public:
     /// Explanation :
     /// We must partition the array into k = 3 subarrays.The only valid 
     /// partition is[1], [1], [1].
-    /// Each subarray has sumArr = 1 and value = 1 × 2 / 2 = 1.
+    /// Each subarray has sumArr = 1 and value = 1 ? 2 / 2 = 1.
     /// The score of this partition is 1 + 1 + 1 = 3, which is the minimum 
     /// possible score.
     ///
@@ -18120,5 +18124,132 @@ public:
     /// 1. 0 <= n <= 1000
     /// </summary>
     int countMonobit(int n);
+
+    /// <summary>
+    /// Leet Code 3848. Check Digitorial Permutation
+    ///
+    /// Medium
+    ///
+    /// You are given an integer n.
+    ///
+    /// A number is called digitorial if the sum of the factorials of its 
+    /// digits is equal to the number itself.
+    ///
+    /// Determine whether any permutation of n(including the original order) 
+    /// forms a digitorial number.
+    ///
+    /// Return true if such a permutation exists, otherwise return false.
+    ///
+    /// Note:
+    ///
+    /// The factorial of a non - negative integer x, denoted as x!, is the 
+    /// product of all positive integers less than or equal to x, and 0 != 1.
+    /// A permutation is a rearrangement of all the digits of a number that 
+    /// does not start with zero.Any arrangement starting with zero is invalid.
+    ///
+    /// Example 1:
+    /// Input: n = 145
+    /// Output : true
+    /// Explanation :
+    /// The number 145 itself is digitorial since 
+    /// 1!+ 4!+ 5 != 1 + 24 + 120 = 145. Thus, the answer is true.
+    ///
+    /// Example 2 :
+    /// Input : n = 10
+    /// Output : false
+    /// Explanation :
+    /// 10 is not digitorial since 1!+ 0 != 2 is not equal to 10, and the 
+    /// permutation "01" is invalid because it starts with zero.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n <= 10^9
+    /// </summary>
+    bool isDigitorial(int n);
+
+    /// <summary>
+    /// Leet Code 3857. Minimum Cost to Split into Ones 
+    ///
+    /// Medium
+    ///
+    /// You are given an integer n.
+    ///
+    /// In one operation, you may split an integer x into two positive 
+    /// integers a and b such that a + b = x.
+    ///
+    /// The cost of this operation is a * b.
+    ///
+    /// Return an integer denoting the minimum total cost required to 
+    /// split the integer n into n ones.
+    ///
+    /// Example 1:
+    /// Input: n = 3
+    /// Output : 3
+    /// Explanation :
+    /// One optimal set of operations is :
+    /// x a b a + b a * b Cost
+    /// 3 1 2 3 2 2
+    /// 2 1 1 2 1 1
+    /// Thus, the minimum total cost is 2 + 1 = 3.
+    ///
+    /// Example 2:
+    /// Input: n = 4
+    /// Output : 6
+    /// Explanation :
+    /// One optimal set of operations is :
+    /// x a b a + b a * b Cost
+    /// 4 2 2 4 4 4
+    /// 2 1 1 2 1 1
+    /// 2 1 1 2 1 1
+    /// Thus, the minimum total cost is 4 + 1 + 1 = 6.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n <= 500
+    /// </summary>
+    int minCost_Split(int n);
+
+    /// <summary>
+    /// Leet Code 3855. Sum of K - Digit Numbers in a Range
+    ///
+    /// Hard
+    ///
+    /// You are given three integers l, r, and k.
+    ///
+    /// Consider all possible integers consisting of exactly k digits, where 
+    /// each digit is chosen independently from the integer range[l, r]
+    /// (inclusive).If 0 is included in the range, leading zeros are allowed.
+    ///
+    /// Return an integer representing the sum of all such numbers.
+    /// Since the answer may be very large, return it modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    /// Input: l = 1, r = 2, k = 2
+    /// Output : 66
+    /// Explanation :
+    /// All numbers formed using k = 2 digits in the range[1, 2] 
+    /// are 11, 12, 21, 22.
+    /// The total sum is 11 + 12 + 21 + 22 = 66.
+    ///
+    /// Example 2 :
+    /// Input : l = 0, r = 1, k = 3
+    /// Output : 444
+    /// Explanation :
+    /// All numbers formed using k = 3 digits in the range[0, 1] are 
+    /// 000, 001, 010, 011, 100, 101, 110, 111
+    /// These numbers without leading zeros are 0, 1, 10, 11, 100, 101, 110, 
+    /// 111.
+    /// The total sum is 444.
+    ///
+    /// Example 3 :
+    /// Input : l = 5, r = 5, k = 10
+    /// Output : 555555520
+    /// Explanation : 
+    /// 5555555555 is the only valid number consisting of k = 10 digits in the 
+    /// range[5, 5].
+    /// The total sum is 5555555555 % (109 + 7) = 555555520.
+    ///
+    /// Constraints :
+    /// 1. 0 <= l <= r <= 9
+    /// 2. 1 <= k <= 10^9
+    int sumOfNumbers(int l, int r, int k);
 };
 #endif

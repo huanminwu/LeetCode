@@ -1373,7 +1373,7 @@ public:
     /// Some examples:
     /// "1 + 1" = 2
     /// " 2-1 + 2 " = 3
-    /// "(1+(4+5+2)-3)+(6+8)" = 23	
+    /// "(1+(4+5+2)-3)+(6+8)" = 23 
     /// </summary>
     int calculate(string s);
 
@@ -3260,7 +3260,7 @@ public:
     /// 1 + 1 = 2, 1 + 2 = 3, 2 + 3 = 5, 3 + 5 = 8
     /// "199100199" is also an additive number, the additive sequence is: 1, 99, 100, 199. 1 + 99 = 100, 99 + 100 = 199
     ///
-    ///	Note: Numbers in the additive sequence cannot have leading zeros, so sequence 1, 2, 03 or 1, 02, 3 is invalid. 
+    /// Note: Numbers in the additive sequence cannot have leading zeros, so sequence 1, 2, 03 or 1, 02, 3 is invalid. 
     /// Given a string containing only digits '0'-'9', write a function to determine if it's an additive number.
     /// Follow up:
     /// How would you handle overflow for very large input integers? 
@@ -3340,7 +3340,7 @@ public:
     /// A magical string S consists of only '1' and '2' and obeys the following rules:  
     /// The string S is magical because concatenating the number of contiguous occurrences of 
     /// characters '1' and '2' generates the string S itself.  
-    /// The first few elements of string S is the following: S = "1221121221221121122����" 
+    /// The first few elements of string S is the following: S = "1221121221221121122????" 
     /// If we group the consecutive '1's and '2's in S, it will be:  
     ///
     /// 1 22 11 2 1 22 1 22 11 2 11 22 ...... 
@@ -4382,7 +4382,7 @@ public:
     /// Note:
     ///
     /// 1. S has length at most 50.
-    /// 2. S is guaranteed to be a special binary string as defined above.	
+    /// 2. S is guaranteed to be a special binary string as defined above. 
     /// </summary>
     string makeLargestSpecial(string S);
 
@@ -5268,14 +5268,14 @@ public:
     /// For example, assuming we have following lines
     /// John,Smith,john.smith@gmail.com,Los Angeles,1
     /// Jane, Roberts, janer@msn.com, "San Francisco, CA", 0
-    ///	"Alexandra ""Alex""", Menendez, alex.menendez@gmail.com, Miami, 1
-    ///	"""Alexandra Alex"""
+    /// "Alexandra ""Alex""", Menendez, alex.menendez@gmail.com, Miami, 1
+    /// """Alexandra Alex"""
     ///
     /// After we parse it, it become the followng vector of strings.
-    ///	John | Smith | john.smith@gmail.com | Los Angeles | 1
-    ///	Jane | Roberts | janer@msn.com | San Francisco, CA | 0
-    ///	Alexandra "Alex" | Menendez | alex.menendez@gmail.com | Miami | 1
-    ///	"Alexandra Alex"
+    /// John | Smith | john.smith@gmail.com | Los Angeles | 1
+    /// Jane | Roberts | janer@msn.com | San Francisco, CA | 0
+    /// Alexandra "Alex" | Menendez | alex.menendez@gmail.com | Miami | 1
+    /// "Alexandra Alex"
     /// </summary>
     vector<vector<string>>  parseCSV(vector<string>& lines);
 
@@ -5472,7 +5472,7 @@ public:
     /// Leet code #1507. Reformat Date
     ///
     /// Easy
-    ///	
+    /// 
     /// Given a date string in the form Day Month Year, where:
     /// Day is in the set {"1st", "2nd", "3rd", "4th", ..., "30th", "31st"}.
     /// Month is in the set {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", 
@@ -11754,7 +11754,7 @@ public:
     /// Leet Code 2490. Circular Sentence
     /// 
     /// Easy
-    ///	
+    /// 
     /// A sentence is a list of words that are separated by a single space 
     /// with no leading or trailing spaces.
     ///
@@ -11815,7 +11815,7 @@ public:
     /// Leet Code 2486. Append Characters to String to Make Subsequence
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given two strings s and t consisting of only lowercase English 
     /// letters.
     ///
@@ -11859,7 +11859,7 @@ public:
     /// Leet Code 2496. Maximum Value of a String in an Array
     /// 
     /// Easy
-    ///	
+    /// 
     /// The value of an alphanumeric string can be defined as:
     ///
     /// The numeric representation of the string in base 10, if it comprises 
@@ -11899,7 +11899,7 @@ public:
     /// Leet Code 2506. Count Pairs Of Similar Strings
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given a 0-indexed string array words.
     ///
     /// Two strings are similar if they consist of the same characters.
@@ -11949,7 +11949,7 @@ public:
     /// Leet Code 2512. Reward Top K Students
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given two string arrays positive_feedback and 
     /// negative_feedback, containing the words denoting positive and negative 
     /// feedback, respectively. Note that no word is both positive and 
@@ -12013,7 +12013,7 @@ public:
     /// Leet Code 2516. Take K of Each Character From Left and Right
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given a string s consisting of the characters 'a', 'b', 
     /// and 'c' and a non-negative integer k. Each minute, you may take 
     /// either the leftmost character of s, or the rightmost character of s.
@@ -12049,7 +12049,7 @@ public:
     /// Leet Code 2522. Partition String Into Substrings With Values at Most K
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given a string s consisting of digits from 1 to 9 and an 
     /// integer k.
     ///
@@ -12089,7 +12089,7 @@ public:
     /// Leet Code 2531. Make Number of Distinct Characters Equal
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given two 0-indexed strings word1 and word2.
     ///
     /// A move consists of choosing two indices i and j such that 
@@ -12129,7 +12129,7 @@ public:
     /// Leet Code 2565. Subsequence With the Minimum Score
     /// 
     /// Hard
-    ///	
+    /// 
     /// You are given two strings s and t.
     /// You are allowed to remove any number of characters from the string t.
     /// The score of the string is 0 if no characters are removed from the 
@@ -12175,7 +12175,7 @@ public:
     /// Leet Code 2586. Count the Number of Vowel Strings in Range
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given a 0-indexed array of string words and two integers left 
     /// and right.
     ///
@@ -12220,7 +12220,7 @@ public:
     /// Leet Code 2606. Find the Substring With Maximum Cost
     /// 
     /// Medium
-    ///	
+    /// 
     /// You are given a string s, a string chars of distinct characters and 
     /// an integer array vals of the same length as chars.
     ///
@@ -12268,7 +12268,7 @@ public:
     /// Leet Code 2645. Minimum Additions to Make Valid String
     /// 
     /// Medium
-    ///	
+    /// 
     /// Given a string word to which you can insert letters "a", "b" or "c" 
     /// anywhere and any number of times, return the minimum number of 
     /// letters that must be inserted so that word becomes valid.
@@ -12302,7 +12302,7 @@ public:
     /// Leet Code 2663. Lexicographically Smallest Beautiful String
     /// 
     /// Hard
-    ///	
+    /// 
     /// A string is beautiful if:
     ///
     /// It consists of the first k letters of the English lowercase alphabet.
@@ -12352,7 +12352,7 @@ public:
     /// Leet Code 2678. Number of Senior Citizens
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given a 0-indexed array of strings details. Each element of 
     /// details provides information about a given passenger compressed into
     /// a string of length 15. The system is such that:
@@ -12390,7 +12390,7 @@ public:
     /// Leet Code 2696. Minimum String Length After Removing Substrings
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given a string s consisting only of uppercase English letters.
     ///
     /// You can apply some operations to this string where, in one operation, 
@@ -12430,7 +12430,7 @@ public:
     /// Leet Code 2697. Lexicographically Smallest Palindrome
     /// 
     /// Easy
-    ///	
+    /// 
     /// You are given a string s consisting of lowercase English letters, and 
     /// you are allowed to perform operations on it. In one operation, you 
     /// can replace a character in s with another lowercase English letter.
@@ -12478,7 +12478,7 @@ public:
     /// Leet Code 2710. Remove Trailing Zeros From a String
     /// 
     /// Easy
-    ///	
+    /// 
     /// Given a positive integer num represented as a string, return the 
     /// integer num without trailing zeros as a string.
     ///
@@ -14593,7 +14593,7 @@ public:
     ///
     /// We say that word is k-periodic if there is some string s of length 
     /// k such that word can be obtained by concatenating s an arbitrary 
-    /// number of times. For example, if word == ��ababab��, then word is 
+    /// number of times. For example, if word == ??ababab??, then word is 
     /// 2-periodic for s = "ab".
     ///
     /// Example 1:
@@ -14609,10 +14609,10 @@ public:
     /// Explanation:
     /// We can obtain a 2-periodic string by applying the operations in the 
     /// table below.
-    /// i	j	word
-    /// 0	2	etetcoleet
-    /// 4	0	etetetleet
-    /// 6	0	etetetetet
+    /// i j word
+    /// 0 2 etetcoleet
+    /// 4 0 etetetleet
+    /// 6 0 etetetetet
     /// 
     /// Constraints:
     /// 1. 1 <= n == word.length <= 10^5
@@ -15069,30 +15069,30 @@ public:
     /// Input: n = 2, commands = ["RIGHT","DOWN"]
     /// Output: 3
     /// Explanation:
-    /// 0	1
-    /// 2	3
-    /// 0	1
-    /// 2	3
-    /// 0	1
-    /// 2	3
+    /// 0 1
+    /// 2 3
+    /// 0 1
+    /// 2 3
+    /// 0 1
+    /// 2 3
     ///
     /// Example 2:
     /// Input: n = 3, commands = ["DOWN","RIGHT","UP"]
     /// Output: 1
     ///
     /// Explanation:
-    /// 0	1	2
-    /// 3	4	5
-    /// 6	7	8
-    /// 0	1	2
-    /// 3	4	5
-    /// 6	7	8
-    /// 0	1	2
-    /// 3	4	5
-    /// 6	7	8
-    /// 0	1	2
-    /// 3	4	5
-    /// 6	7	8
+    /// 0 1 2
+    /// 3 4 5
+    /// 6 7 8
+    /// 0 1 2
+    /// 3 4 5
+    /// 6 7 8
+    /// 0 1 2
+    /// 3 4 5
+    /// 6 7 8
+    /// 0 1 2
+    /// 3 4 5
+    /// 6 7 8
     ///
     /// Constraints:
     /// 1. 2 <= n <= 10
@@ -15521,7 +15521,7 @@ public:
     /// 
     /// Constraints:
     /// 1. 1 <= pattern.length < s.length <= 10^5
-    /// 2. s and pattern consist only of lowercase English letters.	
+    /// 2. s and pattern consist only of lowercase English letters. 
     /// </summary>
     int minStartingIndex(string s, string pattern);
 
@@ -16789,13 +16789,13 @@ public:
     /// Input: s = "babab"
     /// Output: "abbba"
     /// Explanation:
-    /// Rearranging "babab" → "abbba" gives the smallest lexicographic palindrome.
+    /// Rearranging "babab" ? "abbba" gives the smallest lexicographic palindrome.
     ///
     /// Example 3:
     /// Input: s = "daccad"
     /// Output: "acddca"
     /// Explanation:
-    /// Rearranging "daccad" → "acddca" gives the smallest lexicographic 
+    /// Rearranging "daccad" ? "acddca" gives the smallest lexicographic 
     /// palindrome.
     /// 
     /// Constraints:
@@ -18854,7 +18854,179 @@ public:
     /// </summary>
     string reverseByType(string s);
 
-    
+    /// <summary> 
+    /// Leet Code 3838. Weighted Word Mapping
+    ///         
+    /// Easy
+    ///   
+    /// You are given an array of strings words, where each string represents 
+    /// a word containing lowercase English letters.
+    ///
+    /// You are also given an integer array weights of length 26, where 
+    /// weights[i] represents the weight of the ith lowercase English letter.
+    ///
+    /// The weight of a word is defined as the sum of the weights of its 
+    /// characters.
+    ///
+    /// For each word, take its weight modulo 26 and map the result to a 
+    /// lowercase English letter using reverse alphabetical 
+    /// order(0 -> 'z', 1 -> 'y', ..., 25 -> 'a').
+    /// Return a string formed by concatenating the mapped characters for all 
+    /// words in order.
+    ///
+    /// Example 1:
+    /// Input: words = ["abcd", "def", "xyz"], weights = [5, 3, 12, 14, 1, 
+    /// 2, 3, 2, 10, 6, 6, 9, 7, 8, 7, 10, 8, 9, 6, 9, 9, 8, 3, 7, 7, 2]
+    /// Output : "rij"
+    ///
+    /// Explanation :
+    /// The weight of "abcd" is 5 + 3 + 12 + 14 = 34. The result modulo 26 
+    /// is 34 % 26 = 8, which maps to 'r'.
+    /// The weight of "def" is 14 + 1 + 2 = 17. The result modulo 26 is 
+    /// 17 % 26 = 17, which maps to 'i'.
+    /// The weight of "xyz" is 7 + 7 + 2 = 16. The result modulo 26 is 
+    /// 16 % 26 = 16, which maps to 'j'.
+    /// Thus, the string formed by concatenating the mapped characters 
+    /// is "rij".
+    ///
+    /// Example 2:
+    /// Input: words = ["a", "b", "c"], weights = [1, 1, 1, 1, 1, 1, 1, 
+    /// 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    /// Output : "yyy"
+    /// Explanation :
+    /// Each word has weight 1. The result modulo 26 is 1 % 26 = 1, which 
+    /// maps to 'y'.
+    ///
+    /// Thus, the string formed by concatenating the mapped characters 
+    /// is "yyy".
+    ///
+    /// Example 3:
+    /// Input: words = ["abcd"], weights = [7, 5, 3, 4, 3, 5, 4, 9, 4, 2, 
+    /// 2, 7, 10, 2, 5, 10, 6, 1, 2, 2, 4, 1, 3, 4, 4, 5]
+    /// Output : "g"
+    /// Explanation : 
+    ///
+    /// The weight of "abcd" is 7 + 5 + 3 + 4 = 19. The result modulo 26 
+    /// is 19 % 26 = 19, which maps to 'g'.
+    /// Thus, the string formed by concatenating the mapped characters 
+    /// is "g".
+    ///
+    /// Constraints:
+    /// 1. 1 <= words.length <= 100
+    /// 2. 1 <= words[i].length <= 10
+    /// 3. weights.length == 26
+    /// 4. 1 <= weights[i] <= 100
+    /// 5. words[i] consists of lowercase English letters.
+    /// </summary>
+    string mapWordWeights(vector<string>& words, vector<int>& weights);
+
+    /// <summary> 
+    /// Leet Code 3856. Trim Trailing Vowels
+    /// 
+    /// Easy
+    /// 
+    /// You are given a string s that consists of lowercase English letters.
+    /// Return the string obtained by removing all trailing vowels from s.
+    ///The vowels consist of the characters 'a', 'e', 'i', 'o', and 'u'.
+    ///
+    /// Example 1:
+    /// Input: s = "idea"
+    /// Output : "id"
+    /// Explanation :
+    /// Removing "idea", we obtain the string "id".
+    /// 
+    /// Example 2 :
+    /// Input : s = "day"
+    /// Output : "day"
+    /// Explanation :
+    /// There are no trailing vowels in the string "day".
+    ///
+    /// Example 3:
+    /// Input: s = "aeiou"
+    /// Output : ""
+    /// Explanation :
+    /// Removing "aeiou", we obtain the string "".
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 100
+    /// 2. s consists of lowercase English letters only.
+    /// </summary>
+    string trimTrailingVowels(string s);
+
+
+    /// <summary> 
+    /// Leet Code 3860. Unique Email Groups
+    /// 
+    /// Medium
+    ///
+    /// You are given an array of strings emails, where each string is a 
+    /// valid email address.
+    ///
+    /// Two email addresses belong to the same group if both their normalized 
+    /// local names and normalized domain names are identical.
+    ///
+    /// The normalization rules are as follows :
+    ///
+    /// The local name is the part before the '@' symbol.
+    /// Ignore all dots '.'.
+    /// Ignore everything after the first '+', if present.
+    /// Convert to lowercase.
+    /// The domain name is the part after the '@' symbol.
+    /// Convert to lowercase.
+    /// Return an integer denoting the number of unique email groups after 
+    /// normalization.
+    ///
+    /// Example 1:
+    /// Input: emails = ["test.email+alex@leetcode.com", 
+    /// "test.e.mail+bob.cathy@leetcode.com", "testemail+david@lee.tcode.com"]
+    /// Output : 2
+    /// Explanation :
+    /// Email Local Normalized Local Domain Normalized Domain Final Email
+    /// test.email + alex@leetcode.com test.email + alex testemail leetcode.com 
+    /// leetcode.com testemail@leetcode.com
+    /// test.e.mail + bob.cathy@leetcode.com test.e.mail + bob.cathy testemail 
+    /// leetcode.com leetcode.com testemail@leetcode.com
+    /// testemail + david@lee.tcode.com testemail + david testemail 
+    /// lee.tcode.com lee.tcode.com testemail@lee.tcode.com
+    /// Unique emails are["testemail@leetcode.com", "testemail@lee.tcode.com"].
+    /// Thus, the answer is 2.
+    ///
+    /// Example 2:
+    /// Input: emails = ["A@B.com", "a@b.com", "ab+xy@b.com", "a.b@b.com"]
+    /// Output : 2
+    /// Explanation :
+    /// Email Local Normalized Local Domain Normalized Domain Final Email
+    /// A@B.com A a B.com b.com a@b.com
+    /// a@b.com a a b.com b.com a@b.com
+    /// ab + xy@b.com ab + xy ab b.com b.com ab@b.com
+    /// a.b@b.com a.b ab b.com b.com ab@b.com
+    /// Unique emails are["a@b.com", "ab@b.com"].Thus, the answer is 2.
+    ///
+    /// Example 3:
+    /// Input: emails = ["a.b+c.d+e@DoMain.com", "ab+xyz@domain.com", 
+    /// "ab@domain.com"]
+    /// Output : 1
+    /// Explanation :
+    /// Email Local Normalized Local Domain Normalized Domain Final Email
+    /// a.b + c.d + e@DoMain.com a.b + c.d + e ab DoMain.com 
+    /// domain.com ab@domain.com
+    /// ab + xyz@domain.com ab + xyz ab domain.com domain.com ab@domain.com
+    /// ab@domain.com ab ab domain.com domain.com ab@domain.com
+    /// All emails normalize to "ab@domain.com".Thus, the answer is 1.
+    ///
+    /// Constraints:
+    /// 1. 1 <= emails.length <= 1000
+    /// 2. 1 <= emails[i].length <= 100
+    /// 3. emails[i] consists of lowercase and uppercase English letters, 
+    ///    digits, and the characters '.', '+', and '@'.
+    /// 4. Each emails[i] contains exactly one '@' character.
+    /// 5. All local and domain names are non - empty; local names do not start
+    ///    with '+'.
+    /// 6. Domain names end with the ".com" suffix and contain at least one 
+    ///    character before ".com".
+    /// </summary>
+    int uniqueEmailGroups(vector<string>& emails);
+
 #pragma endregion
 };
 

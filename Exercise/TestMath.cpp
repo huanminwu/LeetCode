@@ -8576,8 +8576,46 @@ void TestLeetCode3827(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3848(void)
+{
+    Logger::WriteMessage("Test Leet Code 3848");
+    LeetCodeMath leetCode;
+    int n = 1000000000;
+    bool result = leetCode.isDigitorial(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    n = 145;
+    result = leetCode.isDigitorial(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 10;
+    result = leetCode.isDigitorial(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3857(void)
+{
+    Logger::WriteMessage("Test Leet Code 3857");
+    LeetCodeMath leetCode;
+    int n = 3;
+    int result = leetCode.minCost_Split(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 4;
+    result = leetCode.minCost_Split(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3857();
+    TestLeetCode3848();
     TestLeetCode3827();
     TestLeetCode3826();
     TestLeetCode3809();

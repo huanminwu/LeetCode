@@ -1835,8 +1835,65 @@ void TestLeetCode3806(void)
     Logger::WriteMessage("k = " + to_string(k) + "; m = " + to_string(m) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3845(void)
+{
+    Logger::WriteMessage("Test Leet Code 3845");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 5, 4, 5, 6 };
+    int k = 2;
+    int result = leetCode.maxXor(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k)  + "; result = " + to_string(result));
+
+    nums = { 5, 4, 5, 6 };
+    k = 1;
+    result = leetCode.maxXor(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; result = " + to_string(result));
+}
+
+void TestLeetCode3849(void)
+{
+    Logger::WriteMessage("Test Leet Code 3849");
+    LeetCodeBit leetCode;
+    string s = "101", t = "011";
+    string result = leetCode.maximumXor(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + result);
+    
+    s = "0110", t = "1110";
+    result = leetCode.maximumXor(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + result);
+
+    s = "0101", t = "1001";
+    result = leetCode.maximumXor(s, t);
+    Logger::WriteMessage("s = " + s + "; t = " + t + "; result = " + result);
+}
+
+void TestLeetCode3858(void)
+{
+    Logger::WriteMessage("Test Leet Code 3858");
+    LeetCodeBit leetCode;
+    vector<vector<int>> grid = { {1, 5},{2, 4} };
+    int result = leetCode.minimumOR(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {3, 5},{6, 4} };
+    result = leetCode.minimumOR(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {7, 9, 8} };
+    result = leetCode.minimumOR(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode3858();
+    TestLeetCode3849();
+    TestLeetCode3845();
     TestLeetCode3806();
     TestLeetCode3757();
     TestLeetCode3766();

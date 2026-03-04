@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #ifndef LeetCodeBit_H
 #define LeetCodeBit_H
 #include <stdint.h>
@@ -20,90 +20,6 @@
 #include "leetcode.h"
 
 using namespace std;
-/// <summary>
-/// The class is to implement bit operation related algorithm  
-/// </summary>
-struct TrieBitNode 
-{
-    TrieBitNode* m_Child[2] = {};
-    int m_Count = 0; 
-    int m_MaxBits = 31;
-    TrieBitNode(int max_bits)
-    {
-        m_MaxBits = max_bits;
-    }
-    
-    void increase(long long number, int d) 
-    {
-        TrieBitNode* cur = this;
-        for (int i = m_MaxBits; i >= 0; --i)
-        {
-            int bit = (int)((number >> i) & 1);
-            if (cur->m_Child[bit] == nullptr) cur->m_Child[bit] = new TrieBitNode(m_MaxBits);
-            cur = cur->m_Child[bit];
-            cur->m_Count += d;
-        }
-    }
-
-    void decrease(long long number, int d)
-    {
-        TrieBitNode* cur = this;
-        for (int i = m_MaxBits; i >= 0; --i)
-        {
-            int bit = (int)((number >> i) & 1);
-            cur = cur->m_Child[bit];
-            cur->m_Count -= d;
-        }
-    }
-
-    long long maxXorFind(long long number) 
-    {
-        TrieBitNode* cur = this;
-        long long result = 0;
-        for (int i = m_MaxBits; i >= 0; --i)
-        {
-            if (cur == nullptr) break;
-            int bit = (number >> i) & 1;
-            if (cur->m_Child[1 - bit] != nullptr && cur->m_Child[1 - bit]->m_Count > 0) 
-            {
-                cur = cur->m_Child[1 - bit];
-                result |= ((long long)1 << (long long)i);
-            }
-            else
-            {
-                cur = cur->m_Child[bit];
-            }
-        }
-        return result;
-    }
-
-    long long countXorGreater(long long number, long long k)
-    {
-        TrieBitNode* cur = this;
-        long long result = 0;
-        for (int i = m_MaxBits; i >= 0; --i)
-        {
-            if (cur == nullptr) break;
-            int bit_number = (number >> i) & 1;
-            int bit_k = (k >> i) & 1;
-            if (bit_k == 0)
-            {
-                if (cur->m_Child[1 - bit_number] != nullptr)
-                {
-                    result += cur->m_Child[1 - bit_number]->m_Count;
-                }
-                cur = cur->m_Child[bit_number];
-            }
-            else
-            {
-                cur = cur->m_Child[1 - bit_number];
-            }
-        }
-        if (cur != nullptr) result += cur->m_Count;
-        return result;
-    }
-};
-
 class LeetCodeBit
 {
 public:
@@ -120,9 +36,9 @@ public:
     /// <summary>
     /// Leet code # 191. Number of 1 Bits
     /// 
-    /// Write a function that takes an unsigned integer and returns the number of ’1' 
+    /// Write a function that takes an unsigned integer and returns the number of ?1' 
     /// bits it has (also known as the Hamming weight). 
-    /// For example, the 32-bit integer ’11' has binary representation 
+    /// For example, the 32-bit integer ?11' has binary representation 
     /// 00000000000000000000000000001011, so the function should return 3. 
     /// </summary>
     int hammingWeight(uint32_t n);
@@ -196,7 +112,7 @@ public:
 
     /// <summary>
     /// Leet code #405. Convert a Number to Hexadecimal 
-    /// Given an integer, write an algorithm to convert it to hexadecimal. For negative integer, two’s complement method is used.  
+    /// Given an integer, write an algorithm to convert it to hexadecimal. For negative integer, two?s complement method is used.  
     /// Note: 
     /// 1.All letters in hexadecimal (a-f) must be in lowercase.
     /// 2.The hexadecimal string must not contain extra leading 0s. If the number is zero, it is represented by a single zero character '0'; otherwise, 
@@ -316,8 +232,8 @@ public:
 
     /// <summary>
     /// Leet code #421. Maximum XOR of Two Numbers in an Array Add to List 
-    /// Given a non-empty array of numbers, a0, a1, a2,... an-1, where 0 ≤ ai < 231.
-    /// Find the maximum result of ai XOR aj, where 0 ≤ i, j < n. 
+    /// Given a non-empty array of numbers, a0, a1, a2,... an-1, where 0 ? ai < 231.
+    /// Find the maximum result of ai XOR aj, where 0 ? i, j < n. 
     ///
     /// Could you do this in O(n) runtime? 
     /// Example:
@@ -333,7 +249,7 @@ public:
     /// corresponding bits are different.
     /// Given two integers x and y, calculate the Hamming distance.
     /// Note:
-    /// 0 ≤ x, y < 231. 
+    /// 0 ? x, y < 231. 
     /// Example: 
     /// Input: x = 1, y = 4
     /// Output: 2
@@ -390,7 +306,7 @@ public:
     /// strategy is to flip the bits of its binary representation.
     /// Note:
     /// 1.The given integer is guaranteed to fit within the range of a 32-bit signed integer.
-    /// 2.You could assume no leading zero bit in the integer’s binary representation.
+    /// 2.You could assume no leading zero bit in the integer?s binary representation.
     /// Example 1:
     /// Input: 5
     /// Output: 2
@@ -3327,7 +3243,7 @@ public:
     ///
     /// Hard
     ///
-    /// Given an array of positive integers nums of length n and a non‑negative 
+    /// Given an array of positive integers nums of length n and a non?negative 
     /// integer k.
     ///
     /// Return the number of contiguous subarrays whose bitwise XOR of all 
@@ -3808,7 +3724,126 @@ public:
     /// 4. 1 <= m <= n
     /// </summary>
     int maximumAND(vector<int>& nums, int k, int m);
+
+    /// <summary>
+    /// Leet Code 3845. Maximum Subarray XOR with Bounded Range
+    ///
+    /// Hard
+    /// 
+    /// You are given a non - negative integer array nums and an integer k.
+    /// You must select a subarray of nums such that the difference between 
+    /// its maximum and minimum elements is at most k.The value of this 
+    /// subarray is the bitwise XOR of all elements in the subarray.
+    ///
+    /// Return an integer denoting the maximum possible value of the selected 
+    /// subarray.
+    ///
+    /// Example 1:
+    /// Input: nums = [5, 4, 5, 6], k = 2
+    /// Output : 7
+    /// Explanation :
+    /// Select the subarray[5, 4, 5, 6].
+    /// The difference between its maximum and minimum elements is 6 - 4 = 2 <= k.
+    /// The value is 4 XOR 5 XOR 6 = 7.
+    ///
+    /// Example 2 :
+    /// Input: nums = [5, 4, 5, 6], k = 1
+    /// Output : 6
+    /// Explanation :
+    /// Select the subarray[5, 4, 5, 6].
+    /// The difference between its maximum and minimum elements is 6 - 5 = 1 <= k.
+    /// The value is 5 XOR 4 XOR 5 XOR 6 = 6
+    /// 
+    /// Constraints :
+    /// 1. 1 <= nums.length <= 4 * 10^4
+    /// 2. 0 <= nums[i] < 2^15
+    /// 3. 0 <= k < 2^15
+    /// </summary>
+    int maxXor(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code 3849. Maximum Bitwise XOR After Rearrangement
+    ///
+    /// Medium
+    ///
+    /// You are given two binary strings s and t, each of length n.
+    ///
+    /// You may rearrange the characters of t in any order, but s must remain 
+    /// unchanged.
+    ///
+    /// Return a binary string of length n representing the maximum integer 
+    /// value obtainable by taking the bitwise XOR of s and rearranged t.
+    ///
+    /// Example 1:
+    /// Input: s = "101", t = "011"
+    /// Output : "110"
+    /// Explanation :
+    /// One optimal rearrangement of t is "011".
+    /// The bitwise XOR of s and rearranged t is "101" XOR "011" = "110", 
+    /// which is the maximum possible.
+    ///
+    /// Example 2:
+    /// Input : s = "0110", t = "1110"
+    /// Output : "1101"
+    /// Explanation :
+    /// One optimal rearrangement of t is "1011".
+    /// The bitwise XOR of s and rearranged t is "0110" XOR "1011" = "1101", 
+    /// which is the maximum possible.
+    ///
+    /// Example 3 :
+    /// Input : s = "0101", t = "1001"
+    /// Output : "1111"
+    /// Explanation :
+    /// One optimal rearrangement of t is "1010".
+    /// The bitwise XOR of s and rearranged t is "0101" XOR "1010" = "1111", 
+    /// which is the maximum possible.
+    ///
+    /// Constraints :
+    /// 1. 1 <= n == s.length == t.length <= 2 * 10^5
+    /// 2. s[i] and t[i] are either '0' or '1'.
+    /// </summary>
+    string maximumXor(string s, string t);
  
+    /// <summary>
+    /// Leet Code 3858. Minimum Bitwise OR From Grid
+    ///
+    /// Medium
+    ///
+    /// You are given a 2D integer array grid of size m x n.
+    /// 
+    /// You must select exactly one integer from each row of the grid.
+    ///
+    /// Return an integer denoting the minimum possible bitwise OR of 
+    /// the selected integers from each row.
+    ///
+    /// Example 1:
+    /// Input: grid = [[1, 5], [2, 4]]
+    /// Output : 3
+    /// Explanation :
+    /// Choose 1 from the first row and 2 from the second row.
+    /// The bitwise OR of 1 | 2 = 3, which is the minimum possible.
+    ///
+    /// Example 2 :
+    /// Input : grid = [[3, 5], [6, 4]]
+    /// Output : 5
+    /// Explanation :
+    /// Choose 5 from the first row and 4 from the second row.
+    /// The bitwise OR of 5 | 4 = 5, which is the minimum possible.
+    /// 
+    /// Example 3 :
+    /// Input : grid = [[7, 9, 8]]
+    /// Output : 7
+    /// Explanation :
+    /// Choosing 7 gives the minimum bitwise OR.
+    /// 
+    /// Constraints :
+    /// 1. 1 <= m == grid.length <= 10^5
+    /// 2. 1 <= n == grid[i].length <= 10^5
+    /// 3. m * n <= 10^5
+    /// 4. 1 <= grid[i][j] <= 10^5
+    /// </summary>
+    int minimumOR(vector<vector<int>>& grid);
+
 #pragma endregion
 };
 #endif  // LeetCodeBit_H

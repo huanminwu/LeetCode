@@ -345,7 +345,7 @@ public:
     /// For example,
     /// Given [1,1,1,2,2,3] and k = 2, return [1,2]. 
     /// Note: 
-    /// You may assume k is always valid, 1 �� k �� number of unique elements.
+    /// You may assume k is always valid, 1 ?? k ?? number of unique elements.
     /// Your algorithm's time complexity must be better than O(n log n), where n is the array's size.
     /// </summary>
     vector<int> topKFrequent(vector<int>& nums, int k);
@@ -4295,7 +4295,6 @@ public:
     /// </summary>
     int minOperations(vector<int>& nums, vector<int>& target);
 
-
     /// <summary>
     /// Leet Code 2404. Most Frequent Even Element
     ///                                                  
@@ -4332,5 +4331,209 @@ public:
     /// 2. 0 <= nums[i] <= 10^5
     /// </summary>
     int mostFrequentEven(vector<int>& nums);
-};
+
+    /// <summary>
+    /// Leet Code 3839. Number of Prefix Connected Groups
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given an array of strings words and an integer k.
+    /// Two words a and b at distinct indices are prefix - connected if 
+    /// a[0..k - 1] == b[0..k - 1].
+    ///
+    /// A connected group is a set of words such that each pair of words 
+    /// is prefix - connected.
+    /// Return the number of connected groups that contain at least two words, 
+    /// formed from the given words.
+    ///
+    /// Note:
+    /// Words with length less than k cannot join any group and are ignored.
+    /// Duplicate strings are treated as separate words.
+    ///
+    /// Example 1:
+    /// Input: words = ["apple", "apply", "banana", "bandit"], k = 2
+    /// Output : 2
+    /// Explanation :
+    /// Words sharing the same first k = 2 letters are grouped together :
+    /// words[0] = "apple" and words[1] = "apply" share prefix "ap".
+    /// words[2] = "banana" and words[3] = "bandit" share prefix "ba".
+    /// Thus, there are 2 connected groups, each containing at least two 
+    /// words.
+    ///     
+    /// Example 2:
+    /// Input: words = ["car", "cat", "cartoon"], k = 3
+    /// Output : 1
+    ///
+    /// Explanation :
+    /// Words are evaluated for a prefix of length k = 3 :
+    /// words[0] = "car" and words[2] = "cartoon" share prefix "car".
+    /// words[1] = "cat" does not share a 3 - length prefix with any 
+    /// other word.
+    /// Thus, there is 1 connected group.
+    ///
+    /// Example 3:
+    /// Input: words = ["bat", "dog", "dog", "doggy", "bat"], k = 3
+    /// Output : 2
+    ///
+    /// Explanation :
+    /// Words are evaluated for a prefix of length k = 3 :
+    /// words[0] = "bat" and words[4] = "bat" form a group.
+    /// words[1] = "dog", words[2] = "dog" and words[3] = "doggy" 
+    /// share prefix "dog".
+    /// Thus, there are 2 connected groups, each containing at 
+    /// least two words.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= words.length <= 5000
+    /// 2. 1 <= words.length <= 5000
+    /// 3. 1 <= words[i].length <= 100
+    /// 4. 1 <= k <= 100
+    /// 5. All strings in words consist of lowercase English letters.
+    /// </summary>
+    int prefixConnected(vector<string>& words, int k);
+
+    /// <summary>
+    /// Leet Code 3843. First Element with Unique Frequency
+    ///                                                  
+    /// Medium
+    ///
+    /// You are given an integer array nums.
+    ///
+    /// Return an integer denoting the first element(scanning from left to 
+    /// right) in nums whose frequency is unique.That is, no other integer 
+    /// appears the same number of times in nums.If there is no such element, 
+    /// return -1.
+    ///
+    /// Example 1:
+    /// Input: nums = [20, 10, 30, 30]
+    /// Output : 30
+    ///
+    /// Explanation :
+    /// 20 appears once.
+    /// 10 appears once.
+    /// 30 appears twice.
+    /// The frequency of 30 is unique because no other integer appears exactly 
+    /// twice.
+    /// 
+    /// Example 2:
+    /// Input: nums = [20, 20, 10, 30, 30, 30]
+    /// Output : 20
+    /// Explanation :
+    /// 20 appears twice.
+    /// 10 appears once.
+    /// 30 appears 3 times.
+    /// The frequency of 20, 10, and 30 are unique.The first element 
+    /// that has unique frequency is 20.
+    ///
+    /// Example 3:
+    /// Input: nums = [10, 10, 20, 20]
+    /// Output : -1
+    /// Explanation :
+    /// 10 appears twice.
+    /// 20 appears twice.
+    /// No element has a unique frequency.
+    /// 
+    /// Constraints :
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^5
+    /// </summary>
+    int firstUniqueFreq(vector<int>& nums);
+    
+    /// <summary>
+    /// Leet Code 3846. Total Distance to Type a String Using One Finger
+    ///                                                  
+    /// Medium
+    ///
+    /// There is a special keyboard where keys are arranged in a rectangular 
+    /// grid as follows.
+    /// q	w	e	r	t	y	u	i	o	p
+    /// a	s	d	f	g	h	j	k	l
+    /// z	x	c	v	b	n	m
+    /// You are given a string s that consists of lowercase English letters 
+    /// only.Return an integer denoting the total distance to type s using 
+    /// only one finger.Your finger starts on the key 'a'.
+    /// The distance between two keys at(r1, c1) and (r2, c2) is 
+    /// | r1 - r2 | +| c1 - c2 | .
+    ///
+    /// Example 1:
+    /// Input: s = "hello"
+    /// Output : 17
+    /// Explanation :
+    /// Your finger starts at 'a', which is at(1, 0).
+    /// Move to 'h', which is at(1, 5).The distance is 
+    /// | 1 - 1 | +| 0 - 5 | = 5.
+    /// Move to 'e', which is at(0, 2).The distance is 
+    /// | 1 - 0 | +| 5 - 2 | = 4.
+    /// Move to 'l', which is at(1, 8).The distance is 
+    /// | 0 - 1 | +| 2 - 8 | = 7.
+    /// Move to 'l', which is at(1, 8).The distance is 
+    /// | 1 - 1 | +| 8 - 8 | = 0.
+    /// Move to 'o', which is at(0, 8).The distance is 
+    /// | 1 - 0 | +| 8 - 8 | = 1.
+    /// Total distance is 5 + 4 + 7 + 0 + 1 = 17.
+    ///
+    /// Example 2:
+    /// Input: s = "a"
+    /// Output : 0
+    /// Explanation :
+    /// Your finger starts at 'a', which is at(1, 0).
+    /// Move to 'a', which is at(1, 0).The distance is 
+    /// | 1 - 1 | +| 0 - 0 | = 0.
+    /// Total distance is 0.
+    ///
+    /// Constraints :
+    /// 1. 1 <= s.length <= 10^4
+    /// 2. s consists of lowercase English letters only.
+    /// </summary>
+    int totalDistance(string s);
+
+    /// <summary>
+    /// Leet Code 3852. Smallest Pair With Different Frequencies
+    /// 
+    /// Easy
+    ///
+    /// You are given an integer array nums.
+    ///
+    /// Consider all pairs of distinct values x and y from nums such that :
+    ///
+    /// x < y
+    /// x and y have different frequencies in nums.
+    /// Among all such pairs :
+    /// Choose the pair with the smallest possible value of x.
+    /// If multiple pairs have the same x, choose the one with the smallest 
+    /// possible value of y.
+    /// Return an integer array[x, y].If no valid pair exists, return[-1, -1].
+    ///
+    /// The frequency of a value x is the number of times it occurs in the 
+    /// array.
+    ///
+    /// Example 1:
+    /// Input: nums = [1, 1, 2, 2, 3, 4]
+    /// Output : [1, 3]
+    /// Explanation :
+    /// The smallest value is 1 with a frequency of 2, and the smallest value 
+    /// greater than 1 that has a different frequency from 1 is 3 with a 
+    /// frequency of 1. Thus, the answer is[1, 3].
+    ///
+    /// Example 2 :
+    /// Input : nums = [1, 5]
+    /// Output : [-1, -1]
+    /// Explanation :
+    /// Both values have the same frequency, so no valid pair exists.
+    /// Return [-1, -1].
+    ///
+    /// Example 3 :
+    /// Input : nums = [7]
+    /// Output : [-1, -1]
+    /// Explanation :
+    /// There is only one value in the array, so no valid pair exists.
+    /// Return[-1, -1].
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2.  1 <= nums[i] <= 100
+    /// </summary>
+    vector<int> minDistinctFreqPair(vector<int>& nums);
+
+ };
 #endif  // LeetCodeHashtable
