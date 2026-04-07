@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <ctype.h>  /* is space */
 #include <stdio.h>     /* printf */
 #include <stdlib.h>  
@@ -1679,7 +1679,7 @@ vector<string> LeetCodeDFS::generateAbbreviationsII(string word)
 }
 
 /// <summary>
-/// Leet code #411. Minimum Unique Word Abbreviation         
+/// Leet code #411. Minimum Unique Word Abbreviation  ?????? 
 /// </summary>
 void LeetCodeDFS::getAbbrBits(int index, int digits, int target_digits, string &abbr_bits, vector<string> &result)
 {
@@ -1697,7 +1697,7 @@ void LeetCodeDFS::getAbbrBits(int index, int digits, int target_digits, string &
 }
 
 /// <summary>
-/// Leet code #411. Minimum Unique Word Abbreviation         
+/// Leet code #411. Minimum Unique Word Abbreviation  ?????? 
 /// </summary>
 string LeetCodeDFS::getAbbrWord(string word, string abbr_bits, int& length)
 {
@@ -1735,7 +1735,7 @@ string LeetCodeDFS::getAbbrWord(string word, string abbr_bits, int& length)
 }
 
 /// <summary>
-/// Leet code #411. Minimum Unique Word Abbreviation         
+/// Leet code #411. Minimum Unique Word Abbreviation  ?????? 
 /// 
 /// A string such as "word" contains the following abbreviations:
 /// ["word", "1ord", "w1rd", "wo1d", "wor1", "2rd", "w2d", "wo2", "1o1d", "1or1", "w1r1", "1o2", 
@@ -1749,7 +1749,7 @@ string LeetCodeDFS::getAbbrWord(string word, string abbr_bits, int& length)
 ///
 /// Note:
 /// In the case of multiple answers as shown in the second example below, you may return any one of them.
-/// Assume length of target string = m, and dictionary size = n. You may assume that m ≤ 21, n ≤ 1000, 
+/// Assume length of target string = m, and dictionary size = n. You may assume that m ? 21, n ? 1000, 
 /// and log2(n) + m <= 20.
 /// 
 /// Examples:
@@ -10176,7 +10176,7 @@ long long LeetCodeDFS::permuteIV(int n, long long k, long long index, vector<int
 /// [2, 1, 4, 3]
 /// [2, 3, 4, 1]
 /// [3, 2, 1, 4]
-/// [3, 4, 1, 2] ← 6th permutation
+/// [3, 4, 1, 2] ? 6th permutation
 /// [4, 1, 2, 3]
 /// [4, 3, 2, 1]
 /// Since k = 6, we return [3, 4, 1, 2].
@@ -10187,7 +10187,7 @@ long long LeetCodeDFS::permuteIV(int n, long long k, long long index, vector<int
 /// Explanation:
 /// The lexicographically-sorted alternating permutations of [1, 2, 3] are:
 /// [1, 2, 3]
-/// [3, 2, 1] ← 2nd permutation
+/// [3, 2, 1] ? 2nd permutation
 /// Since k = 2, we return [3, 2, 1].
 ///
 /// Example 3:
@@ -10739,8 +10739,8 @@ int LeetCodeDFS::minTravelTime(int pre_pos, int accum_count, int curr_k, int cur
 /// position array: [0, 8, 10]
 /// time array: [5, 11, 6]
 /// Segment Distance (km) Time per km (min)	Segment Travel Time (min)
-/// 0  8	8	5	8 × 5 = 40
-/// 8  10	2	11	2 × 11 = 22
+/// 0  8	8	5	8 ? 5 = 40
+/// 8  10	2	11	2 ? 11 = 22
 /// Total Travel Time: 40 + 22 = 62, which is the minimum possible time after 
 /// exactly 1 merge.
 ///
@@ -10755,9 +10755,9 @@ int LeetCodeDFS::minTravelTime(int pre_pos, int accum_count, int curr_k, int cur
 /// position array: [0, 2, 3, 5]
 /// time array: [8, 12, 3, 3]
 /// Segment	Distance (km)	Time per km (min)	Segment Travel Time (min)
-/// 0  2   2   8   2 × 8 = 16
-/// 2  3   1   12  1 × 12 = 12
-/// 3  5   2   3   2 × 3 = 6
+/// 0  2   2   8   2 ? 8 = 16
+/// 2  3   1   12  1 ? 12 = 12
+/// 3  5   2   3   2 ? 3 = 6
 /// Total Travel Time: 16 + 12 + 6 = 34, which is the minimum possible time 
 /// after exactly 1 merge.
 /// 
@@ -10908,7 +10908,7 @@ vector<vector<int>> LeetCodeDFS::findPath(vector<vector<int>>& grid, int k)
 /// floor(d) % m steps.
 /// If individuals are left behind, one person must return with the boat. 
 /// Let r be the index of the returning person, the return takes 
-/// time[r] × mul[current_stage], defined as return_time, and the stage 
+/// time[r] ? mul[current_stage], defined as return_time, and the stage 
 /// advances by floor(return_time) % m.
 /// Return the minimum total time required to transport all individuals. If 
 /// it is not possible to transport all individuals to the destination, 
@@ -10918,7 +10918,7 @@ vector<vector<int>> LeetCodeDFS::findPath(vector<vector<int>>& grid, int k)
 /// Input: n = 1, k = 1, m = 2, time = [5], mul = [1.0,1.3]
 /// Output: 5.00000
 /// Explanation:
-/// Individual 0 departs from stage 0, so crossing time = 5 × 1.00 = 5.00 
+/// Individual 0 departs from stage 0, so crossing time = 5 ? 1.00 = 5.00 
 /// minutes.
 /// All team members are now at the destination. Thus, the total time taken 
 /// is 5.00 minutes.
@@ -10929,15 +10929,15 @@ vector<vector<int>> LeetCodeDFS::findPath(vector<vector<int>>& grid, int k)
 /// Explanation:
 /// The optimal strategy is:
 /// Send individuals 0 and 2 from the base camp to the destination from 
-/// stage 0. The crossing time is max(2, 8) × mul[0] = 8 × 1.00 = 8.00 minutes. 
+/// stage 0. The crossing time is max(2, 8) ? mul[0] = 8 ? 1.00 = 8.00 minutes. 
 /// The stage advances by floor(8.00) % 3 = 2, so the next stage is 
 /// (0 + 2) % 3 = 2.
 /// Individual 0 returns alone from the destination to the base camp from 
-/// stage 2. The return time is 2 × mul[2] = 2 × 0.75 = 1.50 minutes. The 
+/// stage 2. The return time is 2 ? mul[2] = 2 ? 0.75 = 1.50 minutes. The 
 /// stage advances by floor(1.50) % 3 = 1, so the next stage is 
 /// (2 + 1) % 3 = 0.
 /// Send individuals 0 and 1 from the base camp to the destination from 
-/// stage 0. The crossing time is max(2, 5) × mul[0] = 5 × 1.00 = 5.00 
+/// stage 0. The crossing time is max(2, 5) ? mul[0] = 5 ? 1.00 = 5.00 
 /// minutes. The stage advances by floor(5.00) % 3 = 2, so the final stage 
 /// is (0 + 2) % 3 = 2.
 /// All team members are now at the destination. The total time taken is 
@@ -12037,7 +12037,7 @@ long long LeetCodeDFS::popcountDepthI(string str_num, int index, int is_limit, i
 /// The popcount-depth of x is defined as the smallest integer d >= 0 such 
 /// that pd = 1.
 /// For example, if x = 7 (binary representation "111"). Then, the 
-/// sequence is: 7 → 3 → 2 → 1, so the popcount-depth of 7 is 3.
+/// sequence is: 7 ? 3 ? 2 ? 1, so the popcount-depth of 7 is 3.
 ///
 /// Your task is to determine the number of integers in the range [1, n] 
 /// whose popcount-depth is exactly equal to k.
@@ -12052,8 +12052,8 @@ long long LeetCodeDFS::popcountDepthI(string str_num, int index, int is_limit, i
 /// equal to 1:
 ///
 /// x   Binary  Sequence
-/// 2   "10"    2 → 1
-/// 4   "100"   4 → 1
+/// 2   "10"    2 ? 1
+/// 4   "100"   4 ? 1
 /// Thus, the answer is 2.
 ///
 /// Example 2:
@@ -12068,9 +12068,9 @@ long long LeetCodeDFS::popcountDepthI(string str_num, int index, int is_limit, i
 /// exactly equal to 2:
 /// 
 /// x   Binary  Sequence
-/// 3   "11"    3 → 2 → 1
-/// 5   "101"   5 → 2 → 1
-/// 6   "110"   6 → 2 → 1
+/// 3   "11"    3 ? 2 ? 1
+/// 5   "101"   5 ? 2 ? 1
+/// 6   "110"   6 ? 2 ? 1
 /// Thus, the answer is 3.
 /// 
 /// Constraints:
@@ -12340,7 +12340,7 @@ int LeetCodeDFS::digitsCount(string& str_n, int d, int index, int is_leadingzero
 /// Note:
 ///
 /// 0 <= d <= 9
-/// 1 <= low <= high <= 2×10^8
+/// 1 <= low <= high <= 2?10^8
 /// </summary>
 int LeetCodeDFS::digitsCount(int d, int low, int high)
 {
@@ -12531,4 +12531,250 @@ long long LeetCodeDFS::nthSmallest(long long n, int k)
     return result;
 }
 
+/// <summary>
+/// Leet code #3864. Minimum Cost to Partition a Binary String
+/// </summary>
+long long LeetCodeDFS::minCost(int start, int end, vector<int>& prefix_sum, int encCost, int flatCost)
+{
+    int length = end - start;
+    int sensitive_count = prefix_sum[end] - prefix_sum[start];
+    long long  result = 0;
+    if (sensitive_count == 0)
+    {
+        result = flatCost;
+    }
+    else
+    {
+        result = (long long)length * sensitive_count * encCost;
+        if (length % 2 == 0)
+        {
+            result = min(result, minCost(start, start + length / 2, prefix_sum, encCost, flatCost) +
+                minCost(start + length / 2, end, prefix_sum, encCost, flatCost));
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet code #3864. Minimum Cost to Partition a Binary String
+/// 
+/// Hard
+/// 
+/// You are given a binary string s and two integers encCost and flatCost.
+/// 
+/// Return an integer denoting the minimum possible total cost over all 
+/// valid partitions.
+///
+/// Example 1:
+/// Input: s = "1010", encCost = 2, flatCost = 1
+/// Output : 6
+/// Explanation :
+/// The entire string s = "1010" has length 4 and contains 2 sensitive 
+/// elements, giving a cost of 4 * 2 * 2 = 16.
+/// Since the length is even, it can be split into "10" and "10".Each 
+/// segment has length 2 and contains 1 sensitive element, so each costs 
+/// 2 * 1 * 2 = 4, giving a total of 8.
+/// Splitting both segments into four single - character segments yields the 
+/// segments 
+/// "1", "0", "1", and "0".A segment containing "1" has length 1 and 
+/// exactly one sensitive element, giving a cost of 1 * 1 * 2 = 2, while 
+/// a segment containing "0" has no sensitive elements and therefore costs 
+/// flatCost = 1.
+/// The total cost is thus 2 + 1 + 2 + 1 = 6, which is the minimum 
+/// possible total cost.
+///
+/// Example 2:
+/// Input: s = "1010", encCost = 3, flatCost = 10
+/// Output : 12
+/// Explanation :
+/// The entire string s = "1010" has length 4 and contains 2 sensitive 
+/// elements, giving a cost of 4 * 2 * 3 = 24.
+/// Since the length is even, it can be split into two segments "10" 
+/// and "10".
+/// Each segment has length 2 and contains one sensitive element, so each 
+/// costs 2 * 1 * 3 = 6, giving a total of 12, which is the minimum 
+/// possible total cost.
+///
+/// Example 3:
+/// Input: s = "00", encCost = 1, flatCost = 2
+/// Output : 2
+/// Explanation :
+/// The string s = "00" has length 2 and contains no sensitive elements, 
+/// so storing it as a single segment costs flatCost = 2, which is the 
+/// minimum possible total cost.
+///
+/// Example 4:
+/// Input: s = "1111", encCost = 2, flatCost = 1
+/// Output : 16
+/// Explanation :
+/// The entire string s = "1111" has length 4 and contains 4 sensitive 
+/// elements, giving a cost of 4 * 4 * 2 = 32.
+/// Since the length is even, it can be split into two segments "11" 
+/// Each segment has length 2 and contains two sensitive elements, so 
+/// each costs 2 * 2 * 2 = 8, giving a total of 16, which is the minimum 
+/// possible total cost.
+///
+/// Constraints:
+/// 1. 1 <= s.length <= 10^5
+/// 2. s consists only of '0' and '1'.
+/// 3. 1 <= encCost, flatCost <= 10^5
+/// </summary>
+long long LeetCodeDFS::minCost(string s, int encCost, int flatCost)
+{
+    vector<int> prefix_sum(s.size() + 1);
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        prefix_sum[i + 1] = prefix_sum[i] + (s[i] - '0');
+    }
+    return minCost(0, s.size(), prefix_sum, encCost, flatCost);
+}
+
+/// <summary>
+/// Leet code #3869. Count Fancy Numbers in a Range
+/// </summary>
+long long LeetCodeDFS::countFancy(string& str_num, int is_limit, int is_leading_zero, int sum,
+    int position, int prev_digit, int trend, vector<long long>& cache)
+{
+    if (position == str_num.size())
+    {
+        string str_sum = to_string(sum);
+        if (trend < 3) return 1;
+        bool is_increasing = true;
+        bool is_decreasing = true;
+        for (size_t i = 1; i < str_sum.size(); i++)
+        {
+            if (str_sum[i] >= str_sum[i - 1]) is_decreasing = false;
+            if (str_sum[i] <= str_sum[i - 1]) is_increasing = false;
+        }
+        if (is_increasing || is_decreasing) return 1;
+        else return 0;
+    }
+    int offset = trend * 4 + is_limit * 2 + is_leading_zero;
+    int cache_index = position * 150 * 10 * 16 + sum * 10 * 16 + prev_digit * 16 + offset;
+    if (cache[cache_index] != -1)
+    {
+        return cache[cache_index];
+    }
+    int next_trend = 0, next_is_limit = 0, next_is_leading_zero = 0;
+    long long result = 0;
+    if (is_limit == 0)
+    {
+        next_is_limit = 0;
+        for (int d = 0; d < 10; d++)
+        {
+            if (is_leading_zero == 1)
+            {
+                if (d == 0) next_is_leading_zero = 1;
+                else next_is_leading_zero = 0;
+            }
+            else
+            {
+                next_is_leading_zero = 0;
+                if (d > prev_digit && (trend == 0 || trend == 1)) next_trend = 1;
+                else if (d < prev_digit && (trend == 0 || trend == 2)) next_trend = 2;
+                else next_trend = 3;
+            }
+            result += countFancy(str_num, next_is_limit, next_is_leading_zero, sum + d,
+                position + 1, d, next_trend, cache);
+        }
+    }
+    else
+    {
+        for (int d = 0; d <= str_num[position] - '0'; d++)
+        {
+            if (d == str_num[position] - '0') next_is_limit = 1;
+            else next_is_limit = 0;
+            if (is_leading_zero == 1)
+            {
+                if (d == 0) next_is_leading_zero = 1;
+                else next_is_leading_zero = 0;
+            }
+            else
+            {
+                next_is_leading_zero = 0;
+                if (d > prev_digit && (trend == 0 || trend == 1)) next_trend = 1;
+                else if (d < prev_digit && (trend == 0 || trend == 2)) next_trend = 2;
+                else next_trend = 3;
+            }
+            result += countFancy(str_num, next_is_limit, next_is_leading_zero, sum + d,
+                position + 1, d, next_trend, cache);
+        }
+    }
+    cache[cache_index] = result;
+    return result;
+}
+
+/// <summary>
+ /// Leet code #3869. Count Fancy Numbers in a Range
+ /// 
+ /// Hard
+ ///
+ /// You are given two integers l and r.
+ ///
+ /// An integer is called good if its digits form a strictly monotone 
+ /// sequence, meaning the digits are strictly increasing or strictly 
+ /// decreasing.All single - digit integers are considered good.
+ ///
+ /// An integer is called fancy if it is good, or if the sum of its digits 
+ /// is good.
+ ///
+ /// Return an integer representing the number of fancy integers in the 
+ /// range[l, r](inclusive).
+ ///
+ /// A sequence is said to be strictly increasing if each element is 
+ /// strictly greater than its previous one(if exists).
+ ///
+ /// A sequence is said to be strictly decreasing if each element is 
+ /// strictly less than its previous one(if exists).
+ ///
+ /// Example 1:
+ /// Input: l = 8, r = 10
+ /// Output : 3
+ /// Explanation :
+ /// 8 and 9 are single - digit integers, so they are good and therefore 
+ /// fancy.
+ /// 10 has digits[1, 0], which form a strictly decreasing sequence, so 10 
+ /// is good and thus fancy.
+ /// Therefore, the answer is 3.
+ ///
+ /// Example 2:
+ /// Input: l = 12340, r = 12341
+ /// Output : 1
+ /// Explanation :
+ /// 12340
+ /// 12340 is not good because[1, 2, 3, 4, 0] is not strictly monotone.
+ /// The digit sum is 1 + 2 + 3 + 4 + 0 = 10.
+ /// 10 is good as it has digits[1, 0], which is strictly decreasing.
+ /// Therefore, 12340 is fancy.
+ /// 12341
+ /// 12341 is not good because[1, 2, 3, 4, 1] is not strictly monotone.
+ /// The digit sum is 1 + 2 + 3 + 4 + 1 = 11.
+ /// 11 is not good as it has digits[1, 1], which is not strictly monotone.
+ /// Therefore, 12341 is not fancy.
+ /// Therefore, the answer is 1.
+ ///
+ /// Example 3:
+ /// Input: l = 123456788, r = 123456788
+ /// Output : 0
+ /// Explanation :
+ /// 123456788 is not good because its digits are not strictly monotone.
+ /// The digit sum is 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 8 = 44.
+ /// 44 is not good as it has digits[4, 4], which is not strictly monotone.
+ /// Therefore, 123456788 is not fancy.
+ /// Therefore, the answer is 0.
+ ///
+ /// Constraints:
+ /// 1. 1 <= l <= r <= 10^15
+ /// </summary>
+long long LeetCodeDFS::countFancy(long long l, long long r)
+{
+    string str_l = to_string(l-1);
+    string str_r = to_string(r);
+    vector<long long> cache1(str_r.size() * 150 * 10 * 16, -1);
+    vector<long long> cache2(str_r.size() * 150 * 10 * 16, -1);
+    long long count1  = countFancy(str_r, 1, 1, 0, 0, 0, 0, cache1);
+    long long count2 = countFancy(str_l, 1, 1, 0, 0, 0, 0, cache2);
+    return count1 - count2;
+}
 #pragma endregion

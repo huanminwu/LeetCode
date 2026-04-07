@@ -27223,5 +27223,444 @@ public:
     /// </summary>
     vector<int> makeParityAlternating(vector<int>& nums);
 
+    /// <summary>
+    /// Leet code #3861. Minimum Capacity Box 
+    /// 
+    /// Easy
+    /// 
+    /// You are given an integer array capacity, where capacity[i] represents 
+    /// the capacity of the ith box, and an integer itemSize representing the 
+    /// size of an item.
+    ///
+    /// The ith box can store the item if capacity[i] >= itemSize.
+    ///
+    /// Return an integer denoting the index of the box with the minimum 
+    /// capacity that can store the item.If multiple such boxes exist, return 
+    /// the smallest index.
+    ///
+    /// If no box can store the item, return -1.
+    ///
+    ///
+    /// Example 1:
+    /// Input: capacity = [1, 5, 3, 7], itemSize = 3
+    /// Output : 2
+    /// Explanation :
+    /// The box at index 2 has a capacity of 3, which is the minimum capacity 
+    /// that can store the item.Thus, the answer is 2.
+    //
+    /// Example 2 :
+    /// Input : capacity = [3, 5, 4, 3], itemSize = 2
+    /// Output : 0
+    /// Explanation :
+    /// The minimum capacity that can store the item is 3, and it appears at 
+    /// indices 0 and 3. Thus, the answer is 0.
+    ///
+    /// Example 3 :
+    /// Input : capacity = [4], itemSize = 5
+    /// Output : -1
+    /// Explanation :
+    /// No box has enough capacity to store the item, so the answer is - 1.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= capacity.length <= 100
+    /// 2. 1 <= capacity[i] <= 100
+    /// 3. 1 <= itemSize <= 100
+    /// </summary>
+    int minimumIndex(vector<int>& capacity, int itemSize);
+
+    /// <summary>
+    /// Leet code #3862. Find the Smallest Balanced Index 
+    /// 
+    /// Medium
+    ///
+    /// You are given an integer array nums.
+    ///
+    /// An index i is balanced if the sum of elements strictly to the left of 
+    /// i equals the product of elements strictly to the right of i.
+    ///
+    /// If there are no elements to the left, the sum is considered as 0. 
+    /// Similarly, if there are no elements to the right, the product is 
+    /// considered as 1.
+    /// Return an integer denoting the smallest balanced index.If no balanced 
+    /// index exists, return -1.
+    ///
+    /// Example 1:
+    /// Input: nums = [2, 1, 2]
+    /// Output : 1
+    /// Explanation :
+    /// For index i = 1 :
+    /// Left sum = nums[0] = 2
+    /// Right product = nums[2] = 2
+    /// Since the left sum equals the right product, index 1 is balanced.
+    /// No smaller index satisfies the condition, so the answer is 1.
+    ///
+    /// Example 2:
+    /// Input: nums = [2, 8, 2, 2, 5]
+    /// Output : 2
+    /// Explanation :
+    /// For index i = 2 :
+    /// Left sum = 2 + 8 = 10
+    /// Right product = 2 * 5 = 10
+    /// Since the left sum equals the right product, index 2 is balanced.
+    /// No smaller index satisfies the condition, so the answer is 2.
+    ///
+    /// Example 3:
+    /// Input: nums = [1]
+    /// Output : -1
+    /// Explanation :
+    /// For index i = 0 :
+    /// The left side is empty, so the left sum is 0.
+    /// The right side is empty, so the right product is 1.
+    /// Since the left sum does not equal the right product, index 0 is not 
+    /// balanced.
+    /// Therefore, no balanced index exists and the answer is - 1.
+    ///
+    /// Constraints :
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9 
+    /// </summary>
+    int smallestBalancedIndex(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #3865. Reverse K Subarrays 
+    /// 
+    /// Medium
+    ///
+    /// You are given an integer array nums of length n and an integer k.
+    ///
+    /// You must partition the array into k contiguous subarrays of equal 
+    /// length and reverse each subarray.
+    ///
+    /// It is guaranteed that n is divisible by k.
+    ///
+    /// Return the resulting array after performing the above operation.
+    ///
+    /// Example 1:
+    /// Input: nums = [1, 2, 4, 3, 5, 6], k = 3
+    /// Output : [2, 1, 3, 4, 6, 5]
+    /// Explanation :
+    /// The array is partitioned into k = 3 subarrays : [1, 2] , [4, 3], 
+    /// and [5, 6].
+    /// After reversing each subarray : [2, 1] , [3, 4], and [6, 5].
+    /// Combining them gives the final array[2, 1, 3, 4, 6, 5].
+    ///
+    /// Example 2 :
+    /// Input : nums = [5, 4, 4, 2], k = 1
+    /// Output : [2, 4, 4, 5]
+    /// Explanation :
+    /// The array is partitioned into k = 1 subarray : [5, 4, 4, 2] .
+    /// Reversing it produces[2, 4, 4, 5], which is the final array.
+    ///
+    /// Constraints :
+    /// 1. 1 <= n == nums.length <= 1000
+    /// 2. 1 <= nums[i] <= 1000
+    /// 3. 1 <= k <= n
+    /// 4.n is divisible by k.
+    /// </summary>
+    vector<int> reverseSubarrays(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet code #3866. First Unique Even Element
+    /// 
+    /// Easy
+    ///
+    /// You are given an integer array nums.
+    ///
+    /// Return an integer denoting the first even integer(earliest by array 
+    /// index) that appears exactly once in nums.If no such integer exists, 
+    /// return -1.
+    ///
+    /// An integer x is considered even if it is divisible by 2.
+    ///
+    /// Example 1:
+    /// Input: nums = [3, 4, 2, 5, 4, 6]
+    /// Output : 2
+    /// Explanation :
+    /// Both 2 and 6 are even and they appear exactly once.Since 2 occurs 
+    /// first in the array, the answer is 2.
+    ///
+    /// Example 2 :
+    /// Input : nums = [4, 4]
+    /// Output : -1
+    /// Explanation :
+    /// No even integer appears exactly once, so return -1.
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. 1 <= nums[i] <= 100
+    /// </summary>
+    int firstUniqueEven(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #3872. Longest Arithmetic Sequence After Changing At Most 
+    ///                  One Element
+    ///
+    /// Medium
+    /// 
+    /// You are given an integer array nums.
+    ///
+    /// A subarray is arithmetic if the difference between consecutive 
+    /// elements in the subarray is constant.
+    ///
+    /// You can replace at most one element in nums with any integer.Then, you
+    /// select an arithmetic subarray from nums.
+    ///
+    /// Return an integer denoting the maximum length of the arithmetic 
+    /// subarray you can select.
+    ///
+    /// Example 1:
+    /// Input: nums = [9, 7, 5, 10, 1]
+    /// Output : 5
+    /// Explanation :
+    /// Replace nums[3] = 10 with 3. The array becomes[9, 7, 5, 3, 1].
+    /// Select the subarray[9, 7, 5, 3, 1], which is arithmetic because 
+    /// consecutive elements have a common difference of - 2.
+    ///
+    /// Example 2 :
+    /// Input : nums = [1, 2, 6, 7]
+    /// Output : 3
+    /// Explanation :
+    /// Replace nums[0] = 1 with - 2. The array becomes[-2, 2, 6, 7].
+    /// Select the subarray[-2, 2, 6, 7], which is arithmetic because 
+    /// consecutive elements have a common difference of 4.
+    ///
+    /// Constraints :
+    /// 1. 4 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^5
+    /// </summary>
+    int longestArithmetic(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #3875. Construct Uniform Parity Array I
+    ///
+    /// Easy
+    /// 
+    /// You are given an array nums1 of n distinct integers.
+    ///
+    /// You want to construct another array nums2 of length n such that the 
+    /// elements in nums2 are either all odd or all even.
+    ///
+    /// For each index i, you must choose exactly one of the following
+    /// (in any order) :
+    ///
+    /// nums2[i] = nums1[i]
+    /// nums2[i] = nums1[i] - nums1[j], for an index j != i
+    /// Return true if it is possible to construct such an array, otherwise, 
+    /// return false.
+    ///
+    /// Example 1:
+    /// Input: nums1 = [2, 3]
+    /// Output : true
+    /// Explanation :
+    /// Choose nums2[0] = nums1[0] - nums1[1] = 2 - 3 = -1.
+    /// Choose nums2[1] = nums1[1] = 3.
+    /// nums2 = [-1, 3], and both elements are odd.Thus, the answer is true?.
+    ///
+    /// Example 2 :
+    /// Input : nums1 = [4, 6]
+    /// Output : true
+    /// Explanation : 
+    /// Choose nums2[0] = nums1[0] = 4.
+    /// Choose nums2[1] = nums1[1] = 6.
+    /// nums2 = [4, 6], and all elements are even.Thus, the answer is true.
+    ///
+    /// Constraints :
+    /// 1. 1 <= n == nums1.length <= 100
+    /// 2. 1 <= nums1[i] <= 100
+    /// </summary>
+    bool uniformArray(vector<int>& nums1);
+
+    /// <summary>
+    /// Leet code #3876. Construct Uniform Parity Array II
+    ///
+    /// Medium
+    ///
+    /// You are given an array nums1 of n distinct integers.
+    ///
+    /// You want to construct another array nums2 of length n such that the 
+    /// elements in nums2 are either all odd or all even.
+    ///
+    /// For each index i, you must choose exactly one of the following 
+    /// (in any order) :
+    ///
+    /// nums2[i] = nums1[i]
+    /// nums2[i] = nums1[i] - nums1[j], for an index j != i, 
+    /// such that nums1[i] - nums1[j] >= 1
+    /// Return true if it is possible to construct such an array, otherwise 
+    /// return false.
+    ///
+    /// Example 1:
+    /// Input: nums1 = [1, 4, 7]
+    /// Output : true
+    /// Explanation : 
+    /// Set nums2[0] = nums1[0] = 1.
+    /// Set nums2[1] = nums1[1] - nums1[0] = 4 - 1 = 3.
+    /// Set nums2[2] = nums1[2] = 7.
+    /// nums2 = [1, 3, 7], and all elements are odd.Thus, the answer is true.
+    /// 
+    /// Example 2:
+    /// Input: nums1 = [2, 3]
+    /// Output : false
+    /// Explanation :
+    /// It is not possible to construct nums2 such that all elements have the 
+    /// same parity.Thus, the answer is false.
+    ///
+    /// Example 3 :
+    /// Input : nums1 = [4, 6]
+    /// Output : true
+    /// Explanation :
+    /// Set nums2[0] = nums1[0] = 4.
+    /// Set nums2[1] = nums1[1] = 6.
+    /// nums2 = [4, 6], and all elements are even.Thus, the answer is true.
+    ///
+    /// Constraints :
+    /// 1. 1 <= n == nums1.length <= 10^5
+    /// 2. 1 <= nums1[i] <= 10^9
+    /// 3. nums1 consists of distinct integers.
+    /// </summary>
+    bool uniformArrayII(vector<int>& nums1);
+
+    /// <summary>
+    /// Leet code #3874. Valid Subarrays With Exactly One Peak
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums of length n and an integer k.
+    /// 
+    /// An index i is a peak if:
+    ///
+    /// 0 < i < n - 1
+    /// nums[i] > nums[i - 1] and nums[i] > nums[i + 1]
+    /// A subarray[l, r] is valid if :
+    ///     It contains exactly one peak at index i from nums
+    ///     i - l <= k and r - i <= k
+    /// Return an integer denoting the number of valid subarrays in nums.
+    ///
+    /// A subarray is a contiguous non - empty sequence of elements within 
+    /// an array.
+    ///
+    /// Example 1:
+    /// Input: nums = [1, 3, 2], k = 1
+    /// Output : 4
+    /// Explanation :
+    /// Index i = 1 is a peak because nums[1] = 3 is greater than nums[0] = 1 
+    /// and nums[2] = 2.
+    /// Any valid subarray must include index 1, and the distance from the peak 
+    /// to both ends of the subarray must not exceed k = 1.
+    /// The valid subarrays are[3], [1, 3], [3, 2], and [1, 3, 2], so the 
+    /// answer is 4.
+    ///
+    /// Example 2 :
+    /// Input : nums = [7, 8, 9], k = 2
+    /// Output : 0
+    /// Explanation :
+    /// There is no index i such that nums[i] is greater than both nums[i - 1] 
+    /// and nums[i + 1].
+    /// Therefore, the array contains no peak.Thus, the number of valid 
+    /// subarrays is 0.
+    /// 
+    /// Example 3 :
+    /// Input : nums = [4, 3, 5, 1], k = 2
+    /// Output : 6
+    /// Explanation :
+    /// Index i = 2 is a peak because nums[2] = 5 is greater than nums[1] = 3 
+    /// and nums[3] = 1.
+    /// Any valid subarray must contain this peak, and the distance from the 
+    /// peak to both ends of the subarray must not exceed k = 2.
+    /// The valid subarrays are[5], [3, 5], [5, 1], [3, 5, 1], [4, 3, 5], 
+    /// and [4, 3, 5, 1], so the answer is 6.
+    ///
+    ///  Constraints :
+    /// 1. 1 <= n == nums.length <= 10^5
+    /// 2. -10^5 <= nums[i] <= 10^5
+    /// 3. 1 <= k <= n
+    /// </summary>
+    long long validSubarrays(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet code #3880. Minimum Absolute Difference Between Two Values
+    ///
+    /// Easy
+    /// 
+    /// You are given an integer array nums consisting only of 0, 1, and 2.
+    ///
+    /// A pair of indices(i, j) is called valid if nums[i] == 1 and 
+    /// nums[j] == 2.
+    ///
+    /// Return the minimum absolute difference between i and j among all 
+    /// valid pairs.If no valid pair exists, return -1.
+    ///
+    /// The absolute difference between indices i and j is defined as 
+    /// abs(i - j).
+    ///
+    /// Example 1:
+    /// Input: nums = [1, 0, 0, 2, 0, 1]
+    /// Output : 2
+    /// Explanation :
+    /// The valid pairs are :
+    /// (0, 3) which has absolute difference of abs(0 - 3) = 3.
+    /// (5, 3) which has absolute difference of abs(5 - 3) = 2.
+    /// Thus, the answer is 2.
+    ///
+    /// Example 2:
+    /// Input: nums = [1, 0, 1, 0]
+    /// Output : -1
+    /// Explanation :   
+    /// There are no valid pairs in the array, thus the answer is - 1.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. 0 <= nums[i] <= 2
+    /// </summary>
+    int minAbsoluteDifference(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #3886. Sum of Sortable Integers
+    ///
+    /// Hard
+    /// 
+    /// You are given an integer array nums of length n.
+    ///
+    /// An integer k is called sortable if k divides n and you can sort nums 
+    /// in non - decreasing order by sequentially performing the following 
+    /// operations :
+    ///
+    /// Partition nums into consecutive subarrays of length k.
+    /// Cyclically rotate each subarray independently any number of times to 
+    /// the left or to the right.
+    /// Return an integer denoting the sum of all possible sortable integers k.
+    ///
+    /// Example 1:
+    /// Input: nums = [3, 1, 2]
+    /// Output : 3
+    /// Explanation :
+    /// For n = 3, possible divisors are 1 and 3.
+    /// For k = 1 : each subarray has one element.No rotation can sort the array.
+    /// For k = 3 : the single subarray[3, 1, 2] can be rotated once to 
+    /// produce[1, 2, 3], which is sorted.
+    /// Only k = 3 is sortable.Hence, the answer is 3.
+    ///
+    /// Example 2 :
+    /// Input : nums = [7, 6, 5]
+    /// Output : 0
+    /// Explanation :
+    /// For n = 3, possible divisors are 1 and 3.
+    /// For k = 1 : each subarray has one element.No rotation can sort the array.
+    /// For k = 3 : the single subarray[7, 6, 5] cannot be rotated into 
+    /// non - decreasing order.
+    /// No k is sortable.Hence, the answer is 0.
+    ///
+    /// Example 3 :
+    /// Input : nums = [5, 8]
+    /// Output : 3
+    /// Explanation : 
+    /// For n = 2, possible divisors are 1 and 2.
+    /// Since[5, 8] is already sorted, every divisor is sortable.Hence, the 
+    /// answer is 1 + 2 = 3.
+    ///
+    /// Constraints :
+    /// 1. 1 <= n == nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^5
+    /// </summary>
+    int sortableIntegers(vector<int>& nums);
 };
 #endif  // LeetCodeArray_H

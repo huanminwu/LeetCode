@@ -7202,7 +7202,7 @@ int LeetCodeHashtable::prefixConnected(vector<string>& words, int k)
     int result = 0;
     for (auto itr : prefix_count)
     {
-        if (itr.first.size() < k) continue;
+        if (itr.first.size() < (size_t)k) continue;
         if (itr.second > 1) result++;
     }
     return result;
@@ -7421,5 +7421,76 @@ vector<int> LeetCodeHashtable::minDistinctFreqPair(vector<int>& nums)
     {
         return { -1, -1 };
     }
+}
+
+/// <summary>
+/// Leet Code 3868. Minimum Cost to Equalize Arrays Using Swaps
+/// 
+/// Medium
+///
+/// You are given two integer arrays nums1 and nums2 of size n.
+/// 
+/// You can perform the following two operations any number of times on 
+/// these two arrays :
+///
+/// Swap within the same array : Choose two indices i and j.Then, choose 
+/// either to swap nums1[i] and nums1[j], or nums2[i] and nums2[j].
+/// This operation is free of charge.
+/// Swap between two arrays : Choose an index i.Then, swap nums1[i] and 
+/// nums2[i].This operation incurs a cost of 1.
+/// Return an integer denoting the minimum cost to make nums1 and nums2 
+/// identical.If this is not possible, return -1.
+///
+/// Example 1 :
+/// Input : nums1 = [10, 20], nums2 = [20, 10]
+/// Output : 0
+/// Explanation :
+/// Swap nums2[0] = 20 and nums2[1] = 10.
+/// nums2 becomes[10, 20].
+/// This operation is free of charge.
+/// nums1 and nums2 are now identical.The cost is 0.
+///
+/// Example 2:
+/// Input: nums1 = [10, 10], nums2 = [20, 20]
+/// Output : 1
+/// Explanation :
+/// Swap nums1[0] = 10 and nums2[0] = 20.
+/// nums1 becomes[20, 10].
+/// nums2 becomes[10, 20].
+/// This operation costs 1.
+/// Swap nums2[0] = 10 and nums2[1] = 20.
+/// nums2 becomes[20, 10].
+/// This operation is free of charge.
+/// nums1 and nums2 are now identical.The cost is 1.
+///
+/// Example 3:
+/// Input: nums1 = [10, 20], nums2 = [30, 40]
+/// Output : -1
+/// Explanation :
+/// It is impossible to make the two arrays identical.Therefore, 
+/// the answer is - 1.
+/// 
+/// Constraints:
+/// 1. 2 <= n == nums1.length == nums2.length <= 8 * 104
+/// 2. 1 <= nums1[i], nums2[i] <= 8 * 104
+/// </summary>
+int LeetCodeHashtable::minCost(vector<int>& nums1, vector<int>& nums2)
+{
+    unordered_map<int, int> num_count1, num_count2;
+    for (size_t i = 0; i < nums1.size(); i++)
+    {
+        num_count1[nums1[i]]++;
+        num_count1[nums2[i]]--;
+    }
+    int cost = 0;
+    for (auto itr : num_count1)
+    {
+        if (abs(itr.second) % 2 != 0)
+        {
+            return -1;
+        }
+        cost += abs(itr.second) / 2;
+    }
+    return cost / 2;
 }
 #pragma endregion

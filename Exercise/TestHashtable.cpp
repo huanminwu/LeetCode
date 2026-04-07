@@ -2454,6 +2454,32 @@ void TestLeetCode3852(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3868(void)
+{
+    Logger::WriteMessage("Test Leet Code 3868");
+    LeetCodeHashtable leetCode;
+    vector<int> nums1 = { 10, 20 };
+    vector<int> nums2 = { 20, 10 };
+    int result = leetCode.minCost(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 10, 10 };
+    nums2 = { 20, 20 };
+    result = leetCode.minCost(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums1 = { 10, 10 };
+    nums2 = { 0, 40 };
+    result = leetCode.minCost(nums1, nums2);
+    Logger::WriteMessage(nums1);
+    Logger::WriteMessage(nums2);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
     TestLeetCode3852();

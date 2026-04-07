@@ -1165,8 +1165,29 @@ void TestLeetCode3859(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3884(void)
+{
+    Logger::WriteMessage("Test Leet Code 3884");
+    LeetCodeTwoPointer leetCode;
+    string s = "abcacbd";
+    int result = leetCode.firstMatchingIndex(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "abc";
+    result = leetCode.firstMatchingIndex(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+    
+    s = "abcdab";
+    result = leetCode.firstMatchingIndex(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode3884();
     TestLeetCode3859();
     TestLeetCode3853();
     TestLeetCode3835();

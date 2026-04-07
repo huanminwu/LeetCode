@@ -1374,7 +1374,7 @@ int LeetCodeMath::countNumbersWithUniqueDigits(int n)
 /// Example 2:
 /// Input:
 /// 11
-///	Output:
+/// Output:
 /// 0
 /// Explanation:
 /// The 11th digit of the sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ... is a 0, which is part of the number 10.
@@ -1444,7 +1444,7 @@ vector<int> LeetCodeMath::lexicalOrder(int n)
 /// 1 is read off as "one 1" or 11. 
 /// 11 is read off as "two 1s" or 21.
 /// 21 is read off as "one 2, then one 1" or 1211.
-/// Given an integer n, generate the nth sequence.	
+/// Given an integer n, generate the nth sequence. 
 /// Note: The sequence of integers will be represented as a string. 
 /// </summary>
 string LeetCodeMath::countAndSay(int n)
@@ -1559,7 +1559,7 @@ int LeetCodeMath::findContentChildren(vector<int>& g, vector<int>& s)
 /// 
 /// Example 2:
 /// Input: x = 2, y = 6, z = 5
-/// Output: False 	
+/// Output: False  
 /// </summary>
 bool LeetCodeMath::canMeasureWater(int x, int y, int z)
 {
@@ -1746,7 +1746,7 @@ int LeetCodeMath::minMoves2(vector<int>& nums)
 /// Example:
 /// A = [4, 3, 2, 6]
 /// F(0) = (0 * 4) + (1 * 3) + (2 * 2) + (3 * 6) = 0 + 3 + 4 + 18 = 25
-///	F(1) = (0 * 6) + (1 * 4) + (2 * 3) + (3 * 2) = 0 + 4 + 6 + 6 = 16
+/// F(1) = (0 * 6) + (1 * 4) + (2 * 3) + (3 * 2) = 0 + 4 + 6 + 6 = 16
 /// F(2) = (0 * 2) + (1 * 6) + (2 * 4) + (3 * 3) = 0 + 6 + 8 + 9 = 23
 /// F(3) = (0 * 3) + (1 * 2) + (2 * 6) + (3 * 4) = 0 + 2 + 12 + 12 = 26
 /// So the maximum value of F(0), F(1), F(2), F(3) is F(3) = 26.
@@ -2112,7 +2112,7 @@ vector<int> LeetCodeMath::sortTransformedArray(vector<int>& nums, int a, int b, 
 ///    given target area.
 /// 2. The width W should not be larger than the length L, which 
 ///    means L >= W.
-///	3. The difference between length L and width W should be as small as 
+/// 3. The difference between length L and width W should be as small as 
 ///   possible.
 /// 
 /// You need to output the length L and the width W of the web page you 
@@ -2273,7 +2273,7 @@ void LeetCodeMath::parseComplexNumber(string str, pair<int, int> &complex)
 /// The input strings will not have extra blank.
 /// The input strings will be given in the form of a+bi, where the integer 
 /// a and b will both belong to the range of [-100, 100]. And the output 
-/// should be also in this form.	 
+/// should be also in this form.  
 /// </summary>
 string LeetCodeMath::complexNumberMultiply(string a, string b)
 {
@@ -6248,7 +6248,7 @@ int LeetCodeMath::findNumbers(vector<int>& nums)
 /// <summary>
 /// Leetcode #1304. Find N Unique Integers Sum up to Zero
 ///
-/// Easy	
+/// Easy 
 ///
 /// Given an integer n, return any array containing n unique integers 
 /// such that they add up to 0.
@@ -12859,7 +12859,7 @@ int LeetCodeMath::countOperations(int num1, int num2)
 /// Explanation:
 /// The 14 integers less than or equal to 30 whose digit sums are even are
 /// 2, 4, 6, 8, 11, 13, 15, 17, 19, 20, 22, 24, 26, and 28.
-///	
+/// 
 /// Constraints:
 /// 1. 1 <= num <= 1000
 /// </summary>
@@ -15498,7 +15498,7 @@ int LeetCodeMath::countDistinctStrings(string s, int k)
 /// Leet Code 2469. Convert the Temperature
 /// 
 /// Easy
-///	
+/// 
 /// You are given a non-negative floating point number rounded to two 
 /// decimal places celsius, that denotes the temperature in Celsius.
 ///
@@ -15541,7 +15541,7 @@ vector<double> LeetCodeMath::convertTemperature(double celsius)
 /// Leet Code 2481. Minimum Cuts to Divide a Circle
 /// 
 /// Easy
-///	
+/// 
 /// A valid cut in a circle can be:
 ///
 /// A cut that is represented by a straight line that touches two points 
@@ -15584,7 +15584,7 @@ int LeetCodeMath::numberOfCuts(int n)
 /// Leet Code 2485. Find the Pivot Integer
 /// 
 /// Easy
-///	
+/// 
 /// Given a positive integer n, find the pivot integer x such that:
 ///  
 /// The sum of all elements between 1 and x inclusively equals the sum 
@@ -15625,7 +15625,7 @@ int LeetCodeMath::pivotInteger(int n)
 ///                 Factors
 /// 
 /// Medium
-///	
+/// 
 /// You are given a positive integer n.
 ///
 /// Continuously replace n with the sum of its prime factors.
@@ -15711,7 +15711,7 @@ long long LeetCodeMath::factorial(long long n, long long M)
 /// Leet Code 2514. Count Anagrams
 /// 
 /// Hard
-///	
+/// 
 /// You are given a string s containing one or more words. Every 
 /// consecutive pair of words is separated by a single space ' '.
 ///
@@ -15868,7 +15868,7 @@ int LeetCodeMath::idealArrays(int n, int maxValue)
 /// Leet Code 2523. Closest Prime Numbers in Range
 /// 
 /// Medium
-///	
+/// 
 /// Given two positive integers left and right, find the two integers num1 
 /// and num2 such that:
 ///
@@ -15940,7 +15940,7 @@ vector<int> LeetCodeMath::closestPrimes(int left, int right)
 /// Leet Code 2520. Count the Digits That Divide a Number
 /// 
 /// Easy
-///	
+/// 
 /// Given an integer num, return the number of digits in num that divide 
 /// num.
 ///
@@ -15985,7 +15985,7 @@ int LeetCodeMath::countDigits(int num)
 /// Leet Code 2521. Distinct Prime Factors of Product of Array
 /// 
 /// Medium
-///	
+/// 
 /// Given an array of positive integers nums, return the number of 
 /// distinct prime factors in the product of the elements of nums.
 ///
@@ -16039,7 +16039,7 @@ int LeetCodeMath::distinctPrimeFactors(vector<int>& nums)
 /// Leet Code 2525. Categorize Box According to Criteria
 /// 
 /// Easy
-///	
+/// 
 /// Given four integers length, width, height, and mass, representing 
 /// the dimensions and mass of a box, respectively, return a string 
 /// representing the category of the box.
@@ -16114,7 +16114,7 @@ string LeetCodeMath::categorizeBox(int length, int width, int height, int mass)
 /// Leet Code 2529. Maximum Count of Positive Integer and Negative Integer
 /// 
 /// Easy
-///	
+/// 
 /// Given an array nums sorted in non-decreasing order, return the maximum 
 /// between the number of positive integers and the number of negative 
 /// integers. 
@@ -16162,7 +16162,7 @@ int LeetCodeMath::maximumCount(vector<int>& nums)
 /// Leet Code 2524. Maximum Frequency Score of a Subarray
 /// 
 /// Hard
-///	
+/// 
 /// You are given an integer array nums and a positive integer k.
 /// 
 /// The frequency score of an array is the sum of the distinct values in 
@@ -16238,7 +16238,7 @@ int LeetCodeMath::maxFrequencyScore(vector<int>& nums, int k)
 /// Leet Code 2543. Check if Point Is Reachable
 /// 
 /// Hard
-///	
+/// 
 /// There exists an infinitely large grid. You are currently at 
 /// point (1, 1), and you need to reach the point (targetX, targetY) 
 /// using a finite number of steps.
@@ -16293,7 +16293,7 @@ bool LeetCodeMath::isReachable(int targetX, int targetY)
 /// Leet Code 2544. Alternating Digit Sum
 /// 
 /// Easy
-///	
+/// 
 /// You are given a positive integer n. Each digit of n has a sign 
 /// according to the following rules:
 ///
@@ -16341,7 +16341,7 @@ int LeetCodeMath::alternateDigitSum(int n)
 /// Leet Code 2539. Count the Number of Good Subsequences
 /// 
 /// Medium
-///	
+/// 
 /// A subsequence of a string is good if it is not empty and the frequency 
 /// of each one of its characters is the same.
 ///
@@ -16408,7 +16408,7 @@ int LeetCodeMath::countGoodSubsequences(string s)
 /// Leet Code 2549. Count Distinct Numbers on Board
 /// 
 /// Easy
-///	
+/// 
 /// You are given a positive integer n, that is initially placed on a 
 /// board. Every day, for 109 days, you perform the following procedure:
 ///
@@ -16454,7 +16454,7 @@ int LeetCodeMath::distinctIntegers(int n)
 /// Leet Code 2550. Count Collisions of Monkeys on a Polygon
 /// 
 /// Medium
-///	
+/// 
 /// There is a regular convex polygon with n vertices. The vertices are 
 /// labeled from 0 to n - 1 in a clockwise direction, and each vertex 
 /// has exactly one monkey. The following figure shows a convex polygon 
@@ -16508,7 +16508,7 @@ int LeetCodeMath::monkeyMove(int n)
 /// Leet Code 2553. Separate the Digits in an Array
 /// 
 /// Easy
-///	
+/// 
 /// Given an array of positive integers nums, return an array answer that 
 /// consists of the digits of each integer in nums after separating them 
 /// in the same order they appear in nums.
@@ -16559,7 +16559,7 @@ vector<int> LeetCodeMath::separateDigits(vector<int>& nums)
 /// Leet Code 2554. Maximum Number of Integers to Choose From a Range I
 /// 
 /// Medium
-///	
+/// 
 /// You are given an integer array banned and two integers n and maxSum. 
 /// You are choosing some number of integers following the below rules:
 ///
@@ -16618,7 +16618,7 @@ int LeetCodeMath::maxCount(vector<int>& banned, int n, int maxSum)
 /// Leet Code 2557. Maximum Number of Integers to Choose From a Range II
 /// 
 /// Medium
-///	
+/// 
 /// You are given an integer array banned and two integers n and maxSum. 
 /// You are choosing some number of integers following the below rules:
 ///
@@ -16689,7 +16689,7 @@ int LeetCodeMath::maxCount(vector<int>& banned, int n, long long maxSum)
 /// Leet Code 2566. Maximum Difference by Remapping a Digit
 /// 
 /// Easy
-///	
+/// 
 /// You are given an integer num. You know that Danny Mittal will sneakily 
 /// remap one of the 10 possible digits (0 to 9) to another digit.
 ///
@@ -16753,7 +16753,7 @@ int LeetCodeMath::minMaxDifference(int num)
 /// Leet Code 2575. Find the Divisibility Array of a String
 /// 
 /// Medium
-///	
+/// 
 /// You are given a 0-indexed string word of length n consisting of 
 /// digits, and a positive integer m.
 ///
@@ -16801,7 +16801,7 @@ vector<int> LeetCodeMath::divisibilityArray(string word, int m)
 /// Leet Code 2579. Count Total Number of Colored Cells
 /// 
 /// Medium
-///	
+/// 
 /// There exists an infinitely large two-dimensional grid of uncolored 
 /// unit cells. You are given a positive integer n, indicating that you 
 /// must do the following routine for n minutes:
@@ -16838,7 +16838,7 @@ long long LeetCodeMath::coloredCells(int n)
 /// Leet Code 2578. Split With Minimum Sum
 /// 
 /// Easy
-///	
+/// 
 /// Given a positive integer num, split it into two non-negative integers 
 /// num1 and num2 such that:
 ///
@@ -16889,7 +16889,7 @@ int LeetCodeMath::splitNum(int num)
 /// Leet Code 2582. Pass the Pillow
 /// 
 /// Easy
-///	
+/// 
 /// There are n people standing in a line labeled from 1 to n. The first 
 /// person in the line is holding a pillow initially. Every second, the 
 /// person holding the pillow passes it to the next person standing in 
@@ -16939,7 +16939,7 @@ int LeetCodeMath::passThePillow(int n, int time)
 /// Leet Code 2584. Split the Array to Make Coprime Products
 /// 
 /// Hard
-///	
+/// 
 /// You are given a 0-indexed integer array nums of length n.
 ///
 /// A split at an index i where 0 <= i <= n - 2 is called valid if the 
@@ -17024,7 +17024,7 @@ int LeetCodeMath::findValidSplit(vector<int>& nums)
 /// Leet Code 2591. Distribute Money to Maximum Children
 /// 
 /// Easy
-///	
+/// 
 /// You are given an integer money denoting the amount of money 
 /// (in dollars) that you have and another integer children denoting 
 /// the number of children that you must distribute the money to.
@@ -17099,7 +17099,7 @@ int LeetCodeMath::distMoney(int money, int children)
 /// Leet Code 2595. Number of Even and Odd Bits
 /// 
 /// Easy
-///	
+/// 
 /// You are given a positive integer n.
 /// Let even denote the number of even indices in the binary 
 /// representation of n (0-indexed) with value 1.
@@ -17143,7 +17143,7 @@ vector<int> LeetCodeMath::evenOddBit(int n)
 /// Leet Code 2598. Smallest Missing Non-negative Integer After Operations
 /// 
 /// Medium
-///	
+/// 
 /// You are given a 0-indexed integer array nums and an integer value.
 ///
 /// In one operation, you can add or subtract value from any element of 
@@ -17209,7 +17209,7 @@ int LeetCodeMath::findSmallestInteger(vector<int>& nums, int value)
 /// Leet Code 2600. K Items With the Maximum Sum
 /// 
 /// Easy
-///	
+/// 
 /// There is a bag that consists of items, each item has a number 1, 0, 
 /// or -1 written on it.
 ///
@@ -17258,7 +17258,7 @@ int LeetCodeMath::kItemsWithMaximumSum(int numOnes, int numZeros, int numNegOnes
 /// Leet Code 2601. Prime Subtraction Operation
 /// 
 /// Medium
-///	
+/// 
 /// You are given a 0-indexed integer array nums of length n.
 ///
 /// You can perform the following operation as many times as you want:
@@ -17330,7 +17330,7 @@ bool LeetCodeMath::primeSubOperation(vector<int>& nums)
 /// Leet Code 2605. Form Smallest Number From Two Digit Arrays
 /// 
 /// Easy
-///	
+/// 
 /// Given two arrays of unique digits nums1 and nums2, return the smallest 
 /// number that contains at least one digit from each array.
 ///
@@ -17374,7 +17374,7 @@ int LeetCodeMath::minNumber(vector<int>& nums1, vector<int>& nums2)
 /// Leet Code 2614. Prime In Diagonal
 /// 
 /// Easy
-///	
+/// 
 /// You are given a 0-indexed two-dimensional integer array nums.
 ///
 /// Return the largest prime number that lies on at least one of the 
@@ -17433,7 +17433,7 @@ int LeetCodeMath::diagonalPrime(vector<vector<int>>& nums)
 /// Leet Code 2644. Find the Maximum Divisibility Score
 /// 
 /// Easy
-///	
+/// 
 /// You are given two 0-indexed integer arrays nums and divisors.
 /// 
 /// The divisibility score of divisors[i] is the number of indices j 
@@ -17514,7 +17514,7 @@ int LeetCodeMath::maxDivScore(vector<int>& nums, vector<int>& divisors)
 /// Leet Code 2647. Color the Triangle Red
 /// 
 /// Hard
-///	
+/// 
 /// You are given an integer n. Consider an equilateral triangle of side 
 /// length n, broken up into n2 unit equilateral triangles. The triangle 
 /// has n 1-indexed rows where the ith row has 2i - 1 unit equilateral 
@@ -17602,7 +17602,7 @@ vector<vector<int>> LeetCodeMath::colorRed(int n)
 /// Leet Code 2651. Calculate Delayed Arrival Time
 /// 
 /// Easy
-///	
+/// 
 /// You are given a positive integer arrivalTime denoting the arrival 
 /// time of a train in hours, and another positive integer delayedTime 
 /// denoting the amount of delay in hours.
@@ -17637,7 +17637,7 @@ int LeetCodeMath::findDelayedArrivalTime(int arrivalTime, int delayedTime)
 /// Leet Code 2652. Sum Multiples
 /// 
 /// Easy
-///	
+/// 
 /// Given a positive integer n, find the sum of all integers in the range 
 /// [1, n] inclusive that are divisible by 3, 5, or 7.
 ///
@@ -17683,7 +17683,7 @@ int LeetCodeMath::sumOfMultiples(int n)
 ///                 Elements Equal to 1
 /// 
 /// Medium
-///	
+/// 
 /// You are given a 0-indexed array nums consisiting of positive integers. 
 /// You can do the following operation on the array any number of times:
 ///
@@ -17754,7 +17754,7 @@ int LeetCodeMath::minOperationsII(vector<int>& nums)
 /// Leet Code 2656. Maximum Sum With Exactly K Elements
 /// 
 /// Easy
-///	
+/// 
 /// You are given a 0-indexed integer array nums and an integer k. Your 
 /// task is to perform the following operation exactly k times in order 
 /// to maximize your score:
@@ -17807,7 +17807,7 @@ int LeetCodeMath::maximizeSum(vector<int>& nums, int k)
 /// Leet Code 2682. Find the Losers of the Circular Game
 /// 
 /// Easy
-///	
+/// 
 /// There are n friends that are playing a game. The friends are sitting 
 /// in a circle and are numbered from 1 to n in clockwise order. More 
 /// formally, moving clockwise from the ith friend brings you to the 
@@ -17903,7 +17903,7 @@ bool LeetCodeMath::punishmentNumber(string str, int sum, int pos, int target)
 /// Leet Code 2698. Find the Punishment Number of an Integer
 /// 
 /// Medium
-///	
+/// 
 /// Given a positive integer n, return the punishment number of n.
 ///
 /// The punishment number of n is defined as the sum of the squares of all 
@@ -17959,7 +17959,7 @@ int LeetCodeMath::punishmentNumber(int n)
 /// Leet Code 2706. Buy Two Chocolates
 /// 
 /// Easy
-///	
+/// 
 /// You are given an integer array prices representing the prices of 
 /// various chocolates in a store. You are also given a single integer 
 /// money, which represents your initial amount of money.
@@ -22107,35 +22107,35 @@ long long LeetCodeMath::numberOfPairsII(vector<int>& nums1, vector<int>& nums2, 
 /// Input: n = 3, k = 5
 /// Output: 1
 /// Explanation:
-/// Time elapsed	Children
-/// 0	[0, 1, 2]
-/// 1	[0, 1, 2]
-/// 2	[0, 1, 2]
-/// 3	[0, 1, 2]
-/// 4	[0, 1, 2]
-/// 5	[0, 1, 2]
+/// Time elapsed Children
+/// 0 [0, 1, 2]
+/// 1 [0, 1, 2]
+/// 2 [0, 1, 2]
+/// 3 [0, 1, 2]
+/// 4 [0, 1, 2]
+/// 5 [0, 1, 2]
 ///
 /// Example 2:
 /// Input: n = 5, k = 6
 /// Output: 2
 /// Explanation:
-/// Time elapsed	Children
-/// 0	[0, 1, 2, 3, 4]
-/// 1	[0, 1, 2, 3, 4]
-/// 2	[0, 1, 2, 3, 4]
-/// 3	[0, 1, 2, 3, 4]
-/// 4	[0, 1, 2, 3, 4]
-/// 5	[0, 1, 2, 3, 4]
-/// 6	[0, 1, 2, 3, 4]
+/// Time elapsed Children
+/// 0 [0, 1, 2, 3, 4]
+/// 1 [0, 1, 2, 3, 4]
+/// 2 [0, 1, 2, 3, 4]
+/// 3 [0, 1, 2, 3, 4]
+/// 4 [0, 1, 2, 3, 4]
+/// 5 [0, 1, 2, 3, 4]
+/// 6 [0, 1, 2, 3, 4]
 ///
 /// Example 3:
 /// Input: n = 4, k = 2
 /// Output: 2
 /// Explanation:
-/// Time elapsed	Children
-/// 0	[0, 1, 2, 3]
-/// 1	[0, 1, 2, 3]
-/// 2	[0, 1, 2, 3]
+/// Time elapsed Children
+/// 0 [0, 1, 2, 3]
+/// 1 [0, 1, 2, 3]
+/// 2 [0, 1, 2, 3]
 ///
 /// Constraints:
 /// 1. 2 <= n <= 50
@@ -22995,21 +22995,21 @@ int LeetCodeMath::nonSpecialCount(int l, int r)
 /// Input: nums = [2,1,3,5,6], k = 5, multiplier = 2
 /// Output: [8,4,6,5,6]
 /// Explanation:
-/// Operation	Result
-/// After operation 1	[2, 2, 3, 5, 6]
-/// After operation 2	[4, 2, 3, 5, 6]
-/// After operation 3	[4, 4, 3, 5, 6]
-/// After operation 4	[4, 4, 6, 5, 6]
-/// After operation 5	[8, 4, 6, 5, 6]
+/// Operation Result
+/// After operation 1 [2, 2, 3, 5, 6]
+/// After operation 2 [4, 2, 3, 5, 6]
+/// After operation 3 [4, 4, 3, 5, 6]
+/// After operation 4 [4, 4, 6, 5, 6]
+/// After operation 5 [8, 4, 6, 5, 6]
 ///
 /// Example 2:
 /// Input: nums = [1,2], k = 3, multiplier = 4
 /// Output: [16,8]
 /// Explanation:
-/// Operation	Result
-/// After operation 1	[4, 2]
-/// After operation 2	[4, 8]
-/// After operation 3	[16, 8]
+/// Operation Result
+/// After operation 1 [4, 2]
+/// After operation 2 [4, 8]
+/// After operation 3 [16, 8]
 ///
 /// Constraints:
 /// 1. 1 <= nums.length <= 100
@@ -23063,22 +23063,22 @@ vector<int> LeetCodeMath::getFinalStateI(vector<int>& nums, int k, int multiplie
 /// Input: nums = [2,1,3,5,6], k = 5, multiplier = 2
 /// Output: [8,4,6,5,6]
 /// Explanation:
-/// Operation	Result
-/// After operation 1	[2, 2, 3, 5, 6]
-/// After operation 2	[4, 2, 3, 5, 6]
-/// After operation 3	[4, 4, 3, 5, 6]
-/// After operation 4	[4, 4, 6, 5, 6]
-/// After operation 5	[8, 4, 6, 5, 6]
-/// After applying modulo	[8, 4, 6, 5, 6]
+/// Operation Result
+/// After operation 1 [2, 2, 3, 5, 6]
+/// After operation 2 [4, 2, 3, 5, 6]
+/// After operation 3 [4, 4, 3, 5, 6]
+/// After operation 4 [4, 4, 6, 5, 6]
+/// After operation 5 [8, 4, 6, 5, 6]
+/// After applying modulo [8, 4, 6, 5, 6]
 ///
 /// Example 2:
 /// Input: nums = [100000,2000], k = 2, multiplier = 1000000
 /// Output: [999999307,999999993]
 /// Explanation:
-/// Operation	Result
-/// After operation 1	[100000, 2000000000]
-/// After operation 2	[100000000000, 2000000000]
-/// After applying modulo	[999999307, 999999993]
+/// Operation Result
+/// After operation 1 [100000, 2000000000]
+/// After operation 2 [100000000000, 2000000000]
+/// After applying modulo [999999307, 999999993]
 /// 
 /// Constraints:
 /// 1. 1 <= nums.length <= 10^4
@@ -24505,14 +24505,14 @@ int LeetCodeMath::maxLength(vector<int>& nums)
 /// Output: 24
 /// Explanation:
 /// The subsequences of nums with at most 2 elements are:
-/// Subsequence	Minimum	Maximum	Sum
-/// [1]	1	1	2
-/// [2]	2	2	4
-/// [3]	3	3	6
-/// [1, 2]	1	2	3
-/// [1, 3]	1	3	4
-/// [2, 3]	2	3	5
-/// Final Total	 	 	24
+/// Subsequence Minimum Maximum Sum
+/// [1] 1 1 2
+/// [2] 2 2 4
+/// [3] 3 3 6
+/// [1, 2] 1 2 3
+/// [1, 3] 1 3 4
+/// [2, 3] 2 3 5
+/// Final Total     24
 /// The output would be 24.
 ///
 /// Example 2:
@@ -29045,6 +29045,433 @@ int LeetCodeMath::sumOfNumbers(int l, int r, int k)
     long long countSum = modPow(r - l + 1, k-1, M);
     long long result = (digitsSum * countSum % M) * allPositionSum % M;
     return (int)result;
+}
+
+/// <summary>
+/// Leet Code 3870. Count Commas in Range
+///
+/// Easy
+///
+/// You are given an integer n.
+///
+/// Return the total number of commas used when writing all integers 
+/// from[1, n](inclusive) in standard number formatting.
+///
+/// In standard formatting :
+///
+/// A comma is inserted after every three digits from the right.
+/// Numbers with fewer than 4 digits contain no commas.
+///
+/// Example 1:
+/// Input: n = 1002
+/// Output : 3
+/// Explanation :
+/// The numbers "1,000", "1,001", and "1,002" each contain one comma, 
+/// giving a total of 3.
+///
+/// Example 2 :
+/// Input : n = 998
+/// Output : 0
+/// Explanation :
+/// All numbers from 1 to 998 have fewer than four digits.Therefore, 
+/// no commas are used.
+/// Explanation :
+/// All numbers from 1 to 998 have fewer than four digits.Therefore, 
+/// no commas are used.
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^5
+/// </summary>
+int LeetCodeMath::countCommas(int n)
+{
+    int result = 0;
+    for (int i = 1000; i <= n; i *= 1000)
+    {
+        result += n - i + 1;
+    }
+    return result;
+
+}
+
+/// <summary>
+/// Leet Code 3871. Count Commas in Range II
+///
+/// Medium
+///
+/// You are given an integer n.
+/// Return the total number of commas used when writing all integers 
+/// from[1, n](inclusive) in standard number formatting.
+///
+/// In standard formatting :
+///
+/// A comma is inserted after every three digits from the right.
+/// Numbers with fewer than 4 digits contain no commas.
+///
+/// Example 1:
+/// Input: n = 1002
+/// Output : 3
+/// Explanation :
+/// The numbers "1,000", "1,001", and "1,002" each contain one comma, 
+/// giving a total of 3.
+///
+/// Example 2 :
+/// Input : n = 998
+/// Output : 0
+/// Explanation :
+/// All numbers from 1 to 998 have fewer than four digits.Therefore, no commas are used.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 10^15
+/// </summary>
+long long LeetCodeMath::countCommas(long long n)
+{
+    long long result = 0;
+    for (long long i = 1000; i <= n; i *= 1000)
+    {
+        result += n - i + 1;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3867. Sum of GCD of Formed Pairs
+///
+/// Medium
+///
+/// You are given an integer array nums of length n.
+///
+/// Construct an array prefixGcd where for each index i :
+/// Let mxi = max(nums[0], nums[1], ..., nums[i]).
+/// prefixGcd[i] = gcd(nums[i], mxi).
+/// After constructing prefixGcd :
+///
+/// Sort prefixGcd in non - decreasing order.
+/// Form pairs by taking the smallest unpaired element and the largest 
+/// unpaired element.
+/// Repeat this process until no more pairs can be formed.
+/// For each formed pair, compute the gcd of the two elements.
+/// If n is odd, the middle element in the prefixGcd array remains unpaired 
+/// and should be ignored.
+/// Return an integer denoting the sum of the GCD values of all formed pairs.
+///
+/// The term gcd(a, b) denotes the greatest common divisor of a and b.
+///
+/// Example 1:
+/// Input: nums = [2, 6, 4]
+/// Output : 2
+/// Explanation :
+/// Construct prefixGcd :
+/// i nums[i] mxi prefixGcd[i]
+/// 0 2 2 2
+/// 1 6 6 6
+/// 2 4 6 2
+/// prefixGcd = [2, 6, 2].After sorting, it forms[2, 2, 6].
+///
+/// Pair the smallest and largest elements : gcd(2, 6) = 2. The remaining 
+/// middle element 2 is ignored.Thus, the sum is 2.
+///
+/// Example 2 :
+/// Input : nums = [3, 6, 2, 8]
+/// Output : 5
+/// Explanation :
+/// Construct prefixGcd :
+/// i nums[i] mxi prefixGcd[i]
+/// 0 3 3 3
+/// 1 6 6 6
+/// 2 2 6 2
+/// 3 8 8 8
+/// prefixGcd = [3, 6, 2, 8].After sorting, it forms[2, 3, 6, 8].
+/// Form pairs : gcd(2, 8) = 2 and gcd(3, 6) = 3. Thus, the sum is 2 + 3 = 5.
+///
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 1 <= nums[i] <= 10^9
+/// </summary>
+long long LeetCodeMath::gcdSum(vector<int>& nums)
+{
+    int n = nums.size();
+    vector<int> prefixGcd(n);
+    int currentMax = 0;
+    for (int i = 0; i < n; i++)
+    {
+        currentMax = max(currentMax, nums[i]);
+        prefixGcd[i] = gcd(nums[i], currentMax);
+    }
+    sort(prefixGcd.begin(), prefixGcd.end());
+    long long result = 0;
+    for (int i = 0; i < n / 2; i++)
+    {
+        result += gcd(prefixGcd[i], prefixGcd[n - 1 - i]);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3881. Direction Assignments with Exactly K Visible People
+///
+/// Medium
+///
+/// You are given three integers n, pos, and k.
+///
+/// There are n people standing in a line indexed from 0 to n - 1. Each 
+/// person independently chooses a direction :
+///
+/// 'L' : visible only to people on their right
+/// 'R' : visible only to people on their left
+/// A person at index pos sees others as follows :
+/// A person i < pos is visible if and only if they choose 'L'.
+/// A person i > pos is visible if and only if they choose 'R'.
+/// Return the number of possible direction assignments such that the 
+/// person at index pos sees exactly k people.
+///
+/// Since the answer may be large, return it modulo 10^9 + 7.
+///
+/// Example 1:
+/// Input: n = 3, pos = 1, k = 0
+/// Output : 2
+/// Explanation : 
+///
+/// Index 0 is to the left of pos = 1, and index 2 is to the right 
+/// of pos = 1.
+/// To see k = 0 people, index 0 must choose 'R' and index 2 must 
+/// choose 'L', keeping both invisible.
+/// The person at index 1 can choose 'L' or 'R' since it does not 
+/// affect the count.Thus, the answer is 2.
+/// Example 2 :
+///
+/// Input : n = 3, pos = 2, k = 1
+/// Output : 4
+/// Explanation :
+/// Index 0 and index 1 are left of pos = 2, and there is no index 
+/// to the right.
+/// To see k = 1 person, exactly one of index 0 or index 1 must 
+/// choose 'L', and the other must choose 'R'.
+/// There are 2 ways to choose which index is visible from the left.
+/// The person at index 2 can choose 'L' or 'R' since it does not 
+/// affect the count.Thus, the answer is 2 + 2 = 4.
+/// Example 3:
+/// Input: n = 1, pos = 0, k = 0
+/// Output : 2
+/// Explanation :
+/// There are no indices to the left or right of pos = 0.
+/// To see k = 0 people, no additional condition is required.
+/// The person at index 0 can choose 'L' or 'R'.Thus, the answer is 2.
+/// 
+/// Constraints :
+/// 1. 1 <= n <= 10^5
+/// 2. 0 <= pos, k <= n - 1
+/// </summary>
+int LeetCodeMath::countVisiblePeople(int n, int pos, int k)
+{
+    long long M = 1000000007;
+    long long result = combination(n-1, k, M);
+    result = (result * 2) % M; // The person at pos can choose 'L' or 'R'
+    return (int)result;
+}
+
+/// <summary>
+/// Leet code # 3888. Minimum Operations to Make All Grid Elements Equal
+///
+/// Hard
+/// 
+/// You are given a 2D integer array grid of size m ? n, and an integer k.
+///
+/// In one operation, you can :
+///
+/// Select any k x k submatrix of grid, and
+/// Increment all elements inside that submatrix by 1.
+/// Return the minimum number of operations required to make all elements 
+/// in the grid equal.If it is not possible, return -1.
+/// A submatrix(x1, y1, x2, y2) is a matrix that forms by choosing all 
+/// cells matrix[x][y] where x1 <= x <= x2 and y1 <= y <= y2.
+///
+/// Example 1:
+/// Input: grid = [[3, 3, 5], [3, 3, 5]], k = 2
+/// Output : 2
+/// Explanation :
+/// Choose the left 2 x 2 submatrix(covering the first two columns) and 
+/// apply the operation twice.
+/// After 1 operation : [[4, 4, 5], [4, 4, 5]]
+/// After 2 operations : [[5, 5, 5], [5, 5, 5]]
+/// All elements become equal to 5. Thus, the minimum number of operations 
+/// is 2.
+///
+/// Example 2 :
+/// Input : grid = [[1, 2], [2, 3]], k = 1
+/// Output : 4
+/// Explanation :
+/// Since k = 1, each operation increments a single cell grid[i][j] by 1. 
+/// To make all elements equal, the final value must be 3.
+///
+/// Increase grid[0][0] = 1 to 3, requiring 2 operations.
+/// Increase grid[0][1] = 2 to 3, requiring 1 operation.
+/// Increase grid[1][0] = 2 to 3, requiring 1 operation.
+/// Thus, the minimum number of operations is 2 + 1 + 1 + 0 = 4.
+///
+/// Constraints:
+/// 1. 1 <= m == grid.length <= 1000
+/// 2. 1 <= n == grid[i].length <= 1000
+/// 3. - 10^5 <= grid[i][j] <= 10^5
+/// 4. 1 <= k <= min(m, n)
+/// </summary>
+long long LeetCodeMath::minOperations(vector<vector<int>>& grid, int k)
+{
+    int m = grid.size();
+    int n = grid[0].size();
+
+    vector<long long> colSum(n, 0);
+    vector<vector<long long>> ops_ring(k, vector<long long>(n, 0));
+
+    bool hasCandidate = false;
+    long long candidateX = 0;
+
+    long long sumOps0 = 0;
+    long long sumOps1 = 0;
+    long long minX = LLONG_MIN;
+
+    for (int i = 0; i < m; ++i) 
+    {
+        if (i >= k) 
+        {
+            int evictRow = i % k;
+            for (int j = 0; j < n; ++j) 
+            {
+                colSum[j] -= ops_ring[evictRow][j];
+                ops_ring[evictRow][j] = 0;
+            }
+        }
+
+        long long window_sum = 0;
+        for (int j = 0; j < n; ++j) 
+        {
+            window_sum += colSum[j];
+            long long req0 = -grid[i][j] - window_sum;
+
+            if (i <= m - k && j <= n - k) 
+            {
+                ops_ring[i % k][j] = req0;
+                colSum[j] += req0;
+                window_sum += req0;
+
+                long long o1 = (i % k == 0 && j % k == 0) ? 1 : 0;
+                sumOps0 += req0;
+                sumOps1 += o1;
+
+                if (o1 == 1) 
+                {
+                    if (-req0 > minX) minX = -req0;
+                }
+                else 
+                {
+                    if (req0 < 0) return -1;
+                }
+            }
+            else 
+            {
+                long long r0 = req0;
+                long long r1 = ((i / k) * k > m - k || (j / k) * k > n - k) ? 1 : 0;
+
+                if (r1 != 0) 
+                {
+                    long long x = -r0;
+                    if (!hasCandidate) 
+                    {
+                        candidateX = x;
+                        hasCandidate = true;
+                    }
+                    else if (candidateX != x) {
+                        return -1;
+                    }
+                }
+                else 
+                {
+                    if (r0 != 0) return -1;
+                }
+            }
+
+            if (j >= k - 1) 
+            {
+                window_sum -= colSum[j - k + 1];
+            }
+        }
+    }
+
+    if (hasCandidate) 
+    {
+        if (candidateX < minX) return -1;
+    }
+    else 
+    {
+        candidateX = minX;
+    }
+
+    return sumOps0 + candidateX * sumOps1;
+}
+
+/// <summary>
+/// Leet code #3890. Integers With Multiple Sum of Two Cubes
+///
+/// Medium
+/// 
+/// You are given an integer n.
+///
+/// An integer x is considered good if there exist at least two distinct 
+/// pairs(a, b) such that :
+///
+/// a and b are positive integers.
+/// a <= b
+/// x = a^3 + b^3
+///  Return an array containing all good integers less than or equal 
+///  to n, sorted in ascending order.
+/// 
+/// Example 1:
+/// Input: n = 4104
+/// Output : [1729, 4104]
+/// Explanation :
+/// Among integers less than or equal to 4104, the good integers are :
+/// 1729 : 13 + 123 = 1729 and 93 + 103 = 1729.
+/// 4104 : 23 + 163 = 4104 and 93 + 153 = 4104.
+/// Thus, the answer is[1729, 4104].
+///
+/// Example 2 :
+/// Input : n = 578
+/// Output : []
+/// Explanation :
+/// There are no good integers less than or equal to 578, so the answer 
+/// is an empty array.
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^9
+/// </summary>
+vector<int> LeetCodeMath::findGoodIntegers(int n)
+{
+    vector<int> cubes;
+    for (int i = 1; i * i * i <= n; i++)
+    {
+        cubes.push_back(i * i * i);
+    }
+    unordered_map<int, int> sumToPairs;
+    for (size_t i = 0; i < cubes.size(); i++)
+    {
+        for (size_t j = i + 1; j < cubes.size(); j++)
+        {
+            int sum = cubes[i] + cubes[j];
+            if (sum > n) break;
+            sumToPairs[sum]++;
+        }
+    }
+
+    vector<int> result;
+    for (const auto& pair : sumToPairs)
+    {
+        if (pair.second >= 2)
+        {
+            result.push_back(pair.first);
+        }
+    }
+    sort(result.begin(), result.end());
+    return result;
 }
 
 #pragma endregion

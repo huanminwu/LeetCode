@@ -8918,8 +8918,29 @@ void TestLeetCode3860(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3889(void)
+{
+    Logger::WriteMessage("Test Leet Code 3889");
+    LeetCodeString leetCode;
+    string s = "ab1z9";
+    int result = leetCode.mirrorFrequency(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "4m7n";
+    result = leetCode.mirrorFrequency(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "byby";
+    result = leetCode.mirrorFrequency(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3889();
     TestLeetCode3860();
     TestLeetCode3856();
     TestLeetCode3838();

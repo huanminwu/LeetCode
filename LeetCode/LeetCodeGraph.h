@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #ifndef LeetcodeGraph_H
 #define LeetCodeGraph_H
 #include <stdint.h>
@@ -29,6 +29,11 @@ private:
     /// unionFind two nodes in graph
     /// </summary>
     pair<int, int> unionFind(vector<int>& parents, int a, int b);
+
+    /// <summary>
+    /// unionFind two nodes in graph with distance parity
+    /// </summary>
+    int dsuParityFind(vector<int>& parents, vector<int>& parity, int node);
 
     /// <summary>
     /// find shortest path from start to end graph
@@ -169,9 +174,9 @@ public:
     /// 1.How many MHTs can a graph have at most?
     /// Note: 
     ///
-    /// (1) According to the definition of tree on Wikipedia: “a tree is an undirected graph in 
+    /// (1) According to the definition of tree on Wikipedia: ?a tree is an undirected graph in 
     /// which any two vertices are connected by exactly one path. In other words, any connected 
-    /// graph without simple cycles is a tree.” 
+    /// graph without simple cycles is a tree.? 
     /// (2) The height of a rooted tree is the number of edges on the longest downward path between the root and a leaf. 
     /// </summary>
     vector<int> findMinHeightTrees(int n, vector<pair<int, int>>& edges);
@@ -1489,7 +1494,7 @@ public:
     /// score of a path starting at [0,0] and ending at [R-1,C-1].
     ///
     /// The score of a path is the minimum value in that path.  For example, the 
-    /// value of the path 8 →  4 →  5 →  9 is 4.
+    /// value of the path 8 ?  4 ?  5 ?  9 is 4.
     ///
     /// A path moves some number of times from one visited cell to any neighbouring 
     /// unvisited cell in one of the 4 cardinal directions (north, east, west, 
@@ -6730,7 +6735,7 @@ public:
     /// Example 1:
     /// Input: nums = [2,4,12], start = 2, goal = 12
     /// Output: 2
-    /// Explanation: We can go from 2 → 14 → 12 with the following 2 
+    /// Explanation: We can go from 2 ? 14 ? 12 with the following 2 
     /// operations.
     /// - 2 + 12 = 14
     /// - 14 - 2 = 12
@@ -11330,7 +11335,7 @@ public:
     /// topological order.
     ///
     /// A topological order of a DAG is a linear ordering of its nodes 
-    /// such that for every directed edge u → v, node u comes before v in 
+    /// such that for every directed edge u ? v, node u comes before v in 
     /// the ordering.
     ///
     /// Example 1:
@@ -11342,8 +11347,8 @@ public:
     /// Node 1 depends on node 0, so a valid order is [0, 1].
     ///
     /// Node Processing Order   Score   Multiplier  Profit Calculation
-    /// 0   1st 2   1   2 × 1 = 2
-    /// 1   2nd 3   2   3 × 2 = 6
+    /// 0   1st 2   1   2 ? 1 = 2
+    /// 1   2nd 3   2   3 ? 2 = 6
     /// The maximum total profit achievable over all valid topological orders 
     /// is 2 + 6 = 8.
     ///
@@ -11357,9 +11362,9 @@ public:
     /// [0, 2, 1].
     ///
     /// Node    Processing Order    Score   Multiplier  Profit Calculation
-    /// 0   1st 1   1   1 × 1 = 1
-    /// 2   2nd 3   2   3 × 2 = 6
-    /// 1   3rd 6   3   6 × 3 = 18
+    /// 0   1st 1   1   1 ? 1 = 1
+    /// 2   2nd 3   2   3 ? 2 = 6
+    /// 1   3rd 6   3   6 ? 3 = 18
     /// The maximum total profit achievable over all valid topological orders 
     /// is 1 + 6 + 18 = 25.
     ///
@@ -11570,8 +11575,8 @@ public:
     /// Since cell (1, 0) contains an obstacle 'X', the student cannot move 
     /// directly downward.
     /// A valid sequence of moves to collect all litter is as follows:
-    /// Move 1: From (0, 0) → (0, 1) with 1 unit of energy and 1 unit remaining.
-    /// Move 2: From (0, 1) → (1, 1) to collect the litter 'L'.
+    /// Move 1: From (0, 0) ? (0, 1) with 1 unit of energy and 1 unit remaining.
+    /// Move 2: From (0, 1) ? (1, 1) to collect the litter 'L'.
     /// The student collects all the litter using 2 moves. Thus, the output is 2.
     ///
     /// Example 2:
@@ -11580,10 +11585,10 @@ public:
     /// Explanation:
     /// The student starts at cell (0, 1) with 4 units of energy.
     /// A valid sequence of moves to collect all litter is as follows:
-    /// Move 1: From (0, 1) → (0, 0) to collect the first litter 'L' with 1 unit 
+    /// Move 1: From (0, 1) ? (0, 0) to collect the first litter 'L' with 1 unit 
     /// of energy used and 3 units remaining.
-    /// Move 2: From (0, 0) → (1, 0) to 'R' to reset and restore energy back to 4.
-    /// Move 3: From (1, 0) → (1, 1) to collect the second litter 'L'.
+    /// Move 2: From (0, 0) ? (1, 0) to 'R' to reset and restore energy back to 4.
+    /// Move 3: From (1, 0) ? (1, 1) to collect the second litter 'L'.
     /// The student collects all the litter using 3 moves. Thus, the output is 3.
     ///
     /// Example 3:
@@ -11697,9 +11702,9 @@ public:
     /// 
     /// The optimal path is:
     ///
-    /// At time t = 0, take the edge (0 → 1) which is available from 0 to 1. You 
+    /// At time t = 0, take the edge (0 ? 1) which is available from 0 to 1. You 
     /// arrive at node 1 at time t = 1, then wait until t = 2.
-    /// At time t = 2, take the edge (1 → 2) which is available from 2 to 5. You 
+    /// At time t = 2, take the edge (1 ? 2) which is available from 2 to 5. You 
     /// arrive at node 2 at time 3.
     /// Hence, the minimum time to reach node 2 is 3.
     //
@@ -11709,9 +11714,9 @@ public:
     /// Explanation:
     /// 
     /// The optimal path is:
-    /// Wait at node 0 until time t = 1, then take the edge (0 → 2) which is 
+    /// Wait at node 0 until time t = 1, then take the edge (0 ? 2) which is 
     /// available from 1 to 5. You arrive at node 2 at t = 2.
-    /// Wait at node 2 until time t = 4, then take the edge (2 → 3) which is 
+    /// Wait at node 2 until time t = 4, then take the edge (2 ? 3) which is 
     /// available from 4 to 7. You arrive at node 3 at t = 5.
     /// Hence, the minimum time to reach node 3 is 5.
     ///
@@ -11739,7 +11744,7 @@ public:
     /// Medium
     ///
     /// You are given an integer c representing c power stations, each with a 
-    /// unique identifier id from 1 to c (1‑based indexing).
+    /// unique identifier id from 1 to c (1?based indexing).
     ///
     /// These stations are interconnected via n bidirectional cables, represented 
     /// by a 2D array connections, where each element connections[i] = [ui, vi] 
@@ -11762,7 +11767,7 @@ public:
     /// Return an array of integers representing the results of each query of 
     /// type [1, x] in the order they appear.
     ///
-    /// Note: The power grid preserves its structure; an offline (non‑operational) 
+    /// Note: The power grid preserves its structure; an offline (non?operational) 
     /// node remains part of its grid and taking it offline does not alter 
     /// connectivity.
     /// 
@@ -11836,7 +11841,7 @@ public:
     /// Explanation:
     /// 
     /// The longest palindromic path is from node 0 to node 2 via node 1, 
-    /// following the path 0 → 1 → 2 forming string "aba".
+    /// following the path 0 ? 1 ? 2 forming string "aba".
     /// This is a valid palindrome of length 3.
     ///
     /// Example 2:
@@ -11852,7 +11857,7 @@ public:
     /// Output: 3
     /// Explanation:
     /// The longest palindromic path is from node 0 to node 1, 
-    /// following the path 0 → 3 → 1, forming string "bcb".
+    /// following the path 0 ? 3 ? 1, forming string "bcb".
     /// This is a valid palindrome of length 3.
     /// 
     /// Constraints:
@@ -11963,7 +11968,7 @@ public:
     /// 
     /// No edge can be removed, since allowing only one component (k = 1) 
     /// requires the graph to stay fully connected.
-    /// That single component’s cost equals its largest edge weight, which is 5.
+    /// That single component?s cost equals its largest edge weight, which is 5.
     /// Constraints:
     ///
     /// 1. 1 <= n <= 5 * 10^4
@@ -12022,20 +12027,20 @@ public:
     ///
     /// Hard
     ///
-    /// You are given a directed acyclic graph of n nodes numbered from 0 to 
-    /// n − 1. This is represented by a 2D array edges of length m, where 
-    /// edges[i] = [ui, vi, costi] indicates a one‑way communication from 
-    /// node ui to node vi with a recovery cost of costi.
+    /// You are given a directed acyclic graph of n?nodes numbered from 0?to?
+    /// n???1. This is represented by a 2D array edges of length m, where 
+    /// edges[i] = [ui, vi, costi] indicates a one?way communication from 
+    /// node?ui to node?vi with a recovery cost of?costi.
     ///
     /// Some nodes may be offline. You are given a boolean array online where 
-    /// online[i] = true means node i is online. Nodes 0 and n − 1 are always 
+    /// online[i] = true means node?i is online. Nodes 0 and n???1 are always 
     /// online.
     ///
-    /// A path from 0 to n − 1 is valid if:
+    /// A path from 0?to n???1 is valid if:
     ///
     /// All intermediate nodes on the path are online.
     /// The total recovery cost of all edges on the path does not exceed k.
-    /// For each valid path, define its score as the minimum edge‑cost along 
+    /// For each valid path, define its score as the minimum edge?cost along 
     /// that path.
     ///
     /// Return the maximum path score (i.e., the largest minimum-edge cost) 
@@ -12052,8 +12057,8 @@ public:
     /// invalid.
     /// Path 0 -> 2 -> 3
     /// Total cost = 3 + 4 = 7 <= k, so this path is valid.
-    /// The minimum edge‐cost along this path is min(3, 4) = 3.
-    /// There are no other valid paths. Hence, the maximum among all valid path‐
+    /// The minimum edge?cost along this path is min(3, 4) = 3.
+    /// There are no other valid paths. Hence, the maximum among all valid path?
     /// scores is 3.
     ///
     /// Example 2:
@@ -12065,12 +12070,12 @@ public:
     /// Consider the remaining routes from 0 to 4:
     /// Path 0 -> 1 -> 4
     /// Total cost = 7 + 5 = 12 <= k, so this path is valid.
-    /// The minimum edge‐cost along this path is min(7, 5) = 5.
+    /// The minimum edge?cost along this path is min(7, 5) = 5.
     /// Path 0 -> 2 -> 3 -> 4
     /// Node 3 is offline, so this path is invalid regardless of cost.
     /// Path 0 -> 2 -> 4
     /// Total cost = 6 + 6 = 12 <= k, so this path is valid.
-    /// The minimum edge‐cost along this path is min(6, 6) = 6.
+    /// The minimum edge?cost along this path is min(6, 6) = 6.
     /// Among the two valid paths, their scores are 5 and 6. Therefore, the 
     /// answer is 6.
     /// 
@@ -12083,7 +12088,7 @@ public:
     /// 6. ui != vi
     /// 7. 0 <= costi <= 109
     /// 8. 0 <= k <= 5 * 10^13
-    /// 9. online[i] is either true or false, and both online[0] and online[n − 1] 
+    /// 9. online[i] is either true or false, and both online[0] and online[n ? 1] 
     ///    are true.
     /// 10. The given graph is a directed acyclic graph.
     /// </summary>
@@ -12348,7 +12353,121 @@ public:
     /// </summary>
     int minCostII(int n, vector<vector<int>>& edges, int k);
 
- 
+    /// <summary>
+    /// Leet Code 3873. Maximum Points Activated with One Addition
+    ///
+    /// Hard
+    ///
+    /// You are given a 2D integer array points, where points[i] = [xi, yi] 
+    /// represents the coordinates of the ith point.All coordinates in points 
+    /// are distinct.
+    ///
+    /// If a point is activated, then all points that have the same 
+    /// x - coordinate or y - coordinate become activated as well.
+    ///
+    /// Activation continues until no additional points can be activated.
+    ///
+    /// You may add one additional point at any integer coordinate(x, y) 
+    /// not already present in points.Activation begins by activating this 
+    /// newly added point.
+    ///
+    /// Return an integer denoting the maximum number of points that can 
+    /// be activated, including the newly added point.
+    ///
+    /// 
+    /// Example 1:
+    /// Input: points = [[1, 1], [1, 2], [2, 2]]
+    /// Output : 4
+    /// Explanation :
+    /// Adding and activating a point such as(1, 3) causes activations :
+    /// (1, 3) shares x = 1 with(1, 1) and (1, 2) -> (1, 1) and (1, 2) become 
+    /// activated.
+    /// (1, 2) shares y = 2 with(2, 2) -> (2, 2) becomes activated.
+    /// Thus, the activated points are(1, 3), (1, 1), (1, 2), (2, 2), so 4 
+    /// points in total.We can show this is the maximum activated.
+    ///
+    /// Example 2:
+    /// Input: points = [[2, 2], [1, 1], [3, 3]]
+    /// Output : 3
+    /// Explanation :
+    /// Adding and activating a point such as(1, 2) causes activations :
+    /// (1, 2) shares x = 1 with(1, 1) -> (1, 1) becomes activated.
+    /// (1, 2) shares y = 2 with(2, 2) -> (2, 2) becomes activated.
+    /// Thus, the activated points are(1, 2), (1, 1), (2, 2), so 3 points in 
+    /// total.We can show this is the maximum activated.
+    ///
+    /// Example 3:
+    /// Input: points = [[2, 3], [2, 2], [1, 1], [4, 5]]
+    /// Output : 4
+    /// Explanation :
+    /// Adding and activating a point such as(2, 1) causes activations :
+    /// (2, 1) shares x = 2 with(2, 3) and (2, 2) -> (2, 3) and (2, 2) become 
+    /// activated.
+    /// (2, 1) shares y = 1 with(1, 1) -> (1, 1) becomes activated.
+    /// Thus, the activated points are(2, 1), (2, 3), (2, 2), (1, 1), so 4 
+    /// points in total.
+    ///
+    /// Constraints:
+    /// 1. 1 <= points.length <= 10^5
+    /// 2. points[i] = [xi, yi]
+    /// 3. - 10^9 <= xi, yi <= 10^9
+    /// 4. points contains all distinct coordinates.
+    /// </summary>
+    int maxActivated(vector<vector<int>>& points);
+
+    /// <summary>
+    /// Leet Code 3887. Incremental Even - Weighted Cycle Queries
+    ///
+    /// Hard
+    ///
+    /// You are given a positive integer n.
+    ///
+    /// There is an undirected graph with n nodes labeled from 0 to n - 1. 
+    /// Initially, the graph has no edges.
+    ///
+    /// You are also given a 2D integer array edges, where 
+    /// edges[i] = [ui, vi, wi] represents an edge between nodes ui and vi 
+    /// with weight wi.The weight wi is either 0 or 1.
+    /// Process the edges in edges in the given order.For each edge, add it 
+    /// to the graph only if, after adding it, the sum of the weights of the 
+    /// edges in every cycle in the resulting graph is even.
+    ///
+    /// Return an integer denoting the number of edges that are successfully 
+    /// added to the graph.
+    /// Example 1:
+    /// Input: n = 3, edges = [[0, 1, 1], [1, 2, 1], [0, 2, 1]]
+    /// Output : 2
+    /// Explanation :
+    /// [0, 1, 1] : We add the edge between vertex 0 and vertex 1 with 
+    /// weight 1.
+    /// [1, 2, 1] : We add the edge between vertex 1 and vertex 2 with 
+    /// weight 1.
+    /// [0, 2, 1] : The edge between vertex 0 and vertex 2 (the dashed edge 
+    /// in the diagram) is not added because the cycle 0 - 1 - 2 - 0 has 
+    /// total edge weight 1 + 1 + 1 = 3, which is an odd number.
+    ///
+    /// Example 2 :
+    /// Input : n = 3, edges = [[0, 1, 1], [1, 2, 1], [0, 2, 0]]
+    /// Output : 3
+    /// Explanation :
+    /// [0, 1, 1] : We add the edge between vertex 0 and vertex 1 with 
+    /// weight 1.
+    /// [1, 2, 1] : We add the edge between vertex 1 and vertex 2 with 
+    /// weight 1.
+    /// [0, 2, 0] : We add the edge between vertex 0 and vertex 2 with 
+    /// weight 0.
+    /// Note that the cycle 0 - 1 - 2 - 0 has total edge weight 
+    /// 1 + 1 + 0 = 2, which is an even number.
+    ///
+    /// Constraints :
+    /// 1. 3 <= n <= 5 * 10^4
+    /// 2. 1 <= edges.length <= 5 * 10^4
+    /// 3. edges[i] = [ui, vi, wi]
+    /// 4. 0 <= ui < vi < n
+    /// 5. All edges are distinct.
+    /// 6. wi = 0 or wi = 1
+    /// </summary>
+    int numberOfEdgesAdded(int n, vector<vector<int>>& edges);
 #pragma endregion
 };
 #endif  // LeetCodeGraph_H

@@ -8611,9 +8611,119 @@ void TestLeetCode3857(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3870(void)
+{
+    Logger::WriteMessage("Test Leet Code 3870");
+    LeetCodeMath leetCode;
+    int n = 1002;
+    int result = leetCode.countCommas(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 998;
+    result = leetCode.countCommas(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3871(void)
+{
+    Logger::WriteMessage("Test Leet Code 3871");
+    LeetCodeMath leetCode;
+    long long n = 1002;
+    long long result = leetCode.countCommas(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 998;
+    result = leetCode.countCommas(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3867(void)
+{
+    Logger::WriteMessage("Test Leet Code 3867");
+    LeetCodeMath leetCode;
+    vector<int> nums = {2, 6, 4};
+    long long result = leetCode.gcdSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3, 6, 2, 8 };
+    result = leetCode.gcdSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3881(void)
+{
+    Logger::WriteMessage("Test Leet Code 3881");
+    LeetCodeMath leetCode;
+    int n = 3, pos = 1, k = 0;
+    int result = leetCode.countVisiblePeople(n, pos, k);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("pos = " + to_string(pos));
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3, pos = 2, k = 1;
+    result = leetCode.countVisiblePeople(n, pos, k);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("pos = " + to_string(pos));
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 1, pos = 0, k = 0;
+    result = leetCode.countVisiblePeople(n, pos, k);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("pos = " + to_string(pos));
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3888(void)
+{
+    Logger::WriteMessage("Test Leet Code 3888");
+    LeetCodeMath leetCode;
+    vector<vector<int>> grid = { {3, 3, 5},{3, 3, 5} };
+    int k = 2;
+    long long result = leetCode.minOperations(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = {{1, 2}, {2, 3}};
+    k = 1;
+    result = leetCode.minOperations(grid, k);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3890(void)
+{
+    Logger::WriteMessage("Test Leet Code 3890");
+    LeetCodeMath leetCode;
+    int n = 4104;
+    vector<int> result = leetCode.findGoodIntegers(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 578;
+    result = leetCode.findGoodIntegers(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
 
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3890();
+    TestLeetCode3888();
+    TestLeetCode3881();
+    TestLeetCode3867();
+    TestLeetCode3871();
+    TestLeetCode3870();
     TestLeetCode3857();
     TestLeetCode3848();
     TestLeetCode3827();

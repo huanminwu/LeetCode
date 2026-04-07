@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #ifndef LeetcodeDesign_H
 #define LeetCodeDesign_H
 #include <stdint.h>
@@ -1742,7 +1742,7 @@ public:
 /// <summary>
 /// Leet code #307. Range Sum Query - Mutable
 /// Given an integer array nums, find the sum of the elements between indices 
-/// i and j (i ≤ j), inclusive.
+/// i and j (i ? j), inclusive.
 /// The update(i, val) function modifies nums by updating the element at index 
 /// i to val. 
 /// Example:
@@ -1826,7 +1826,7 @@ public:
 /// Note:
 /// 1.You may assume that the matrix does not change.
 /// 2.There are many calls to sumRegion function.
-/// 3.You may assume that row1 ≤ row2 and col1 ≤ col2.
+/// 3.You may assume that row1 ? row2 and col1 ? col2.
 /// </summary>
 class NumMatrix
 {
@@ -1900,7 +1900,7 @@ public:
 /// Note:
 /// 1.The matrix is only modifiable by the update function.
 /// 2.You may assume the number of calls to update and sumRegion function is distributed evenly.
-/// 3.You may assume that row1 ≤ row2 and col1 ≤ col2.
+/// 3.You may assume that row1 ? row2 and col1 ? col2.
 /// </summary>
 class NumMatrixMutable
 {
@@ -3403,7 +3403,7 @@ public:
 /// function to return a uniform random integer from [0, N) which is NOT 
 /// in B.
 ///
-/// Optimize it such that it minimizes the call to system’s Math.random().
+/// Optimize it such that it minimizes the call to system?s Math.random().
 ///
 /// Note:
 /// 1. 1 <= N <= 1000000000
@@ -7885,7 +7885,7 @@ public:
 /// kthLargest.add(9);   // returns 8
 /// kthLargest.add(4);   // returns 8
 /// Note: 
-/// You may assume that nums' length ≥ k-1 and k ≥ 1.
+/// You may assume that nums' length ? k-1 and k ? 1.
 /// </summary>
 class KthLargest
 {
@@ -14485,7 +14485,6 @@ public:
     }
 };
 
-
 /// <summary>
 /// Leet Code 3829. Design Ride Sharing System
 ///
@@ -14607,6 +14606,107 @@ public:
     void cancelRider(int riderId) 
     {
         m_RiderSet.erase(riderId);
+    }
+};
+
+/// <summary>
+/// Leet Code 3885. Design Event Manager
+///
+/// Medium
+///
+/// You are given an initial list of events, where each event has a unique 
+/// eventId and a priority.
+///
+/// Implement the EventManager class :
+///
+/// EventManager(int[][] events) Initializes the manager with the given 
+/// events, where events[i] = [eventIdi, priority i].
+/// void updatePriority(int eventId, int newPriority) Updates the priority 
+/// of the active event with id eventId to newPriority.
+/// int pollHighest() Removes and returns the eventId of the active event 
+/// with the highest priority.If multiple active events have the same 
+/// priority, return the smallest eventId among them.If there are no active 
+/// events, return -1.
+/// An event is called active if it has not been removed by pollHighest().
+///
+/// Example 1:
+/// Input:
+/// ["EventManager", "pollHighest", "updatePriority", "pollHighest", 
+///  "pollHighest"]
+/// [[[[5, 7], [2, 7], [9, 4]] ], [], [9, 7], [], []]
+///
+/// Output :
+/// [null, 2, null, 5, 9]
+///
+/// Explanation
+/// EventManager eventManager = new EventManager([[5, 7], [2, 7], [9, 4]] ); 
+/// // Initializes the manager with three events
+/// eventManager.pollHighest(); 
+/// // both events 5 and 2 have priority 7, so return the smaller id 2
+/// eventManager.updatePriority(9, 7); 
+/// // event 9 now has priority 7
+/// eventManager.pollHighest(); 
+/// // remaining highest priority events are 5 and 9, return 5
+/// eventManager.pollHighest(); // return 9
+///
+/// Example 2:
+/// Input:
+/// ["EventManager", "pollHighest", "pollHighest", "pollHighest"]
+/// [[[[4, 1], [7, 2]] ], [], [], []]
+///
+/// Output :
+/// [null, 7, 4, -1]
+/// Explanation
+/// EventManager eventManager = new EventManager([[4, 1], [7, 2]] ); 
+/// // Initializes the manager with two events
+/// eventManager.pollHighest(); // return 7
+/// eventManager.pollHighest(); // return 4
+/// eventManager.pollHighest(); // no events remain, return -1
+///
+/// Constraints:
+/// 1. 1 <= events.length <= 10^5
+/// 2. events[i] = [eventId, priority]
+/// 3. 1 <= eventId <= 10^9
+/// 4. 1 <= priority <= 10^9
+/// 5. All the values of eventId in events are unique.
+/// 6. 1 <= newPriority <= 10^9
+/// 7. For every call to updatePriority, eventId refers to an active event.
+/// 8. At most 10^5 calls in total will be made to updatePriority and 
+///     pollHighest.
+/// </summary>
+class EventManager 
+{
+    unordered_map<int, int> m_events;
+    set<pair<int, int>> m_priorityqueue;
+public:
+    EventManager(vector<vector<int>>& events) 
+    {
+        for (size_t i = 0; i < events.size(); i++)
+        {
+            m_events[events[i][0]] = events[i][1];
+            m_priorityqueue.insert(make_pair(events[i][1], -events[i][0]));
+        }
+    }
+
+    void updatePriority(int eventId, int newPriority) 
+    {
+        m_priorityqueue.erase(make_pair(m_events[eventId], -eventId));
+        m_priorityqueue.insert(make_pair(newPriority, -eventId));
+        m_events[eventId] = newPriority;
+
+    }
+
+    int pollHighest() 
+    {
+        if (m_priorityqueue.empty())
+        {
+            return -1;
+        }
+        pair<int, int> event = *m_priorityqueue.rbegin();
+        int result = -event.second;
+        m_priorityqueue.erase(event);
+        m_events.erase(-event.second);
+        return result;
     }
 };
 

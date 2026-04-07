@@ -6130,8 +6130,85 @@ void TestLeetCode3829(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3885(void)
+{
+    Logger::WriteMessage("Test Leet Code 3885");
+    vector<string> commands =
+    {
+        "EventManager", "pollHighest", "updatePriority", "pollHighest", "pollHighest"
+    };
+    vector<vector<vector<int>>> parameters =
+    {
+        { {5, 7} ,{2, 7},{9, 4} } ,{},{{9, 7}}, {},{}
+    };
+    vector<string> result;
+    EventManager* eventManager = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "EventManager")
+        {
+            eventManager = new EventManager(parameters[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "pollHighest")
+        {
+            int ret = eventManager->pollHighest();
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "updatePriority")
+        {
+            eventManager->updatePriority(parameters[i][0][0], parameters[i][0][1]);
+            result.push_back("null");
+        }
+    }
+    delete eventManager;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        Logger::WriteMessage(parameters[i]);
+    }
+    Logger::WriteMessage(result);
+
+    commands =
+    {
+       "EventManager", "pollHighest", "pollHighest", "pollHighest"
+    };
+    parameters =
+    {
+        {{4, 1},{7, 2}} , {},{}, {}
+    };
+    result.clear();
+    eventManager = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "EventManager")
+        {
+            eventManager = new EventManager(parameters[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "pollHighest")
+        {
+            int ret = eventManager->pollHighest();
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "updatePriority")
+        {
+            eventManager->updatePriority(parameters[i][0][0], parameters[i][0][1]);
+            result.push_back("null");
+        }
+    }
+    delete eventManager;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        Logger::WriteMessage(parameters[i]);
+    }
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode3885();
     TestLeetCode3829();
     TestLeetCode3822();
     TestLeetCode3815();

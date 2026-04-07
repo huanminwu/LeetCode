@@ -7475,8 +7475,7 @@ TreeNode* LeetCodeTree::deserialize(string data)
                 {
                     input_queue.push(nullptr);
                 }
-                else if ((number[0] >= 'a' && number[0] <= 'z') ||
-                         (number[0] == '+' || number[0] == '-'))
+                else if ((number[0] >= 'a' && number[0] <= 'z'))
                 {
                     input_queue.push(new TreeNode(number[0]));
                 }
@@ -16062,7 +16061,7 @@ vector<int> LeetCodeTree::minimumFlips(int n, vector<vector<int>>& edges, string
     }
     vector<int> result;
     queue<int> queue;
-    for (int i = 0; i < degree.size(); i++)
+    for (size_t i = 0; i < degree.size(); i++)
     {
         if (degree[i] == 1) queue.push(i);
     }
@@ -16313,4 +16312,116 @@ int LeetCodeTree::levelMedian(TreeNode* root, int level)
     return values[values.size() / 2];
 }
 
+/// <summary>
+/// Leet Code 3879. Maximum Distinct Path Sum in a Binary Tree
+/// </summary>
+void LeetCodeTree::maxSum(vector<pair<TreeNode*, int>>& nodes, int curr, int prev, vector<int>& parent,
+    unordered_set<int>& visited, int sum, int& result)
+{
+    TreeNode* node = nodes[curr].first;
+    int val = nodes[curr].second;
+    if (visited.count(val))
+    {
+        return;
+    }
+    visited.insert(val);
+    sum += val;
+    result = max(result, sum);
+    if (parent[curr] != -1 && parent[curr] != prev)
+    {
+        maxSum(nodes,parent[curr], curr, parent, visited, sum, result);
+    }
+    if (node->left != nullptr && node->left->val != prev)
+    {
+        maxSum(nodes, node->left->val,  curr, parent, visited, sum, result);
+    }
+    if (node->right != nullptr && node->right->val != prev)
+    {
+        maxSum(nodes, node->right->val, curr, parent, visited, sum, result);
+    }
+    visited.erase(val);
+    return;
+}
+
+
+/// <summary>
+/// Leet Code 3879. Maximum Distinct Path Sum in a Binary Tree
+///
+/// Medium
+///
+/// You are given the root of a binary tree, where each node contains 
+/// an integer value.
+///
+/// A valid path in the tree is a sequence of connected nodes such that :
+/// 
+/// The path can start and end at any node in the tree.
+/// The path does not need to pass through the root.
+/// All node values along the path are distinct.
+/// Return an integer denoting the maximum possible sum of node values 
+/// among all valid paths.
+///
+/// Example 1:
+/// Input: root = [2, 2, 1]
+/// Output : 3
+/// Explanation :
+/// The path 2 -> 2 is invalid because the value 2 is not distinct.
+/// The maximum - sum valid path is 2 ? 1, with a sum = 2 + 1 = 3.
+///
+/// Example 2:
+/// Input: root = [1, -2, 5, null, null, 3, 5]
+/// Output : 9
+/// Explanation :
+/// The path 3 -> 5 -> 5 is invalid due to duplicate value 5.
+/// The maximum - sum valid path is 1 ? 5 ? 3, with a 
+/// sum = 1 + 5 + 3 = 9.
+///
+/// Example 3:
+/// Input: root = [4, 6, 6, null, null, null, 9]
+/// Output : 19
+/// Explanation :
+/// The path 6 -> 4 -> 6 -> 9 is invalid because the value 6 appears more 
+/// than once.
+/// The maximum - sum valid path is 4 -> 6 -> 9, with a sum = 4 + 6 + 9 = 19.
+/// 
+/// Constraints :
+/// 1. The number of nodes in the tree is in the range[1, 1000].
+/// 2. - 1000 <= Node.val <= 1000
+/// </summary>
+int LeetCodeTree::maxSum(TreeNode* root)
+{
+    vector<int> parent;
+    vector<pair<TreeNode *, int>> nodes;
+    nodes.push_back({root, root->val});
+    queue<int> queue;
+    queue.push(0);
+    parent.push_back(-1);
+    while (!queue.empty())
+    {
+        int index = queue.front();
+        queue.pop();
+        TreeNode* node = nodes[index].first;
+        node->val = index;
+        if (node->left != nullptr)
+        {
+            int left_index = nodes.size();
+            nodes.push_back({node->left, node->left->val});
+            parent.push_back(index);
+            queue.push(left_index);
+        }
+        if (node->right != nullptr)
+        {
+            int right_index = nodes.size();
+            nodes.push_back({node->right, node->right->val});
+            parent.push_back(index);
+            queue.push(right_index);
+        }
+    }
+    int result = INT_MIN;
+    unordered_set<int> visited;
+    for (size_t i = 0; i < nodes.size(); i++)
+    {
+        maxSum(nodes, i, -1, parent, visited, 0, result);
+    }
+    return result;
+}
 #pragma endregion

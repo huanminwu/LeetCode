@@ -18250,6 +18250,275 @@ public:
     /// Constraints :
     /// 1. 0 <= l <= r <= 9
     /// 2. 1 <= k <= 10^9
+    /// </summary>
     int sumOfNumbers(int l, int r, int k);
+
+    /// <summary>
+    /// Leet Code 3870. Count Commas in Range
+    ///
+    /// Easy
+    ///
+    /// You are given an integer n.
+    ///
+    /// Return the total number of commas used when writing all integers 
+    /// from[1, n](inclusive) in standard number formatting.
+    ///
+    /// In standard formatting :
+    ///
+    /// A comma is inserted after every three digits from the right.
+    /// Numbers with fewer than 4 digits contain no commas.
+    ///
+    /// Example 1:
+    /// Input: n = 1002
+    /// Output : 3
+    /// Explanation :
+    /// The numbers "1,000", "1,001", and "1,002" each contain one comma, 
+    /// giving a total of 3.
+    ///
+    /// Example 2 :
+    /// Input : n = 998
+    /// Output : 0
+    /// Explanation :
+    /// All numbers from 1 to 998 have fewer than four digits.Therefore, 
+    /// no commas are used.
+    /// Explanation :
+    /// All numbers from 1 to 998 have fewer than four digits.Therefore, 
+    /// no commas are used.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n <= 10^5
+    /// </summary>
+    int countCommas(int n);
+
+
+    /// <summary>
+    /// Leet Code 3871. Count Commas in Range II
+    ///
+    /// Medium
+    ///
+    /// You are given an integer n.
+    /// Return the total number of commas used when writing all integers 
+    /// from[1, n](inclusive) in standard number formatting.
+    ///
+    /// In standard formatting :
+    ///
+    /// A comma is inserted after every three digits from the right.
+    /// Numbers with fewer than 4 digits contain no commas.
+    ///
+    /// Example 1:
+    /// Input: n = 1002
+    /// Output : 3
+    /// Explanation :
+    /// The numbers "1,000", "1,001", and "1,002" each contain one comma, 
+    /// giving a total of 3.
+    ///
+    /// Example 2 :
+    /// Input : n = 998
+    /// Output : 0
+    /// Explanation :
+    /// All numbers from 1 to 998 have fewer than four digits.Therefore, no commas are used.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 10^15
+    /// </summary>
+    long long countCommas(long long n);
+
+    /// <summary>
+    /// Leet Code 3867. Sum of GCD of Formed Pairs
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums of length n.
+    ///
+    /// Construct an array prefixGcd where for each index i :
+    /// Let mxi = max(nums[0], nums[1], ..., nums[i]).
+    /// prefixGcd[i] = gcd(nums[i], mxi).
+    /// After constructing prefixGcd :
+    ///
+    /// Sort prefixGcd in non - decreasing order.
+    /// Form pairs by taking the smallest unpaired element and the largest 
+    /// unpaired element.
+    /// Repeat this process until no more pairs can be formed.
+    /// For each formed pair, compute the gcd of the two elements.
+    /// If n is odd, the middle element in the prefixGcd array remains unpaired 
+    /// and should be ignored.
+    /// Return an integer denoting the sum of the GCD values of all formed pairs.
+    ///
+    /// The term gcd(a, b) denotes the greatest common divisor of a and b.
+    ///
+    /// Example 1:
+    /// Input: nums = [2, 6, 4]
+    /// Output : 2
+    /// Explanation :
+    /// Construct prefixGcd :
+    /// i nums[i] mxi prefixGcd[i]
+    /// 0 2 2 2
+    /// 1 6 6 6
+    /// 2 4 6 2
+    /// prefixGcd = [2, 6, 2].After sorting, it forms[2, 2, 6].
+    ///
+    /// Pair the smallest and largest elements : gcd(2, 6) = 2. The remaining 
+    /// middle element 2 is ignored.Thus, the sum is 2.
+    ///
+    /// Example 2 :
+    /// Input : nums = [3, 6, 2, 8]
+    /// Output : 5
+    /// Explanation :
+    /// Construct prefixGcd :
+    /// i nums[i] mxi prefixGcd[i]
+    /// 0 3 3 3
+    /// 1 6 6 6
+    /// 2 2 6 2
+    /// 3 8 8 8
+    /// prefixGcd = [3, 6, 2, 8].After sorting, it forms[2, 3, 6, 8].
+    /// Form pairs : gcd(2, 8) = 2 and gcd(3, 6) = 3. Thus, the sum is 2 + 3 = 5.
+    ///
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 1 <= nums[i] <= 10^9
+    /// </summary>
+    long long gcdSum(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3881. Direction Assignments with Exactly K Visible People
+    ///
+    /// Medium
+    ///
+    /// You are given three integers n, pos, and k.
+    ///
+    /// There are n people standing in a line indexed from 0 to n - 1. Each 
+    /// person independently chooses a direction :
+    ///
+    /// 'L' : visible only to people on their right
+    /// 'R' : visible only to people on their left
+    /// A person at index pos sees others as follows :
+    /// A person i < pos is visible if and only if they choose 'L'.
+    /// A person i > pos is visible if and only if they choose 'R'.
+    /// Return the number of possible direction assignments such that the 
+    /// person at index pos sees exactly k people.
+    ///
+    /// Since the answer may be large, return it modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    /// Input: n = 3, pos = 1, k = 0
+    /// Output : 2
+    /// Explanation : 
+    ///
+    /// Index 0 is to the left of pos = 1, and index 2 is to the right 
+    /// of pos = 1.
+    /// To see k = 0 people, index 0 must choose 'R' and index 2 must 
+    /// choose 'L', keeping both invisible.
+    /// The person at index 1 can choose 'L' or 'R' since it does not 
+    /// affect the count.Thus, the answer is 2.
+    /// Example 2 :
+    ///
+    /// Input : n = 3, pos = 2, k = 1
+    /// Output : 4
+    /// Explanation :
+    /// Index 0 and index 1 are left of pos = 2, and there is no index 
+    /// to the right.
+    /// To see k = 1 person, exactly one of index 0 or index 1 must 
+    /// choose 'L', and the other must choose 'R'.
+    /// There are 2 ways to choose which index is visible from the left.
+    /// The person at index 2 can choose 'L' or 'R' since it does not 
+    /// affect the count.Thus, the answer is 2 + 2 = 4.
+    /// Example 3:
+    /// Input: n = 1, pos = 0, k = 0
+    /// Output : 2
+    /// Explanation :
+    /// There are no indices to the left or right of pos = 0.
+    /// To see k = 0 people, no additional condition is required.
+    /// The person at index 0 can choose 'L' or 'R'.Thus, the answer is 2.
+    /// 
+    /// Constraints :
+    /// 1. 1 <= n <= 10^5
+    /// 2. 0 <= pos, k <= n - 1
+    /// </summary>
+    int countVisiblePeople(int n, int pos, int k);
+
+    /// <summary>
+    /// Leet code # 3888. Minimum Operations to Make All Grid Elements Equal
+    ///
+    /// Hard
+    /// 
+    /// You are given a 2D integer array grid of size m ? n, and an integer k.
+    ///
+    /// In one operation, you can :
+    ///
+    /// Select any k x k submatrix of grid, and
+    /// Increment all elements inside that submatrix by 1.
+    /// Return the minimum number of operations required to make all elements 
+    /// in the grid equal.If it is not possible, return -1.
+    /// A submatrix(x1, y1, x2, y2) is a matrix that forms by choosing all 
+    /// cells matrix[x][y] where x1 <= x <= x2 and y1 <= y <= y2.
+    ///
+    /// Example 1:
+    /// Input: grid = [[3, 3, 5], [3, 3, 5]], k = 2
+    /// Output : 2
+    /// Explanation :
+    /// Choose the left 2 x 2 submatrix(covering the first two columns) and 
+    /// apply the operation twice.
+    /// After 1 operation : [[4, 4, 5], [4, 4, 5]]
+    /// After 2 operations : [[5, 5, 5], [5, 5, 5]]
+    /// All elements become equal to 5. Thus, the minimum number of operations 
+    /// is 2.
+    ///
+    /// Example 2 :
+    /// Input : grid = [[1, 2], [2, 3]], k = 1
+    /// Output : 4
+    /// Explanation :
+    /// Since k = 1, each operation increments a single cell grid[i][j] by 1. 
+    /// To make all elements equal, the final value must be 3.
+    ///
+    /// Increase grid[0][0] = 1 to 3, requiring 2 operations.
+    /// Increase grid[0][1] = 2 to 3, requiring 1 operation.
+    /// Increase grid[1][0] = 2 to 3, requiring 1 operation.
+    /// Thus, the minimum number of operations is 2 + 1 + 1 + 0 = 4.
+    ///
+    /// Constraints:
+    /// 1. 1 <= m == grid.length <= 1000
+    /// 2. 1 <= n == grid[i].length <= 1000
+    /// 3. - 10^5 <= grid[i][j] <= 10^5
+    /// 4. 1 <= k <= min(m, n)
+    /// </summary>
+    long long minOperations(vector<vector<int>>& grid, int k);
+
+    /// <summary>
+    /// Leet code #3890. Integers With Multiple Sum of Two Cubes
+    ///
+    /// Medium
+    /// 
+    /// You are given an integer n.
+    ///
+    /// An integer x is considered good if there exist at least two distinct 
+    /// pairs(a, b) such that :
+    ///
+    /// a and b are positive integers.
+    /// a <= b
+    /// x = a^3 + b^3
+    ///  Return an array containing all good integers less than or equal 
+    ///  to n, sorted in ascending order.
+    /// 
+    /// Example 1:
+    /// Input: n = 4104
+    /// Output : [1729, 4104]
+    /// Explanation :
+    /// Among integers less than or equal to 4104, the good integers are :
+    /// 1729 : 13 + 123 = 1729 and 93 + 103 = 1729.
+    /// 4104 : 23 + 163 = 4104 and 93 + 153 = 4104.
+    /// Thus, the answer is[1729, 4104].
+    ///
+    /// Example 2 :
+    /// Input : n = 578
+    /// Output : []
+    /// Explanation :
+    /// There are no good integers less than or equal to 578, so the answer 
+    /// is an empty array.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n <= 10^9
+    /// </summary>
+    vector<int> findGoodIntegers(int n);
 };
 #endif

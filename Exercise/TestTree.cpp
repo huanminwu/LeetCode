@@ -4810,8 +4810,32 @@ void TestLeetCode3831(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3879(void)
+{
+    Logger::WriteMessage("Test Leet Code 3879");
+    LeetCodeTree leetCode;
+    string input = "[2,2,1]";
+    TreeNode* root = leetCode.deserialize(input);
+    int result = leetCode.maxSum(root);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    input = "[1,-2,5,null,null,3,5]";
+    root = leetCode.deserialize(input);
+    result = leetCode.maxSum(root);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    input = "[4,6,6,null,null,null,9]";
+    root = leetCode.deserialize(input);
+    result = leetCode.maxSum(root);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3879();
     TestLeetCode3831();
     TestLeetCode3820();
     TestLeetCode3812();

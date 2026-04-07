@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <ctype.h>  /* is space */
 #include <stdio.h>     /* printf */
 #include <stdlib.h>  
@@ -349,7 +349,7 @@ int LeetCodeBFS::minArea(vector<vector<char>>& image, int x, int y)
 }
 
 /// <summary>
-/// Leet code #542. 01 Matrix       
+/// Leet code #542. 01 Matrix?????? 
 /// 
 /// Given a matrix consists of 0 and 1, find the distance of the nearest 0 
 /// for each cell.
@@ -3200,7 +3200,7 @@ vector<int> LeetCodeBFS::queryConversions(vector<vector<int>>& conversions, vect
 /// Input: nums = [4,6,5,8]
 /// Output: 3
 /// Explanation:
-/// Since no teleportation is possible, we move through 0 → 1 → 2 → 3. Thus, 
+/// Since no teleportation is possible, we move through 0 ? 1 ? 2 ? 3. Thus, 
 /// the answer is 3.
 /// 
 /// Constraints:
@@ -3372,5 +3372,86 @@ int LeetCodeBFS::minOperations(string s, int k)
         result++;
     }
     return -1;
+}
+
+/// <summary> 
+/// Leet Code 3863. Minimum Operations to Sort a String
+/// 
+/// Medium
+///
+/// You are given a string s consisting of lowercase English letters.
+///
+/// In one operation, you can select any substring of s that is not 
+/// the entire string and sort it in non - descending alphabetical order.
+///
+/// Return the minimum number of operations required to make s sorted 
+/// in non - descending order.If it is not possible, return -1.
+///
+/// Example 1:
+/// Input: s = "dog"
+/// Output : 1
+/// Explanation : 
+/// Sort substring "og" to "go".
+/// Now, s = "dgo", which is sorted in ascending order.Thus, the answer 
+/// is 1.
+/// 
+/// Example 2 :
+/// Input : s = "card"
+/// Output : 2
+/// Explanation :
+/// Sort substring "car" to "acr", so s = "acrd".
+/// Sort substring "rd" to "dr", making s = "acdr", which is sorted in 
+/// ascending order.Thus, the answer is 2.
+///
+/// Example 3 :
+/// Input : s = "gf"
+/// Output : -1
+/// Explanation :
+/// It is impossible to sort s under the given constraints.Thus, the 
+/// answer is - 1.
+///
+/// Constraints :
+/// 1. 1 <= s.length <= 10^5
+/// 2. s consists of only lowercase English letters.
+/// </summary>
+int LeetCodeBFS::minOperationsSort(string s)
+{
+    unordered_set<string> visited;
+    queue<string> queue;
+    queue.push(s);
+    visited.insert(s);
+    int result = -1;
+    int step = 0;
+    int n = s.size();
+    while (!queue.empty())
+    {
+        size_t size = queue.size();
+        for (size_t i = 0; i < size; i++)
+        {
+            string str = queue.front();
+            queue.pop();
+            if (is_sorted(str.begin(), str.end()))
+            {
+                result = step;
+                return result;
+            }
+            string next = str;
+            sort(next.begin(), next.begin() + n -1);
+            if (visited.count(next) == 0)
+            {
+                visited.insert(next);
+                queue.push(next);
+            }
+            next = str;
+            sort(next.begin() + 1, next.end());
+            if (visited.count(next) == 0)
+            {
+                visited.insert(next);
+                queue.push(next);
+            }
+        }
+        step++;
+    }
+    return result;
 }
 #pragma endregion

@@ -1000,8 +1000,29 @@ void TestLeetCode3666(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3863(void)
+{
+    Logger::WriteMessage("Test Leet Code 3863");
+    LeetCodeBFS leetCode;
+    string s = "dog";
+    int result = leetCode.minOperationsSort(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "card";
+    result = leetCode.minOperationsSort(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "gf";
+    result = leetCode.minOperationsSort(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBFS(void)
 {
+    TestLeetCode3863();
     TestLeetCode3666();
     TestLeetCode3629();
     TestLeetCode3535();

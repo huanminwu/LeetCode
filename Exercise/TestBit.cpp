@@ -1889,8 +1889,24 @@ void TestLeetCode3858(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3878(void)
+{
+    Logger::WriteMessage("Test Leet Code 3878");
+    LeetCodeBit leetCode;
+    vector<int> nums = {4, 2, 3};
+    int result = leetCode.countGoodSubarrays(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,3,1 };
+    result = leetCode.countGoodSubarrays(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode3878();
     TestLeetCode3858();
     TestLeetCode3849();
     TestLeetCode3845();

@@ -13332,5 +13332,250 @@ public:
     /// </summary>
     int countSequences(vector<int>& nums, long long k);
 
+    /// <summary>
+    /// Leet Code 3877. Minimum Removals to Achieve Target XOR
+    /// 
+    /// Medium
+    ///
+    /// You are given an integer array nums and an integer target.
+    ///
+    /// You may remove any number of elements from nums(possibly zero).
+    ///
+    /// Return the minimum number of removals required so that the bitwise 
+    /// XOR of the remaining elements equals target.If it is impossible to 
+    /// achieve target, return -1.
+    ///
+    /// The bitwise XOR of an empty array is 0.
+    ///
+    /// Example 1:
+    /// Input: nums = [1, 2, 3], target = 2
+    /// Output : 1
+    /// Explanation :
+    /// Removing nums[1] = 2 leaves[nums[0], nums[2]] = [1, 3].
+    /// The XOR of[1, 3] is 2, which equals target.
+    /// It is not possible to achieve XOR = 2 in less than one removal, 
+    /// therefore the answer is 1.
+    ///
+    /// Example 2 :
+    /// Input : nums = [2, 4], target = 1   
+    /// Output : -1
+    /// Explanation :
+    /// It is impossible to remove elements to achieve target.Thus, the 
+    /// answer is - 1.
+    ///
+    /// Example 3 :
+    /// Input : nums = [7], target = 7
+    /// Output : 0
+    /// Explanation :
+    /// The XOR of all elements is nums[0] = 7, which equals target.Thus, 
+    /// no removal is needed.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 40
+    /// 2. 0 <= nums[i] <= 10^4
+    /// 3. 0 <= target <= 10^4
+    /// </summary>
+    int minRemovals(vector<int>& nums, int target);
+
+    /// <summary>
+    /// Leet Code 3882. Minimum XOR Path in a Grid
+    /// 
+    /// Medium
+    ///
+    /// You are given a 2D integer array grid of size m * n.
+    ///
+    /// You start at the top - left cell(0, 0) and want to reach the 
+    /// bottom - right cell(m - 1, n - 1).
+    ///
+    /// At each step, you may move either right or down.
+    ///
+    /// The cost of a path is defined as the bitwise XOR of all the values 
+    /// in the cells along that path, including the start and end cells.
+    /// Return the minimum possible XOR value among all valid paths 
+    /// from(0, 0) to(m - 1, n - 1).
+    ///
+    /// Example 1:
+    /// Input: grid = [[1, 2], [3, 4]]
+    /// Output : 6
+    /// Explanation :
+    /// There are two valid paths :
+    /// (0, 0) ->(0, 1) ->(1, 1) with XOR : 1 XOR 2 XOR 4 = 7
+    /// (0, 0) ->(1, 0) ->(1, 1) with XOR : 1 XOR 3 XOR 4 = 6
+    /// The minimum XOR value among all valid paths is 6.
+    ///
+    /// Example 2 :
+    /// Input : grid = [[6, 7], [5, 8]]
+    /// Output : 9
+    /// Explanation :
+    /// There are two valid paths :
+    /// (0, 0) ->(0, 1) ->(1, 1) with XOR : 6 XOR 7 XOR 8 = 9
+    /// (0, 0) ->(1, 0) ->(1, 1) with XOR : 6 XOR 5 XOR 8 = 11
+    /// The minimum XOR value among all valid paths is 9.
+    ///
+    /// Example 3 :
+    /// Input : grid = [[2, 7, 5]]
+    /// Output : 0
+    /// Explanation :
+    /// There is only one valid path :
+    /// (0, 0) ->(0, 1) ->(0, 2) with XOR : 2 XOR 7 XOR 5 = 0
+    /// The XOR value of this path is 0, which is the minimum possible.
+    ///
+    /// Constraints:
+    /// 1. 1 <= m == grid.length <= 1000
+    /// 2. 1 <= n == grid[i].length <= 1000
+    /// 3. m * n <= 1000
+    /// 3. 0 <= grid[i][j] <= 1023
+    /// </summary>
+    int minCostXor(vector<vector<int>>& grid);
+
+    /// <summary>
+    /// Leet Code 3883. Count Non Decreasing Arrays With Given Digit Sums
+    /// 
+    /// Hard
+    ///
+    /// You are given an integer array digitSum of length n.
+    /// An array arr of length n is considered valid if:
+    ///
+    /// 0 <= arr[i] <= 5000
+    /// it is non - decreasing.
+    /// the sum of the digits of arr[i] equals digitSum[i].
+    /// Return an integer denoting the number of distinct valid arrays.Since 
+    /// the answer may be large, return it modulo 10^9 + 7.
+    ///
+    /// An array is said to be non - decreasing if each element is greater 
+    /// than or equal to the previous element, if it exists.
+    /// 
+    /// Example 1:
+    /// Input: digitSum = [25, 1]
+    /// Output : 6
+    /// Explanation :
+    /// Numbers whose sum of digits is 25 are 799, 889, 898, 979, 988, and 997.
+    /// The only number whose sum of digits is 1 that can appear after these 
+    /// values while keeping the array non - decreasing is 1000.
+    /// Thus, the valid arrays are[799, 1000], [889, 1000], [898, 1000], 
+    /// [979, 1000], [988, 1000], and [997, 1000].
+    /// Hence, the answer is 6.
+    ///
+    /// Example 2:
+    /// Input: digitSum = [1]
+    /// Output : 4
+    /// Explanation :
+    /// The valid arrays are[1], [10], [100], and [1000].
+    /// Thus, the answer is 4.
+    /// Example 3:
+    /// Input: digitSum = [2, 49, 23]
+    /// Output : 0
+    /// Explanation :
+    /// Numbers whose sum of digits is 2 are 2, 11, 20, 101, 110, and 200.
+    /// There is no integer in the range[0, 5000] whose sum of digits is 49. 
+    /// Thus, the answer is 0.
+    ///
+    /// Constraints:
+    /// 1. 1 <= digitSum.length <= 1000
+    /// 2. 0 <= digitSum[i] <= 50
+    /// </summary>
+    int countArrays(vector<int>& digitSum);
+
+    /// <summary>
+    /// Leet Code 3891. Minimum Increase to Maximize Special Indices
+    /// 
+    /// Medium
+    ///
+    /// You are given an integer array nums of length n.
+    /// An index i (0 < i < n - 1) is special if nums[i] > nums[i - 1] and 
+    /// nums[i] > nums[i + 1].
+    ///
+    /// You may perform operations where you choose any index i and increase 
+    /// nums[i] by 1.
+    ///
+    /// Your goal is to :
+    /// Maximize the number of special indices.
+    /// Minimize the total number of operations required to achieve that 
+    /// maximum.
+    /// Return an integer denoting the minimum total number of operations 
+    /// required.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1, 2, 2]
+    /// Output : 1
+    /// Explanation : 
+    /// Start with nums = [1, 2, 2].
+    /// Increase nums[1] by 1, array becomes[1, 3, 2].
+    /// The final array is[1, 3, 2] has 1 special index, which is the maximum 
+    /// achievable.
+    /// It is impossible to achieve this number of special indices with fewer 
+    /// operations.Thus, the answer is 1.
+    /// 
+    /// Example 2:
+    /// Input: nums = [2, 1, 1, 3]
+    /// Output : 2
+    /// Explanation : 
+    /// Start with nums = [2, 1, 1, 3].
+    /// Perform 2 operations at index 1, array becomes[2, 3, 1, 3].
+    /// The final array is[2, 3, 1, 3] has 1 special index, which is the 
+    /// maximum achievable.Thus, the answer is 2.
+    /// 
+    /// Example 3 :
+    /// Input : nums = [5, 2, 1, 4, 3]
+    /// Output : 4
+    /// Explanation : 
+    /// Start with nums = [5, 2, 1, 4, 3].
+    /// Perform 4 operations at index 1, array becomes[5, 6, 1, 4, 3].
+    /// The final array is[5, 6, 1, 4, 3] has 2 special indices, which is the 
+    /// maximum achievable.Thus, the answer is 4.
+    ///
+    /// Constraints :
+    /// 1. 3 <= n <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// </summary>
+    long long minIncrease(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3892. Minimum Operations to Achieve At Least K Peaks
+    /// 
+    /// You are given a circular integer array nums of length n.
+    /// An index i is a peak if its value is strictly greater than its neighbors :
+    ///
+    /// The previous neighbor of i is nums[i - 1] if i > 0, otherwise nums[n - 1].
+    /// The next neighbor of i is nums[i + 1] if i < n - 1, otherwise nums[0].
+    /// You are allowed to perform the following operation any number of times :
+    ///
+    /// Choose any index i and increase nums[i] by 1.
+    /// Return an integer denoting the minimum number of operations required to 
+    /// make the array contain at least k peaks.If it is impossible, return -1.
+    ///
+    /// Example 1:
+    /// Input: nums = [2, 1, 2], k = 1
+    /// Output : 1
+    /// Explanation :
+    /// To achieve at least k = 1 peak, we can increase nums[2] = 2 to 3.
+    /// After this operation, nums[2] = 3 is strictly greater than its neighbors 
+    /// nums[0] = 2 and nums[1] = 1.
+    /// Therefore, the minimum number of operations required is 1.
+    ///
+    /// Example 2:
+    /// Input: nums = [4, 5, 3, 6], k = 2
+    /// Output: 0
+    /// Explanation :
+    /// The array already contains at least k = 2 peaks with zero operations.
+    /// Index 1 : nums[1] = 5 is strictly greater than its neighbors nums[0] = 4 
+    /// and nums[2] = 3.
+    /// Index 3 : nums[3] = 6 is strictly greater than its neighbors nums[2] = 3 
+    /// and nums[0] = 4.
+    /// Therefore, the minimum number of operations required is 0.
+    ///
+    /// Example 3 :
+    /// Input : nums = [3, 7, 3], k = 2
+    /// Output : -1
+    /// Explanation :
+    /// It is impossible to have at least k = 2 peaks in this array.Therefore, 
+    /// the answer is - 1.
+    ///
+    /// Constraints:
+    /// 1. 3 <= n == nums.length <= 10^5 
+    /// 2. -10^5 <= nums[i] <= 10^5 
+    /// 3. 0 <= k <= n
+    /// </summary>
+    int minOperations(vector<int>& nums, int k); 
  };
 #endif  // LeetCodeDP

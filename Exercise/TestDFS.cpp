@@ -2948,6 +2948,7 @@ void TestLeetCode1012(void)
     result = leetCode.numDupDigitsAtMostN(N);
     Logger::WriteMessage("N = " + to_string(N) + "; result = " + to_string(result));
 }
+
 void TestLeetCode3821(void)
 {
     Logger::WriteMessage("Test Leet Code 3821");
@@ -2964,8 +2965,57 @@ void TestLeetCode3821(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3864(void)
+{
+    Logger::WriteMessage("Test Leet Code 3864");
+    LeetCodeDFS leetCode;
+
+    string s = "1010";
+    int encCost = 2, flatCost = 1;
+    long long result = leetCode.minCost(s, encCost, flatCost);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("; encCost = " + to_string(encCost) + "; flatCost = " + to_string(flatCost));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "1010";
+    encCost = 3, flatCost = 10;
+    result = leetCode.minCost(s, encCost, flatCost);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("; encCost = " + to_string(encCost) + "; flatCost = " + to_string(flatCost));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "00";
+    encCost = 1, flatCost = 2;
+    result = leetCode.minCost(s, encCost, flatCost);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("; encCost = " + to_string(encCost) + "; flatCost = " + to_string(flatCost));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3869(void)
+{
+    Logger::WriteMessage("Test Leet Code 3869");
+    LeetCodeDFS leetCode;
+    long long l = 8, r = 10;
+    long long result = leetCode.countFancy(l, r);
+    Logger::WriteMessage("l = " + to_string(l) + "; r = " + to_string(r));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    l = 12340, r = 12341;
+    result = leetCode.countFancy(l, r);
+    Logger::WriteMessage("l = " + to_string(l) + "; r = " + to_string(r));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    l = 123456788, r = 123456788;
+    result = leetCode.countFancy(l, r);
+    Logger::WriteMessage("l = " + to_string(l) + "; r = " + to_string(r));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode3869();
+    TestLeetCode3864();
     TestLeetCode3821();
     TestLeetCode1012();
     TestLeetCode1067();
