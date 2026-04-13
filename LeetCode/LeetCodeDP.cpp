@@ -11230,21 +11230,23 @@ int LeetCodeDP::longestPalindromeSubseqII(string s)
 /// </summary>
 int LeetCodeDP::maxSumAfterOperation(vector<int>& nums)
 {
-    int sum = 0, sum_op = 0;
-    int result = INT_MIN;
+    vector<int> prefix(nums.size());
+    vector<int> suffix(nums.size());
+    int n = nums.size();
+    for (int i = 0; i < n; i++)
+    {
+        if (i == 0) prefix[i] = 0;
+        else prefix[i] = max(prefix[i - 1] + nums[i-1], 0);
+    }
+    for (int i = n - 1; i >= 0; i--)
+    {
+        if (i == n - 1) suffix[i] = 0;
+        else suffix[i] = max(suffix[i + 1] + nums[i + 1], 0);
+    }
+    int result = 0;
     for (size_t i = 0; i < nums.size(); i++)
     {
-        if (i == 0)
-        {
-            sum = nums[i];
-            sum_op = nums[i] * nums[i];
-        }
-        else
-        {
-            sum_op = max(sum + nums[i] * nums[i], sum_op + nums[i]);
-            sum = max(0, sum + nums[i]);
-        }
-        result = max(result, sum_op);
+        result = max(result, prefix[i] + nums[i] * nums[i] + suffix[i]);
     }
     return result;
 }

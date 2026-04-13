@@ -6665,6 +6665,7 @@ void TestLeetCode3892(void)
 
 void TestLeetCodeDP(void)
 {
+    TestLeetCode1746();
     TestLeetCode3892();
     TestLeetCode3891();
     TestLeetCode3883();

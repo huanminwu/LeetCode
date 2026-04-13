@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <ctype.h>  /* is space */
 #include <stdio.h>     /* printf */
 #include <stdlib.h>  
@@ -721,7 +721,7 @@ int LeetCodeSort::mergeCountRangeSum(vector<long long>& sums, int begin, int end
 /// Given an integer array nums, return the number of range sums that lie in 
 /// [lower, upper] inclusive.
 /// Range sum S(i, j) is defined as the sum of the elements in nums between 
-/// indices i and j (i ≤ j), inclusive.
+/// indices i and j (i ? j), inclusive.
 /// 
 /// Note:
 /// A naive algorithm of O(n2) is trivial. You MUST do better than that. 
@@ -833,7 +833,7 @@ bool LeetCodeSort::increasingTriplet(vector<int>& nums)
 ///
 /// Given integers n and k, find the lexicographically k-th smallest 
 /// integer in the range from 1 to n. 
-/// Note: 1 ≤ k ≤ n ≤ 109.
+/// Note: 1 ? k ? n ? 109.
 /// 
 /// Example: 
 /// Input:
@@ -903,7 +903,7 @@ int LeetCodeSort::findKthNumber(int n, int k)
 ///
 /// Therefore, return the median sliding window as [1,-1,-1,3,5,6].
 /// Note: 
-/// You may assume k is always valid, ie: 1 ≤ k ≤ input array's size for non-empty 
+/// You may assume k is always valid, ie: 1 ? k ? input array's size for non-empty 
 /// array.
 /// </summary>
 vector<double> LeetCodeSort::medianSlidingWindow(vector<int>& nums, int k)
@@ -1202,7 +1202,7 @@ string LeetCodeSort::splitLoopedString(vector<string>& strs)
 }
 
 /// <summary>
-/// Leet code #561. Array        
+/// Leet code #561. Array ?????? 
 /// 
 /// Given an array of 2n integers, your task is to group these integers 
 /// into n pairs of integer, say (a1, b1), (a2, b2), ..., (an, bn) which 
@@ -1384,7 +1384,7 @@ bool LeetCodeSort::checkPossibility(vector<int>& nums)
 /// Explanation: "the", "is", "sunny" and "day" are the four most frequent 
 /// words, with the number of occurrence being 4, 3, 2 and 1 respectively.
 /// Note:
-/// You may assume k is always valid, 1 ≤ k ≤ number of unique elements.
+/// You may assume k is always valid, 1 ? k ? number of unique elements.
 /// Input words contain only lowercase letters.
 /// Follow up:
 /// 1. Try to solve it in O(n log k) time and O(n) extra space.
@@ -14489,10 +14489,10 @@ int LeetCodeSort::maxProduct(int n)
 ///
 /// For each contiguous subarray of length k, determine the minimum length of 
 /// a continuous segment that must be sorted so that the entire window becomes 
-/// non‑decreasing; if the window is already sorted, its required length is 
+/// non?decreasing; if the window is already sorted, its required length is 
 /// zero.
 ///
-/// Return an array of length n − k + 1 where each element corresponds to the 
+/// Return an array of length n ? k + 1 where each element corresponds to the 
 /// answer for its window.
 /// 
 /// Example 1:
@@ -14545,7 +14545,7 @@ vector<int> LeetCodeSort::minSubarraySort(vector<int>& nums, int k)
 }
 
 /// <summary>
-/// Leet Code 3572. Maximize Y‑Sum by Picking a Triplet of Distinct X‑Values
+/// Leet Code 3572. Maximize Y?Sum by Picking a Triplet of Distinct X?Values
 ///
 /// Medium
 ///
@@ -14690,7 +14690,7 @@ long long LeetCodeSort::maximumMedianSum(vector<int>& nums)
 /// IDi: Unique identifier of the threat.
 /// sevi: Indicates the severity of the threat.
 /// expi: Indicates the exploitability of the threat.
-/// The score of a threat i is defined as: score = 2 × sevi + expi
+/// The score of a threat i is defined as: score = 2 ? sevi + expi
 ///
 /// Your task is to return threats sorted in descending order of score.
 /// If multiple threats have the same score, sort them by ascending ID.
@@ -14699,20 +14699,20 @@ long long LeetCodeSort::maximumMedianSum(vector<int>& nums)
 /// Input: threats = [[101,2,3],[102,3,2],[103,3,3]]
 /// Output: [[103,3,3],[102,3,2],[101,2,3]]
 /// Explanation:
-/// Threat  ID  sev exp Score = 2 × sev + exp
-/// threats[0]  101 2   3   2 × 2 + 3 = 7
-/// threats[1]  102 3   2   2 × 3 + 2 = 8
-/// threats[2]  103 3   3   2 × 3 + 3 = 9
+/// Threat  ID  sev exp Score = 2 ? sev + exp
+/// threats[0]  101 2   3   2 ? 2 + 3 = 7
+/// threats[1]  102 3   2   2 ? 3 + 2 = 8
+/// threats[2]  103 3   3   2 ? 3 + 3 = 9
 /// Sorted Order: [[103, 3, 3], [102, 3, 2], [101, 2, 3]]
 ///
 /// Example 2:
 /// Input: threats = [[101,4,1],[103,1,5],[102,1,5]]
 /// Output: [[101,4,1],[102,1,5],[103,1,5]]
 /// Explanation:
-/// Threat  ID  sev exp Score = 2 × sev + exp
-/// threats[0]  101 4   1   2 × 4 + 1 = 9
-/// threats[1]  103 1   5   2 × 1 + 5 = 7
-/// threats[2]  102 1   5   2 × 1 + 5 = 7
+/// Threat  ID  sev exp Score = 2 ? sev + exp
+/// threats[0]  101 4   1   2 ? 4 + 1 = 9
+/// threats[1]  103 1   5   2 ? 1 + 5 = 7
+/// threats[2]  102 1   5   2 ? 1 + 5 = 7
 /// threats[1] and threats[2] have same score, thus sort them by ascending ID.
 ///
 /// Sorted Order: [[101, 4, 1], [102, 1, 5], [103, 1, 5]]
@@ -14808,11 +14808,11 @@ int LeetCodeSort::minRemoval(vector<int>& nums, int k)
 /// water rides.
 ///
 /// Land rides
-/// landStartTime[i] – the earliest time the ith land ride can be boarded.
-/// landDuration[i] – how long the ith land ride lasts.
+/// landStartTime[i] ? the earliest time the ith land ride can be boarded.
+/// landDuration[i] ? how long the ith land ride lasts.
 /// Water rides
-/// waterStartTime[j] – the earliest time the jth water ride can be boarded.
-/// waterDuration[j] – how long the jth water ride lasts.
+/// waterStartTime[j] ? the earliest time the jth water ride can be boarded.
+/// waterDuration[j] ? how long the jth water ride lasts.
 /// A tourist must experience exactly one ride from each category, in either 
 /// order.
 ///
@@ -14828,22 +14828,22 @@ int LeetCodeSort::minRemoval(vector<int>& nums, int k)
 /// waterDuration = [3]
 /// Output: 9
 /// Explanation:
-/// Plan A (land ride 0 → water ride 0):
+/// Plan A (land ride 0 ? water ride 0):
 /// Start land ride 0 at time landStartTime[0] = 2. 
 /// Finish at 2 + landDuration[0] = 6.
 /// Water ride 0 opens at time waterStartTime[0] = 6. Start immediately at 6, 
 /// finish at 6 + waterDuration[0] = 9.
-/// Plan B (water ride 0 → land ride 1):
+/// Plan B (water ride 0 ? land ride 1):
 /// Start water ride 0 at time waterStartTime[0] = 6. 
 /// Finish at 6 + waterDuration[0] = 9.
 /// Land ride 1 opens at landStartTime[1] = 8. Start at time 9, 
 /// finish at 9 + landDuration[1] = 10.
-/// Plan C (land ride 1 → water ride 0):
+/// Plan C (land ride 1 ? water ride 0):
 /// Start land ride 1 at time landStartTime[1] = 8. 
 /// Finish at 8 + landDuration[1] = 9.
 /// Water ride 0 opened at waterStartTime[0] = 6. Start at time 9, 
 /// finish at 9 + waterDuration[0] = 12.
-/// Plan D (water ride 0 → land ride 0):
+/// Plan D (water ride 0 ? land ride 0):
 /// Start water ride 0 at time waterStartTime[0] = 6. 
 /// Finish at 6 + waterDuration[0] = 9.
 /// Land ride 0 opened at landStartTime[0] = 2. Start at time 9, 
@@ -14856,12 +14856,12 @@ int LeetCodeSort::minRemoval(vector<int>& nums, int k)
 /// 
 /// Output: 14
 /// Explanation:
-/// Plan A (water ride 0 → land ride 0):
+/// Plan A (water ride 0 ? land ride 0):
 /// Start water ride 0 at time waterStartTime[0] = 1. 
 /// Finish at 1 + waterDuration[0] = 11.
 /// Land ride 0 opened at landStartTime[0] = 5. Start immediately at 11 and 
 /// finish at 11 + landDuration[0] = 14.
-/// Plan B (land ride 0 → water ride 0):
+/// Plan B (land ride 0 ? water ride 0):
 /// Start land ride 0 at time landStartTime[0] = 5. 
 /// Finish at 5 + landDuration[0] = 8.
 /// Water ride 0 opened at waterStartTime[0] = 1. Start immediately at 8 and 
@@ -14925,11 +14925,11 @@ int LeetCodeSort::earliestFinishTimeI(vector<int>& landStartTime, vector<int>& l
 /// and water rides.
 ///
 /// Land rides
-/// landStartTime[i] – the earliest time the ith land ride can be boarded.
-/// landDuration[i] – how long the ith land ride lasts.
+/// landStartTime[i] ? the earliest time the ith land ride can be boarded.
+/// landDuration[i] ? how long the ith land ride lasts.
 /// Water rides
-/// waterStartTime[j] – the earliest time the jth water ride can be boarded.
-/// waterDuration[j] – how long the jth water ride lasts.
+/// waterStartTime[j] ? the earliest time the jth water ride can be boarded.
+/// waterDuration[j] ? how long the jth water ride lasts.
 /// A tourist must experience exactly one ride from each category, in either 
 /// order.
 ///
@@ -14945,22 +14945,22 @@ int LeetCodeSort::earliestFinishTimeI(vector<int>& landStartTime, vector<int>& l
 /// waterDuration = [3]
 /// Output: 9
 /// Explanation:
-/// Plan A (land ride 0 → water ride 0):
+/// Plan A (land ride 0 ? water ride 0):
 /// Start land ride 0 at time landStartTime[0] = 2. Finish at 
 /// 2 + landDuration[0] = 6.
 /// Water ride 0 opens at time waterStartTime[0] = 6. Start immediately at 6, 
 /// finish at 6 + waterDuration[0] = 9.
-/// Plan B (water ride 0 → land ride 1):
+/// Plan B (water ride 0 ? land ride 1):
 /// Start water ride 0 at time waterStartTime[0] = 6. Finish at 
 /// 6 + waterDuration[0] = 9.
 /// Land ride 1 opens at landStartTime[1] = 8. Start at time 9, finish at 
 /// 9 + landDuration[1] = 10.
-/// Plan C (land ride 1 → water ride 0):
+/// Plan C (land ride 1 ? water ride 0):
 /// Start land ride 1 at time landStartTime[1] = 8. Finish at 
 /// 8 + landDuration[1] = 9.
 /// Water ride 0 opened at waterStartTime[0] = 6. Start at time 9, finish 
 /// at 9 + waterDuration[0] = 12.
-/// Plan D (water ride 0 → land ride 0):
+/// Plan D (water ride 0 ? land ride 0):
 /// Start water ride 0 at time waterStartTime[0] = 6. Finish at 
 /// 6 + waterDuration[0] = 9.
 /// Land ride 0 opened at landStartTime[0] = 2. Start at time 9, 
@@ -14972,12 +14972,12 @@ int LeetCodeSort::earliestFinishTimeI(vector<int>& landStartTime, vector<int>& l
 /// waterDuration = [10]
 /// Output: 14
 /// Explanation:
-/// Plan A (water ride 0 → land ride 0):
+/// Plan A (water ride 0 ? land ride 0):
 /// Start water ride 0 at time waterStartTime[0] = 1. Finish at 
 /// 1 + waterDuration[0] = 11.
 /// Land ride 0 opened at landStartTime[0] = 5. Start immediately at 11 and 
 /// finish at 11 + landDuration[0] = 14.
-/// Plan B (land ride 0 → water ride 0):
+/// Plan B (land ride 0 ? water ride 0):
 /// Start land ride 0 at time landStartTime[0] = 5. Finish at 
 /// 5 + landDuration[0] = 8.
 /// Water ride 0 opened at waterStartTime[0] = 1. Start immediately at 8 and 
@@ -16342,5 +16342,100 @@ int LeetCodeSort::finalElement(vector<int>& nums)
         round = 1 - round;
     }
     return nums[first];
+}
+
+
+/// <summary>
+/// Leet Code 3897. Maximum Value of Concatenated Binary Segments 
+/// 
+/// Hard
+///
+/// You are given two integer arrays nums1 and nums0, each of size n.
+///
+/// nums1[i] represents the number of '1's in the ith segment.
+/// nums0[i] represents the number of '0's in the ith segment.
+/// For each index i, construct a binary segment consisting of :
+/// nums1[i] occurrences of '1' followed by
+/// nums0[i] occurrences of '0'.
+/// You may rearrange the order of these segments in any way.After 
+/// rearranging, concatenate all segments to form a single binary string.
+///
+/// Return the maximum possible integer value of the concatenated binary 
+/// string.
+///
+/// Since the result can be very large, return the answer modulo 10^9 + 7.
+///
+/// Example 1:
+/// Input: nums1 = [1, 2], nums0 = [1, 0]
+/// Output : 14
+/// Explanation :
+/// At index 0, nums1[0] = 1 and nums0[0] = 1, so the segment formed 
+/// is "10".
+/// At index 1, nums1[1] = 2 and nums0[1] = 0, so the segment formed 
+/// is "11".
+/// Reordering the segments as "11" followed by "10" produces the binary 
+/// string "1110".
+/// The binary number "1110" has value 14 which is the maximum possible 
+/// value.
+/// 
+/// Example 2:
+/// Input: nums1 = [3, 1], nums0 = [0, 3]
+/// Output : 120
+/// Explanation :
+/// At index 0, nums1[0] = 3 and nums0[0] = 0, so the segment formed 
+/// is "111".
+/// At index 1, nums1[1] = 1 and nums0[1] = 3, so the segment formed 
+/// is "1000".
+/// Reordering the segments as "111" followed by "1000" produces the binary 
+/// string "1111000".
+/// The binary number "1111000" has value 120 which is the maximum possible 
+/// value.
+///
+/// Constraints :
+/// 1. 1 <= n == nums1.length == nums0.length <= 10^5
+/// 2. 0 <= nums1[i], nums0[i] <= 10^4
+/// 3. nums1[i] + nums0[i] > 0
+/// 4. The total sum of all elements in nums1 and nums0 does not exceed 
+///    2 * 10^5.
+/// </summary>
+int LeetCodeSort::maxValue(vector<int>& nums1, vector<int>& nums0)
+{
+    long long M = 1000000007;
+    long long result = 0;
+
+    vector<pair<int, int>> arr;
+    vector<int> full;
+    for (size_t i = 0; i < nums1.size(); i++)
+    {
+        if (nums0[i] == 0)
+        {
+            full.push_back(nums1[i]);
+        }
+        else
+        {
+            arr.push_back(make_pair(-nums1[i], nums0[i]));
+        }
+    }
+    sort(arr.begin(), arr.end());
+    for (size_t i = 0; i < full.size(); i++)
+    {
+        for (int j = 0; j < full[i]; j++)
+        {
+            result = (result * 2 + 1) % M;
+        }
+    }
+
+    for (size_t i = 0; i < arr.size(); i++)
+    {
+        for (int j = 0; j < -arr[i].first; j++)
+        {
+            result = (result * 2 + 1) % M;
+        }
+        for (int j = 0; j < arr[i].second; j++)
+        {
+            result = (result * 2) % M;
+        }
+    }
+    return (int)result;
 }
 #pragma endregion

@@ -29473,6 +29473,247 @@ vector<int> LeetCodeMath::findGoodIntegers(int n)
     sort(result.begin(), result.end());
     return result;
 }
+/// <summary>
+/// Leet code 3894. Traffic Signal Color
+///
+/// Easy
+///
+/// You are given an integer timer representing the remaining time 
+/// (in seconds) on a traffic signal.
+///
+/// The signal follows these rules :
+/// 
+/// If timer == 0, the signal is "Green"
+/// If timer == 30, the signal is "Orange"
+/// If 30 < timer <= 90, the signal is "Red"
+/// Return the current state of the signal.If none of the above 
+/// conditions are met, return "Invalid".
+///
+///  Example 1:
+/// Input: timer = 60
+/// Output : "Red"
+/// Explanation :
+/// Since timer = 60, and 30 < timer <= 90, the answer is "Red".
+///
+/// Example 2 :
+/// Input : timer = 5
+/// Output : "Invalid"
+/// Explanation :
+/// Since timer = 5, it does not satisfy any of the given conditions, 
+/// the answer is "Invalid".
+///
+/// Constraints:
+/// 1. 0 <= timer <= 1000   
+/// </summary>
+string LeetCodeMath::trafficSignal(int timer)
+{
+    if (timer == 0) return "Green";
+    else if (timer == 30) return "Orange";
+    else if (timer > 30 && timer <= 90) return "Red";
+    return "Invalid";
+}
+
+/// <summary>
+/// Leet code 3895. Count Digit Appearances
+///
+/// Medium
+/// 
+/// You are given an integer array nums and an integer digit.
+///
+/// Return the total number of times digit appears in the decimal 
+/// representation of all elements in nums.
+///
+/// Example 1:
+/// Input: nums = [12, 54, 32, 22], digit = 2
+/// Output : 4
+/// Explanation :
+/// The digit 2 appears once in 12 and 32, and twice in 22. Thus, the 
+/// total number of times digit 2 appears is 4.
+///
+/// Example 2 :
+/// Input : nums = [1, 34, 7], digit = 9
+/// Output : 0
+/// Explanation :
+/// The digit 9 does not appear in the decimal representation of any 
+/// element in nums, so the total number of times digit 9 appears is 0.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 1000
+/// 2. 1 <= nums[i] <= 10^6
+/// 3. 0 <= digit <= 9
+/// </summary>
+int LeetCodeMath::countDigitOccurrences(vector<int>& nums, int digit)
+{
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int value = nums[i];
+        if (value == 0 && digit == 0)
+        {
+            result++;
+        }
+        else
+        {
+            while (value > 0)
+            {
+                if (value % 10 == digit)
+                {
+                    result++;
+                }
+                value /= 10;
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code 3896. Minimum Operations to Transform Array into Alternating 
+///                 Prime
+///
+/// Medium
+/// 
+/// You are given an integer array nums.
+///
+/// An array is considered alternating prime if:
+///
+/// Elements at even indices(0 - based) are prime numbers.
+/// Elements at odd indices are non - prime numbers.
+/// In one operation, you may increment any element by 1.
+/// Return the minimum number of operations required to transform nums 
+/// into an alternating prime array.
+///
+/// A prime number is a natural number greater than 1 with only two 
+/// factors, 1 and itself.
+///
+/// Example 1:
+/// Input: nums = [1, 2, 3, 4]
+/// Output : 3
+/// Explanation :
+/// The element at index 0 must be prime.Increment nums[0] = 1 to 2, 
+/// using 1 operation.
+/// The element at index 1 must be non - prime.Increment nums[1] = 2 to 4, 
+/// using 2 operations.
+/// The element at index 2 is already prime.
+/// The element at index 3 is already non - prime.
+/// Total operations = 1 + 2 = 3.
+///
+/// Example 2:
+/// Input: nums = [5, 6, 7, 8]
+/// Output : 0
+/// Explanation :
+/// The elements at indices 0 and 2 are already prime.
+/// The elements at indices 1 and 3 are already non - prime.
+/// No operations are needed.
+///
+/// Example 3:
+/// Input: nums = [4, 4]
+/// Output : 1
+/// Explanation :
+/// The element at index 0 must be prime.Increment nums[0] = 4 to 5, 
+/// using 1 operation.
+/// The element at index 1 is already non - prime.
+/// Total operations = 1.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 105
+/// 2. 1 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeMath::minOperationsAlternativePrime(vector<int>& nums)
+{
+    vector<int> is_prime(1000001, 1);
+    is_prime[0] = 0;
+    is_prime[1] = 0;
+    for (int i = 0; i < 100000; i++)
+    {
+        if ((i == 0) || (i == 1)) continue;
+        if (is_prime[i] == 0) continue;
+        int factor = 2;
+        while (i * factor <= 100000)
+        {
+            is_prime[i * factor] = 0;
+            factor++;
+        }
+    }
+    vector<int> prime;
+    for (int i = 0; i < 100000; i++)
+    {
+        if (is_prime[i] == 1) prime.push_back(i);
+    }
+    prime.push_back(100003);
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (i % 2 == 0)
+        {
+            int index = lower_bound(prime.begin(), prime.end(), nums[i]) - prime.begin();
+            result += prime[index] - nums[i];
+        }
+        else
+        {
+            if (is_prime[nums[i]] == 1)
+            {
+                if (nums[i] == 2) result += 2;
+                else result += 1;
+            }
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet code 3899. Angles of a Triangle 
+///
+/// Medium
+/// 
+/// You are given a positive integer array sides of length 3.
+///
+/// Determine if there exists a triangle with positive area whose three 
+/// side lengths are given by the elements of sides.
+///
+/// If such a triangle exists, return an array of three floating - point 
+/// numbers representing its internal angles(in degrees), sorted in 
+/// non - decreasing order.Otherwise, return an empty array.
+///
+/// Answers within 10 ^- 5 of the actual answer will be accepted.
+///
+/// Example 1:
+/// Input: sides = [3, 4, 5]
+/// Output : [36.86990, 53.13010, 90.00000]
+/// Explanation :
+/// You can form a right - angled triangle with side lengths 3, 4, and 5. 
+/// The internal angles of this triangle are approximately 36.869897646, 
+/// 53.130102354, and 90 degrees respectively.
+///
+/// Example 2 :
+/// Input : sides = [2, 4, 2]
+/// Output : []
+/// Explanation :
+/// You cannot form a triangle with positive area using side lengths 2, 4,
+/// and 2.
+/// 
+/// Constraints:
+/// 1. sides.length == 3
+/// 2. 1 <= sides[i] <= 1000
+/// </summary>
+vector<double> LeetCodeMath::internalAngles(vector<int>& sides)
+{
+    const double M_PI = 3.14159265358979323846;
+    vector<double> result;
+    int a = sides[0], b = sides[1], c = sides[2];
+    if ((a + b > c) && (a + c > b) && (b + c > a))
+    {
+        double A = acos((b * b + c * c - a * a) / (2.0 * b * c)) * 180.0 / M_PI;
+        double B = acos((a * a + c * c - b * b) / (2.0 * a * c)) * 180.0 / M_PI;
+        double C = 180.0 - A - B;
+        result.push_back(A);
+        result.push_back(B);
+        result.push_back(C);
+        sort(result.begin(), result.end());
+    }
+    return result;
+}
 
 #pragma endregion
 

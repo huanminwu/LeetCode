@@ -8716,8 +8716,91 @@ void TestLeetCode3890(void)
     Logger::WriteMessage(result);
 }
 
+
+void TestLeetCode3894(void)
+{
+    Logger::WriteMessage("Test Leet Code 3894");
+    LeetCodeMath leetCode;
+    int timer = 0;
+    string result = leetCode.trafficSignal(timer);
+    Logger::WriteMessage("timer = " + to_string(timer));
+    Logger::WriteMessage("result = " + result);
+
+    timer = 30;
+    result = leetCode.trafficSignal(timer);
+    Logger::WriteMessage("timer = " + to_string(timer));
+    Logger::WriteMessage("result = " + result);
+
+    timer = 60;
+    result = leetCode.trafficSignal(timer);
+    Logger::WriteMessage("timer = " + to_string(timer));
+    Logger::WriteMessage("result = " + result);
+
+    timer = 5;
+    result = leetCode.trafficSignal(timer);
+    Logger::WriteMessage("timer = " + to_string(timer));
+    Logger::WriteMessage("result = " + result);
+}
+
+void TestLeetCode3895(void)
+{
+    Logger::WriteMessage("Test Leet Code 3895");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 12, 54, 32, 22 };
+    int digit = 2;
+    int result = leetCode.countDigitOccurrences(nums, digit);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("digit = " + to_string(digit));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1, 34, 7 };
+    digit = 9;
+    result = leetCode.countDigitOccurrences(nums, digit);
+    Logger::WriteMessage("digit = " + to_string(digit));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3896(void)
+{
+    Logger::WriteMessage("Test Leet Code 3896");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 1, 2, 3, 4 };
+    int result = leetCode.minOperationsAlternativePrime(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,6,7,8 };
+    result = leetCode.minOperationsAlternativePrime(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,4 };
+    result = leetCode.minOperationsAlternativePrime(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3899(void)
+{
+    Logger::WriteMessage("Test Leet Code 3899");
+    LeetCodeMath leetCode;
+    vector<int> sides = { 3, 4, 5 };
+    vector<double> result = leetCode.internalAngles(sides);
+    Logger::WriteMessage(sides);
+    Logger::WriteMessage(result);
+
+    sides = { 2, 4, 2 };
+    result = leetCode.internalAngles(sides);
+    Logger::WriteMessage(sides);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3894();
+    TestLeetCode3895();
+    TestLeetCode3896();
+    TestLeetCode3899();
     TestLeetCode3890();
     TestLeetCode3888();
     TestLeetCode3881();

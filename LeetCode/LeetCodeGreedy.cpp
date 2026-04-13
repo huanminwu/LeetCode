@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include <ctype.h>  /* is space */
 #include <stdio.h>     /* printf */
 #include <stdlib.h>  
@@ -527,7 +527,7 @@ int LeetCodeGreedy::findMinArrowShots(vector<vector<int>>& points)
 /// The geometric information of each building is represented by a triplet of 
 /// integers [Li, Ri, Hi], where Li and Ri are the x coordinates of the left 
 /// and right edge of the ith building, respectively, and Hi is its height. 
-/// It is guaranteed that 0 ≤ Li, Ri ≤ INT_MAX, 0 < Hi ≤ INT_MAX, 
+/// It is guaranteed that 0 ? Li, Ri ? INT_MAX, 0 < Hi ? INT_MAX, 
 /// and Ri - Li > 0. 
 /// You may assume all buildings are perfect rectangles grounded on an 
 /// absolutely flat surface at height 0.
@@ -7490,6 +7490,86 @@ int LeetCodeGreedy::earliestTime(vector<vector<int>>& tasks)
     for (size_t i = 0; i < tasks.size(); i++)
     {
         result = min(result, tasks[i][0] + tasks[i][1]);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3893. Maximum Team Size with Overlapping Intervals
+///
+/// Medium
+///
+/// You are given two integer arrays startTime and endTime of length n.
+///
+/// startTime[i] represents the start time of the ith employee.
+/// endTime[i] represents the end time of the ith employee.
+/// Two employees i and j can interact if their time intervals overlap.
+/// Two intervals are considered overlapping if they share at least one 
+/// common time point.
+///
+/// A team is valid if there exists at least one employee in the team 
+/// who can interact with every other member of the team.
+/// Return an integer denoting the maximum possible size of such a team.
+///
+/// Example 1:
+/// Input: startTime = [1, 2, 3], endTime = [4, 5, 6]
+/// Output : 3
+/// Explanation :
+/// For i = 0 with interval[1, 4].
+/// It overlaps with i = 1 having interval[2, 5] and i = 2 having 
+/// interval[3, 6].
+/// Thus, index 0 can interact with all other indices, so the team size 
+/// is 3.
+///
+/// Example 2 :
+/// Input : startTime = [2, 5, 8], endTime = [3, 7, 9]
+/// Output : 1
+/// Explanation :
+/// For i = 0, interval[2, 3] does not overlap with[5, 7] or [8, 9].
+/// For i = 1, interval[5, 7] does not overlap with[2, 3] or [8, 9].
+/// For i = 2, interval[8, 9] does not overlap with[2, 3] or [5, 7].
+/// Thus, no index can interact with others, so the maximum team size is 1.
+///
+/// Example 3:
+/// Input: startTime = [3, 4, 6], endTime = [8, 5, 7]
+/// Output : 3
+/// Explanation :
+/// For i = 0 with interval[3, 8].
+/// It overlaps with i = 1 having interval[4, 5] and i = 2 having 
+/// interval[6, 7].
+/// Thus, index 0 can interact with all other indices, so the team size 
+/// is 3.
+/// 
+/// Constraints :
+/// 1. 1 <= n == startTime.length == endTime.length <= 10^5
+/// 2. 0 <= startTime[i] <= endTime[i] <= 10^9
+/// </summary>
+int LeetCodeGreedy::maximumTeamSize(vector<int>& startTime, vector<int>& endTime)
+{
+    vector<pair<int, int>> intervals;
+    for (size_t i = 0; i < startTime.size(); i++)
+    {
+        intervals.push_back({ startTime[i], endTime[i] });
+    }
+    sort(intervals.begin(), intervals.end());
+    set<pair<int, int>> prev_ends;
+    deque<int> next_starts;
+    for (size_t i = 0; i < intervals.size(); i++)
+    {
+        next_starts.push_back(intervals[i].first);
+    }
+    int result = 0;
+    for (size_t i = 0; i < intervals.size(); i++)
+    {
+        next_starts.pop_front();
+        while (!prev_ends.empty() && prev_ends.begin()->first < intervals[i].first)
+        {
+            prev_ends.erase(prev_ends.begin());
+        }
+        int left = prev_ends.size();
+        int right = upper_bound(next_starts.begin(), next_starts.end(), intervals[i].second) - next_starts.begin();
+        result = max(result, left + right + 1);
+        prev_ends.insert(make_pair(intervals[i].second, i));
     }
     return result;
 }

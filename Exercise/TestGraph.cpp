@@ -6768,8 +6768,29 @@ void TestLeetCode3887(void)
     Logger::WriteMessage("n = " + to_string(n) + "; result = " + to_string(result));
 }
 
+void TestLeetCode3898(void)
+{
+    Logger::WriteMessage("Test Leet Code 3898");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> matrix = {{0, 1, 1}, {1, 0, 1}, {1, 1, 0}};
+    vector<int> degrees = leetCode.findDegrees(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage(degrees);
+
+    matrix = {{0, 1, 0}, {1, 0, 0}, {0, 0, 0}};
+    degrees = leetCode.findDegrees(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage(degrees);
+
+    matrix = { {0} };
+    degrees = leetCode.findDegrees(matrix);
+    Logger::WriteMessage(matrix);
+    Logger::WriteMessage(degrees);
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode3898();
     TestLeetCode3887();
     TestLeetCode3873();
     TestLeetCode3807();
