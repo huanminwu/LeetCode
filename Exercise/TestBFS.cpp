@@ -1020,8 +1020,35 @@ void TestLeetCode3863(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3905(void)
+{
+    Logger::WriteMessage("Test Leet Code 3905");
+    LeetCodeBFS leetCode;
+    int n = 3, m = 3;
+    vector<vector<int>> sources = { {0, 0, 1}, {2, 2, 2} };
+    vector<vector<int>> result = leetCode.colorGrid(n, m, sources);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m));
+    Logger::WriteMessage(sources);
+    Logger::WriteMessage(result);
+ 
+    n = 3, m = 3;
+    sources = { {0, 1, 3},{1, 1, 5} };
+    result = leetCode.colorGrid(n, m, sources);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m));
+    Logger::WriteMessage(sources);
+    Logger::WriteMessage(result);
+
+    n = 2, m = 2;
+    sources = { {1, 1, 5} };
+    result = leetCode.colorGrid(n, m, sources);
+    Logger::WriteMessage("n = " + to_string(n) + "; m = " + to_string(m));
+    Logger::WriteMessage(sources);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeBFS(void)
 {
+    TestLeetCode3905();
     TestLeetCode3863();
     TestLeetCode3666();
     TestLeetCode3629();

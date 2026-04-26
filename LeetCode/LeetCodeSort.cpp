@@ -16438,4 +16438,108 @@ int LeetCodeSort::maxValue(vector<int>& nums1, vector<int>& nums0)
     }
     return (int)result;
 }
+
+/// <summary>
+/// Leet Code 3907. Count Smaller Elements With Opposite Parity 
+/// 
+/// Medium
+///
+/// You are given an integer array nums of length n.
+///
+/// The score of an index i is defined as the number of indices j such 
+/// that :
+///
+/// i < j < n
+/// nums[j] < nums[i]
+/// nums[i] and nums[j] have different parity(one is even and the other 
+/// is odd).
+/// Return an integer array answer of length n, where answer[i] is the 
+/// score of index i.
+///
+/// Example 1:
+/// Input: nums = [5, 2, 4, 1, 3]
+/// Output : [2, 1, 2, 0, 0]
+/// Explanation :
+/// For i = 0, the elements nums[1] = 2 and nums[2] = 4 are smaller and 
+/// have different parity.
+/// For i = 1, the element nums[3] = 1 is smaller and has different parity.
+/// For i = 2, the elements nums[3] = 1 and nums[4] = 3 are smaller and 
+/// have different parity.
+/// No valid elements exist for the remaining indices.
+/// Thus, the answer = [2, 1, 2, 0, 0].
+///
+/// Example 2:
+/// Input: nums = [4, 4, 1]
+/// Output : [1, 1, 0]
+/// Explanation :
+/// For i = 0 and i = 1, the element nums[2] = 1 is smaller and has 
+/// different parity.
+/// Thus, the answer = [1, 1, 0].
+///
+/// Example 3 :
+/// Input : nums = [7]
+///
+/// Output : [0]
+///
+/// Explanation :
+/// No elements exist to the right of index 0, so its score is 0. Thus, 
+/// the answer = [0].
+/// 
+/// Constraints:
+/// 1. 1 <= n == nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// </summary>
+vector<int> LeetCodeSort::countSmallerOppositeParity(vector<int>& nums)
+{
+    vector<int> result(nums.size());
+    vector<pair<int, int>> arr;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        arr.push_back(make_pair(nums[i], i));
+    }
+    sort(arr.begin(), arr.end());
+    vector<int> new_nums(nums.size());
+    int current = 1;
+    for (size_t i = 0; i < arr.size(); i++)
+    {
+        if (i == 0)
+        {
+            if (arr[i].first % 2 == 0)
+            {
+                current = 2;
+            }
+        }
+        else
+        {
+            if (arr[i].first > arr[i - 1].first)
+            {
+                if (arr[i].first % 2 == current % 2)
+                {
+                    current += 2;
+                }
+                else
+                {
+                    current += 1;
+                }
+            }
+        }
+        new_nums[arr[i].second] = current;
+    }
+    BinaryIndexTree odd_tree(current + 1);
+    BinaryIndexTree even_tree(current + 1);
+    for (int i = (int)nums.size() - 1; i >= 0; i--)
+    {
+        if ((nums[i] & 1) == 0)
+        {
+            result[i] = odd_tree.sum(new_nums[i]);
+            even_tree.add(new_nums[i], 1);
+        }
+        else
+        {
+            result[i] = even_tree.sum(new_nums[i]);
+            odd_tree.add(new_nums[i], 1);
+        }
+    }
+    return result;
+}
 #pragma endregion

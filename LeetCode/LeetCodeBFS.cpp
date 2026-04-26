@@ -3454,4 +3454,109 @@ int LeetCodeBFS::minOperationsSort(string s)
     }
     return result;
 }
+
+
+/// <summary> 
+/// Leet Code 3905. Multi Source Flood Fill
+/// 
+/// Medium
+///
+/// You are given two integers n and m representing the number of rows and 
+/// columns of a grid, respectively.
+///
+/// You are also given a 2D integer array sources, where sources[i] = 
+/// [ri, ci, colori] indicates that the cell(ri, ci) is initially colored 
+/// with colori.All other cells are initially uncolored and represented 
+/// as 0.
+///
+/// At each time step, every currently colored cell spreads its color to 
+/// all adjacent uncolored cells in the four directions : up, down, left, 
+/// and right.All spreads happen simultaneously.
+///
+/// If multiple colors reach the same uncolored cell at the same time 
+/// step, the cell takes the color with the maximum value.
+///
+/// The process continues until no more cells can be colored.
+///
+/// Return a 2D integer array representing the final state of the grid, 
+/// where each cell contains its final color.
+/// 
+/// Example 1:
+/// Input: n = 3, m = 3, sources = [[0, 0, 1], [2, 2, 2]]
+/// Output : [[1, 1, 2], [1, 2, 2], [2, 2, 2]]
+/// Explanation :
+/// The grid at each time step is as follows :
+///
+/// At time step 2, cells(0, 2), (1, 1), and (2, 0) are reached by both 
+/// colors, so they are assigned color 2 as it has the maximum value 
+/// among them.
+///
+/// Example 2:
+/// Input: n = 3, m = 3, sources = [[0, 1, 3], [1, 1, 5]]
+/// Output : [[3, 3, 3], [5, 5, 5], [5, 5, 5]]
+///
+/// Explanation :
+/// The grid at each time step is as follows :
+///
+/// Example 3 :
+/// Input : n = 2, m = 2, sources = [[1, 1, 5]]
+/// Output : [[5, 5], [5, 5]]
+/// Explanation :
+/// The grid at each time step is as follows :
+///
+/// Since there is only one source, all cells are assigned the same color.
+///
+/// Constraints:
+/// 1. 1 <= n, m <= 10^5
+/// 2. 1 <= n * m <= 10^5
+/// 3. 1 <= sources.length <= n * m
+/// 4. sources[i] = [ri, ci, colori]
+/// 5. 0 <= ri <= n - 1
+/// 6. 0 <= ci <= m - 1
+/// 7. 1 <= colori <= 10^6
+/// 8. All (ri, ci) in sources are distinct.
+/// </summary>
+vector<vector<int>> LeetCodeBFS::colorGrid(int n, int m, vector<vector<int>>& sources)
+{
+    vector<vector<int>> result(n, vector<int>(m));
+    priority_queue<vector<int>> queue;
+    for (size_t i = 0; i < sources.size(); i++)
+    {
+        if (sources[i][2] != 0)
+        {
+            result[sources[i][0]][sources[i][1]] = sources[i][2];
+            queue.push({ sources[i][2], sources[i][0], sources[i][1] });
+        }
+    }
+    vector<vector<int>> directions = { {0, 1}, {0, -1}, {1, 0}, {-1, 0} };
+    while (!queue.empty())
+    {
+        size_t size = queue.size();
+        vector<vector<int>> next_queue;
+        for (size_t i = 0; i < size; i++)
+        {
+            vector<int> cell = queue.top();
+            queue.pop();
+            int color = cell[0];
+            int row = cell[1];
+            int col = cell[2];
+            for (size_t d = 0; d < directions.size(); d++)
+            {
+                int next_row = row + directions[d][0];
+                int next_col = col + directions[d][1];
+                if (next_row < 0 || next_row >= n ||
+                    next_col < 0 || next_col >= m ||
+                    result[next_row][next_col] != 0) continue;
+                result[next_row][next_col] = color;
+                next_queue.push_back({ color, next_row, next_col });
+            }
+        }
+        for (size_t i = 0; i < next_queue.size(); i++)
+        {
+            queue.push(next_queue[i]);
+        }
+        next_queue.clear();
+    }
+    return result;
+}
 #pragma endregion

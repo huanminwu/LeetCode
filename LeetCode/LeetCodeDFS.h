@@ -782,7 +782,7 @@ public:
     /// Leet Code 282. Expression Add Operators
     /// 
     /// Hard
-    ///	
+    ///  
     /// Given a string num that contains only digits and an integer target, 
     /// return all possibilities to insert the binary operators '+', '-', 
     /// and/or '*' between the digits of num so that the resultant expression 
@@ -910,7 +910,7 @@ public:
     /// The n-queens puzzle is the problem of placing n queens on an nxn 
     /// chessboard such that no two queens attack each other. 
     /// Given an integer n, return all distinct solutions to the n-queens puzzle.
-    ///	
+    ///  
     /// Each solution contains a distinct board configuration of the n-queens' 
     /// placement, where 'Q' and '.' 
     /// both indicate a queen and an empty space respectively. 
@@ -926,7 +926,7 @@ public:
     ///    "Q...",
     ///    "...Q",
     ///    ".Q.."]
-    /// ]	
+    /// ]  
     /// </summary>
     vector<vector<string>> solveNQueens(int n);
 
@@ -1084,7 +1084,7 @@ public:
     /// Leet code #78. Subsets
     /// Given a set of distinct integers, nums, return all possible subsets.  
     /// Note: The solution set must not contain duplicate subsets. 
-    ///	For example,
+    ///  For example,
     /// If nums = [1,2,3], a solution is: 
     /// [
     ///  [3],
@@ -1110,7 +1110,7 @@ public:
     /// Given a collection of integers that might contain duplicates, nums, 
     /// return all possible subsets.  
     /// Note: The solution set must not contain duplicate subsets. 
-    ///	For example,
+    ///  For example,
     /// If nums = [1,2,2], a solution is: 
     /// [
     ///  [2],
@@ -1146,7 +1146,7 @@ public:
     /// ]
     /// word = "ABCCED", -> returns true,
     /// word = "SEE", -> returns true,
-    /// word = "ABCB", -> returns false.	
+    /// word = "ABCB", -> returns false.  
     /// </summary>
     bool wordSearch(vector<vector<char>>& board, string word);
 
@@ -1616,7 +1616,7 @@ public:
     /// Output: 4
     /// Explanation: Teacher can place 4 students in available seats so they 
     /// don't cheat on the exam.
-    ///	
+    ///  
     /// Example 2:
     /// Input: seats = 
     /// [[".","#"],
@@ -4382,7 +4382,7 @@ public:
     /// Leet Code 2572. Count the Number of Square-Free Subsets
     /// 
     /// Medium
-    ///	
+    ///  
     /// You are given a positive integer 0-indexed array nums.
     ///
     /// A subset of the array nums is square-free if the product of its 
@@ -4437,7 +4437,7 @@ public:
     /// Leet Code 2597. The Number of Beautiful Subsets
     /// 
     /// Medium
-    ///	
+    ///  
     /// You are given an array nums of positive integers and a positive 
     /// integer k.
     /// 
@@ -4482,7 +4482,7 @@ public:
     /// Leet Code 2664. The Knight's Tour
     /// 
     /// Medium
-    ///	
+    ///  
     /// Given two positive integers m and n which are the height and width of 
     /// a 0-indexed 2D-array board, a pair of positive integers (r, c) which 
     /// is the starting position of the knight on the board.
@@ -4522,12 +4522,12 @@ public:
     vector<vector<int>> tourOfKnight(int m, int n, int r, int c);
 
     /// <summary>
-    /// Leet Code 	2741. Special Permutations
+    /// Leet Code   2741. Special Permutations
     /// </summary>
     int specialPerm(int k, int bits, vector<vector<int>>& neighbors, vector<vector<int>>& dp);
 
     /// <summary>
-    /// Leet Code 	2741. Special Permutations
+    /// Leet Code   2741. Special Permutations
     /// 
     /// Medium
     ///
@@ -5306,12 +5306,12 @@ public:
     /// Input: strength = [3,4,1], K = 1
     /// Output: 4
     /// Explanation:
-    /// Time	Energy	X	Action	Updated X
-    /// 0	0	1	Nothing	1
-    /// 1	1	1	Break 3rd Lock	2
-    /// 2	2	2	Nothing	2
-    /// 3	4	2	Break 2nd Lock	3
-    /// 4	3	3	Break 1st Lock	3
+    /// Time  Energy  X  Action  Updated X
+    /// 0  0  1  Nothing  1
+    /// 1  1  1  Break 3rd Lock  2
+    /// 2  2  2  Nothing  2
+    /// 3  4  2  Break 2nd Lock  3
+    /// 4  3  3  Break 1st Lock  3
     /// The locks cannot be broken in less than 4 minutes; thus, the answer 
     /// is 4.
     ///
@@ -5319,13 +5319,13 @@ public:
     /// Input: strength = [2,5,4], K = 2
     /// Output: 5
     /// Explanation:
-    /// Time	Energy	X	Action	Updated X
-    /// 0	0	1	Nothing	1
-    /// 1	1	1	Nothing	1
-    /// 2	2	1	Break 1st Lock	3
-    /// 3	3	3	Nothing	3
-    /// 4	6	3	Break 2nd Lock	5
-    /// 5	5	5	Break 3rd Lock	7
+    /// Time  Energy  X  Action  Updated X
+    /// 0  0  1  Nothing  1
+    /// 1  1  1  Nothing  1
+    /// 2  2  1  Break 1st Lock  3
+    /// 3  3  3  Nothing  3
+    /// 4  6  3  Break 2nd Lock  5
+    /// 5  5  5  Break 3rd Lock  7
     /// The locks cannot be broken in less than 5 minutes; thus, the answer 
     /// is 5.
     /// 
@@ -5678,9 +5678,9 @@ public:
     /// After the merge:
     /// position array: [0, 8, 10]
     /// time array: [5, 11, 6]
-    /// Segment Distance (km) Time per km (min)	Segment Travel Time (min)
-    /// 0  8	8	5	8 ? 5 = 40
-    /// 8  10	2	11	2 ? 11 = 22
+    /// Segment Distance (km) Time per km (min)  Segment Travel Time (min)
+    /// 0  8  8  5  8 ? 5 = 40
+    /// 8  10  2  11  2 ? 11 = 22
     /// Total Travel Time: 40 + 22 = 62, which is the minimum possible time after 
     /// exactly 1 merge.
     ///
@@ -5694,7 +5694,7 @@ public:
     /// After the merge:
     /// position array: [0, 2, 3, 5]
     /// time array: [8, 12, 3, 3]
-    /// Segment	Distance (km)	Time per km (min)	Segment Travel Time (min)
+    /// Segment  Distance (km)  Time per km (min)  Segment Travel Time (min)
     /// 0  2   2   8   2 ? 8 = 16
     /// 2  3   1   12  1 ? 12 = 12
     /// 3  5   2   3   2 ? 3 = 6
@@ -6656,6 +6656,124 @@ public:
     /// 1. 1 <= l <= r <= 10^15
     /// </summary>
     long long countFancy(long long l, long long r);
+
+
+    /// <summary>
+    /// Leet code #3906. Count Good Integers on a Grid Path
+    /// </summary>
+    long long countGoodIntegersOnPath(string& str_num, int is_limit, int position, int prev_digit, string& str_bits, 
+        vector<long long>& cache);
+
+
+    /// <summary>
+    /// Leet code #3906. Count Good Integers on a Grid Path
+    /// 
+    /// Hard
+    ///
+    /// You are given two integers l and r, and a string directions consisting 
+    /// of exactly three 'D' characters and three 'R' characters..
+    ///
+    /// For each integer x in the range[l, r](inclusive), perform the 
+    /// following steps :
+    ///
+    /// If x has fewer than 16 digits, pad it on the left with leading zeros 
+    /// to obtain a 16 - digit string.
+    /// Place the 16 digits into a 4 ? 4 grid in row - major order(the first 4 
+    /// digits form the first row from left to right, the next 4 digits form 
+    /// the second row, and so on).
+    /// Starting at the top - left cell(row = 0, column = 0), apply the 6 
+    /// characters of directions in order :
+    /// 'D' increments the row by 1.
+    /// 'R' increments the column by 1.
+    /// Record the sequence of digits visited along the path(including the 
+    /// starting cell), producing a sequence of length 7.
+    /// The integer x is considered good if the recorded sequence is 
+    /// non - decreasing.
+    ///
+    /// Return an integer representing the number of good integers in the 
+    /// range[l, r].
+    ///
+    /// Example 1:
+    /// Input: l = 8, r = 10, directions = "DDDRRR"
+    /// Output : 2
+    /// Explanation :
+    /// The grid for x = 8 :
+    /// 0  0  0  0
+    /// 0  0  0  0
+    /// 0  0  0  0
+    /// 0  0  0  8
+    /// Path : (0, 0)->(1, 0)->(2, 0)->(3, 0)->(3, 1)->(3, 2)->(3, 3)
+    /// The sequence of digits visited is[0, 0, 0, 0, 0, 0, 8].
+    /// As the sequence of digits visited is non - decreasing, 8 is a good 
+    /// integer.
+    ///
+    /// The grid for x = 9 :
+    /// 0  0  0  0
+    /// 0  0  0  0
+    /// 0  0  0  0
+    /// 0  0  0  9
+    /// The sequence of digits visited is[0, 0, 0, 0, 0, 0, 9].
+    /// As the sequence of digits visited is non - decreasing, 9 is a good 
+    /// integer.
+    /// The grid for x = 10:
+    /// 0  0  0  0
+    /// 0  0  0  0
+    /// 0  0  0  0
+    /// 0  0  1  0
+    /// The sequence of digits visited is[0, 0, 0, 0, 0, 1, 0].
+    /// As the sequence of digits visited is not non - decreasing, 10 is not 
+    /// a good integer.
+    /// Hence, only 8 and 9 are good, giving a total of 2 good integers in 
+    /// the range.
+    ///
+    /// Example 2:
+    /// Input: l = 123456789, r = 123456790, directions = "DDRRDR"
+    /// 
+    /// Output : 1
+    /// Explanation :
+    /// The grid for x = 123456789 :
+    /// 0  0  0  0
+    /// 0  0  0  1
+    /// 2  3  4  5
+    /// 6  7  8  9
+    /// Path : (0, 0)->(1, 0)->(2, 0)->(2, 1)->(2, 2)->(3, 2)->(3, 3)
+    /// The sequence of digits visited is[0, 0, 2, 3, 4, 8, 9].
+    /// As the sequence of digits visited is non - decreasing, 123456789 is 
+    /// a good integer.
+    /// The grid for x = 123456790 :
+    /// 0  0  0  0
+    /// 0  0  0  1
+    /// 2  3  4  5
+    /// 6  7  9  0
+    /// The sequence of digits visited is[0, 0, 2, 3, 4, 9, 0].
+    /// As the sequence of digits visited is not non - decreasing, 123456790 
+    /// is not a good integer.
+    /// Hence, only 123456789 is good, giving a total of 1 good integer in 
+    /// the range.
+    ///
+    /// Example 3:
+    /// Input: l = 1288561398769758, r = 1288561398769758, 
+    /// directions = "RRRDDD"
+    /// Output : 0
+    /// Explanation :
+    /// The grid for x = 1288561398769758 :
+    /// 1  2  8  8
+    /// 5  6  1  3
+    /// 9  8  7  6
+    /// 9  7  5  8
+    /// Path : (0, 0)->(0, 1)->(0, 2)->(0, 3)->(1, 3)->(2, 3)->(3, 3)
+    /// The sequence of digits visited is[1, 2, 8, 8, 3, 6, 8].
+    /// As the sequence of digits visited is not non - decreasing, 
+    /// 1288561398769758 is not a good integer.
+    /// No numbers are good, giving a total of 0 good integers in the range.
+    /// 
+    /// Constraints :
+    /// 1. 1 <= l <= r <= 9 ? 10^15
+    /// 2. directions.length == 6
+    /// 3. directions consists of exactly three 'D' characters and three 
+    ///    'R' characters.
+    /// </summary>
+    long long countGoodIntegersOnPath(long long l, long long r, string directions);
 
 #pragma endregion
 };

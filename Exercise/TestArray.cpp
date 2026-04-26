@@ -3982,17 +3982,20 @@ void TestLeetCode1538(void)
     Logger::WriteMessage("Test Leet Code 1538");
     LeetCodeArray leetCode;
     vector<int> nums = { 0, 0, 1, 0, 1, 1, 1, 1 };
-    int result = leetCode.guessMajority(ArrayReader(nums));
+    ArrayReader reader(nums);
+    int result = leetCode.guessMajority(reader);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("result = " + to_string(result));
 
     nums = { 0,0,1,1,0 };
-    result = leetCode.guessMajority(ArrayReader(nums));
+    reader = ArrayReader(nums);
+    result = leetCode.guessMajority(reader);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("result = " + to_string(result));
 
     nums = { 1,0,1,0,1,0,1,0 };
-    result = leetCode.guessMajority(ArrayReader(nums));
+    reader = ArrayReader(nums);
+    result = leetCode.guessMajority(reader);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("result = " + to_string(result));
 }
@@ -4002,12 +4005,14 @@ void TestLeetCode1533(void)
     Logger::WriteMessage("Test Leet Code 1533");
     LeetCodeArray leetCode;
     vector<int> arr = { 7, 7, 7, 7, 10, 7, 7, 7 };
-    int result = leetCode.getIndex(ArrayReader(arr));
+    ArrayReader reader(arr);
+    int result = leetCode.getIndex(reader);
     Logger::WriteMessage(arr);
     Logger::WriteMessage("result = " + to_string(result));
 
     arr = { 6,6,12 };
-    result = leetCode.getIndex(ArrayReader(arr));
+    reader = ArrayReader(arr);
+    result = leetCode.getIndex(reader);
     Logger::WriteMessage(arr);
     Logger::WriteMessage("result = " + to_string(result));
 }
@@ -13335,8 +13340,132 @@ void TestLeetCode3886(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3901(void)
+{
+    Logger::WriteMessage("Test Leet Code 3901");
+    LeetCodeArray leetCode;
+    vector<int>   nums = { 4, 8, 12, 16 };
+    int p = 2;
+    vector<vector<int>> queries = {{0, 3}, {2, 6}};
+    int result = leetCode.countGoodSubseq(nums, p, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("p = " + to_string(p));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4, 5, 7, 8 };
+    p = 3;
+    queries = { {0, 6},{1, 9},{2, 3} };
+    result = leetCode.countGoodSubseq(nums, p, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("p = " + to_string(p));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5, 7, 9 };
+    p = 2;
+    queries = { {1, 4}, {2, 8} };
+    result = leetCode.countGoodSubseq(nums, p, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("p = " + to_string(p));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,6 };
+    p = 2;
+    queries = { {1, 6} };
+    result = leetCode.countGoodSubseq(nums, p, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("p = " + to_string(p));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 74, 31, 31, 19, 12, 21 };
+    p = 2;
+    queries = { {5, 66} };
+    result = leetCode.countGoodSubseq(nums, p, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("p = " + to_string(p));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 21, 64, 95 };
+    p = 1;
+    queries = { {0, 56} };
+    result = leetCode.countGoodSubseq(nums, p, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("p = " + to_string(p));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,3 };
+    p = 1;
+    queries = { {0, 4}, {1, 6} };
+    result = leetCode.countGoodSubseq(nums, p, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("p = " + to_string(p));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3903(void)
+{
+    Logger::WriteMessage("Test Leet Code 3903");
+    LeetCodeArray leetCode;
+    vector<int> nums = {5, 0, 1, 4};
+    int k = 3;
+    int result = leetCode.firstStableIndexI(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,2,1 };
+    k = 1;
+    result = leetCode.firstStableIndexI(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0 };
+    k = 0;
+    result = leetCode.firstStableIndexI(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3904(void)
+{
+    Logger::WriteMessage("Test Leet Code 3904");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 5, 0, 1, 4 };
+    int k = 3;
+    int result = leetCode.firstStableIndexII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,2,1 };
+    k = 1;
+    result = leetCode.firstStableIndexII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0 };
+    k = 0;
+    result = leetCode.firstStableIndexII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3904();
+    TestLeetCode3903();
+    TestLeetCode3901();
     TestLeetCode3886();
     TestLeetCode3880();
     TestLeetCode3874();

@@ -27662,5 +27662,228 @@ public:
     /// 2. 1 <= nums[i] <= 10^5
     /// </summary>
     int sortableIntegers(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #3900. Longest Balanced Substring After One Swap
+    ///
+    /// Medium
+    /// 
+    /// You are given a binary string s consisting only of characters '0' 
+    /// and '1'.
+    ///
+    /// A string is balanced if it contains an equal number of '0's and '1's.
+    ///
+    /// You can perform at most one swap between any two characters in s.
+    /// Then, you select a balanced substring from s.
+    /// Return an integer representing the maximum length of the balanced 
+    /// substring you can select.
+    ///
+    /// Example 1:
+    /// Input: s = "100001"
+    /// Output : 4
+    /// Explanation :
+    /// Swap "100001".The string becomes "101000".
+    /// Select the substring "101000", which is balanced because it has 
+    /// two '0's and two '1's.
+    ///
+    /// Example 2 :
+    ///
+    /// Input : s = "111"
+    /// Output : 0
+    /// Explanation :
+    /// Choose not to perform any swaps.
+    /// Select the empty substring, which is balanced because it has zero '0's 
+    /// and zero '1's.
+    ///
+    /// Constraints :
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s consists only of the characters '0' and '1'.
+    /// </summary>
+    int longestBalanced(string s);
+
+    /// <summary>
+    /// Leet code #3901. Good Subsequence Queries
+    ///
+    /// Hard
+    /// 
+    /// You are given an integer array nums of length n and an integer p.
+    ///
+    /// A non - empty subsequence of nums is called good if:
+    /// 
+    /// Its length is strictly less than n.
+    /// The greatest common divisor(GCD) of its elements is exactly p.
+    /// You are also given a 2D integer array queries of length q, where each 
+    /// queries[i] = [indi, vali] indicates that you should update 
+    /// nums[indi] to vali.
+    ///
+    /// After each query, determine whether there exists any good subsequence 
+    /// in the current array.
+    /// 
+    /// Return the number of queries for which a good subsequence exists.
+    ///
+    /// The term gcd(a, b) denotes the greatest common divisor of a and b.
+    ///
+    /// Example 1:
+    /// Input: nums = [4, 8, 12, 16], p = 2, queries = [[0, 3], [2, 6]]
+    /// Output : 1
+    /// Explanation :
+    /// i[indi, vali] OperationUpdated nums Any good Subsequence
+    /// 0 [0, 3] Update nums[0] to 3[3, 8, 12, 16]
+    /// No, as no subsequence has GCD exactly p = 2
+    /// 1 [2, 6]Update nums[2] to 6[3, 8, 6, 16]Yes, subsequence[8, 6] has 
+    /// GCD exactly p = 2
+    /// Thus, the answer is 1.
+    ///
+    /// Example 2:
+    /// Input: nums = [4, 5, 7, 8], p = 3, queries = [[0, 6], [1, 9], [2, 3]]
+    /// Output : 2
+    /// Explanation :
+    /// i[indi, vali]OperationUpdated numsAny good Subsequence
+    /// 0 [0, 6]Update nums[0] to 6[6, 5, 7, 8]
+    /// No, as no subsequence has GCD exactly p = 3
+    /// 1 [1, 9]Update nums[1] to 9[6, 9, 7, 8]
+    /// Yes, subsequence[6, 9] has GCD exactly p = 3
+    /// 2 [2, 3]Update nums[2] to 3[6, 9, 3, 8]
+    /// Yes, subsequence[6, 9, 3] has GCD exactly p = 3
+    /// Thus, the answer is 2.
+    ///
+    /// Example 3:
+    /// Input: nums = [5, 7, 9], p = 2, queries = [[1, 4], [2, 8]]
+    /// Output : 0
+    /// Explanation :
+    /// i [indi, vali]OperationUpdated numsAny good Subsequence
+    /// 0 [1, 4]Update nums[1] to 4[5, 4, 9]
+    /// No, as no subsequence has GCD exactly p = 2
+    /// 1 [2, 8]Update nums[2] to 8[5, 4, 8]
+    /// No, as no subsequence has GCD exactly p = 2
+    /// Thus, the answer is 0.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= n == nums.length <= 5 * 10^4
+    /// 2. 1 <= nums[i] <= 5 * 10^4
+    /// 3. 1 <= queries.length <= 5 * 10^4
+    /// 4. queries[i] = [indi, vali]
+    /// 5. 1 <= vali, p <= 5 * 10^4
+    /// 6. 0 <= indi <= n - 1
+    /// </summary>
+    int countGoodSubseq(vector<int>& nums, int p, vector<vector<int>>& queries);
+
+    /// <summary>
+    /// Leet code #3903. Smallest Stable Index I
+    ///
+    /// Easy
+    ///
+    /// You are given an integer array nums of length n and an integer k.
+    /// 
+    /// For each index i, define its instability score as 
+    /// max(nums[0..i]) - min(nums[i..n - 1]).
+    ///
+    /// In other words :
+    /// max(nums[0..i]) is the largest value among the elements from 
+    /// index 0 to index i.
+    /// min(nums[i..n - 1]) is the smallest value among the elements from 
+    /// index i to index n - 1.
+    /// An index i is called stable if its instability score is less 
+    /// than or equal to k.
+    ///
+    /// Return the smallest stable index.If no such index exists, return -1.
+    /// 
+    /// Example 1:
+    /// Input: nums = [5, 0, 1, 4], k = 3
+    /// Output : 3
+    /// Explanation :
+    /// At index 0 : The maximum in[5] is 5, and the minimum in[5, 0, 1, 4] 
+    /// is 0, so the instability score is 5 - 0 = 5.
+    /// At index 1 : The maximum in[5, 0] is 5, and the minimum in[0, 1, 4] 
+    /// is 0, so the instability score is 5 - 0 = 5.
+    /// At index 2 : The maximum in[5, 0, 1] is 5, and the minimum in[1, 4] 
+    /// is 1, so the instability score is 5 - 1 = 4.
+    /// At index 3 : The maximum in[5, 0, 1, 4] is 5, and the minimum in[4] 
+    /// is 4, so the instability score is 5 - 4 = 1.
+    /// This is the first index with an instability score less than or equal 
+    /// to k = 3. Thus, the answer is 3.
+    ///
+    /// Example 2 :
+    /// Input : nums = [3, 2, 1], k = 1
+    /// Output : -1
+    /// Explanation :
+    /// At index 0, the instability score is 3 - 1 = 2.
+    /// At index 1, the instability score is 3 - 1 = 2.
+    /// At index 2, the instability score is 3 - 1 = 2.
+    /// None of these values is less than or equal to k = 1, so the 
+    /// answer is - 1.
+    ///
+    /// Example 3:
+    /// Input: nums = [0], k = 0
+    /// Output : 0
+    /// Explanation :
+    /// At index 0, the instability score is 0 - 0 = 0, which is less 
+    /// than or equal to k = 0. Therefore, the answer is 0.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. 0 <= nums[i] <= 10^9
+    /// 3. 0 <= k <= 10^9
+    /// </summary>
+    int firstStableIndexI(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet code #3904. Smallest Stable Index II
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums of length n and an integer k.
+    /// 
+    /// For each index i, define its instability score as 
+    /// max(nums[0..i]) - min(nums[i..n - 1]).
+    ///
+    /// In other words :
+    /// max(nums[0..i]) is the largest value among the elements from 
+    /// index 0 to index i.
+    /// min(nums[i..n - 1]) is the smallest value among the elements from 
+    /// index i to index n - 1.
+    /// An index i is called stable if its instability score is less than 
+    /// or equal to k.
+    ///
+    /// Return the smallest stable index.If no such index exists, return -1.
+    ///
+    /// Example 1:
+    /// Input: nums = [5, 0, 1, 4], k = 3
+    /// Output : 3
+    /// Explanation :
+    /// At index 0 : The maximum in[5] is 5, and the minimum in[5, 0, 1, 4] 
+    /// is 0, so the instability score is 5 - 0 = 5.
+    /// At index 1 : The maximum in[5, 0] is 5, and the minimum in[0, 1, 4] 
+    /// is 0, so the instability score is 5 - 0 = 5.
+    /// At index 2 : The maximum in[5, 0, 1] is 5, and the minimum in[1, 4] 
+    /// is 1, so the instability score is 5 - 1 = 4.
+    /// At index 3 : The maximum in[5, 0, 1, 4] is 5, and the minimum in[4] 
+    /// is 4, so the instability score is 5 - 4 = 1.
+    /// This is the first index with an instability score less than or equal 
+    /// to k = 3. Thus, the answer is 3.
+    ///
+    /// Example 2 :
+    /// Input : nums = [3, 2, 1], k = 1
+    /// Output : -1
+    /// Explanation :
+    /// At index 0, the instability score is 3 - 1 = 2.
+    /// At index 1, the instability score is 3 - 1 = 2.
+    /// At index 2, the instability score is 3 - 1 = 2.
+    /// None of these values is less than or equal to k = 1, so the answer 
+    /// is - 1.
+    ///
+    /// Example 3:
+    /// Input: nums = [0], k = 0
+    /// Output : 0
+    /// Explanation :
+    /// At index 0, the instability score is 0 - 0 = 0, which is less than 
+    /// or equal to k = 0. Therefore, the answer is 0.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 0 <= nums[i] <= 10^9
+    /// 3. 0 <= k <= 10^9
+    /// </summary>
+    int firstStableIndexII(vector<int>& nums, int k);
 };
 #endif  // LeetCodeArray_H

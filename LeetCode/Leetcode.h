@@ -216,6 +216,72 @@ struct BinaryIndexTree
     }
 };
 
+struct SegmentTreeGcdValue
+{
+    vector<int> m_arr;
+    int m_zero_count;
+    SegmentTreeGcdValue(int n)
+    {
+        m_arr = vector<int>(4 * n, 0);
+        m_zero_count = 0;
+    }
+    void set(int index, int start, int end, int pos, int val, int p)
+    {
+        if (start == end)
+        {
+            if (val % p != 0)
+            {
+                m_zero_count++;
+                m_arr[index] = 0;
+            }
+            else
+            {
+                if (m_arr[index] == 0) m_zero_count--;
+                m_arr[index] = val / p;
+            }
+            return;
+        }
+        int mid = start + (end - start) / 2;
+        if (pos <= mid)
+        {
+            set(2 * index + 1, start, mid, pos, val, p);
+        }
+        else
+        {
+            set(2 * index + 2, mid + 1, end, pos, val, p);
+        }
+        if (m_arr[2 * index + 1] == 0)
+        {
+            m_arr[index] = m_arr[2 * index + 2];
+        }
+        else if (m_arr[2 * index + 2] == 0)
+        {
+            m_arr[index] = m_arr[2 * index + 1];
+        }
+        else
+        {
+            m_arr[index] = (int)std::gcd(m_arr[2 * index + 1], m_arr[2 * index + 2]);
+        }
+    }
+
+    int query(int idx, int start, int end, int range_left, int range_right)
+    {
+        if (end < range_left or start > range_right) return 0;
+        if (range_left <= start and end <= range_right) return m_arr[idx];
+        int mid = (start + end) / 2;
+        return std::gcd(query(2 * idx + 1, start, mid, range_left, range_right),
+            query(2 * idx + 2, mid + 1, end, range_left, range_right));
+    }
+    int getGcdValue()
+    {
+        return m_arr[0];
+    }
+    int getZeroCount()
+    {
+        return m_zero_count;
+    }
+};
+
 struct SegmentTreeGreater
 {
     vector<int> m_arr;

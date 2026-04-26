@@ -42,8 +42,12 @@
 #include "TestTwoPointer.h"
 #include "TestUSACO.h"
 
-void main(int argc, char* argv[])
+int main(int argc, char* argv[])
 {
+    TestLeetCodeDFS();
+    TestLeetCodeBFS();
+    TestLeetCodeArray();
+    TestLeetCodeTree();
     TestLeetCodeSort();
     TestLeetCodeMath();
     TestLeetCodeGraph();
@@ -51,12 +55,8 @@ void main(int argc, char* argv[])
     TestLeetCodeGreedy();
     TestLeetCodeString();
     TestLeetCodeDesign();
-    TestLeetCodeArray();
     TestLeetCodeTwoPointer();
-    TestLeetCodeTree();
     TestLeetCodeBit();
-    TestLeetCodeDFS();
-    TestLeetCodeBFS();
     TestLeetCodeHashtable();
     TestLeetCodeStack();
     TestLeetCodeBinarySearch();
@@ -64,5 +64,5 @@ void main(int argc, char* argv[])
     TestUSACO();
     printf("Please press a key to end");
     int key = _getch();
-    return;
+    return 0;
 }

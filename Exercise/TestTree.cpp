@@ -4833,8 +4833,26 @@ void TestLeetCode3879(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3902(void)
+{
+    Logger::WriteMessage("Test Leet Code 3902");
+    LeetCodeTree leetCode;
+    string input = "[5,2,8,1,null,9,6]";
+    TreeNode* root = leetCode.deserialize(input);
+    vector<long long> result = leetCode.zigzagLevelSum(root);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage(result);
+
+    input = "[1,2,3,4,5,null,7]";
+    root = leetCode.deserialize(input);
+    result = leetCode.zigzagLevelSum(root);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3902();
     TestLeetCode3879();
     TestLeetCode3831();
     TestLeetCode3820();
