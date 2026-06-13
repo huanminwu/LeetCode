@@ -58,68 +58,68 @@
 WITH Caller_Union 
 AS
 (
-	SELECT
-		caller_id,
-		recipient_id,
-		[date] = CONVERT(DATE, call_time),
-		call_time 
-	FROM
-	   Calls
-	UNION
-	SELECT
-		caller_id = recipient_id,
-		recipient_id = caller_id,
-		[date] = CONVERT(DATE, call_time),
-		call_time 
-	FROM
-	   Calls
+  SELECT
+    caller_id,
+    recipient_id,
+    [date] = CONVERT(DATE, call_time),
+    call_time 
+  FROM
+     Calls
+  UNION
+  SELECT
+    caller_id = recipient_id,
+    recipient_id = caller_id,
+    [date] = CONVERT(DATE, call_time),
+    call_time 
+  FROM
+     Calls
 ),
 Caller_CTE
 AS
 (
-	SELECT
-		caller_id,
-		recipient_id,
-		[date],
-		order_id = ROW_NUMBER() OVER (PARTITION BY caller_id, [date] ORDER BY call_time), 
-		revorder_id = ROW_NUMBER() OVER (PARTITION BY caller_id, [date] ORDER BY call_time DESC) 
-	FROM
-	   Caller_Union		
+  SELECT
+    caller_id,
+    recipient_id,
+    [date],
+    order_id = ROW_NUMBER() OVER (PARTITION BY caller_id, [date] ORDER BY call_time), 
+    revorder_id = ROW_NUMBER() OVER (PARTITION BY caller_id, [date] ORDER BY call_time DESC) 
+  FROM
+     Caller_Union    
 ),
 Caller_JOIN 
 AS
 (
     SELECT
-	    A.caller_id,
-		A.recipient_id,
-		A.[date]
-	FROM
-	(
-		SELECT
-			caller_id,
-			recipient_id,
-			[date]
-		FROM
-		   Caller_CTE
-		WHERE
-		   order_id = 1
+      A.caller_id,
+    A.recipient_id,
+    A.[date]
+  FROM
+  (
+    SELECT
+      caller_id,
+      recipient_id,
+      [date]
+    FROM
+       Caller_CTE
+    WHERE
+       order_id = 1
     ) AS A
     INNER JOIN
     (
-		SELECT
-			caller_id,
-			recipient_id,
-			[date]
-		FROM
-		   Caller_CTE
-		WHERE
-		   revorder_id = 1
+    SELECT
+      caller_id,
+      recipient_id,
+      [date]
+    FROM
+       Caller_CTE
+    WHERE
+       revorder_id = 1
     ) AS B
-	ON
-	  A.caller_id = B.caller_id AND
-	  A.[date] = B.[date]
-	WHERE 
-	   A.recipient_id = B.recipient_id	   
+  ON
+    A.caller_id = B.caller_id AND
+    A.[date] = B.[date]
+  WHERE 
+     A.recipient_id = B.recipient_id     
 )
 SELECT DISTINCT user_id = caller_id FROM Caller_JOIN
 order by user_id

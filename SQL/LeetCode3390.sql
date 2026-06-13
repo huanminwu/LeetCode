@@ -85,12 +85,12 @@
 --- Explanation:
 ---
 --- Arsenal's streaks:
---- First streak: 3 passes (1→2→3→4) ended when player 4 passed to Chelsea's 
+--- First streak: 3 passes (1  2  3  4) ended when player 4 passed to Chelsea's 
 --- player 5
---- Second streak: 2 passes (1→2→3)
+--- Second streak: 2 passes (1  2  3)
 --- Longest streak = 3
 --- Chelsea's streaks:
---- First streak: 3 passes (6→7→8→6→5)
+--- First streak: 3 passes (6  7  8  6  5)
 --- Longest streak = 4
 ---------------------------------------------------------------
 /* Write your T-SQL query statement below */

@@ -131,7 +131,7 @@ public:
     /// Given two integers representing the numerator and denominator of a fraction, return the fraction in string format.
     /// If the fractional part is repeating, enclose the repeating part in parentheses.
     /// For example,
-    /// Given numerator = 1, denominator = 2, return "0.5".	
+    /// Given numerator = 1, denominator = 2, return "0.5".  
     /// Given numerator = 2, denominator = 1, return "2".
     /// Given numerator = 2, denominator = 3, return "0.(6)"
     /// Hint:
@@ -256,7 +256,7 @@ public:
     /// <summary>
     /// Leet code #217. Contains Duplicate
     /// Given an array of integers, find if the array contains any duplicates. Your function should return true 
-    /// if any value appears at least twice in the array, and it should return false if every element is distinct.	
+    /// if any value appears at least twice in the array, and it should return false if every element is distinct.  
     /// </summary>
     bool containsDuplicate(vector<int>& nums);
 
@@ -298,7 +298,7 @@ public:
     /// how many digits in said guess match your secret number exactly in both 
     /// digit and position (called "bulls") 
     /// and how many digits match the secret number but locate in the wrong position (called "cows"). Your friend 
-    /// will use successive guesses and hints to eventually derive the secret number.	
+    /// will use successive guesses and hints to eventually derive the secret number.  
     /// For example: 
     /// Secret number:  "1807"
     /// Friend's guess: "7810"
@@ -319,19 +319,19 @@ public:
     /// Given nums1 = [1, 2, 2, 1], nums2 = [2, 2], return [2]. 
     /// Note:
     /// Each element in the result must be unique.
-    /// The result can be in any order.	
+    /// The result can be in any order.  
     /// </summary>
     vector<int> intersectionArray(vector<int>& nums1, vector<int>& nums2);
 
     /// <summary>
     /// Leet code #350. Intersection of Two Arrays II 
-    /// Given two arrays, write a function to compute their intersection. 	
+    /// Given two arrays, write a function to compute their intersection.   
     /// Example:
     /// Given nums1 = [1, 2, 2, 1], nums2 = [2, 2], return [2, 2]. 
     /// Note:
     /// Each element in the result should appear as many times as it shows in both arrays.
     /// The result can be in any order.
-    ///	Follow up:
+    ///  Follow up:
     /// What if the given array is already sorted? How would you optimize your algorithm?
     /// What if nums1's size is small compared to nums2's size? Which algorithm is better?
     /// What if elements of nums2 are stored on disk, and the memory is limited such that 
@@ -1601,7 +1601,7 @@ public:
     /// Leet code #1512. Number of Good Pairs
     ///
     /// Easy
-    ///	
+    ///  
     /// Given an array of integers nums.
     ///
     /// A pair (i,j) is called good if nums[i] == nums[j] and i < j.
@@ -2454,7 +2454,7 @@ public:
     /// 
     /// Given a 2D integer array nums where nums[i] is a non-empty array of 
     /// distinct positive integers, return the list of integers that are 
-    /// present	in each array of nums sorted in ascending order.
+    /// present  in each array of nums sorted in ascending order.
     /// 
     /// Example 1:
     /// Input: nums = [[3,1,2,4,5],[1,2,3,4],[3,4,5,6]]
@@ -2738,7 +2738,7 @@ public:
     /// Leet Code 2657. Find the Prefix Common Array of Two Arrays
     /// 
     /// Medium
-    ///	
+    ///  
     /// You are given two 0-indexed integer permutations A and B of length n.
     ///
     /// A prefix common array of A and B is an array C such that C[i] is equal 
@@ -2776,7 +2776,7 @@ public:
     /// Leet Code 2670. Find the Distinct Difference Array
     /// 
     /// Easy
-    ///	
+    ///  
     /// You are given a 0-indexed array nums of length n.
     ///
     /// The distinct difference array of nums is an array diff of length n 
@@ -4446,9 +4446,9 @@ public:
     ///
     /// There is a special keyboard where keys are arranged in a rectangular 
     /// grid as follows.
-    /// q	w	e	r	t	y	u	i	o	p
-    /// a	s	d	f	g	h	j	k	l
-    /// z	x	c	v	b	n	m
+    /// q  w  e  r  t  y  u  i  o  p
+    /// a  s  d  f  g  h  j  k  l
+    /// z  x  c  v  b  n  m
     /// You are given a string s that consists of lowercase English letters 
     /// only.Return an integer denoting the total distance to type s using 
     /// only one finger.Your finger starts on the key 'a'.

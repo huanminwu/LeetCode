@@ -1,4 +1,4 @@
-﻿-----------------------------------------------------------------------
+-----------------------------------------------------------------------
 ---  Leet code #1783. Grand Slam Titles
 --- 
 ---  Medium
@@ -88,18 +88,18 @@ AS
 )
 SELECT
     A.player_id,
-	B.player_name,
-	A.grand_slams_count
+  B.player_name,
+  A.grand_slams_count
 FROM
 (
-	SELECT
-		player_id,
-		grand_slams_count = SUM(1)
-	FROM 
-		Champion
-	GROUP BY
-		player_id
-) AS A	
+  SELECT
+    player_id,
+    grand_slams_count = SUM(1)
+  FROM 
+    Champion
+  GROUP BY
+    player_id
+) AS A  
 INNER JOIN Players AS B
 ON
     A.player_id = B.player_id

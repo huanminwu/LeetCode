@@ -29715,5 +29715,849 @@ vector<double> LeetCodeMath::internalAngles(vector<int>& sides)
     return result;
 }
 
+/// <summary>
+/// Leet code 3908. Valid Digit Number 
+///
+/// Easy
+/// 
+/// You are given an integer n and a digit x.
+///
+/// A number is considered valid if:
+///
+/// It contains at least one occurrence of digit x, and
+/// It does not start with digit x.
+/// Return true if n is valid, otherwise return false.
+/// 
+/// Example 1:
+/// Input: n = 101, x = 0
+/// Output : true
+/// Explanation :
+/// The number contains digit 0 at index 1. It does not start with 0, 
+/// so it satisfies both conditions.Thus, the answer is true?.
+///
+/// Example 2 :
+/// Input : n = 232, x = 2
+/// Output : false
+/// Explanation :
+/// The number starts with 2, which violates the condition.Thus, 
+/// the answer is false.
+///
+/// Example 3 :
+/// Input : n = 5, x = 1
+/// Output : false
+/// Explanation :
+/// The number does not contain digit 1. Thus, the answer is false.
+///
+/// Constraints:
+/// 1. 0 <= n <= 10^5.
+/// 2. 0 <= x <= 9
+/// </summary>
+bool LeetCodeMath::validDigit(int n, int x)
+{
+    string str_n = to_string(n);
+    bool result = false;
+    for (size_t i = 0; i < str_n.size(); i++)
+    {
+        if (str_n[i] - '0' == x)
+        {
+            result = true;
+            break;
+        }
+    }
+    if (str_n[0] - '0' == x)
+    {
+        result = false;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code 3918. Sum of Primes Between Number and Its Reverse
+///
+/// Medium
+/// 
+/// You are given an integer n.
+///
+/// Let r be the integer formed by reversing the digits of n.
+///
+/// Return the sum of all prime numbers between min(n, r) and 
+/// max(n, r), inclusive.
+///
+/// Example 1:
+/// Input: n = 13
+/// Output : 132
+/// Explanation :
+/// The reverse of 13 is 31. Thus, the range is[13, 31].
+/// The prime numbers in this range are 13, 17, 19, 23, 29, and 31.
+/// The sum of these prime numbers is 13 + 17 + 19 + 23 + 29 + 31 = 132.
+/// 
+/// Example 2 :
+/// Input : n = 10
+/// Output : 17
+/// Explanation :
+/// The reverse of 10 is 1. Thus, the range is[1, 10].
+/// The prime numbers in this range are 2, 3, 5, and 7.
+/// The sum of these prime numbers is 2 + 3 + 5 + 7 = 17.
+///
+/// Example 3 :
+/// Input : n = 8 
+/// Output : 0
+/// Explanation :
+/// The reverse of 8 is 8. Thus, the range is[8, 8].
+/// There are no prime numbers in this range, so the sum is 0.
+///
+/// Constraints :
+/// 1.1 <= n <= 1000
+/// </summary>
+int LeetCodeMath::sumOfPrimesInRange(int n)
+{
+    string str_n = to_string(n);
+    std::reverse(str_n.begin(), str_n.end());
+    int rev_n = atoi(str_n.c_str());
+    int a = min(n, rev_n);
+    int b = max(n, rev_n);
+    vector<int> prime(1000);
+    for (int i = 0; i < min(1000, b+1); i++)
+    {
+        if ((i == 0) || (i == 1))
+        {
+            prime[i] = 1;
+            continue;
+        }
+        if (prime[i] == 1) continue;
+        int factor = 2;
+        while (i * factor < min(1000, b + 1))
+        {
+            prime[i * factor] = 1;
+            factor++;
+        }
+    }
+    int result = 0;
+    for (int i = a; i < min(b + 1, 1000) ; i++)
+    {
+        if (prime[i] == 0)
+        {
+            result+= i;
+        }
+    }
+    return result;
+}
+/// <summary>
+/// Leet code #3923. Minimum Generations to Target Point
+/// 
+/// Medium
+///
+/// You are given a 2D integer array points where points[i] = [xi, yi, zi] 
+/// represents a point in 3D space, and an integer array target 
+/// representing a target point.
+///
+/// Define generation 0 as the initial list of points.For each 
+/// integer k >= 1, form generation k as follows :
+///
+/// Consider every pair of two distinct points a = [x1, y1, z1] and 
+/// b = [x2, y2, z2] taken from all points produced in generations 0 
+/// through k - 1.
+/// For each such pair, compute c = [floor((x1 + x2) / 2), 
+/// floor((y1 + y2) / 2), floor((z1 + z2) / 2)] and collect every such c 
+/// into a generation k.
+/// All points in the generation k are produced simultaneously from points 
+/// in generations 0 through k - 1.
+/// After generation k is formed, the points in the generation k are 
+/// considered available for forming later generations.
+/// Return the smallest integer k such that the target appears in one of 
+/// the generations 0 through k.If the target is already in the initial 
+/// points, return 0. If it is impossible to obtain the target, return -1.
+///
+/// Notes:
+/// floor denotes rounding down to the nearest integer.
+/// "Two distinct points" means the two chosen points must have 
+/// different(x, y, z) coordinates.A point cannot be paired with itself, 
+/// and pairing two points with identical coordinates is not possible.
+///
+/// Example 1:
+/// Input: points = [[0, 0, 0], [6, 6, 6]], target = [3, 3, 3]
+/// Output : 1
+/// Explanation :
+/// Generation 0 : The initial points = [[0, 0, 0], [6, 6, 6]] .
+/// The target = [3, 3, 3] does not exist in generation 0.
+/// Generation 1 : For each pair of points in generation 0, we create new 
+/// points.
+/// Using[0, 0, 0] and [6, 6, 6], we generate[3, 3, 3].
+/// After generation 1, points = [[0, 0, 0], [6, 6, 6], [3, 3, 3]] .
+/// The target = [3, 3, 3] is found in generation 1, so the smallest k 
+/// is 1.
+///
+/// Example 2 :
+/// Input : points = [[0, 0, 0], [5, 5, 5]], target = [1, 1, 1]
+/// Output : 2
+/// Explanation :
+/// Generation 0 : The initial points = [[0, 0, 0], [5, 5, 5]] .
+/// The target = [1, 1, 1] does not exist in generation 0.
+/// Generation 1 : For each pair of points in generation 0, we create 
+/// new points.
+/// Using[0, 0, 0] and [5, 5, 5], we generate[2, 2, 2].
+/// After generation 1, points = [[0, 0, 0], [5, 5, 5], [2, 2, 2]] .
+/// Generation 2 : For each pair of points available after generation 1, 
+/// we create new points.
+/// Using[0, 0, 0] and [5, 5, 5], we generate[2, 2, 2].
+/// Using[0, 0, 0] and [2, 2, 2], we generate[1, 1, 1].
+/// Using[5, 5, 5] and [2, 2, 2], we generate[3, 3, 3].
+/// After generation 2, points = [[0, 0, 0], [5, 5, 5], [2, 2, 2], 
+/// [1, 1, 1], [3, 3, 3]] .
+/// The target = [1, 1, 1] is found in generation 2, so the smallest 
+/// k is 2.
+/// 
+/// Example 3:
+/// Input: points = [[0, 0, 0], [2, 2, 2], [3, 3, 3]], target = [2, 2, 2]
+/// Output : 0
+/// Explanation :
+/// Generation 0 : The initial points = [[0, 0, 0], [2, 2, 2], [3, 3, 3]] .
+/// The target = [2, 2, 2] already exists in generation 0, so the smallest 
+/// k is 0.
+///
+/// Example 4 :
+/// Input : points = [[1, 2, 3]], target = [5, 5, 5]
+/// Output : -1
+/// Explanation :
+/// Only one initial point is available, so no new points can be generated.
+/// Therefore, the target cannot be obtained, and the answer is - 1.
+///
+/// Constraints :
+/// 1. 1 <= points.length <= 20
+/// 2. points[i] = [xi, yi, zi]
+/// 3. 0 <= xi, yi, zi <= 6
+/// 4. target.length == 3
+/// 5. 0 <= target[i] <= 6
+/// </summary>
+int LeetCodeMath::minGenerations(vector<vector<int>>& points, vector<int>& target)
+{
+    set<vector<int>> curr, next;
+    int result = 0;
+    for (size_t i = 0; i < points.size(); i++)
+    {
+        curr.insert(points[i]);
+    }
+    while (true)
+    {
+        if (curr.find(target) != curr.end())
+        {
+            break;
+        }
+        for (auto first = curr.begin(); first != curr.end(); first++)
+        {
+            for (auto second = std::next(first); second != curr.end(); second++)
+            {
+                vector<int> next_point = { ((*first)[0] + (*second)[0]) / 2,
+                    ((*first)[1] + (*second)[1]) / 2, ((*first)[2] + (*second)[2]) / 2 };
+                next.insert(next_point);
+            }
+        }
+        next.insert(curr.begin(), curr.end());
+        if (curr == next)
+        {
+            result = -1;
+            break;
+        }
+        curr = next;
+        next.clear();
+        result++;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #3927. Minimize Array Sum Using Divisible Replacements
+/// 
+/// Medium
+/// 
+/// You are given an integer array nums.
+///
+/// You can perform the following operation any number of times :
+///
+/// Choose two indices a and b such that nums[a] % nums[b] == 0.
+/// Replace nums[a] with nums[b].
+/// Return the minimum possible sum of the array after performing any 
+/// number of operations.
+///
+/// Example 1:
+/// Input: nums = [3, 6, 2]
+/// Output : 7
+/// Explanation :
+/// Choose a = 1, b = 2, where nums[a] = 6 and nums[b] = 2. 
+/// Since 6 % 2 == 0, replace nums[1] with nums[2].
+/// The array becomes[3, 2, 2].
+/// No further operation reduces the sum.Thus, the final 
+/// sum is 3 + 2 + 2 = 7.
+///
+/// Example 2 :
+/// Input : nums = [4, 2, 8, 3]
+/// Output : 9
+/// Explanation :
+/// Choose a = 0, b = 1, where nums[a] = 4 and nums[b] = 2. 
+/// Since 4 % 2 == 0, replace nums[0] with nums[1].
+/// Choose a = 2, b = 1, where nums[a] = 8 and nums[b] = 2. 
+/// Since 8 % 2 == 0, replace nums[2] with nums[1].
+/// The array becomes[2, 2, 2, 3].
+/// No further operation reduces the sum.Thus, the final 
+/// sum is 2 + 2 + 2 + 3 = 9.
+///
+/// Example 3:
+/// Input: nums = [7, 5, 9]
+/// Output : 21
+/// Explanation :
+/// There is no pair(a, b) such that nums[a] % nums[b] == 0.
+/// Hence, no operation can be performed.The sum 
+/// remains 7 + 5 + 9 = 21.
+/// 
+/// Constraints :
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// </summary>
+long long LeetCodeMath::minArraySum(vector<int>& nums)
+{
+    vector<int> array(100001, 0);
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        array[nums[i]]++;
+    }
+    for (int i = 1; i <= 100000; i++)
+    {
+        if (array[i] == 0) continue;
+        if (array[i] > 0)
+        {
+            for (int j = 2 * i; j <= 100000; j += i)
+            {
+                if (array[j] > 0)
+                {
+                    array[i] += array[j];
+                    array[j] = 0;
+                }
+            }
+        }
+    }
+    long long result = 0;
+    for (size_t i = 0; i <= 100000; i++)
+    {
+        result = result + (long long)i * array[i];
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #3931. Check Adjacent Digit Differences
+/// 
+/// Easy
+/// 
+/// You are given a string s consisting of digits.
+/// Return true if the absolute difference between every pair of adjacent 
+/// digits is at most 2, otherwise return false.
+///
+/// The absolute difference between a and b is defined as abs(a - b).
+/// 
+/// Example 1:
+/// Input: s = "132"
+/// Output : true
+/// Explanation :
+/// The absolute difference between digits at s[0] and s[1] is 
+/// abs(1 - 3) = 2.
+/// The absolute difference between digits at s[1] and s[2] is 
+/// abs(3 - 2) = 1.
+/// Since both differences are at most 2, the answer is true.
+///
+/// Example 2 :
+/// Input : s = "129"
+/// Output : false
+/// Explanation :
+/// The absolute difference between digits at s[0] and s[1] 
+/// is abs(1 - 2) = 1.
+/// The absolute difference between digits at s[1] and s[2] 
+/// is abs(2 - 9) = 7, which is greater than 2.
+/// Therefore, the answer is false.
+/// 
+/// Constraints :
+/// 1. 2 <= s.length <= 100
+/// 2. s consists only of digits.
+/// </summary>
+bool LeetCodeMath::isAdjacentDiffAtMostTwo(string s)
+{
+    for (size_t i = 1; i < s.size(); i++)
+    {
+        if (abs(s[i] - s[i - 1]) > 2)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+/// <summary>
+/// Leet code #3932. Count K - th Roots in a Range
+/// Medium
+///
+/// You are given three integers l, r, and k.
+///
+/// An integer y is said to be a perfect kth power if there exists an 
+/// integer x such that y = xk.
+///
+/// Return the number of integers y in the range[l, r](inclusive) that are 
+/// perfect kth powers.
+///
+/// Example 1:
+/// Input: l = 1, r = 9, k = 3
+/// Output : 2
+/// Explanation :
+/// The perfect cubes in the range[1, 9] are :
+/// 1 = 1^3
+/// 8 = 2^3
+/// Hence, the answer is 2.
+/// Example 2 :
+///
+/// Input : l = 8, r = 30, k = 2
+/// Output : 3
+/// Explanation :
+/// The perfect squares in the range[8, 30] are :
+/// 9 = 3^2
+/// 16 = 4^2
+/// 25 = 5^2
+/// Hence, the answer is 3.
+///
+/// Constraints :
+/// 1. 0 <= l <= r <= 10^9
+/// 2. 1 <= k <= 30
+/// </summary>
+int LeetCodeMath::countKthRoots(int l, int r, int k)
+{
+    int count = 0;
+    if (k == 1)
+    {
+        return r - l + 1;
+    }
+    for (long long i = 1; i <= r; i++)
+    {
+        long long power = 1;
+        for (int j = 0; j < k; j++)
+        {
+            power *= i;
+            if (power > r) break;
+        }
+        if (power > r) break;
+        if (power >= l) count++;
+    }
+    return count;
+}
+
+
+/// <summary>
+/// Leet code #3945. Digit Frequency Score
+///
+/// Easy
+///
+/// You are given an integer n.
+/// The score of n is defined as the sum of d* freq(d) over all distinct 
+/// digits d, where freq(d) denotes the number of times the digit d 
+/// appears in n.
+///
+/// Return an integer denoting the score of n.
+///
+/// Example 1:
+/// Input: n = 122
+/// Output : 5
+/// Explanation :
+/// The digit 1 appears 1 time, contributing 1 * 1 = 1.
+/// The digit 2 appears 2 times, contributing 2 * 2 = 4.
+/// Thus, the score of n is 1 + 4 = 5.
+///
+/// Example 2 :
+/// Input : n = 101
+/// Output : 2
+/// Explanation :
+/// The digit 0 appears 1 time, contributing 0 * 1 = 0.
+/// The digit 1 appears 2 times, contributing 1 * 2 = 2.
+/// Thus, the score of n is 2.
+///
+/// Constraints :
+/// 1. 1 <= n <= 10^9
+/// </summary>
+int LeetCodeMath::digitFrequencyScore(int n)
+{
+    int freq[10] = { 0 };
+    while (n > 0)
+    {
+        freq[n % 10]++;
+        n /= 10;
+    }
+    int result = 0;
+    for (int i = 0; i < 10; i++)
+    {
+        if (freq[i] > 0)
+        {
+            result += i * freq[i];
+        }
+    }
+    return result;
+}
+
+/// <summary>
+ /// Leet code #3954. Sum of Compatible Numbers in Range I
+ ///
+ /// Easy
+ ///
+ /// You are given two integers n and k.
+ /// A positive integer x is called compatible if it satisfies both of 
+ /// the following conditions :
+ ///
+ /// abs(n - x) <= k
+ /// (n & x) == 0
+ /// Return the sum of all compatible integers x.
+ /// Note :
+ /// Here, & denotes the bitwise AND operator.
+ /// The absolute difference between integers i and j is defined as 
+ /// abs(i - j).
+ ///
+ /// Example 1:
+ /// Input: n = 2, k = 3
+ /// Output : 10
+ /// Explanation :
+ /// The compatible integers are :
+ /// x = 1, since abs(2 - 1) = 1 and 2 & 1 = 0.
+ /// x = 4, since abs(2 - 4) = 2 and 2 & 4 = 0.
+ /// x = 5, since abs(2 - 5) = 3 and 2 & 5 = 0.
+ /// Thus, the answer is 1 + 4 + 5 = 10.
+ ///
+ /// Example 2:
+ /// Input: n = 5, k = 1
+ /// Output : 0
+ /// Explanation :
+ /// There are no compatible integers in the range[4, 6].Thus, the 
+ /// answer is 0.
+ /// 
+ /// Constraints:
+ /// 1. 1 <= n <= 100
+ /// 2. 1 <= k <= 100
+ /// </summary>
+int LeetCodeMath::sumOfGoodIntegers(int n, int k)
+{
+    int result = 0;
+    for (int x = max(1, n - k); x <= n + k; x++)
+    {
+        if ((n & x) == 0)
+        {
+            result += x;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #3953. Maximum Score with Co - Prime Element
+///
+/// Hard
+///
+///  
+/// You are given an integer array nums of length n and an integer maxVal.
+///
+/// You may change any element in nums to any positive integer less than 
+/// or equal to maxVal.Each such change costs 1.
+///
+/// Two integers are co - prime if their greatest common divisor(GCD) is 1.
+///
+/// After all modifications, you must choose an index i such that, 
+/// nums[i] is co - prime with every other element nums[j].
+///
+/// Let:
+/// selectedValue be the final value of nums[i] after modifications.
+/// modificationCost be the total number of elements changed.
+/// The score is defined as score = selectedValue - modificationCost.
+///
+/// Return the maximum possible score.
+///
+/// Example 1:
+/// Input: nums = [3, 4, 6], maxVal = 5
+/// Output : 4
+/// Explanation :
+/// Change nums[2] from 6 to 5, which costs 1. Choose nums[2] = 5, 
+/// since it is co - prime with 3 and 4.
+/// selectedValue = 5
+/// modificationCost = 1
+/// The score is 5 - 1 = 4
+///
+/// Example 2:
+/// Input: nums = [1, 2, 3], maxVal = 4
+/// Output : 3
+/// Explanation :
+/// No modifications are required.Choose nums[2] = 3, since it is 
+/// co - prime with 1 and 2.
+/// selectedValue = 3
+/// modificationCost = 0
+/// The score is 3 - 0 = 3
+///
+/// Example 3:
+/// Input: nums = [2, 2], maxVal = 1
+/// Output : 1
+/// Explanation :
+/// Change nums[0] from 2 to 1, which costs 1. Choose nums[1] = 2, 
+/// since it is co - prime with 1.
+/// selectedValue = 2
+/// modificationCost = 1
+/// The score is 2 - 1 = 1
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5 
+/// 3. 1 <= maxVal <= 10^5
+/// </summary>
+int LeetCodeMath::maxScore(vector<int>& nums, int maxVal)
+{
+    int maxi = 0;
+    for (int i : nums) maxi = max(maxi, i);
+    maxi = max(maxi, maxVal) + 1;
+
+     // Precompute Frequencies
+    vector<int> freq(maxi, 0);
+    for (int i : nums) 
+    {
+        freq[i]++;
+    }
+
+    vector<int> spf(maxi);
+    vector<vector<int>> factors(maxi);
+    // Precompute Multiples
+    vector<int> mults(maxi);
+    for (int i = 2; i < maxi; i++) 
+    {
+        for (int j = i; j < maxi; j += i) 
+        {
+            if (spf[j] == 0) spf[j] = i;
+            if (spf[i] == i) factors[j].push_back(i);
+            mults[i] += freq[j];
+        }
+    }
+
+    int ans = freq[1] > 0 ? 1 : 0;
+
+    for (int i = maxi - 1; i > 0; i--) 
+    {
+        // Early Exit: if our current best score is already equal to or greater 
+        // than 'i', no further score can possibly beat it.
+        if (ans >= i) break;
+
+        vector<int> primes = factors[i];
+        int k = primes.size();
+        int nc = 0; // "non-coprime" count
+
+        // Applying Inclusion-Exclusion via Bitmasks
+        int total_subsets = (1 << k);
+        for (int mask = 1; mask < total_subsets; ++mask) 
+        {
+            int prod = 1;
+            int bits = 0; // Represents j.bit_count()
+
+            // Form the subset's composite divisor
+            for (int j = 0; j < k; ++j) 
+            {
+                if ((mask >> j) & 1) 
+                {
+                    prod *= primes[j];
+                    bits++;
+                }
+            }
+
+            // Check subset parity
+            if (bits & 1) {
+                nc += mults[prod]; // Odd: Add
+            }
+            else {
+                nc -= mults[prod]; // Even: Subtract
+            }
+        }
+
+        // Calculate Modifications and Maximize Global Score
+        // int mods = nc + (freq[i] > 0 ? freq[i]-1 : 1);
+        // int mods =0;
+        if (freq[i] > 0) 
+        {
+            nc --;
+        }
+        else if (i <= maxVal) 
+        {
+            nc = nc > 0 ? nc : 1;
+        }
+        else continue;
+        int score = i - nc;
+        ans = max(ans, score);
+    }
+
+    return ans;
+}
+
+
+/// <summary>
+/// Leet Code #3947. Maximum Number of Items From Sale II
+///
+/// Medium
+///
+/// You are given a 2D integer array items, where items[i] = 
+/// [factori, pricei] represents the ith item.You are also given an 
+/// integer budget.
+///
+/// There are unlimited copies of each item available for purchase.You may 
+/// buy any number of copies of any items such that the total cost of the 
+/// purchased copies is at most budget.
+///
+/// After buying items, you may receive free copies according to the 
+/// following rules :
+///
+/// Each purchased copy of item i can give you at most one free copy of 
+/// another item j.
+/// The free item must satisfy i != j and factori divides factorj.
+/// For each ordered pair(i, j), you can receive a free copy of item j 
+/// from purchases of item i at most once, regardless of how many copies 
+/// of item i you buy.
+/// The same item j can be received multiple times for free if it is 
+/// received from purchases of different item types.
+/// Return the maximum total number of item copies you can obtain, 
+/// including both purchased copies and free copies, while spending 
+/// at most budget on purchased items.
+///
+/// Example 1:
+/// Input: items = [[1, 6], [2, 4], [3, 5]], budget = 19
+/// Output : 5
+/// Explanation :
+/// You can buy 2 copies of item 0 and 1 copy of item 1 for a total cost 
+/// of 2 * 6 + 4 = 16, which is not greater than budget = 19.
+/// One purchased copy of item 0 gives 1 free copy of item 1, because 
+/// factor0 = 1 divides factor1 = 2.
+/// The other purchased copy of item 0 gives 1 free copy of item 2, 
+/// because factor0 = 1 divides factor2 = 3.
+/// You leave with 3 purchased copies and 2 free copies, for a total of 5 
+/// item copies.
+///
+/// Example 2:
+/// Input: items = [[2, 8], [1, 10], [6, 6], [4, 12], [5, 20], [5, 17]], 
+/// budget = 35
+/// Output : 7
+/// Explanation :
+/// You can buy 2 copies of item 0, 1 copy of item 1, and 1 copy of item 2 
+/// for a total cost of 2 * 8 + 10 + 6 = 32, which is not greater than 
+/// budget = 35.
+/// One purchased copy of item 0 gives 1 free copy of item 2, because 
+/// factor0 = 2 divides factor2 = 6.
+/// The other purchased copy of item 0 gives 1 free copy of item 3, because 
+/// factor0 = 2 divides factor3 = 4.
+/// The purchased copy of item 1 gives 1 free copy of item 2, because 
+/// factor1 = 1 divides factor2 = 6.
+/// Buying item 2 gives no free copy, because factor2 = 6 does not 
+/// divide the factor of any other item.
+/// You leave with 4 purchased copies and 3 free copies, for a total of 7 
+/// item copies.
+///
+/// Constraints:
+/// 1. 1 <= items.length <= 10^5
+/// 2. items[i] = [factori, pricei]
+/// 3. 1 <= factori <= items.length
+/// 4. 1 <= pricei <= 10^9
+/// 5. 1 <= budget <= 10^9
+/// </summary>
+int LeetCodeMath::maximumSaleItemsII(vector<vector<int>>& items, int budget)
+{
+    int n = items.size();
+    vector<int> factor_count(n + 1);
+    int min_price = INT_MAX;
+    for (int i = 0; i < n; i++)
+    {
+        factor_count[items[i][0]]++;
+        min_price = min(min_price, items[i][1]);
+    }
+    vector<int> sorted_factors;
+    for (int i = 1; i <= n; i++)
+    {
+        if (factor_count[i] > 0)
+        {
+            sorted_factors.push_back(i);
+        }
+    }
+    for (size_t i = 0; i < sorted_factors.size(); i++)
+    {
+        int factor = sorted_factors[i];
+        factor_count[factor]--;
+        for (int j = 2 * factor; j <= n; j += factor)
+        {
+            factor_count[factor] += factor_count[j];
+        }
+    }
+    set<pair<int, int>> heap;
+    for (int i = 0; i < n; i++)
+    {
+        if (factor_count[items[i][0]] > 0)
+        {
+            heap.insert(make_pair(items[i][1], i));
+        }
+    }
+    int result = 0;
+    while (!heap.empty() && budget > 0)
+    {
+        if (heap.begin()->first > min_price * 2)
+        {
+            break;
+        }
+        int min_count = min(factor_count[items[heap.begin()->second][0]], budget / heap.begin()->first);
+        result += min_count * 2;
+        budget -= heap.begin()->first * min_count;
+        heap.erase(heap.begin());
+    }
+    result += budget / min_price;
+    return result;
+}
+
+/// <summary>
+/// Leet Code #3958. Minimum Cost to Split into Ones II
+///
+/// Medium
+///
+/// You are given an integer n.
+///
+/// In one operation, you may split an integer x into two positive 
+/// integers a and b such that a + b = x.
+///
+/// The cost of this operation is a * b.
+///
+/// Return the minimum total cost required to split the integer n into n ones.
+///
+/// Example 1:
+///
+/// Input: n = 3
+///
+/// Output : 3
+///
+/// Explanation :
+///
+/// One optimal set of operations is :
+///
+/// x  a  b  a + b  a * b  Cost
+/// 3  1  2  3  2  2
+/// 2  1  1  2  1  1
+/// Thus, the minimum total cost is 2 + 1 = 3.
+///
+/// Example 2:
+///
+/// Input: n = 4
+///
+/// Output : 6
+///
+/// Explanation : 
+/// One optimal set of operations is :
+/// x  a  b  a + b  a * b  Cost
+/// 4  2  2  4  4  4
+/// 2  1  1  2  1  1
+/// Thus, the minimum total cost is 4 + 1 + 1 = 6.
+///
+/// Constraints:
+/// 1. 2 <= n <= 5 * 107
+/// </summary>
+long long LeetCodeMath::minCost(int n)
+{
+    long long result = (long long) n * (n - 1) / 2;
+    return result;
+}
 #pragma endregion
 

@@ -56,13 +56,13 @@ SELECT
 FROM 
 (
     SELECT max_salary = max(salary)
-	FROM Salaries
-	WHERE department = 'Engineering'
+  FROM Salaries
+  WHERE department = 'Engineering'
 ) AS A
 CROSS JOIN
 (
     SELECT max_salary = max(salary)
-	FROM Salaries
-	WHERE department = 'Marketing'
+  FROM Salaries
+  WHERE department = 'Marketing'
 ) AS B
 ;

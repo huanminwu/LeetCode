@@ -91,18 +91,18 @@
 ---
 --- First Half (00:00-45:00):
 --- Arsenal's passes:
---- 1 → 2 (00:15): Successful pass (+1)
---- 2 → 3 (00:45): Successful pass (+1)
---- 3 → 1 (01:15): Successful pass (+1)
+--- 1    2 (00:15): Successful pass (+1)
+--- 2    3 (00:45): Successful pass (+1)
+--- 3    1 (01:15): Successful pass (+1)
 --- Chelsea's passes:
---- 4 → 1 (00:30): Intercepted by Arsenal (-1)
+--- 4    1 (00:30): Intercepted by Arsenal (-1)
 --- Second Half (45:01-90:00):
 --- Arsenal's passes:
---- 2 → 3 (46:00): Successful pass (+1)
---- 3 → 4 (46:15): Intercepted by Chelsea (-1)
---- 1 → 2 (46:45): Successful pass (+1)
+--- 2    3 (46:00): Successful pass (+1)
+--- 3    4 (46:15): Intercepted by Chelsea (-1)
+--- 1    2 (46:45): Successful pass (+1)
 --- Chelsea's passes:
---- 5 → 6 (46:30): Successful pass (+1)
+--- 5    6 (46:30): Successful pass (+1)
 --- The results are ordered by team_name and then half_number
 ---------------------------------------------------------------
 /* Write your T-SQL query statement below */

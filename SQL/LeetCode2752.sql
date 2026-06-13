@@ -63,27 +63,27 @@
 WITH customer_transaction AS
 (
     SELECT
-	   customer_id,
-	   group_days = RN - diff_days
-	FROM
-	(
- 		SELECT
-			customer_id,
-			transaction_date,
-			diff_days = DATEDIFF(DAY, MIN(transaction_date) OVER(PARTITION BY customer_id), transaction_date),
-			RN = ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY transaction_date)
-		 FROM Transactions
-	) AS T
+     customer_id,
+     group_days = RN - diff_days
+  FROM
+  (
+     SELECT
+      customer_id,
+      transaction_date,
+      diff_days = DATEDIFF(DAY, MIN(transaction_date) OVER(PARTITION BY customer_id), transaction_date),
+      RN = ROW_NUMBER() OVER(PARTITION BY customer_id ORDER BY transaction_date)
+     FROM Transactions
+  ) AS T
 ),
 Transaction_Count AS
 (
-	SELECT
-	  DISTINCT
-		customer_id,
-		group_days,
-		group_count = count(*) OVER (PARTITION BY customer_id, group_days)
-	FROM
-	    customer_transaction
+  SELECT
+    DISTINCT
+    customer_id,
+    group_days,
+    group_count = count(*) OVER (PARTITION BY customer_id, group_days)
+  FROM
+      customer_transaction
 )
 SELECT customer_id FROM Transaction_Count
 WHERE group_count = (SELECT MAX(group_count) FROM Transaction_Count)

@@ -62,14 +62,14 @@
 ---------------------------------------------------------------
 SELECT
     country,
-	gold_medals,
-	silver_medals,
-	bronze_medals
+  gold_medals,
+  silver_medals,
+  bronze_medals
 FROM
-	Olympic
+  Olympic
 ORDER BY
-	gold_medals DESC,
-	silver_medals DESC,
-	bronze_medals DESC,
-	country
+  gold_medals DESC,
+  silver_medals DESC,
+  bronze_medals DESC,
+  country
 ;

@@ -100,10 +100,10 @@
 ---------------------------------------------------------------
 SELECT
     A.salesperson_id,
-	A.name,
+  A.name,
     total = SUM(ISNULL(C.price, 0))
 FROM
-	Salesperson AS A
+  Salesperson AS A
 LEFT OUTER JOIN
     Customer AS B
 ON
@@ -114,5 +114,5 @@ ON
     B.customer_id = C.customer_id
 GROUP BY
     A.salesperson_id,
-	A.name
+  A.name
 ;

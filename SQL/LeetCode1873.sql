@@ -55,8 +55,8 @@
 -----------------------------------------------------------------------
 SELECT 
     employee_id,
-	bonus = 
-	    CASE WHEN employee_id % 2 = 0 OR SUBSTRING(name, 1, 1) = 'M' THEN 0 ELSE salary END
+  bonus = 
+      CASE WHEN employee_id % 2 = 0 OR SUBSTRING(name, 1, 1) = 'M' THEN 0 ELSE salary END
 FROM 
     Employees
 ;

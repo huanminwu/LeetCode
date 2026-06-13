@@ -20,7 +20,7 @@
 --- +--------------+---------+
 --- (driver_id) is the unique key for this table.
 --- Each row includes a driver's ID, their name, age, years of driving 
---- experience, and the number of accidents they’ve had.
+--- experience, and the number of accidents they've had.
 --- Table: Vehicles
 ---
 --- +--------------+---------+

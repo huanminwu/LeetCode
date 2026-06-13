@@ -5,7 +5,7 @@
 --  SQL Schema
 --
 --  Given three tables: salesperson, company, orders.
---  Output all the names in the table salesperson, who didn’t have sales to
+--  Output all the names in the table salesperson, who didn't have sales to
 --  company 'RED'.
 --  Example
 --  Input

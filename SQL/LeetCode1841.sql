@@ -92,43 +92,43 @@ WITH team_goals
 (team_id, points, goal_for, goal_against, goal_diff)
 AS
 (
-	SELECT
-		team_id = home_team_id,
-		points = 
-			CASE WHEN home_team_goals > away_team_goals THEN 3
-				 WHEN home_team_goals = away_team_goals THEN 1
-				 ELSE 0
-				 END,
-		goal_for = home_team_goals,
-		goal_against = away_team_goals,
-		goal_diff = home_team_goals - away_team_goals
-	FROM 	
-		Matches
-	UNION ALL
-	SELECT
-		team_id = away_team_id,
-		points = 
-			CASE WHEN home_team_goals > away_team_goals THEN 0
-				 WHEN home_team_goals = away_team_goals THEN 1
-				 ELSE 3
-				 END,
-		goal_for = away_team_goals,
-		goal_against = home_team_goals,
-		goal_diff = away_team_goals - home_team_goals
-	FROM 	
-		Matches	
+  SELECT
+    team_id = home_team_id,
+    points = 
+      CASE WHEN home_team_goals > away_team_goals THEN 3
+         WHEN home_team_goals = away_team_goals THEN 1
+         ELSE 0
+         END,
+    goal_for = home_team_goals,
+    goal_against = away_team_goals,
+    goal_diff = home_team_goals - away_team_goals
+  FROM   
+    Matches
+  UNION ALL
+  SELECT
+    team_id = away_team_id,
+    points = 
+      CASE WHEN home_team_goals > away_team_goals THEN 0
+         WHEN home_team_goals = away_team_goals THEN 1
+         ELSE 3
+         END,
+    goal_for = away_team_goals,
+    goal_against = home_team_goals,
+    goal_diff = away_team_goals - home_team_goals
+  FROM   
+    Matches  
 ),
 team_matches 
 (team_id, matches_played)
 AS
 (
-	SELECT 
-		team_id,
-		matches_played = COUNT(*)
-	FROM
-	   team_goals
-	GROUP BY
-	   team_id
+  SELECT 
+    team_id,
+    matches_played = COUNT(*)
+  FROM
+     team_goals
+  GROUP BY
+     team_id
 )
 SELECT
     A.team_name,

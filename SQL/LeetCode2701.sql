@@ -70,27 +70,27 @@ WITH customer_transaction AS
 (
 SELECT 
     customer_id,
-	transaction_date,
-	prev_tran = 
-	(
-	    SELECT TOP 1 transaction_id 
-		FROM Transactions
-		WHERE  
-		     customer_id = A.customer_id AND
-			 transaction_date = DATEADD(DAY, -1, A.transaction_date) AND
+  transaction_date,
+  prev_tran = 
+  (
+      SELECT TOP 1 transaction_id 
+    FROM Transactions
+    WHERE  
+         customer_id = A.customer_id AND
+       transaction_date = DATEADD(DAY, -1, A.transaction_date) AND
              amount < A.amount
-	),
-	next_tran = 
-	(
-	    SELECT TOP 1 transaction_id 
-		FROM Transactions
-		WHERE  
-		     customer_id = A.customer_id AND
-			 transaction_date = DATEADD(DAY, 1, A.transaction_date) AND
+  ),
+  next_tran = 
+  (
+      SELECT TOP 1 transaction_id 
+    FROM Transactions
+    WHERE  
+         customer_id = A.customer_id AND
+       transaction_date = DATEADD(DAY, 1, A.transaction_date) AND
              amount > A.amount
-	)
+  )
 FROM 
-	Transactions AS A
+  Transactions AS A
 )
 SELECT
     customer_id,
@@ -100,17 +100,17 @@ FROM
 (
 SELECT 
     customer_id,
-	consecutive_start = A.transaction_date,
-	consecutive_end  = 
-	(
-	    SELECT MIN(transaction_date) 
-		FROM customer_transaction
-		WHERE 
-		    transaction_date > A.transaction_date AND
-			customer_id = A.customer_id AND
-			prev_tran IS NOT NULL AND 
+  consecutive_start = A.transaction_date,
+  consecutive_end  = 
+  (
+      SELECT MIN(transaction_date) 
+    FROM customer_transaction
+    WHERE 
+        transaction_date > A.transaction_date AND
+      customer_id = A.customer_id AND
+      prev_tran IS NOT NULL AND 
             next_tran IS NULL
-	)
+  )
 FROM 
     customer_transaction AS A 
 WHERE 

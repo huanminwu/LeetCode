@@ -1,4 +1,4 @@
-﻿-----------------------------------------------------------------------
+-----------------------------------------------------------------------
 ---  Leet code #1699. Number of Calls Between Two Persons
 --- 
 ---  Medium
@@ -50,24 +50,24 @@
 -----------------------------------------------------------------------
 SELECT
     person1,
-	person2,
-	SUM(1) AS call_count,
-	SUM(duration) AS total_duration
+  person2,
+  SUM(1) AS call_count,
+  SUM(duration) AS total_duration
 FROM
 (
-	SELECT
-		CASE WHEN from_id < to_id 
-			 THEN from_id 
-			 ELSE to_id 
-			 END AS person1, 
-		CASE WHEN from_id < to_id 
-			 THEN to_id 
-			 ELSE from_id 
-			 END AS person2,
-		duration 
-	FROM 	
-		Calls
+  SELECT
+    CASE WHEN from_id < to_id 
+       THEN from_id 
+       ELSE to_id 
+       END AS person1, 
+    CASE WHEN from_id < to_id 
+       THEN to_id 
+       ELSE from_id 
+       END AS person2,
+    duration 
+  FROM   
+    Calls
 ) AS T
 GROUP BY
     person1,
-	person2
+  person2

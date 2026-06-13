@@ -102,7 +102,7 @@ LEFT OUTER JOIN
 (
     SELECT
         A.school_id,
-        score = MIN(B.score)	
+        score = MIN(B.score)  
     FROM 
         Schools AS A
     CROSS JOIN 

@@ -875,7 +875,7 @@ int LeetCodeDP::numDistinct(string s, string t)
 /// The robot can only move either down or right at any point in time. 
 /// The robot is trying to reach the bottom-right corner of the grid 
 /// (marked 'Finish' in the diagram below). 
-///	How many possible unique paths are there?
+///  How many possible unique paths are there?
 /// Above is a 3 x 7 grid. How many possible unique paths are there?  
 /// Note: m and n will be at most 100.
 /// </summary>
@@ -914,7 +914,7 @@ int LeetCodeDP::uniquePaths(int m, int n)
 /// Now consider if some obstacles are added to the grids. How many unique 
 /// paths would there be? 
 /// An obstacle and empty space is marked as 1 and 0 respectively in the grid. 
-///	For example,
+///  For example,
 /// [
 ///   [0,0,0],
 ///   [0,1,0],
@@ -964,7 +964,7 @@ int LeetCodeDP::uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid)
 /// Given a m x n grid filled with non-negative numbers, find a path from 
 /// top left to bottom right 
 /// which minimizes the sum of all numbers along its path.
-///	Note: You can only move either down or right at any point in time. 
+///  Note: You can only move either down or right at any point in time. 
 /// </summary>
 int LeetCodeDP::minPathSum(vector<vector<int>>& grid)
 {
@@ -1947,7 +1947,7 @@ int LeetCodeDP::longestPalindromeSubseq(string s)
 /// Given [3, 1, 5, 8] 
 /// Return 167 
 /// nums = [3,1,5,8] --> [3,5,8] -->   [3,8]   -->  [8]  --> []
-/// coins =  3*1*5      +  3*5*8    +  1*3*8      + 1*8*1   = 167	
+/// coins =  3*1*5      +  3*5*8    +  1*3*8      + 1*8*1   = 167  
 /// </summary>   
 int LeetCodeDP::maxBurstBalloonCoins(vector<int>& nums)
 {
@@ -2819,7 +2819,7 @@ int LeetCodeDP::maxA(int N)
 /// Leet code #656. Coin Path
 /// 
 /// Given an array A (index starts at 1) consisting of N integers: A1, A2,
-///	..., AN and an integer B. The integer B denotes that from any place 
+///  ..., AN and an integer B. The integer B denotes that from any place 
 /// (suppose the index is i) in the array A, you can jump to any one of 
 /// the place in the array A indexed i+1, i+2, ?, i+B if this place can 
 /// be jumped to. Also, if you step on the index i, you have to pay Ai 
@@ -2891,7 +2891,7 @@ vector<int> LeetCodeDP::cheapestJump(vector<int>& A, int B)
 }
 
 /// <summary>
-/// Leet code #	660. Remove 9
+/// Leet code #  660. Remove 9
 /// Start from integer 1, remove any integer that contains 9 such as 9, 
 /// 19, 29...
 ///
@@ -3267,7 +3267,7 @@ vector<int> LeetCodeDP::maxSumOfThreeSubarrays(vector<int>& nums, int k)
 ///
 /// 1. 0 < prices.length <= 50000.
 /// 2. 0 < prices[i] < 50000.
-/// 3. 0 <= fee < 50000.	
+/// 3. 0 <= fee < 50000.  
 /// </summary>
 int LeetCodeDP::maxProfitWithFee(vector<int>& prices, int fee)
 {
@@ -3283,7 +3283,7 @@ int LeetCodeDP::maxProfitWithFee(vector<int>& prices, int fee)
             {
                 dp.pop_back();
             }
-            // price drop and gap is more than fee			
+            // price drop and gap is more than fee      
             if (dp.empty() || dp.back() - prices[i] > fee)
             {
                 dp.push_back(prices[i]);
@@ -4723,7 +4723,7 @@ double LeetCodeDP::new21Game(int N, int K, int W)
 /// Note:
 /// 
 /// 1. 3 <= A.length <= 1000
-/// 2. 1 <= A[0] < A[1] < ... < A[A.length - 1] <= 10^9	/// </summary>
+/// 2. 1 <= A[0] < A[1] < ... < A[A.length - 1] <= 10^9  /// </summary>
 /// </summary>
 int LeetCodeDP::lenLongestFibSubseq(vector<int>& A)
 {
@@ -14689,7 +14689,7 @@ int LeetCodeDP::numberOfPaths(vector<vector<int>>& grid, int k)
 /// Leet Code 2495. Number of Subarrays Having Even Product
 /// 
 /// Medium
-///	
+///  
 /// Given a 0-indexed integer array nums, return the number of subarrays
 /// of nums having an even product.
 /// 
@@ -14732,7 +14732,7 @@ long long LeetCodeDP::evenProduct(vector<int>& nums)
 /// Leet Code 2484. Count Palindromic Subsequences
 /// 
 /// Hard
-///	
+///  
 /// Given a string of digits s, return the number of palindromic 
 /// subsequences of s having length 5. Since the answer may be very 
 /// large, return it modulo 10^9 + 7.
@@ -14827,7 +14827,7 @@ int LeetCodeDP::countPalindromes(string s)
 /// Leet Code 2478. Number of Beautiful Partitions
 /// 
 /// Hard
-///	
+///  
 /// You are given a string s that consists of the digits '1' to '9' and 
 /// two integers k and minLength.
 ///
@@ -14996,7 +14996,7 @@ int LeetCodeDP::validSubarraySplit(vector<int>& nums)
 /// Leet Code 2466. Count Ways To Build Good Strings
 /// 
 /// Medium
-///	
+///  
 /// Given the integers zero, one, low, and high, we can construct a string 
 /// by starting with an empty string, and then at each step perform either 
 /// of the following:
@@ -15062,7 +15062,7 @@ int LeetCodeDP::countGoodStrings(int low, int high, int zero, int one)
 /// Leet Code 2501. Longest Square Streak in an Array
 /// 
 /// Medium
-///	
+///  
 /// You are given an integer array nums. A subsequence of nums is called a 
 /// square streak if:
 ///
@@ -15122,7 +15122,7 @@ int LeetCodeDP::longestSquareStreak(vector<int>& nums)
 /// Leet Code 2472. Maximum Number of Non-overlapping Palindrome Substrings
 /// 
 /// Hard
-///	
+///  
 /// You are given a string s and a positive integer k.
 ///
 /// Select a set of non-overlapping substrings from the string s that 
@@ -15225,7 +15225,7 @@ long long LeetCodeDP::minimumTotalDistance(vector<int>& robot, vector<vector<int
 /// Leet Code 2463. Minimum Total Distance Traveled
 /// 
 /// Hard
-///	
+///  
 /// There are some robots and factories on the X-axis. You are given an 
 /// integer array robot where robot[i] is the position of the ith robot. 
 /// You are also given a 2D integer array factory where 
@@ -15317,7 +15317,7 @@ long long LeetCodeDP::minimumTotalDistance(vector<int>& robot, vector<vector<int
 ///                    And 1's
 /// 
 /// Medium
-///	
+///  
 /// You are given a 0-indexed m x n binary matrix grid. You can move from 
 /// a cell (row, col) to any of the cells (row + 1, col) or (row, col + 1).
 ///
@@ -15381,7 +15381,7 @@ bool LeetCodeDP::isThereAPath(vector<vector<int>>& grid)
 /// Leet Code 2518. Number of Great Partitions
 /// 
 /// Hard
-///	
+///  
 /// You are given an array nums consisting of positive integers and an 
 /// integer k.
 ///
@@ -15526,7 +15526,7 @@ int LeetCodeDP::deleteString(string s)
 /// Leet Code 2533. Number of Good Binary Strings
 /// 
 /// Medium
-///	
+///  
 /// You are given four integers minLenght, maxLength, oneGroup and 
 /// zeroGroup.
 ///
@@ -15593,7 +15593,7 @@ int LeetCodeDP::goodBinaryStrings(int minLength, int maxLength, int oneGroup, in
 /// Leet Code 2547. Minimum Cost to Split an Array
 /// 
 /// Hard
-///	
+///  
 /// You are given an integer array nums and an integer k.
 ///
 /// Split the array into some number of non-empty subarrays. The cost of 
@@ -15671,7 +15671,7 @@ int LeetCodeDP::minCost(vector<int>& nums, int k)
 /// Leet Code 2585. Number of Ways to Earn Points
 /// 
 /// Hard
-///	
+///  
 /// There is a test that has n types of questions. You are given an integer
 /// target and a 0-indexed 2D integer array types where types[i] = 
 /// [counti, marksi] indicates that there are counti questions of the ith 
@@ -15754,7 +15754,7 @@ int LeetCodeDP::waysToReachTarget(int target, vector<vector<int>>& types)
 /// Leet Code 2638. Count the Number of K-Free Subsets
 /// 
 /// Medium
-///	
+///  
 /// You are given an integer array nums, which contains distinct elements 
 /// and an integer k.
 ///
@@ -17940,13 +17940,13 @@ int LeetCodeDP::numberOfStableArraysII(int zero, int one, int limit)
 /// Input: initial = "axxy", target = "yabx"
 /// Output: 6
 /// Explanation:
-/// Operation	Resulting String
-/// Add 'y' to the beginning	"yaxxy"
-/// Remove from end	"yaxx"
-/// Remove from end	"yax"
-/// Remove from end	"ya"
-/// Add 'b' to the end	"yab"
-/// Add 'x' to the end	"yabx"
+/// Operation  Resulting String
+/// Add 'y' to the beginning  "yaxxy"
+/// Remove from end  "yaxx"
+/// Remove from end  "yax"
+/// Remove from end  "ya"
+/// Add 'b' to the end  "yab"
+/// Add 'x' to the end  "yabx"
 ///
 /// Example 3:
 /// Input: initial = "xyz", target = "xyz"
@@ -18944,13 +18944,13 @@ int LeetCodeDP::minLargest(vector<int>& nums1, vector<int>& nums2)
 /// [5,6]]
 /// Output: [7,14,11,14,5]
 /// Explanation:
-/// Index	nums[li..ri]	Maximum XOR Score Subarray	Maximum Subarray 
+/// Index  nums[li..ri]  Maximum XOR Score Subarray  Maximum Subarray 
 /// XOR Score
-/// 0	[0, 7, 3, 2]	[7]	7
-/// 1	[7, 3, 2, 8, 5]	[7, 3, 2, 8]	14
-/// 2	[3, 2, 8]	[3, 2, 8]	11
-/// 3	[3, 2, 8, 5, 1]	[2, 8, 5, 1]	14
-/// 4	[5, 1]	[5]	5
+/// 0  [0, 7, 3, 2]  [7]  7
+/// 1  [7, 3, 2, 8, 5]  [7, 3, 2, 8]  14
+/// 2  [3, 2, 8]  [3, 2, 8]  11
+/// 3  [3, 2, 8, 5, 1]  [2, 8, 5, 1]  14
+/// 4  [5, 1]  [5]  5
 /// 
 /// Constraints:
 /// 1. 1 <= n == nums.length <= 2000
@@ -19504,7 +19504,7 @@ int LeetCodeDP::countWinningSequences(string s)
 /// 
 /// Medium
 ///
-/// 	
+///   
 /// You are given two integers, n and k, along with two 2D integer 
 /// arrays, stayScore and travelScore.
 ///
@@ -19576,7 +19576,7 @@ int LeetCodeDP::maxScore(int n, int k, vector<vector<int>>& stayScore, vector<ve
 /// 
 /// Hard
 ///
-/// 	
+///   
 /// Alice is attempting to type a specific string on her computer. 
 /// However, she tends to be clumsy and may press a key for too long, 
 /// resulting in a character being typed multiple times.
@@ -21139,12 +21139,12 @@ int LeetCodeDP::minZeroArrayIV(vector<int>& nums, vector<vector<int>>& queries)
 /// Input: skill = [1,5,2,4], mana = [5,1,4,2]
 /// Output: 110
 /// Explanation:
-/// Potion Number	Start time	Wizard 0 done by	Wizard 1 done by	
-/// Wizard 2 done by	Wizard 3 done by
-/// 0	0	5	30	40	60
-/// 1	52	53	58	60	64
-/// 2	54	58	78	86	102
-/// 3	86	88	98	102	110
+/// Potion Number  Start time  Wizard 0 done by  Wizard 1 done by  
+/// Wizard 2 done by  Wizard 3 done by
+/// 0  0  5  30  40  60
+/// 1  52  53  58  60  64
+/// 2  54  58  78  86  102
+/// 3  86  88  98  102  110
 /// As an example for why wizard 0 cannot start working on the 1st potion 
 /// before time t = 52, consider the case where the wizards started preparing 
 /// the 1st potion at time t = 50. At time t = 58, wizard 2 is done with the 
@@ -22352,7 +22352,7 @@ int LeetCodeDP::minCostTeleportations(vector<vector<int>>& grid, int k)
 /// Input: grid = [[0,0],[0,0]]
 /// Output: 2
 /// Explanation:
-/// Number	Full Path
+/// Number  Full Path
 /// 1   (0, 0) -> (0, 1) -> (1, 1)
 /// 2   (0, 0) -> (1, 0) -> (1, 1)
 ///
@@ -22656,10 +22656,10 @@ int LeetCodeDP::zigZagArraysI(int n, int l, int r)
 /// Output: 13
 /// Explanation:
 /// One optimal path is 0 -> 1 -> 2 -> 4
-/// Jump	Cost Calculation				Cost
-/// 0 -> 1	costs[1] + (1 - 0)^2 = 1 + 1	2
-/// 1 -> 2	costs[2] + (2 - 1)^2 = 2 + 1	3
-/// 2 -> 4	costs[4] + (4 - 2)^2 = 4 + 4	8
+/// Jump  Cost Calculation        Cost
+/// 0 -> 1  costs[1] + (1 - 0)^2 = 1 + 1  2
+/// 1 -> 2  costs[2] + (2 - 1)^2 = 2 + 1  3
+/// 2 -> 4  costs[4] + (4 - 2)^2 = 4 + 4  8
 /// Thus, the minimum total cost is 2 + 3 + 8 = 13
 ///
 /// Example 2:
@@ -22668,10 +22668,10 @@ int LeetCodeDP::zigZagArraysI(int n, int l, int r)
 /// Explanation:
 /// One optimal path is 0 -> 2 -> 4
 /// 
-///	Jump	Cost Calculation				Cost
-///	0 -> 2	costs[2] + (2 - 0)^2 = 1 + 4	5
-///	2 -> 4	costs[4] + (4 - 2)^2 = 2 + 4	6
-///	Thus, the minimum total cost is 5 + 6 = 11
+///  Jump  Cost Calculation        Cost
+///  0 -> 2  costs[2] + (2 - 0)^2 = 1 + 4  5
+///  2 -> 4  costs[4] + (4 - 2)^2 = 2 + 4  6
+///  Thus, the minimum total cost is 5 + 6 = 11
 ///
 /// Example 3:
 /// Input: n = 3, costs = [9,8,3]
@@ -23864,6 +23864,8 @@ long long LeetCodeDP::minIncrease(vector<int>& nums)
 /// <summary>
 /// Leet Code 3892. Minimum Operations to Achieve At Least K Peaks
 /// 
+/// Hard
+/// 
 /// You are given a circular integer array nums of length n.
 /// An index i is a peak if its value is strictly greater than its neighbors :
 ///
@@ -23970,6 +23972,552 @@ int LeetCodeDP::minOperations(vector<int>& nums, int k)
         }
     }
     result = min(result, dp[n - 1][k]);
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3915. Maximum Sum of Alternating Subsequence With Distance 
+///                 at Least K
+/// 
+/// Hard
+/// 
+/// You are given an integer array nums of length n and an integer k.
+///
+/// Pick a subsequence with indices 0 <= i1 < i2 < ... < im < n such that :
+///
+/// For every 1 <= t < m, it + 1 - it >= k.
+/// The selected values form a strictly alternating sequence.In other 
+/// words, either :
+/// nums[i1] < nums[i2] > nums[i3] < ..., or
+/// nums[i1] > nums[i2] < nums[i3] > ...
+/// A subsequence of length 1 is also considered strictly alternating.The 
+/// score of a valid subsequence is the sum of its selected values.
+/// Return an integer denoting the maximum possible score of a valid 
+/// subsequence.
+///
+/// Example 1:
+/// Input: nums = [5, 4, 2], k = 2
+/// Output : 7
+/// Explanation :
+/// An optimal choice is indices[0, 2], which gives values[5, 2].
+///
+/// The distance condition holds because 2 - 0 = 2 >= k.
+/// The values are strictly alternating because 5 > 2.
+/// The score is 5 + 2 = 7.
+///
+/// Example 2:
+/// Input: nums = [3, 5, 4, 2, 4], k = 1
+/// Output : 14
+/// Explanation :
+/// An optimal choice is indices[0, 1, 3, 4], which gives 
+/// values[3, 5, 2, 4].
+///
+/// The distance condition holds because each pair of consecutive chosen 
+/// indices differs by at least k = 1.
+/// The values are strictly alternating since 3 < 5 > 2 < 4.
+/// The score is 3 + 5 + 2 + 4 = 14.
+///
+/// Example 3:
+/// Input: nums = [5], k = 1
+/// Output : 5
+/// Explanation :
+/// The only valid subsequence is[5].A subsequence with 1 element is always 
+/// strictly alternating, so the score is 5.
+///
+/// Constraints:
+/// 1. 1 <= n == nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// 3. 1 <= k <= n
+/// </summary>
+long long LeetCodeDP::maxAlternatingSum(vector<int>& nums, int k)
+{
+    int max_val = 100000;
+    SegmentTreeMax upHeap(max_val + 1), downHeap(max_val + 1);
+    deque<pair<int, long long>> upQueue, downQueue;
+    long long result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        long long downValue = nums[i] + downHeap.get(0, 0, max_val + 1, nums[i] + 1, max_val + 1);
+        long long upValue = nums[i] + upHeap.get(0, 0, max_val + 1, 0, nums[i] - 1);
+        upQueue.push_back(make_pair(nums[i], downValue));
+        downQueue.push_back(make_pair(nums[i], upValue));
+        result = max(result, max(upValue, downValue));
+        if ((int)upQueue.size() >= k)
+        {
+            downHeap.set(0, 0, max_val + 1, downQueue.front().first, downQueue.front().second);
+            downQueue.pop_front();
+            upHeap.set(0, 0, max_val + 1, upQueue.front().first, upQueue.front().second);
+            upQueue.pop_front();
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code #3946. Maximum Number of Items From Sale I
+///
+/// Medium
+///
+/// You are given a 2D integer array items, where items[i] = 
+/// [factori, pricei] represents the ith item.You are also given an 
+/// integer budget.
+///
+/// There are unlimited copies of each item available for purchase.You may 
+/// buy any number of copies of any items such that the total cost of the 
+/// purchased copies is at most budget.
+///
+/// After buying items, you may receive free copies according to the 
+/// following rules :
+///
+/// For each item i that you bought at least one copy of, you receive one 
+/// free copy of every item j such that j != i and factori divides factorj.
+/// Buying multiple copies of the same item i does not give additional 
+/// free copies through item i.
+/// The same item j can be received multiple times for free if it is 
+/// received from purchases of different item types.
+/// Return the maximum total number of item copies you can obtain, 
+/// including both purchased copies and free copies, while spending at 
+/// most budget on purchased items.
+///
+/// Example 1:
+/// Input: items = [[6, 2], [2, 6], [3, 4]], budget = 9
+/// Output : 4
+/// Explanation :
+/// You can buy 2 copies of item 0 and 1 copy of item 2 for a total cost 
+/// of 2 * 2 + 4 = 8, which is not greater than budget = 9.
+/// Buying item 2 gives 1 free copy of item 0, because factor2 = 3 
+/// divides factor0 = 6.
+/// You leave with 3 purchased copies and 1 free copy, for a total of 4 
+/// item copies.
+///
+/// Example 2 :
+/// Input : items = [[2, 4], [3, 2], [4, 1], [6, 4], [12, 4]], budget = 8
+/// Output : 10
+/// Explanation :
+/// You can buy 1 copy of item 0, 1 copy of item 1, and 2 copies of item 2 
+/// for a total cost of 4 + 2 + 2 * 1 = 8.
+/// Buying item 0 gives 1 free copy of items 2, 3, and 4.
+/// Buying item 1 gives 1 free copy of items 3 and 4.
+/// Buying item 2 gives 1 free copy of item 4.
+/// Thus, you receive 6 free copies.You leave with 4 purchased copies 
+/// and 6 free copies, for a total of 10 item copies.
+///
+/// Constraints:
+/// 1. 1 <= items.length <= 1000
+/// 2. items[i] = [factori, pricei]
+/// 3. 1 <= factori, pricei <= 1500
+/// 4. 1 <= budget <= 1500
+/// </summary>
+int LeetCodeDP::maximumSaleItemsI(vector<vector<int>>& items, int budget)
+{
+    vector<int> factor_count(items.size());
+    int min_price = INT_MAX;
+    for (size_t i = 0; i < items.size(); i++)
+    {
+        int factor = items[i][0];
+        for (size_t j = 0; j < items.size(); j++)
+        {
+            if (i != j && items[j][0] % factor == 0)
+            {
+                factor_count[i]++;
+            }
+        }
+        min_price = min(min_price, items[i][1]);
+    }
+    vector<int> dp(budget + 1);
+    for (size_t i = 0; i < items.size(); i++)
+    {
+        if (factor_count[i] > 0)
+        {
+            for (int j = budget; j >= items[i][1]; j--)
+            {
+                dp[j] = max(dp[j], dp[j - items[i][1]] + factor_count[i] + 1);
+            }
+        }
+    }
+    int result = 0;
+    for (int i = 0; i <= budget; i++)
+    {
+        result = max(result, dp[i] + (budget - i) / min_price);
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code #3952. Maximum Total Value of Covered Indices
+///
+/// Medium
+///
+/// You are given an integer array nums of length n and a binary 
+/// string s of length n, where s[i] == '1' means index i initially 
+/// contains a token and s[i] == '0' means it does not.
+///
+/// You may perform the following operation any number of times :
+/// Choose a token currently located at index i, where i > 0, such 
+/// that this token has not been moved before.
+/// Move this token from index i to index i - 1.
+/// An index is considered covered if it contains a token after all moves.
+///
+/// Return an integer denoting the maximum total value of nums at the 
+/// covered indices after optimally performing the operations.
+///
+/// Example 1:
+/// Input: nums = [9, 2, 6, 1], s = "0101"
+/// Output : 15
+/// Explanation :
+/// Initially, indices 1 and 3 contain tokens.
+/// Move the token from index 3 to index 2.
+/// Move the token from index 1 to index 0.
+/// The covered indices are[0, 2], so the total value is 
+/// nums[0] + nums[2] = 9 + 6 = 15.
+///
+/// Example 2:
+/// Input: nums = [5, 1, 4], s = "001"
+/// Output : 4
+/// Explanation :
+/// Initially, only index 2 contains a token.
+/// It is optimal to leave the token at index 2.
+/// The covered index is[2], so the total value is nums[2] = 4.
+///
+/// Example 3 :
+/// Input : nums = [9, 3, 5], s = "011"
+/// Output : 14
+/// Explanation :
+/// Initially, indices 1 and 2 contain tokens.
+/// Move the token from index 1 to index 0.
+/// The covered indices are[0, 2], so the total value is 
+/// nums[0] + nums[2] = 9 + 5 = 14.
+///
+/// Constraints :
+/// 1. 1 <= n == nums.length == s.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// 3. s[i] is either '0' or '1'
+/// </summary>
+long long LeetCodeDP::maxTotal(vector<int>& nums, string s)
+{
+    int n = nums.size();
+    vector<vector<long long>> dp(n, vector<long long>(2));
+    for (int i = 0; i < n; i++)
+    {
+        if (s[i] == '1')
+        {
+            if (i == 0)
+            {
+                dp[i][0] = -1;
+                dp[i][1] = nums[i];
+            }
+            else if (dp[i - 1][0] == -1)
+            {
+                dp[i][0] = -1;
+                dp[i][1] = nums[i] + dp[i-1][1];
+            }
+            else
+            {
+                dp[i][0] = dp[i - 1][0] + nums[i - 1];
+                dp[i][1] = max(dp[i - 1][0], dp[i - 1][1]) + nums[i];
+            }
+        }
+        else
+        {
+            if (i == 0)
+            {
+                dp[i][0] = 0;
+                dp[i][1] = 0;
+            }
+            else
+            {
+                dp[i][0] = max(dp[i - 1][0], dp[i - 1][1]);
+                dp[i][1] = dp[i][0];
+            }
+        }
+    }
+    return max(dp[n - 1][0], dp[n - 1][1]);
+}
+
+/// <summary>
+/// Leet Code #3957. Maximum Sum of M Non - Overlapping Subarrays II
+/// </summary>
+pair<long long, int> LeetCodeDP::maximumSumII_solve(int n, int l, int r, long long p, vector<long long>& prev)
+{
+    vector<pair<long long, int>> dp(n + 1, { 0,0 });
+    deque<int> dq;
+
+    for (int i = 1; i <= n; i++) {
+        int j = i - l;
+
+        if (j >= 0) {
+            while (!dq.empty()) {
+                int x = dq.back();
+
+                long long v1 = dp[x].first - prev[x];
+                long long v2 = dp[j].first - prev[j];
+
+                if (v2 > v1 || (v2 == v1 && dp[j].second <= dp[x].second)) {
+                    dq.pop_back();
+                }
+                else {
+                    break;
+                }
+            }
+
+            dq.push_back(j);
+        }
+
+        while (!dq.empty() && dq.front() < i - r) {
+            dq.pop_front();
+        }
+
+        dp[i] = dp[i - 1];
+
+        if (!dq.empty()) {
+            int x = dq.front();
+
+            long long ns = dp[x].first - prev[x] + prev[i] - p;
+            int nc = dp[x].second + 1;
+
+            if (ns > dp[i].first || (ns == dp[i].first && nc < dp[i].second)) {
+                dp[i] = { ns,nc };
+            }
+        }
+    }
+
+    return dp[n];
+}
+
+/// <summary>
+/// Leet Code #3957. Maximum Sum of M Non - Overlapping Subarrays II
+/// </summary>
+long long LeetCodeDP::maximumSumII_helper(int n, int l, int r, vector<long long>& prev)
+{
+    long long ans = -(long long)4e18;
+    deque<int> dq;
+
+    for (int i = 1; i <= n; i++) {
+        int j = i - l;
+
+        if (j >= 0) {
+            while (!dq.empty() && prev[dq.back()] >= prev[j]) {
+                dq.pop_back();
+            }
+
+            dq.push_back(j);
+        }
+
+        while (!dq.empty() && dq.front() < i - r) {
+            dq.pop_front();
+        }
+
+        if (!dq.empty()) {
+            ans = max(ans, prev[i] - prev[dq.front()]);
+        }
+    }
+
+    return ans;
+}
+
+/// <summary>
+/// Leet Code #3957. Maximum Sum of M Non - Overlapping Subarrays II
+///
+/// Hard
+///
+/// You are given an integer array nums of length n, and three 
+/// integers m, l, and r.
+///
+/// Your task is to select at least one and at most m non - overlapping 
+/// subarrays from nums such that :
+///
+/// Each selected subarray has a length between[l, r](inclusive).
+/// The total sum of all selected subarrays is maximized.
+/// Return the maximum total sum you can achieve.
+/// 
+/// Example 1:
+/// Input: nums = [4, 1, -5, 2], m = 2, l = 1, r = 3
+/// Output : 7
+/// Explanation :
+/// One optimal strategy is to :
+/// Select the subarray[4, 1] with sum 4 + 1 = 5 and the subarray[2] with 
+/// sum 2. Both subarrays have length between[l, r].
+/// The total sum of these subarrays is 5 + 2 = 7, which is the maximum 
+/// achievable sum with at most m = 2 subarrays.
+/// 
+/// Example 2 :
+/// Input : nums = [1, 0, 3, 4], m = 2, l = 1, r = 2
+/// Output : 8
+/// Explanation :
+/// One optimal strategy is to :
+/// Select the subarray[1] with sum 1 and the subarray[3, 4] with 
+/// sum 3 + 4 = 7. Both subarrays have length between[l, r].
+/// The total sum of these subarrays is 1 + 7 = 8, which is the 
+/// maximum achievable sum with at most m = 2 subarrays.
+/// 
+/// Example 3 :
+/// Input : nums = [-1, 7, -4], m = 1, l = 2, r = 3
+/// Output : 6
+/// Explanation :
+/// Select the subarray[-1, 7] from nums which has length between[l, r].
+/// The total sum of this subarray is - 1 + 7 = 6, which is the maximum 
+/// achievable sum with at most m = 1 subarray.
+///
+/// Example 4 :
+/// Input : nums = [-3, -4, -1], m = 2, l = 1, r = 2
+/// Output : -1
+/// Explanation :
+/// All subarrays of nums have negative sums.The optimal strategy is 
+/// to select the subarray[-1], which has length between[l, r].
+/// The total sum of this subarray is - 1, which is the maximum 
+/// achievable sum with at most m = 2 subarrays.
+/// 
+/// Constraints :
+/// 1. 1 <= n == nums.length <= 10^5
+/// 2. - 10^5 <= nums[i] <= 10^5
+/// 3. 1 <= m <= n
+/// 4. 1 <= l <= r <= n    /// </summary>
+long long LeetCodeDP::maximumSumII(vector<int>& nums, int m, int l, int r)
+{
+    int n = nums.size();
+
+    vector<long long> prev(n + 1);
+
+    for (int i = 0; i < n; i++) {
+        prev[i + 1] = prev[i] + nums[i];
+    }
+
+    pair<long long, int> curr = maximumSumII_solve(n, l, r, 0, prev);
+
+    if (curr.second == 0) {
+        return maximumSumII_helper(n, l, r, prev);
+    }
+
+    if (curr.second <= m) {
+        return curr.first;
+    }
+
+    long long low = 0, high = (long long)2e11;
+    long long ans = -1;
+
+    while (low <= high) {
+        long long mid = low + (high - low) / 2;
+
+        pair<long long, int> x = maximumSumII_solve(n, l, r, mid, prev);
+
+        if (x.second <= m) 
+        {
+            ans = x.first + mid * m;
+            high = mid - 1;
+        }
+        else 
+        {
+            low = mid + 1;
+        }
+    }
+
+    return ans;
+}
+
+
+/// <summary>
+/// Leet Code #3956. Maximum Sum of M Non - Overlapping Subarrays I
+///
+/// Hard
+///
+/// You are given an integer array nums of length n, and three integers 
+/// m, l, and r.
+///
+/// Your task is to select at least one and at most m non - overlapping 
+/// subarrays from nums such that :
+///
+/// Each selected subarray has a length between[l, r](inclusive).
+/// The total sum of all selected subarrays is maximized.
+/// Return the maximum total sum you can achieve.
+///
+/// Example 1:
+/// Input: nums = [4, 1, -5, 2], m = 2, l = 1, r = 3
+/// Output : 7
+/// Explanation :
+/// One optimal strategy is to :
+/// Select the subarray[4, 1] with sum 4 + 1 = 5 and the subarray[2] with 
+/// sum 2. Both subarrays have length between[l, r].
+/// The total sum of these subarrays is 5 + 2 = 7, which is the maximum 
+/// achievable sum with at most m = 2 subarrays.
+/// 
+/// Example 2 :
+/// Input : nums = [1, 0, 3, 4], m = 2, l = 1, r = 2
+/// Output : 8
+/// Explanation :
+/// One optimal strategy is to :
+/// Select the subarray[1] with sum 1 and the subarray[3, 4] with 
+/// sum 3 + 4 = 7. Both subarrays have length between[l, r].
+/// The total sum of these subarrays is 1 + 7 = 8, which is the maximum 
+/// achievable sum with at most m = 2 subarrays.
+///
+/// Example 3 :
+/// Input : nums = [-1, 7, -4], m = 1, l = 2, r = 3
+/// Output : 6
+/// Explanation :
+/// Select the subarray[-1, 7] from nums which has length between[l, r].
+/// The total sum of this subarray is - 1 + 7 = 6, which is the maximum 
+/// achievable sum with at most m = 1 subarray.
+///
+/// Example 4 :
+/// Input : nums = [-3, -4, -1], m = 2, l = 1, r = 2
+/// Output : -1
+/// Explanation :
+/// All subarrays of nums have negative sums.The optimal strategy is to 
+/// select the subarray[-1], which has length between[l, r].
+/// The total sum of this subarray is - 1, which is the maximum achievable 
+/// sum with at most m = 2 subarrays.
+///
+/// Constraints :
+/// 1. 1 <= n == nums.length <= 1000
+/// 2. -10^9 <= nums[i] <= 10^9
+/// 3. 1 <= m <= n
+/// 4. 1 <= l <= r <= n
+/// </summary>
+long long LeetCodeDP::maximumSumI(vector<int>& nums, int m, int l, int r)
+{
+    int n = nums.size();
+    vector<long long> prefix(n + 1);
+    for (int i = 0; i < n; i++)
+    {
+        prefix[i + 1] = prefix[i] + nums[i];
+    }
+    vector<vector<long long>> dp(n + 1, vector<long long>(2));
+    int curr = 0, next = 1;
+    long long result = LLONG_MIN;
+    for (int i = 0; i < m; i++)
+    {
+        deque<long long> dq;
+        for (int j = 0; j <= n; j++)
+        {
+            if (j < l) dp[j][curr] = 0;
+            dp[j][next] = LLONG_MIN;
+        }
+        for (int j = 1; j <= n; j++)
+        {
+            int k = j - l;
+            if (k >= 0)
+            {
+                while (!dq.empty() && dp[dq.back()][curr] - prefix[dq.back()] <= dp[k][curr] - prefix[k])
+                {
+                    dq.pop_back();
+                }
+                dq.push_back(k);
+                while (!dq.empty() && dq.front() < j - r)
+                {
+                    dq.pop_front();
+                }
+                if (!dq.empty()) 
+                {
+                    dp[j][next] = max(dp[j][next], prefix[j] + dp[dq.front()][curr] - prefix[dq.front()]);
+                }
+                dp[j][next] = max(dp[j][next], dp[j - 1][next]);
+            }
+        }
+        result = max(result, dp[n][next]);
+        swap(curr, next);
+    }
     return result;
 }
 #pragma endregion

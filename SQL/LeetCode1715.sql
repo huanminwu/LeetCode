@@ -1,4 +1,4 @@
-﻿-----------------------------------------------------------------------
+-----------------------------------------------------------------------
 ---  Leet code #1715. Count Apples and Oranges
 --- 
 ---  Medium
@@ -86,7 +86,7 @@
 -----------------------------------------------------------------------
 SELECT
     apple_count = SUM(A.apple_count + ISNULL(B.apple_count, 0)),
-	orange_count = SUM(A.orange_count + ISNULL(B.orange_count, 0))
+  orange_count = SUM(A.orange_count + ISNULL(B.orange_count, 0))
 FROM 
     Boxes AS A
 LEFT OUTER JOIN

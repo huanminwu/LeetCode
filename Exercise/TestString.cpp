@@ -779,7 +779,7 @@ void TestLeetCode227(void)
 /// Some examples:
 /// "1 + 1" = 2
 /// " 2-1 + 2 " = 3
-/// "(1+(4+5+2)-3)+(6+8)" = 23	
+/// "(1+(4+5+2)-3)+(6+8)" = 23  
 /// </summary>
 void TestLeetCode224(void)
 {
@@ -8938,8 +8938,92 @@ void TestLeetCode3889(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3913(void)
+{
+    Logger::WriteMessage("Test Leet Code 3913");
+    LeetCodeString leetCode;
+    string s = "leetcode";
+    string result = leetCode.sortVowelsII(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(result);
+
+    s = "aeiaaioooa";
+    result = leetCode.sortVowelsII(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(result);
+
+    s = "baeiou";
+    result = leetCode.sortVowelsII(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3921(void)
+{
+    Logger::WriteMessage("Test Leet Code 3921");
+    LeetCodeString leetCode;
+    vector<string> events = {"1", "4", "W", "6", "WD"};
+    vector<int> result = leetCode.scoreValidator(events);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage(result);
+
+    events = {"WD", "NB", "0", "4", "4"};
+    result = leetCode.scoreValidator(events);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage(result);
+
+    events = { "W","W","W","W","W","W","W","W","W","W","W" };
+    result = leetCode.scoreValidator(events);
+    Logger::WriteMessage(events);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3926(void)
+{
+    Logger::WriteMessage("Test Leet Code 3926");
+    LeetCodeString leetCode;
+    vector<string> chunks = { "hello wor", "ld hello" };
+    vector<string> queries = { "hello", "world", "wor" };
+    vector<int> result = leetCode.countWordOccurrences(chunks, queries);
+    Logger::WriteMessage(chunks);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    chunks = { "a--b a-", "-c" };
+    queries = { "a", "b", "c" };
+    result = leetCode.countWordOccurrences(chunks, queries);
+    Logger::WriteMessage(chunks);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    chunks = { "hello" };
+    queries = { "hello", "ell" };
+    result = leetCode.countWordOccurrences(chunks, queries);
+    Logger::WriteMessage(chunks);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3941(void)
+{
+    Logger::WriteMessage("Test Leet Code 3941");
+    LeetCodeString leetCode;
+    string password = "aA1!";
+    int result = leetCode.passwordStrength(password);
+    Logger::WriteMessage("password = " + password);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    password = "bbB11#";
+    result = leetCode.passwordStrength(password);
+    Logger::WriteMessage("password = " + password);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeString(void)
 {
+    TestLeetCode3941();
+    TestLeetCode3921();
+    TestLeetCode3913();
     TestLeetCode3889();
     TestLeetCode3860();
     TestLeetCode3856();

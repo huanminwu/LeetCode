@@ -76,21 +76,21 @@
 ---------------------------------------------------------------
 WITH Equation_CTE AS
 (
-	    SELECT
-		    factor = 
-				CASE WHEN factor > 0 
-					 THEN '+' + CONVERT(varchar(max), factor)  
-					 ELSE CONVERT(varchar(max), factor) 
-					 END,
-			power =
-				CASE 
+      SELECT
+        factor = 
+        CASE WHEN factor > 0 
+           THEN '+' + CONVERT(varchar(max), factor)  
+           ELSE CONVERT(varchar(max), factor) 
+           END,
+      power =
+        CASE 
                     WHEN ([power] != 0 AND [power] != 1) THEN 'X^' + CONVERT(varchar(max), power)
                     WHEN [power] = 1 THEN 'X'    
                      ELSE ''
-					 END,
+           END,
               [sequece] = RANK() OVER (ORDER BY power DESC)
-	    FROM 
-			Terms
+      FROM 
+      Terms
 )
 SELECT  equation = (SELECT STRING_AGG(factor+power, '') WITHIN GROUP (ORDER BY [sequece] ASC) FROM Equation_CTE) + '=0'
 

@@ -4976,8 +4976,91 @@ void TestLeetCode3897(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3912(void)
+{
+    Logger::WriteMessage("Test Leet Code 3912");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 1, 2, 4, 2, 3, 2 };
+    vector<int> result = leetCode.findValidElements(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 5,5,5,5 };
+    result = leetCode.findValidElements(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 1 };
+    result = leetCode.findValidElements(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode3914(void)
+{
+    Logger::WriteMessage("Test Leet Code 3914");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 3, 3, 2, 1 };
+    long long result = leetCode.minOperationsIV(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,1,2,3 };
+    result = leetCode.minOperationsIV(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3942(void)
+{
+    Logger::WriteMessage("Test Leet Code 3942");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 0, 2, 1 };
+    int result = leetCode.minOperationsRotation(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,0,2 };
+    result = leetCode.minOperationsRotation(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,0,1,3 };
+    result = leetCode.minOperationsRotation(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3935(void)
+{
+    Logger::WriteMessage("Test Leet Code 3935");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 2 };
+    int p = 4;
+    vector<vector<int>> queries = { {3, 1}, {1, 2} };
+    vector<int> result = leetCode.powerUpdateI(nums, p, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("p = " + to_string(p));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums = { 7, 5 };
+    p = 6;
+    queries = { {4, 3},{7, 2} };
+    result = leetCode.powerUpdateI(nums, p, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("p = " + to_string(p));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3942();
+    TestLeetCode3935();
+    TestLeetCode3914();
+    TestLeetCode3912();
     TestLeetCode3897();
     TestLeetCode3828();
     TestLeetCode3825();

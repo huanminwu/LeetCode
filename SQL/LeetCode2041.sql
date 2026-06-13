@@ -88,18 +88,18 @@
 --- experience and the score.
 -------------------------------------------------------------------
 SELECT
-	A.candidate_id
+  A.candidate_id
 FROM
     Candidates AS A
 LEFT OUTER JOIN
 (
     SELECT 
-	    interview_id, 
+      interview_id, 
         score = SUM(score)
     FROM 
         Rounds
     GROUP BY 
-	    interview_id
+      interview_id
 ) AS B
 ON
     A.interview_id = B.interview_id

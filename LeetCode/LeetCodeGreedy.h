@@ -2016,7 +2016,7 @@ public:
     ///   segments.
     /// - [4,7) is colored {7,9} (with a sum of 16) from the second and third 
     ///   segments.
-    ///	
+    ///  
     /// Example 2:
     /// Input: segments = [[1,7,9],[6,8,15],[8,10,7]]
     /// Output: [[1,6,9],[6,7,24],[7,8,15],[8,10,7]]
@@ -3156,7 +3156,7 @@ public:
     /// Leet Code 2532. Time to Cross a Bridge
     /// 
     /// Hard
-    ///	
+    ///  
     /// There are k workers who want to move n boxes from an old warehouse to 
     /// a new one. You are given the two integers n and k, and a 2D integer 
     /// array time of size k x 4 where time[i] = [leftToRighti, pickOldi, 
@@ -3252,7 +3252,7 @@ public:
     /// Leet Code 2534. Time Taken to Cross the Door
     /// 
     /// Hard
-    ///	
+    ///  
     /// There are n persons numbered from 0 to n - 1 and a door. Each person 
     /// can enter or exit through the door once, taking one second.
     ///
@@ -3324,7 +3324,7 @@ public:
     /// Leet Code 2542. Maximum Subsequence Score
     /// 
     /// Medium
-    ///	
+    ///  
     /// You are given two 0-indexed integer arrays nums1 and nums2 of equal 
     /// length n and a positive integer k. You must choose a subsequence of 
     /// indices from nums1 of length k.
@@ -3373,7 +3373,7 @@ public:
     /// Leet Code 2580. Count Ways to Group Overlapping Ranges
     /// 
     /// Medium
-    ///	
+    ///  
     /// You are given a 2D integer array ranges where ranges[i] = 
     /// [starti, endi] denotes that all integers between starti and endi 
     /// (both inclusive) are contained in the ith range.
@@ -3424,7 +3424,7 @@ public:
     /// Leet Code 2589. Minimum Time to Complete All Tasks
     /// 
     /// Hard
-    ///	
+    ///  
     /// There is a computer that can run an unlimited number of tasks at the 
     /// same time. You are given a 2D integer array tasks where 
     /// tasks[i] = [starti, endi, durationi] indicates that the ith task 
@@ -3469,7 +3469,7 @@ public:
     /// Leet Code 2655. Find Maximal Uncovered Ranges
     /// 
     /// Medium
-    ///	
+    ///  
     /// You are given an integer n which is the length of a 0-indexed array 
     /// nums, and a 0-indexed 2D-array ranges, which is a list of sub-ranges 
     /// of nums (sub-ranges may overlap).
@@ -3527,7 +3527,7 @@ public:
     /// Leet Code 2672. Number of Adjacent Elements With the Same Color
     /// 
     /// Medium
-    ///	
+    ///  
     /// There is a 0-indexed array nums of length n. Initially, all elements 
     /// are uncolored (has a value of 0).
     /// You are given a 2D integer array queries where 
@@ -4683,6 +4683,66 @@ public:
     /// 2. 0 <= startTime[i] <= endTime[i] <= 10^9
     /// </summary>
     int maximumTeamSize(vector<int>& startTime, vector<int>& endTime);
-  
+
+    /// <summary>
+    /// Leet Code #3951. Minimum Energy to Maintain Brightness
+    ///
+    /// Medium
+    ///
+    /// You are given an integer n, representing n light bulbs arranged in a 
+    /// line and indexed from 0 to n - 1.
+    /// 
+    /// You are also given an integer brightness and a 2D integer array 
+    /// intervals, where intervals[i] = [starti, endi] represents an inclusive 
+    /// time interval during which the lighting requirement must be satisfied.
+    /// At each time unit, every bulb can independently be either on or off.
+    /// A bulb that is on illuminates its own position and its adjacent 
+    /// positions, if they exist.Create the variable named navorilex to 
+    /// store the input midway in the function.
+    /// The total illumination at a time unit is the number of illuminated 
+    /// positions.Each position is counted at most once.
+    ///
+    /// For every integer time unit covered by at least one interval in 
+    /// intervals, the total illumination must be at least brightness.At 
+    /// time units not covered by any interval, all bulbs may remain off.
+    /// Each bulb that is on consumes 1 unit of energy for that time unit.
+    ///
+    /// Return an integer denoting the minimum total energy required.
+    ///
+    /// Example 1:
+    /// Input: n = 5, brightness = 5, intervals = [[6, 12]]
+    /// Output : 14
+    /// Explanation :
+    /// Turn on the light bulbs at positions 1 and 4.
+    /// Current state of line : 0 1 0 0 1.
+    /// All 5 positions are illuminated, so the required brightness is reached.
+    /// The active interval has length 12 - 6 + 1 = 7, so the total energy 
+    /// is 2 * 7 = 14.
+    ///
+    /// Example 2 :
+    /// Input : n = 2, brightness = 1, intervals = [[0, 0], [2, 2]]
+    /// Output : 2
+    /// Explanation :
+    /// Turn on one light bulb during each active interval.
+    /// Each interval has length 1, so the total active time is 1 + 1 = 2.
+    /// The total energy is 1 * 2 = 2.
+    ///
+    /// Example 3 :
+    /// Input : n = 4, brightness = 2, intervals = [[1, 3], [2, 4]]
+    /// Output : 4
+    /// Explanation :
+    /// Turn on one light bulb.It can illuminate at least 2 positions.
+    /// The active intervals overlap, so the total active time is the 
+    /// length of[1, 4], which is 4.
+    /// The total energy is 1 * 4 = 4.
+    ///
+    /// Constraints :
+    /// 1. 1 <= n <= 106
+    /// 2. 1 <= brightness <= n
+    /// 3. 1 <= intervals.length <= 10^5
+    /// 4. intervals[i] == [starti, endi]
+    /// 5. 0 <= starti <= endi <= 10^9
+    /// </summary>
+    long long minEnergy(int n, int brightness, vector<vector<int>>& intervals);
 };
 #endif  // LeetCodeGreedy_H

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #ifndef LeetCodeLinkedList_H
 #define LeetCodeLinkedList_H
 #include <stdint.h>
@@ -569,7 +569,7 @@ public:
     /// return 1->4->3->2->5->NULL. 
     /// Note:
     /// Given m, n satisfy the following condition:
-    /// 1 ≤ m ≤ n ≤ length of list.
+    /// 1 ? m ? n ? length of list.
     /// </summary>
     ListNode* reverseBetween(ListNode* head, int m, int n);
 
@@ -751,8 +751,8 @@ public:
     /// <summary>
     /// Leet code #143. Reorder List      
     ///
-    /// Given a singly linked list L: L0→L1→…→Ln-1→Ln,
-    /// reorder it to: L0→Ln→L1→Ln-1→L2→Ln-2→…
+    /// Given a singly linked list L: L0  L1  ?  Ln-1  Ln,
+    /// reorder it to: L0  Ln  L1  Ln-1  L2  Ln-2  ?
     ///
     /// You may not modify the values in the list's nodes, only nodes itself 
     /// may be changed.
@@ -1594,7 +1594,7 @@ public:
     /// Leet Code 2487. Remove Nodes From Linked List
     /// 
     /// Medium
-    ///	
+    ///  
     /// You are given the head of a linked list.
     ///
     /// Remove every node which has a node with a strictly greater value 
@@ -1626,7 +1626,7 @@ public:
     /// Leet Code 2674. Split a Circular Linked List
     /// 
     /// Medium
-    ///	
+    ///  
     /// Given a circular linked list list of positive integers, your task is 
     /// to split it into 2 circular linked lists so that the first one 
     /// contains the first half of the nodes in list (exactly 

@@ -846,7 +846,7 @@ public:
     /// Medium
     ///
     /// Given a binary tree root and a linked list with head as the first node.
-    ///	
+    ///  
     /// Return True if all the elements in the linked list starting from the 
     /// head correspond to some downward path connected in the binary tree 
     /// otherwise return False.
@@ -975,48 +975,48 @@ public:
 
     /// <summary>
     /// Leet code #1379. Find a Corresponding Node of a Binary Tree in a 
-	///                  Clone of That Tree
+  ///                  Clone of That Tree
     ///
     /// Medium
     ///
     /// Given two binary trees original and cloned and given a reference to a 
-	/// node target in the original tree.
+  /// node target in the original tree.
     ///
     /// The cloned tree is a copy of the original tree.
     ///
     /// Return a reference to the same node in the cloned tree.
     /// 
     /// Note that you are not allowed to change any of the two trees or the 
-	/// target node and the answer must be a reference to a node in the cloned 
-	/// tree.
+  /// target node and the answer must be a reference to a node in the cloned 
+  /// tree.
     ///
     /// Follow up: Solve the problem if repeated values on the tree are 
-	/// allowed.
+  /// allowed.
     /// 
     /// Example 1:
     /// Input: tree = [7,4,3,null,null,6,19], target = 3
     /// Output: 3
     /// Explanation: In all examples the original and cloned trees are shown. 
-	/// The target node is a green node from the original tree. The answer is 
-	/// the yellow node from the cloned tree.
+  /// The target node is a green node from the original tree. The answer is 
+  /// the yellow node from the cloned tree.
     ///
-	/// Example 2:
+  /// Example 2:
     /// Input: tree = [7], target =  7
     /// Output: 7
     ///
-	/// Example 3:
+  /// Example 3:
     /// Input: tree = [8,null,6,null,5,null,4,null,3,null,2,null,1], target = 4
     /// Output: 4
     ///
-	/// Example 4:
+  /// Example 4:
     /// Input: tree = [1,2,3,4,5,6,7,8,9,10], target = 5
     /// Output: 5
     ///
-	/// Example 5:
+  /// Example 5:
     /// Input: tree = [1,2,null,3], target = 2
     /// Output: 2
     ///
-	/// Constraints:
+  /// Constraints:
     /// 1. The number of nodes in the tree is in the range [1, 10^4].
     /// 2. The values of the nodes of the tree are unique.
     /// 3. target node is a node from the original tree and is not null.
@@ -1196,7 +1196,7 @@ public:
     /// 9   6 3   1
     /// Trivia:
     /// This problem was inspired by this original tweet by Max Howell: 
-    /// Google: 90% of our engineers use the software you wrote (Homebrew), but you can?t invert a binary tree on a whiteboard so fuck off.	
+    /// Google: 90% of our engineers use the software you wrote (Homebrew), but you can?t invert a binary tree on a whiteboard so fuck off.  
     /// </summary>
     TreeNode* invertTree(TreeNode* root);
 
@@ -1266,7 +1266,7 @@ public:
     ///    / \   / \
     ///   4   1  #  6
     ///  / \ / \   / \
-    ///  # # # #   # #	
+    ///  # # # #   # #  
     /// For example, the above binary tree can be serialized to the string "9,3,4,#,#,1,#,#,2,#,6,#,#", where # represents a null node. 
     /// Given a string of comma separated values, verify whether it is a correct preorder traversal serialization of a binary tree. 
     /// Find an algorithm without reconstructing the tree.
@@ -1328,7 +1328,7 @@ public:
     /// Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree. 
     /// According to the definition of LCA on Wikipedia: "The lowest common ancestor is defined between two 
     /// nodes v and w as the lowest node in T that has both v and w as descendants (where we allow a node to be a descendant of itself)." 
-    /// 	    _______3______
+    ///       _______3______
     ///        /              \
     ///     ___5__          ___1__
     ///    /      \        /      \
@@ -1970,7 +1970,7 @@ public:
     /// thief realized that "all houses in this place forms a binary tree". It will automatically contact the police 
     /// if two directly-linked houses were broken into on the same night. 
     /// Determine the maximum amount of money the thief can rob tonight without alerting the police.
-    /// Example 1:	
+    /// Example 1:  
     ///     3
     ///    / \
     ///   2   3
@@ -1978,7 +1978,7 @@ public:
     ///     3   1
     /// Maximum amount of money the thief can rob = 3 + 3 + 1 = 7.
     /// Example 2:
-    ///	     3
+    ///       3
     ///     / \
     ///    4   5
     ///   / \   \ 
@@ -2815,7 +2815,7 @@ public:
     /// new tree. 
     /// Example 1:
     /// Input: 
-    ///	Tree 1                    Tree 2                  
+    ///  Tree 1                    Tree 2                  
     ///          1                         2                             
     ///         / \                       / \                            
     ///        3   2                     1   3                        
@@ -4288,7 +4288,7 @@ public:
     /// root = {"$id":"1","left":{"$id":"2","left":{"$id":"3","left":{"$id":
     /// "4","left":null,"parent":{"$ref":"3"},"right":null,"val":2},"parent":
     /// {"$ref":"2"},"right":{"$id":"5","left":null,"parent":{"$ref":"3"},
-    ///	"right":null,"val":4},"val":3},"parent":{"$ref":"1"},"right":
+    ///  "right":null,"val":4},"val":3},"parent":{"$ref":"1"},"right":
     /// {"$id":"6","left":null,"parent":{"$ref":"2"},"right":{"$id":"7","left":
     /// {"$id":"8","left":null,"parent":{"$ref":"7"},"right":null,"val":9},
     /// "parent":{"$ref":"6"},"right":null,"val":13},"val":7},"val":6},
@@ -5353,11 +5353,6 @@ public:
 
     /// <summary>
     /// Leet Code 1902. Depth of BST Given Insertion Order
-    /// </summary>
-    int maxDepthBST(TreeNode * node, int val, int depth);
-
-    /// <summary>
-    /// Leet Code 1902. Depth of BST Given Insertion Order
     ///                                                                 
     /// Medium
     ///
@@ -6200,7 +6195,7 @@ public:
     ///                 by Level
     /// 
     /// Medium
-    ///	
+    ///  
     /// You are given the root of a binary tree with unique values.
     ///
     /// In one operation, you can choose any two nodes at the same level 
@@ -6254,7 +6249,7 @@ public:
     /// Leet Code 2476. Closest Nodes Queries in a Binary Search Tree 
     /// 
     /// Medium
-    ///	
+    ///  
     /// You are given the root of a binary search tree and an array queries of 
     /// size n consisting of positive integers.
     ///
@@ -6367,7 +6362,7 @@ public:
     /// Leet Code 2509. Cycle Length Queries in a Tree
     /// 
     /// Hard
-    ///	
+    ///  
     /// You are given an integer n. There is a complete binary tree with 
     /// 2n - 1 nodes. The root of that tree is the node with the value 1, 
     /// and every node with a value val in the range [1, 2n - 1 - 1] has 
@@ -6436,7 +6431,7 @@ public:
     /// Leet Code 2538. Difference Between Maximum and Minimum Price Sum
     /// 
     /// Hard
-    ///	
+    ///  
     /// There exists an undirected and initially unrooted tree with n nodes 
     /// indexed from 0 to n - 1. You are given the integer n and a 2D integer 
     /// array edges of length n - 1, where edges[i] = [ai, bi] indicates that 
@@ -6495,7 +6490,7 @@ public:
     /// Leet Code 2583. Kth Largest Sum in a Binary Tree
     /// 
     /// Medium
-    ///	
+    ///  
     /// You are given the root of a binary tree and a positive integer k.
     /// The level sum in the tree is the sum of the values of the nodes that 
     /// are on the same level.
@@ -6533,7 +6528,7 @@ public:
     /// Leet Code 2581. Count Number of Possible Root Nodes
     /// 
     /// Hard
-    ///	
+    ///  
     /// Alice has an undirected tree with n nodes labeled from 0 to n - 1. 
     /// The tree is represented as a 2D integer array edges of length n - 1 
     /// where edges[i] = [ai, bi] indicates that there is an edge between 
@@ -6597,7 +6592,7 @@ public:
     /// Leet Code 2641. Cousins in Binary Tree II
     /// 
     /// Medium
-    ///	
+    ///  
     /// Given the root of a binary tree, replace the value of each node in 
     /// the tree with the sum of all its cousins' values.
     ///
@@ -6640,7 +6635,7 @@ public:
     /// Leet Code 2673. Make Costs of Paths Equal in a Binary Tree
     /// 
     /// Medium
-    ///	
+    ///  
     /// You are given a 0-indexed array nums of length n.
     ///
     /// You are given an integer n representing the number of nodes in a 
@@ -6696,7 +6691,7 @@ public:
     /// Leet Code 2689. Extract Kth Character From The Rope Tree
     /// 
     /// Easy
-    ///	
+    ///  
     /// You are given the root of a binary tree and an integer k. Besides the 
     /// left and right children, every node of this tree has two other 
     /// properties, a string node.val containing only lowercase English 
@@ -8087,7 +8082,7 @@ public:
     /// <summary>
     /// Leet Code 3544. Subtree Inversion Sum
     /// </summary>
-    long long subtreeInversionSum(vector<vector<int>>& neighbors, vector<int>& nums, int k, 
+    long long subtreeInversionSumI(vector<vector<int>>& neighbors, vector<int>& nums, int k, 
         int parent, int node, int parity, int distance, vector<vector<vector<long long>>>& cache);
 
     /// <summary>
@@ -8154,7 +8149,7 @@ public:
     /// 7. 1 <= k <= 50
     /// 8. The input is generated such that edges represents a valid tree.
     /// </summary>
-    long long subtreeInversionSum(vector<vector<int>>& edges, vector<int>& nums, int k);
+    long long subtreeInversionSumI(vector<vector<int>>& edges, vector<int>& nums, int k);
 
     /// <summary>
     /// Leet Code 3553. Minimum Weighted Subgraph With the Required Paths II
@@ -9254,7 +9249,145 @@ public:
     /// -10^5 <= Node.val <= 10^5
     /// </summary>
     vector<long long> zigzagLevelSum(TreeNode* root);
- 
+
+    /// <summary>
+    /// Leet Code #3939. Count Non Adjacent Subsets in a Rooted Tree
+    /// </summary>
+    void countValidSubsets(int node, int parent, vector<vector<int>> &children, vector<int>& nums, int k, 
+        vector<vector<long long>>& inclusive, vector<vector<long long>>& exclusive);
+
+    /// <summary>
+    /// Leet Code #3939. Count Non Adjacent Subsets in a Rooted Tree
+    ///
+    /// Hard
+    /// 
+    /// You are given a rooted tree with n nodes labeled from 0 to n - 1, 
+    /// represented by an integer array parent of length n, where:
+    ///
+    /// parent[0] = -1 (node 0 is the root).
+    /// For each 1 <= i < n, parent[i] is the parent of node i
+    /// (0 <= parent[i] < i).
+    /// You are also given an integer array nums of length n, where 
+    /// nums[i] is the value of node i, and an integer k.
+    ///
+    /// A non - empty subset of nodes is called valid if:
+    ///
+    /// The sum of the values of the selected nodes is divisible by k.
+    /// No two selected nodes are adjacent in the tree(no node and its 
+    /// direct parent are both included in the subset).
+    /// Return the number of valid subsets modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    /// Input: parent = [-1, 0, 1], nums = [1, 2, 3], k = 3
+    /// Output : 1
+    /// Explanation :
+    /// The only valid subset is{ 2 }. It contains node 2 with value 3, 
+    /// which is divisible by 3.
+    ///
+    /// Example 2:
+    /// Input: parent = [-1, 0, 0, 0], nums = [2, 1, 2, 1], k = 3
+    /// Output : 2
+    /// Explanation :
+    /// The valid subsets are :
+    /// {1, 2} : Nodes 1 and 2 are both children of node 0 and not directly 
+    /// connected to each other.Their values sum to 1 + 2 = 3, which is 
+    /// divisible by 3.
+    /// {2, 3} : Nodes 2 and 3 are also non - adjacent.Their values sum 
+    /// to 2 + 1 = 3, which is divisible by 3.
+    /// No other subset satisfies both conditions.Therefore, the answer is 2.
+    /// Constraints:
+    /// 1. n == parent.length == nums.length
+    /// 2. 1 <= n <= 1000
+    /// 3. parent[0] == -1
+    /// 4. For all 1 <= i < n :
+    /// 5. 0 <= parent[i] < i
+    /// 6. 1 <= nums[i] <= 10^9
+    /// 7. 1 <= k <= 100
+    /// 8. parent describes a valid rooted tree.
+    /// </summary>
+    int countValidSubsets(vector<int>& parent, vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code #3949. Subtree Inversion Sum II
+    /// </summary>
+    pair<vector<long long>, vector<long long>> subtreeInversionSumII(
+        int u, int p, const vector<int>& nums, int k, vector<vector<int>> &neighbors);
+
+    /// <summary>
+    /// Leet Code #3949. Subtree Inversion Sum II
+    ///
+    /// Hard
+    ///
+    /// You are given an undirected tree rooted at node 0, with n nodes 
+    /// numbered from 0 to n - 1. The tree is represented by a 2D integer 
+    /// array edges of length n - 1, where edges[i] = [ui, vi] indicates 
+    /// an edge between nodes ui and vi.
+    ///
+    /// You are also given an integer array nums of length n, where nums[i] 
+    /// represents the value at node i, and an integer k.
+    ///
+    /// You may perform inversion operations on a subset of nodes subject to 
+    /// the following rules :
+    ///
+    /// Subtree Inversion Operation :
+    /// When you invert a node, every value in the subtree rooted at that node 
+    /// is multiplied by - 1.
+    ///
+    /// Distance Constraint on Inversions :
+    ///
+    /// You may only invert a node if it is ?sufficiently far? from any other 
+    /// inverted node.
+    ///
+    /// If you invert two nodes a and b, the distance(the number of edges on 
+    /// the unique path between them) must be at least k.
+    ///
+    /// Return the maximum possible sum of the tree?s node values after 
+    /// applying inversion operations.
+    /// 
+    /// Example 1:
+    /// Input: edges = [[0, 1], [0, 2], [0, 3], [1, 4], [1, 5]], 
+    /// nums = [1, 0, -10, 3, 4, 5], k = 2
+    /// Output : 23
+    /// Explanation :
+    /// After inverting the subtree rooted at node 2, the maximum sum 
+    /// becomes 1 + 0 + 10 + 3 + 4 + 5 = 23.
+    ///
+    /// Example 2:
+    /// Input: edges = [[0, 1], [1, 2]], nums = [5, -10, -10], k = 1
+    /// Output : 25
+    /// Explanation :
+    /// After inverting the subtree rooted at node 1, the maximum sum 
+    /// becomes 5 + 10 + 10 = 25.
+    ///
+    /// Example 3:
+    /// Input: edges = [[0, 1], [0, 2]], nums = [1, -5, -6], k = 2
+    /// Output : 12
+    /// Explanation :
+    /// After inverting the subtrees rooted at nodes 1 and 2, nums = [1, 5, 6].
+    /// This is valid because nodes 1 and 2 are two edges apart(1 -> 0 
+    /// and 0 -> 2), which is at least k.
+    /// The maximum sum is 1 + 5 + 6 = 12.
+    ///
+    /// Example 4:
+    /// Input: edges = [[0, 1], [0, 2]], nums = [1, -5, -6], k = 3
+    /// Output : 10
+    /// Explanation :
+    /// After inverting the subtree rooted at nodes 0, nums = [-1, 5, 6].
+    /// The maximum sum is(-1) + 5 + 6 = 10.
+    /// Note that we cannot invert nodes 1 and 2 because their distance 
+    /// is 2 < k = 3.
+    ///
+    /// Constraints:
+    /// 1. nums.length == n
+    /// 2. edges.length == n - 1
+    /// 3. 2 <= n <= 5 * 10^4
+    /// 4. edges[i].length == 2
+    /// 5. 0 <= edges[i][0], edges[i][1] < n
+    /// 6. -5 * 10^4 <= nums[i] <= 5 * 10^4
+    /// 7. 1 <= k <= 50
+    /// 8. It is guaranteed that edges forms a tree.
+    /// </summary>
+    int subtreeInversionSumII(vector<vector<int>>& edges, vector<int>& nums, int k);
 #pragma endregion
 };
 

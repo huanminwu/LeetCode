@@ -4330,7 +4330,7 @@ void TestLeetCode3544(void)
     vector<vector<int>> edges = { {0, 1},{0, 2},{1, 3},{1, 4},{2, 5},{2, 6} };
     vector<int> nums = { 4, -8, -6, 3, 7, -2, 5 };
     int k = 2;
-    long long result = leetCode.subtreeInversionSum(edges, nums, k);
+    long long result = leetCode.subtreeInversionSumI(edges, nums, k);
     Logger::WriteMessage("k = " + to_string(k));
     Logger::WriteMessage(edges);
     Logger::WriteMessage(nums);
@@ -4339,7 +4339,7 @@ void TestLeetCode3544(void)
     edges = { {0, 1},{1, 2},{2, 3},{3, 4} };
     nums = { -1,3,-2,4,-5 };
     k = 2;
-    result = leetCode.subtreeInversionSum(edges, nums, k);
+    result = leetCode.subtreeInversionSumI(edges, nums, k);
     Logger::WriteMessage("k = " + to_string(k));
     Logger::WriteMessage(edges);
     Logger::WriteMessage(nums);
@@ -4348,7 +4348,7 @@ void TestLeetCode3544(void)
     edges = { {0, 1},{0, 2} };
     nums = { 0,-1,-2 };
     k = 3;
-    result = leetCode.subtreeInversionSum(edges, nums, k);
+    result = leetCode.subtreeInversionSumI(edges, nums, k);
     Logger::WriteMessage("k = " + to_string(k));
     Logger::WriteMessage(edges);
     Logger::WriteMessage(nums);
@@ -4850,8 +4850,74 @@ void TestLeetCode3902(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3939(void)
+{
+    Logger::WriteMessage("Test Leet Code 3939");
+    LeetCodeTree leetCode;
+    vector<int> parent = { -1, 0, 1 };
+    vector<int> nums = { 1, 2, 3 };
+    int k = 3;
+    int result = leetCode.countValidSubsets(parent, nums, k);
+    Logger::WriteMessage(parent);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    parent = { -1,0,0,0 };
+    nums = { 3,3,3,3 };
+    k = 3;
+    result = leetCode.countValidSubsets(parent, nums, k);
+    Logger::WriteMessage(parent);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3949(void)
+{
+    Logger::WriteMessage("Test Leet Code 3949");
+    LeetCodeTree leetCode;
+    vector<vector<int>> edges = { {0, 1},{0, 2},{0, 3},{1, 4},{1, 5} };
+    vector<int> nums = { 1, 0, -10, 3, 4, 5 };
+    int k = 2;
+    int result = leetCode.subtreeInversionSumII(edges, nums, k);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));  
+
+    edges = { {0, 1}, {1, 2} };
+    nums = { 5, -10, -10 };
+    k = 1;
+    result = leetCode.subtreeInversionSumII(edges, nums, k);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    edges = { {0, 1},{0, 2} }; 
+    nums = {1, -5, -6};
+    k = 2;
+    result = leetCode.subtreeInversionSumII(edges, nums, k);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    edges = { {0, 1}, {0, 2} };
+    nums = { 1, -5, -6 };
+    k = 3;
+    result = leetCode.subtreeInversionSumII(edges, nums, k);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3949();
+    TestLeetCode3939();
     TestLeetCode3902();
     TestLeetCode3879();
     TestLeetCode3831();

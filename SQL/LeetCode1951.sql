@@ -61,35 +61,35 @@
 WITH Followers_Common 
 AS
 (
-	SELECT
-		user1_id = A.[user_id],
-		user2_id = B.[user_id],
-		[count] = COUNT(*)
-	FROM
-	   Relations AS A
-	INNER JOIN 
-	   Relations AS B
-	ON
-	   A.follower_id = B.follower_id
-	WHERE
-	   A.[user_id] < B.[user_id]
-	GROUP BY
-		A.[user_id],
-		B.[user_id]	   
+  SELECT
+    user1_id = A.[user_id],
+    user2_id = B.[user_id],
+    [count] = COUNT(*)
+  FROM
+     Relations AS A
+  INNER JOIN 
+     Relations AS B
+  ON
+     A.follower_id = B.follower_id
+  WHERE
+     A.[user_id] < B.[user_id]
+  GROUP BY
+    A.[user_id],
+    B.[user_id]     
 ),
 Followers_Rank
 AS
 (
-	SELECT
-		user1_id,
-		user2_id,
-		[Rank] = RANK() OVER (ORDER BY [count] DESC)
-	FROM
-	   Followers_Common
+  SELECT
+    user1_id,
+    user2_id,
+    [Rank] = RANK() OVER (ORDER BY [count] DESC)
+  FROM
+     Followers_Common
 )
 SELECT 
     user1_id, 
-	user2_id
+  user2_id
 FROM 
     Followers_Rank
 WHERE 

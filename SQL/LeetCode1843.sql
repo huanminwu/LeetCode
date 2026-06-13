@@ -95,17 +95,17 @@ WITH monthly_income
 AS
 (
 
-	SELECT
-		account_id,
-		month = YEAR(day) * 100 + MONTH(day),
-		amount = SUM (amount) 
-	FROM 	
-		Transactions
-	WHERE
-	    type = 'Creditor'
-	GROUP BY
-	    account_id,
-	    YEAR(day) * 100 + MONTH(day)
+  SELECT
+    account_id,
+    month = YEAR(day) * 100 + MONTH(day),
+    amount = SUM (amount) 
+  FROM   
+    Transactions
+  WHERE
+      type = 'Creditor'
+  GROUP BY
+      account_id,
+      YEAR(day) * 100 + MONTH(day)
 )
 SELECT
     DISTINCT account_id

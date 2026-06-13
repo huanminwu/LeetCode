@@ -92,12 +92,12 @@
 ---------------------------------------------------------------
 SELECT
     A.first_col,
-    B.second_col	
+    B.second_col  
 FROM
 (
     SELECT
         first_col,
-        RN = ROW_NUMBER() OVER (ORDER BY first_col ASC)		
+        RN = ROW_NUMBER() OVER (ORDER BY first_col ASC)    
     FROM
         [Data]
 ) AS A
@@ -105,7 +105,7 @@ INNER JOIN
 (
     SELECT
         second_col,
-        RN = ROW_NUMBER() OVER (ORDER BY second_col DESC)		
+        RN = ROW_NUMBER() OVER (ORDER BY second_col DESC)    
     FROM
         [Data]
 ) AS B

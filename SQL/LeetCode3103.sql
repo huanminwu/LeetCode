@@ -67,7 +67,7 @@ WITH HashStart AS
         tweet_id,
         tweet, 
         CHARINDEX('#', tweet, 1) AS StartPosition
-	FROM 
+  FROM 
         Tweets
     WHERE 
         CHARINDEX('#', tweet, 1) > 0
@@ -76,7 +76,7 @@ WITH HashStart AS
         user_id,
         tweet_id,
         tweet,
-	    CHARINDEX('#', tweet, StartPosition + 1) AS StartPosition
+      CHARINDEX('#', tweet, StartPosition + 1) AS StartPosition
     FROM 
         HashStart
     WHERE 

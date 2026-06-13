@@ -72,21 +72,21 @@ SELECT
     accounts_count = COUNT(DISTINCT A.account_id)
 FROM
 (
-	SELECT
-		account_id
-	FROM
-	    Subscriptions
-	WHERE 
-	    start_date <= '2021-12-31' AND end_date >= '2021-01-01'
+  SELECT
+    account_id
+  FROM
+      Subscriptions
+  WHERE 
+      start_date <= '2021-12-31' AND end_date >= '2021-01-01'
 ) AS A
 LEFT OUTER JOIN
 (
-	SELECT 
-	    DISTINCT account_id
+  SELECT 
+      DISTINCT account_id
     FROM 
         Streams
-	WHERE
-	    YEAR(stream_date) = 2021
+  WHERE
+      YEAR(stream_date) = 2021
 ) AS B
 ON
    A.account_id = B.account_id

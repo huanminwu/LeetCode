@@ -1,4 +1,4 @@
-﻿-----------------------------------------------------------------------
+-----------------------------------------------------------------------
 ---  Leet code #1811. Find Interview Candidates
 --- 
 ---  Medium
@@ -117,9 +117,9 @@ AS
 SELECT 
     DISTINCT
     B.name,
-	B.mail
+  B.mail
 FROM
-(	
+(  
     SELECT 
         user_id
     FROM

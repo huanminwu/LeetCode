@@ -1,4 +1,4 @@
-﻿-----------------------------------------------------------------------
+-----------------------------------------------------------------------
 ---  Leet code #1731. The Number of Employees Which Report to Each Employee
 --- 
 ---  Easy
@@ -52,8 +52,8 @@
 SELECT
     employee_id = A.reports_to,
     name = MAX(B.name),
-	reports_count = COUNT(*),
-	average_age = CONVERT(int, ROUND(AVG(CONVERT(float, A.age)), 0))
+  reports_count = COUNT(*),
+  average_age = CONVERT(int, ROUND(AVG(CONVERT(float, A.age)), 0))
 FROM 
     Employees AS A
 INNER JOIN

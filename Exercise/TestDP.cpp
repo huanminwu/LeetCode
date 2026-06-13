@@ -6663,8 +6663,132 @@ void TestLeetCode3892(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+
+void TestLeetCode3915(void)
+{
+    Logger::WriteMessage("Test Leet Code 3915");
+    LeetCodeDP leetCode;
+    vector<int> nums = {5, 4, 2};
+    int k = 2;
+    long long result = leetCode.maxAlternatingSum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3, 5, 4, 2, 4 };
+    k = 1;
+    result = leetCode.maxAlternatingSum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5 };
+    k = 1;
+    result = leetCode.maxAlternatingSum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3946(void)
+{
+    Logger::WriteMessage("Test Leet Code 3946");
+    LeetCodeDP leetCode;
+    vector<vector<int>> items = { {6, 2}, {2, 6}, {3, 4} };
+    int budget = 9;
+    int result = leetCode.maximumSaleItemsI(items, budget);
+    Logger::WriteMessage(items);
+    Logger::WriteMessage("budget = " + to_string(budget));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    items = { {2, 4}, {3, 2}, {4, 1}, {6, 4}, {12, 4} };
+    budget = 8;
+    result = leetCode.maximumSaleItemsI(items, budget);
+    Logger::WriteMessage(items);
+    Logger::WriteMessage("budget = " + to_string(budget));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    items = { {34, 13}, {62, 28}, {44, 26} };
+    budget = 44;
+    result = leetCode.maximumSaleItemsI(items, budget);
+    Logger::WriteMessage(items);
+    Logger::WriteMessage("budget = " + to_string(budget));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    items = { {3,5}, {3, 5}, {7, 6}, {7, 6}, {7,6} };
+    budget = 10;
+    result = leetCode.maximumSaleItemsI(items, budget);
+    Logger::WriteMessage(items);
+    Logger::WriteMessage("budget = " + to_string(budget));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3952(void)
+{
+    Logger::WriteMessage("Test Leet Code 3952");
+    LeetCodeDP leetCode;
+    vector<int> nums = {9, 2, 6, 1};
+    string s = "0101";
+    long long result = leetCode.maxTotal(nums, s);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,1,4 };
+    s = "001";
+    result = leetCode.maxTotal(nums, s);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 9, 3, 5 };
+    s = "011";
+    result = leetCode.maxTotal(nums, s);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3956(void)
+{
+    Logger::WriteMessage("Test Leet Code 3956");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 4, 1, -5, 2 };
+    int m = 2, l = 1, r = 3;
+    long long result = leetCode.maximumSumI(nums, m, l, r);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("m = " + to_string(m) + ", l = " + to_string(l) + ", r = " + to_string(r));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = {1, 0, 3, 4};
+    m = 2, l = 1, r = 2;
+    result = leetCode.maximumSumI(nums, m, l, r);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("m = " + to_string(m) + ", l = " + to_string(l) + ", r = " + to_string(r));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -1, 7, -4 };
+    m = 1, l = 2, r = 3;
+    result = leetCode.maximumSumI(nums, m, l, r);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("m = " + to_string(m) + ", l = " + to_string(l) + ", r = " + to_string(r));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -3, -4, -1 };
+    m = 2, l = 1, r = 2;
+    result = leetCode.maximumSumI(nums, m, l, r);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("m = " + to_string(m) + ", l = " + to_string(l) + ", r = " + to_string(r));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3956();
+    TestLeetCode3952();
+    TestLeetCode3946();
+    TestLeetCode3915();
     TestLeetCode1746();
     TestLeetCode3892();
     TestLeetCode3891();

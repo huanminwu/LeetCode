@@ -187,18 +187,18 @@ static bool isPrime(long long N)
 struct BinaryIndexTree
 {
     vector<long long> m_arr;
-    int m_count;
+    int m_size;
     long long m_M;
     BinaryIndexTree(int n, long long M = 1000000007)
     {
         m_M = M;
         m_arr = vector<long long>(n + 1, 0);
-        m_count = n + 1;
+        m_size = n + 1;
     }
     void add(int index, int val)
     {
         if (index == 0) return;
-        while (index < m_count)
+        while (index < m_size)
         {
             m_arr[index] = (m_arr[index] + val) % m_M;
             index += (index & -index);
@@ -214,7 +214,35 @@ struct BinaryIndexTree
         }
         return sum;
     }
+
+    long long total(void)
+    {
+        long long result = sum(m_size - 1);
+        return result;
+    }
+
+    long long findKth(int k)
+    {
+        int left = 1, right = m_size - 1;
+        int result = -1;
+        while (left <= right)
+        {
+            int mid = left + (right - left) / 2;
+            if (sum(mid) >= k)
+            {
+                result = mid;
+                right = mid - 1;
+            }
+            else
+            {
+                left = mid + 1;
+            }
+        }
+        return result;
+    }
 };
+
+
 
 struct SegmentTreeGcdValue
 {
@@ -359,6 +387,45 @@ struct SegmentMinMaxTree
         auto a = getVal(idx * 2, l, m, L, R);
         auto b = getVal(idx * 2 + 1, m + 1, r, L, R);
         return { min(a.first,b.first),max(a.second,b.second) };
+    }
+};
+
+
+struct SegmentTreeMax
+{
+    int m_count;
+    vector<long long> m_arr;
+    SegmentTreeMax(int n)
+    {
+        m_arr.resize(4 * n);
+        m_count = n;
+    }
+    void set(int index, int start, int end, int pos, long long val)
+    {
+        if (start == end)
+        {
+            m_arr[index] = val;
+            return;
+        }
+        int mid = start + (end - start) / 2;
+        if (pos <= mid)
+        {
+            set(2 * index + 1, start, mid, pos, val);
+        }
+        else
+        {
+            set(2 * index + 2, mid + 1, end, pos, val);
+        }
+        m_arr[index] = max(m_arr[2 * index + 1], m_arr[2 * index + 2]);
+    }
+    long long get(int idx, int l, int r, int L, int R)
+    {
+        if (R < l || r < L)return LLONG_MIN;
+        if (L <= l && r <= R)return m_arr[idx];
+        int m = (l + r) / 2;
+        long long a = get(idx * 2 + 1, l, m, L, R);
+        long long b = get(idx * 2 + 2, m + 1, r, L, R);
+        return max(a, b);
     }
 };
 

@@ -19,8 +19,8 @@
 --- This table contains information about the shifts worked by employees, 
 --- including the start and end times on a specific date.
 --- Write a solution to count the number of overlapping shifts for each 
---- employee. Two shifts are considered overlapping if one shift’s end_time 
---- is later than another shift’s start_time.
+--- employee. Two shifts are considered overlapping if one shift's end_time 
+--- is later than another shift's start_time.
 ---
 --- Return the result table ordered by employee_id in ascending order.
 ---

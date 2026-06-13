@@ -865,7 +865,7 @@ vector<string> LeetCodeTree::binaryTreePaths(TreeNode* root)
 /// Trivia:
 /// This problem was inspired by this original tweet by Max Howell: 
 /// Google: 90% of our engineers use the software you wrote (Homebrew), 
-/// but you can?t invert a binary tree on a whiteboard so fuck off.	
+/// but you can?t invert a binary tree on a whiteboard so fuck off.  
 /// </summary>
 TreeNode* LeetCodeTree::invertTree(TreeNode* root)
 {
@@ -997,7 +997,7 @@ bool LeetCodeTree::isValidBST(TreeNode* root)
 ///    / \   / \
 ///   4   1  #  6
 ///  / \ / \   / \
-///  # # # #   # #	
+///  # # # #   # #  
 /// For example, the above binary tree can be serialized to the string "9,3,4,#,#,1,#,#,2,#,6,#,#", where # represents a null node. 
 /// Given a string of comma separated values, verify whether it is a correct preorder traversal serialization of a binary tree. 
 /// Find an algorithm without reconstructing the tree.
@@ -1140,7 +1140,7 @@ int LeetCodeTree::lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q,
 ///
 /// Given a binary tree, find the lowest common ancestor (LCA) of two 
 /// given nodes in the tree.
-/// 	    _______3______
+///       _______3______
 ///        /              \
 ///     ___5__          ___1__
 ///    /      \        /      \
@@ -2044,7 +2044,7 @@ void LeetCodeTree::robIII(TreeNode* root, int& rob_with_root, int& rob_without_r
 /// if two directly-linked houses were broken into on the same night. 
 /// Determine the maximum amount of money the thief can rob tonight 
 /// without alerting the police.
-/// Example 1:	
+/// Example 1:  
 ///     3
 ///    / \
 ///   2   3
@@ -2052,7 +2052,7 @@ void LeetCodeTree::robIII(TreeNode* root, int& rob_with_root, int& rob_without_r
 ///     3   1
 /// Maximum amount of money the thief can rob = 3 + 3 + 1 = 7.
 /// Example 2:
-///	     3
+///       3
 ///     / \
 ///    4   5
 ///   / \   \ 
@@ -3894,7 +3894,7 @@ string LeetCodeTree::tree2str(TreeNode* t)
 /// new tree. 
 /// Example 1:
 /// Input: 
-///	Tree 1                    Tree 2                  
+///  Tree 1                    Tree 2                  
 ///          1                         2                             
 ///         / \                       / \                            
 ///        3   2                     1   3                        
@@ -5701,7 +5701,7 @@ TreeNode* LeetCodeTree::clone(TreeNode * root)
 vector<TreeNode*> LeetCodeTree::allPossibleFBT(int N)
 {
     vector<TreeNode *> result;
-    if (N == 0) return result;	
+    if (N == 0) return result;  
     if (N == 1)
     {
         result.push_back(new TreeNode(0));
@@ -6446,7 +6446,7 @@ string LeetCodeTree::smallestFromLeaf(TreeNode* root)
 /// root = {"$id":"1","left":{"$id":"2","left":{"$id":"3","left":{"$id":
 /// "4","left":null,"parent":{"$ref":"3"},"right":null,"val":2},"parent":
 /// {"$ref":"2"},"right":{"$id":"5","left":null,"parent":{"$ref":"3"},
-///	"right":null,"val":4},"val":3},"parent":{"$ref":"1"},"right":
+///  "right":null,"val":4},"val":3},"parent":{"$ref":"1"},"right":
 /// {"$id":"6","left":null,"parent":{"$ref":"2"},"right":{"$id":"7","left":
 /// {"$id":"8","left":null,"parent":{"$ref":"7"},"right":null,"val":9},
 /// "parent":{"$ref":"6"},"right":null,"val":13},"val":7},"val":6},
@@ -7841,7 +7841,7 @@ bool LeetCodeTree::isSubPath(ListNode* head, TreeNode* root, vector<ListNode *> 
 /// Medium
 ///
 /// Given a binary tree root and a linked list with head as the first node.
-///	
+///  
 /// Return True if all the elements in the linked list starting from the 
 /// head correspond to some downward path connected in the binary tree 
 /// otherwise return False.
@@ -11281,7 +11281,7 @@ int LeetCodeTree::numberOfNodes(int n, vector<int>& queries)
 ///                 by Level
 /// 
 /// Medium
-///	
+///  
 /// You are given the root of a binary tree with unique values.
 ///
 /// In one operation, you can choose any two nodes at the same level 
@@ -11380,7 +11380,7 @@ void LeetCodeTree::closestNodesSort(TreeNode* node, vector<int>& sorted)
 /// Leet Code 2476. Closest Nodes Queries in a Binary Search Tree 
 /// 
 /// Medium
-///	
+///  
 /// You are given the root of a binary search tree and an array queries of 
 /// size n consisting of positive integers.
 ///
@@ -11588,7 +11588,7 @@ vector<int> LeetCodeTree::treeQueries(TreeNode* root, vector<int>& queries)
 /// Leet Code 2509. Cycle Length Queries in a Tree
 /// 
 /// Hard
-///	
+///  
 /// You are given an integer n. There is a complete binary tree with 
 /// 2n - 1 nodes. The root of that tree is the node with the value 1, 
 /// and every node with a value val in the range [1, 2n - 1 - 1] has 
@@ -11701,7 +11701,7 @@ vector<long long> LeetCodeTree::maxOutput(int prev, int curr,
 /// Leet Code 2538. Difference Between Maximum and Minimum Price Sum
 /// 
 /// Hard
-///	
+///  
 /// There exists an undirected and initially unrooted tree with n nodes 
 /// indexed from 0 to n - 1. You are given the integer n and a 2D integer 
 /// array edges of length n - 1, where edges[i] = [ai, bi] indicates that 
@@ -11771,7 +11771,7 @@ long long LeetCodeTree::maxOutput(int n, vector<vector<int>>& edges, vector<int>
 /// Leet Code 2583. Kth Largest Sum in a Binary Tree
 /// 
 /// Medium
-///	
+///  
 /// You are given the root of a binary tree and a positive integer k.
 /// The level sum in the tree is the sum of the values of the nodes that 
 /// are on the same level.
@@ -11839,7 +11839,7 @@ long long LeetCodeTree::kthLargestLevelSum(TreeNode* root, int k)
 /// Leet Code 2581. Count Number of Possible Root Nodes
 /// 
 /// Hard
-///	
+///  
 /// Alice has an undirected tree with n nodes labeled from 0 to n - 1. 
 /// The tree is represented as a 2D integer array edges of length n - 1 
 /// where edges[i] = [ai, bi] indicates that there is an edge between 
@@ -11959,7 +11959,7 @@ int LeetCodeTree::rootCount(vector<vector<int>>& edges, vector<vector<int>>& gue
 /// Leet Code 2641. Cousins in Binary Tree II
 /// 
 /// Medium
-///	
+///  
 /// Given the root of a binary tree, replace the value of each node in 
 /// the tree with the sum of all its cousins' values.
 ///
@@ -12039,7 +12039,7 @@ TreeNode* LeetCodeTree::replaceValueInTree(TreeNode* root)
 /// Leet Code 2673. Make Costs of Paths Equal in a Binary Tree
 /// 
 /// Medium
-///	
+///  
 /// You are given a 0-indexed array nums of length n.
 ///
 /// You are given an integer n representing the number of nodes in a 
@@ -12135,7 +12135,7 @@ string LeetCodeTree::getKthCharacter(RopeTreeNode* node)
 /// Leet Code 2689. Extract Kth Character From The Rope Tree
 /// 
 /// Easy
-///	
+///  
 /// You are given the root of a binary tree and an integer k. Besides the 
 /// left and right children, every node of this tree has two other 
 /// properties, a string node.val containing only lowercase English 
@@ -14452,7 +14452,7 @@ vector<int> LeetCodeTree::treeQueries(int n, vector<vector<int>>& edges, vector<
 /// <summary>
 /// Leet Code 3544. Subtree Inversion Sum
 /// </summary>
-long long LeetCodeTree::subtreeInversionSum(vector<vector<int>>& neighbors, vector<int>& nums, int k,
+long long LeetCodeTree::subtreeInversionSumI(vector<vector<int>>& neighbors, vector<int>& nums, int k,
     int parent, int node, int parity, int distance, vector<vector<vector<long long>>>& cache)
 {
     if (distance > k) distance = k;
@@ -14465,10 +14465,10 @@ long long LeetCodeTree::subtreeInversionSum(vector<vector<int>>& neighbors, vect
     for (size_t i = 0; i < neighbors[node].size(); i++)
     {
         if (neighbors[node][i] == parent) continue;
-        sum1 += subtreeInversionSum(neighbors, nums, k, node, neighbors[node][i], parity, distance + 1, cache);
+        sum1 += subtreeInversionSumI(neighbors, nums, k, node, neighbors[node][i], parity, distance + 1, cache);
         if (distance == k)
         {
-            sum2 += subtreeInversionSum(neighbors, nums, k, node, neighbors[node][i], 1 - parity, 1, cache);
+            sum2 += subtreeInversionSumI(neighbors, nums, k, node, neighbors[node][i], 1 - parity, 1, cache);
         }
     }
     sum1 += ((parity == 0) ? 1 : -1) * nums[node];
@@ -14547,7 +14547,7 @@ long long LeetCodeTree::subtreeInversionSum(vector<vector<int>>& neighbors, vect
 /// 7. 1 <= k <= 50
 /// 8. The input is generated such that edges represents a valid tree.
 /// </summary>
-long long LeetCodeTree::subtreeInversionSum(vector<vector<int>>& edges, vector<int>& nums, int k)
+long long LeetCodeTree::subtreeInversionSumI(vector<vector<int>>& edges, vector<int>& nums, int k)
 {
     vector<vector<int>> neighbors(nums.size());
     for (size_t i = 0; i < edges.size(); i++)
@@ -14556,7 +14556,7 @@ long long LeetCodeTree::subtreeInversionSum(vector<vector<int>>& edges, vector<i
         neighbors[edges[i][1]].push_back(edges[i][0]);
     }
     vector<vector<vector<long long>>> cache(nums.size(), vector<vector<long long>>(k + 1, vector<long long>(2, LLONG_MIN)));
-    return subtreeInversionSum(neighbors, nums, k, -1, 0, 0, k, cache);
+    return subtreeInversionSumI(neighbors, nums, k, -1, 0, 0, k, cache);
 }
 
 /// <summary>
@@ -16523,5 +16523,275 @@ vector<long long> LeetCodeTree::zigzagLevelSum(TreeNode* root)
         level++;
     }
     return result;
+}
+
+
+/// <summary>
+/// Leet Code #3939. Count Non Adjacent Subsets in a Rooted Tree
+/// </summary>
+void LeetCodeTree::countValidSubsets(int node, int parent, vector<vector<int>>& children, vector<int>& nums, int k,
+    vector<vector<long long>>& inclusive, vector<vector<long long>>& exclusive)
+{
+    long long M = 1000000007;
+    inclusive[node][nums[node] % k] = 1;
+    exclusive[node][0] = 1;
+    for (size_t i = 0; i < children[node].size(); i++)
+    {
+        vector<long long> dp0(k), dp1(k);
+        int child = children[node][i];
+        int val = nums[i];
+        countValidSubsets(child, node, children, nums, k, inclusive, exclusive);
+        for (int p = 0; p < k; p++)
+        {
+            long long sum = (exclusive[child][p] + inclusive[child][p]) % M;
+            for (int q = 0; q < k; q++)
+            {
+                int w = (p + q) % k;
+                dp0[w] = (dp0[w] + (exclusive[node][q] * sum) % M) % M;
+            }
+        }
+        for (int p = 0; p < k; p++)
+        {
+            for (int q = 0; q < k; q++)
+            {
+                int w = (p + q) % k;
+                dp1[w] = (dp1[w] + (inclusive[node][q] * exclusive[child][p]) % M) % M;
+            }
+        }
+        inclusive[node] = dp1;
+        exclusive[node] = dp0;
+    }
+}
+
+/// <summary>
+/// Leet Code #3939. Count Non Adjacent Subsets in a Rooted Tree
+///
+/// Hard
+/// 
+/// You are given a rooted tree with n nodes labeled from 0 to n - 1, 
+/// represented by an integer array parent of length n, where:
+///
+/// parent[0] = -1 (node 0 is the root).
+/// For each 1 <= i < n, parent[i] is the parent of node i
+/// (0 <= parent[i] < i).
+/// You are also given an integer array nums of length n, where 
+/// nums[i] is the value of node i, and an integer k.
+///
+/// A non - empty subset of nodes is called valid if:
+///
+/// The sum of the values of the selected nodes is divisible by k.
+/// No two selected nodes are adjacent in the tree(no node and its 
+/// direct parent are both included in the subset).
+/// Return the number of valid subsets modulo 10^9 + 7.
+///
+/// Example 1:
+/// Input: parent = [-1, 0, 1], nums = [1, 2, 3], k = 3
+/// Output : 1
+/// Explanation :
+/// The only valid subset is{ 2 }. It contains node 2 with value 3, 
+/// which is divisible by 3.
+///
+/// Example 2:
+/// Input: parent = [-1, 0, 0, 0], nums = [2, 1, 2, 1], k = 3
+/// Output : 2
+/// Explanation :
+/// The valid subsets are :
+/// {1, 2} : Nodes 1 and 2 are both children of node 0 and not directly 
+/// connected to each other.Their values sum to 1 + 2 = 3, which is 
+/// divisible by 3.
+/// {2, 3} : Nodes 2 and 3 are also non - adjacent.Their values sum 
+/// to 2 + 1 = 3, which is divisible by 3.
+/// No other subset satisfies both conditions.Therefore, the answer is 2.
+/// Constraints:
+/// 1. n == parent.length == nums.length
+/// 2. 1 <= n <= 1000
+/// 3. parent[0] == -1
+/// 4. For all 1 <= i < n :
+/// 5. 0 <= parent[i] < i
+/// 6. 1 <= nums[i] <= 10^9
+/// 7. 1 <= k <= 100
+/// 8. parent describes a valid rooted tree.
+/// </summary>
+int LeetCodeTree::countValidSubsets(vector<int>& parent, vector<int>& nums, int k)
+{
+    long long M = 1000000007;
+    vector<vector<int>> children(parent.size());
+    for (size_t i = 1; i < parent.size(); i++)
+    {
+        children[parent[i]].push_back(i);
+    }
+    vector<vector<long long>> inclusive(parent.size(), vector<long long>(k));
+    vector<vector<long long>> exclusive(parent.size(), vector<long long>(k));
+
+    countValidSubsets(0, -1, children, nums, k, inclusive, exclusive);
+    int result = (int)((inclusive[0][0] + exclusive[0][0] - 1 + M) % M);
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code #3949. Subtree Inversion Sum II
+/// </summary>
+pair<vector<long long>, vector<long long>> LeetCodeTree::subtreeInversionSumII(
+    int u, int p, const vector<int>& nums, int k, vector<vector<int>>& neighbors)
+{
+    vector<long long> dp0(k + 1, LLONG_MIN), dp1(k + 1, LLONG_MIN);
+
+    dp0[k] = nums[u];
+    dp1[k] = -nums[u];
+
+    dp0[0] = -nums[u];
+    dp1[0] = nums[u];
+
+    for (int v : neighbors[u]) 
+    {
+        if (v == p) continue;
+        auto [child_dp0, child_dp1] = subtreeInversionSumII(v, u, nums, k, neighbors);
+
+        vector<long long> next_dp0(k + 1, LLONG_MIN);
+        vector<long long> next_dp1(k + 1, LLONG_MIN);
+
+        // Merge child states into current node states
+        // i is the closest inverted distance in u's current accumulated
+        // subtree j is the closest inverted distance in v's subtree. In u's
+        // view, it becomes j + 1.
+        for (int i = 0; i <= k; ++i) 
+        {
+            for (int j = 0; j <= k; ++j) 
+            {
+                int real_j = min(k, j + 1);
+
+                // Check distance constraint: distance between the two
+                // inverted nodes must be >= k The distance between them is
+                // i + (j + 1)
+                if (i + j + 1 < k) continue;
+
+                int next_dist = min(i, real_j);
+
+                // For dp0 (incoming parity to u is 0):
+                // If u itself is NOT inverted (i > 0), the parity passing
+                // down to v remains 0. If u itself IS inverted (i == 0),
+                // the parity passing down to v toggles to 1.
+                long long child_contrib0 = (i == 0) ? child_dp1[j] : child_dp0[j];
+                if (dp0[i] > LLONG_MIN && child_contrib0 > LLONG_MIN) 
+                {
+                    next_dp0[next_dist] =
+                        max(next_dp0[next_dist], dp0[i] + child_contrib0);
+                }
+
+                // For dp1 (incoming parity to u is 1):
+                // If u itself is NOT inverted (i > 0), the parity passing
+                // down to v remains 1. If u itself IS inverted (i == 0),
+                // the parity passing down to v toggles to 0.
+                long long child_contrib1 =
+                    (i == 0) ? child_dp0[j] : child_dp1[j];
+                if (dp1[i] > LLONG_MIN && child_contrib1 > LLONG_MIN) 
+                {
+                    next_dp1[next_dist] =
+                        max(next_dp1[next_dist], dp1[i] + child_contrib1);
+                }
+            }
+        }
+        dp0 = move(next_dp0);
+        dp1 = move(next_dp1);
+    }
+    return { dp0, dp1 };
+}
+
+/// <summary>
+/// Leet Code #3949. Subtree Inversion Sum II
+///
+/// Hard
+///
+/// You are given an undirected tree rooted at node 0, with n nodes 
+/// numbered from 0 to n - 1. The tree is represented by a 2D integer 
+/// array edges of length n - 1, where edges[i] = [ui, vi] indicates 
+/// an edge between nodes ui and vi.
+///
+/// You are also given an integer array nums of length n, where nums[i] 
+/// represents the value at node i, and an integer k.
+///
+/// You may perform inversion operations on a subset of nodes subject to 
+/// the following rules :
+///
+/// Subtree Inversion Operation :
+/// When you invert a node, every value in the subtree rooted at that node 
+/// is multiplied by - 1.
+///
+/// Distance Constraint on Inversions :
+///
+/// You may only invert a node if it is ?sufficiently far? from any other 
+/// inverted node.
+///
+/// If you invert two nodes a and b, the distance(the number of edges on 
+/// the unique path between them) must be at least k.
+///
+/// Return the maximum possible sum of the tree?s node values after 
+/// applying inversion operations.
+/// 
+/// Example 1:
+/// Input: edges = [[0, 1], [0, 2], [0, 3], [1, 4], [1, 5]], 
+/// nums = [1, 0, -10, 3, 4, 5], k = 2
+/// Output : 23
+/// Explanation :
+/// After inverting the subtree rooted at node 2, the maximum sum 
+/// becomes 1 + 0 + 10 + 3 + 4 + 5 = 23.
+///
+/// Example 2:
+/// Input: edges = [[0, 1], [1, 2]], nums = [5, -10, -10], k = 1
+/// Output : 25
+/// Explanation :
+/// After inverting the subtree rooted at node 1, the maximum sum 
+/// becomes 5 + 10 + 10 = 25.
+///
+/// Example 3:
+/// Input: edges = [[0, 1], [0, 2]], nums = [1, -5, -6], k = 2
+/// Output : 12
+/// Explanation :
+/// After inverting the subtrees rooted at nodes 1 and 2, nums = [1, 5, 6].
+/// This is valid because nodes 1 and 2 are two edges apart(1 -> 0 
+/// and 0 -> 2), which is at least k.
+/// The maximum sum is 1 + 5 + 6 = 12.
+///
+/// Example 4:
+/// Input: edges = [[0, 1], [0, 2]], nums = [1, -5, -6], k = 3
+/// Output : 10
+/// Explanation :
+/// After inverting the subtree rooted at nodes 0, nums = [-1, 5, 6].
+/// The maximum sum is(-1) + 5 + 6 = 10.
+/// Note that we cannot invert nodes 1 and 2 because their distance 
+/// is 2 < k = 3.
+///
+/// Constraints:
+/// 1. nums.length == n
+/// 2. edges.length == n - 1
+/// 3. 2 <= n <= 5 * 10^4
+/// 4. edges[i].length == 2
+/// 5. 0 <= edges[i][0], edges[i][1] < n
+/// 6. -5 * 10^4 <= nums[i] <= 5 * 10^4
+/// 7. 1 <= k <= 50
+/// 8. It is guaranteed that edges forms a tree.
+/// </summary>
+int LeetCodeTree::subtreeInversionSumII(vector<vector<int>>& edges, vector<int>& nums, int k)
+{
+    vector<vector<int>> neighbors;
+    int n = nums.size();
+    neighbors.assign(n, vector<int>());
+    for (const auto& edge : edges) 
+    {
+        neighbors[edge[0]].push_back(edge[1]);
+        neighbors[edge[1]].push_back(edge[0]);
+    }
+
+    // At the root (node 0), there is no incoming inversion from above, so
+    // incoming parity is 0.
+    auto [dp0, dp1] = subtreeInversionSumII(0, -1, nums, k, neighbors);
+
+    long long max_sum = LLONG_MIN;
+    for (int i = 0; i <= k; ++i) 
+    {
+        max_sum = max(max_sum, dp0[i]);
+    }
+    return (int)max_sum;
 }
 #pragma endregion

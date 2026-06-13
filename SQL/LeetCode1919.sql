@@ -90,10 +90,10 @@
 WITH Recommendations AS
 (
     SELECT user1_id = A.user_id, user2_id = B.user_id 
-	FROM Listens AS A INNER JOIN Listens AS B 
+  FROM Listens AS A INNER JOIN Listens AS B 
     ON A.user_id < B.user_id and A.song_id = B.song_id and A.day = B.day 
-	GROUP BY A.user_id, B.user_id,A.day 
-	HAVING count(distinct A.song_id) >=3
+  GROUP BY A.user_id, B.user_id,A.day 
+  HAVING count(distinct A.song_id) >=3
 )
 SELECT
      DISTINCT user1_id, user2_id 

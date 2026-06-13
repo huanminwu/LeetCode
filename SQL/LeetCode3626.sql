@@ -99,19 +99,19 @@
 --- Cheapest product: Mouse ($19.99) with quantity 50
 --- Inventory imbalance: 5 < 50 (expensive product has lower stock)
 --- Imbalance ratio: 50 / 5 = 10.00
---- Has 4 products (≥ 3), so qualifies
+--- Has 4 products (>= 3), so qualifies
 --- Suburb Mall (store_id = 2):
 --- Most expensive product: Phone ($699.99) with quantity 3
 --- Cheapest product: Case ($15.99) with quantity 75
 --- Inventory imbalance: 3 < 75 (expensive product has lower stock)
 --- Imbalance ratio: 75 / 3 = 25.00
---- Has 4 products (≥ 3), so qualifies
+--- Has 4 products (>= 3), so qualifies
 --- City Center (store_id = 3):
 --- Most expensive product: Tablet ($499.99) with quantity 2
 --- Cheapest product: Stylus ($29.99) with quantity 80
 --- Inventory imbalance: 2 < 80 (expensive product has lower stock)
 --- Imbalance ratio: 80 / 2 = 40.00
---- Has 3 products (≥ 3), so qualifies
+--- Has 3 products (>= 3), so qualifies
 --- Stores not included:
 --- Corner Shop (store_id = 4): Only has 2 products (Watch, Band) - doesn't 
 --- meet minimum 3 products requirement

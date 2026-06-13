@@ -8795,8 +8795,241 @@ void TestLeetCode3899(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3908(void)
+{
+    Logger::WriteMessage("Test Leet Code 3908");
+    LeetCodeMath leetCode;
+    int n = 101, x = 0;
+    bool result = leetCode.validDigit(n, x);
+    Logger::WriteMessage("n = " + to_string(n) + "; x = " + to_string(x));
+    Logger::WriteMessage("result = " + (string)(result ? "true":"false"));
+
+    n = 232, x = 2;
+    result = leetCode.validDigit(n, x);
+    Logger::WriteMessage("n = " + to_string(n) + "; x = " + to_string(x));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    n = 5, x = 1;
+    result = leetCode.validDigit(n, x);
+    Logger::WriteMessage("n = " + to_string(n) + "; x = " + to_string(x));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode3918(void)
+{
+    Logger::WriteMessage("Test Leet Code 3918");
+    LeetCodeMath leetCode;
+    int n = 13;
+    int result = leetCode.sumOfPrimesInRange(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 10;
+    result = leetCode.sumOfPrimesInRange(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 8;
+    result = leetCode.sumOfPrimesInRange(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3923(void)
+{
+    Logger::WriteMessage("Test Leet Code 3923");
+    LeetCodeMath leetCode;
+    vector<vector<int>> points = { {0, 0, 0}, {6, 6, 6} };
+    vector<int> target = { 3, 3, 3 };
+    int result = leetCode.minGenerations(points, target);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    points = { {0,0,0} ,{5,5,5} };
+    target = { 1, 1, 1 };
+    result = leetCode.minGenerations(points, target);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    points = { {0, 0, 0},{2, 2, 2},{3, 3, 3} };
+    target = { 2,2,2 };
+    result = leetCode.minGenerations(points, target);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    points = { {1,2,3} };
+    target = { 5,5,5 };
+    result = leetCode.minGenerations(points, target);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    points = { {3,4,6} ,{3,5,0},{3,0,3},{5,0,6},{1,4,4},{6,4,4},{2,1,5},{3,5,1} };
+    target = { 5,0,2 };
+    result = leetCode.minGenerations(points, target);
+    Logger::WriteMessage(points);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3927(void)
+{
+    Logger::WriteMessage("Test Leet Code 3927");
+    LeetCodeMath leetCode;
+    vector<int> nums = {3, 6, 2};
+    long long result = leetCode.minArraySum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,2,8,3 };
+    result = leetCode.minArraySum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 7,5,9 };
+    result = leetCode.minArraySum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3931(void)
+{
+    Logger::WriteMessage("Test Leet Code 3931");
+    LeetCodeMath leetCode;
+    string s = "132";
+    bool result = leetCode.isAdjacentDiffAtMostTwo(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    s = "129";
+    result = leetCode.isAdjacentDiffAtMostTwo(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode3932(void)
+{
+    Logger::WriteMessage("Test Leet Code 3932");
+    LeetCodeMath leetCode;
+    int l = 1, r = 9, k = 3;
+    int result = leetCode.countKthRoots(l, r, k);
+    Logger::WriteMessage("l = " + to_string(l) + ", r = " + to_string(r) + ", k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    l = 8, r = 30, k = 2;
+    result = leetCode.countKthRoots(l, r, k);
+    Logger::WriteMessage("l = " + to_string(l) + ", r = " + to_string(r) + ", k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3945(void)
+{
+    Logger::WriteMessage("Test Leet Code 3945");
+    LeetCodeMath leetCode;
+    int n = 122;
+    int result = leetCode.digitFrequencyScore(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 101;
+    result = leetCode.digitFrequencyScore(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3954(void)
+{
+    Logger::WriteMessage("Test Leet Code 3954");
+    LeetCodeMath leetCode;
+    int n = 2, k = 3;
+    int result = leetCode.sumOfGoodIntegers(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 5, k = 1;
+    result = leetCode.sumOfGoodIntegers(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3953(void)
+{
+    Logger::WriteMessage("Test Leet Code 3954");
+    LeetCodeMath leetCode;
+    vector<int> nums = { 3, 4, 6 };
+    int maxVal = 5;
+    int result = leetCode.maxScore(nums, maxVal);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("maxVal = " + to_string(maxVal));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3 };
+    maxVal = 4;
+    result = leetCode.maxScore(nums, maxVal);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("maxVal = " + to_string(maxVal));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,2 };
+    maxVal = 1;
+    result = leetCode.maxScore(nums, maxVal);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("maxVal = " + to_string(maxVal));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3947(void)
+{
+    Logger::WriteMessage("Test Leet Code 3947");
+    LeetCodeMath leetCode;
+    vector<vector<int>> items = { {1, 6}, {2, 4}, {3, 5} };
+    int budget = 19;
+    int result = leetCode.maximumSaleItemsII(items, budget);
+    Logger::WriteMessage(items);
+    Logger::WriteMessage("budget = " + to_string(budget));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    items = { {2, 8}, {1, 10}, {6, 6}, {4, 12}, {5, 20}, {5, 17} };
+    budget = 35;
+    result = leetCode.maximumSaleItemsII(items, budget);
+    Logger::WriteMessage(items);
+    Logger::WriteMessage("budget = " + to_string(budget));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3958(void)
+{
+    Logger::WriteMessage("Test Leet Code 3958");
+    LeetCodeMath leetCode;
+    int n = 3;
+    long long result = leetCode.minCost(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 4;
+    result = leetCode.minCost(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3958();
+    TestLeetCode3947();
+    TestLeetCode3953();
+    TestLeetCode3954();
+    TestLeetCode3945();
+    TestLeetCode3932();
+    TestLeetCode3931();
+    TestLeetCode3927();
+    TestLeetCode3923();
+    TestLeetCode3918();
+    TestLeetCode3908();
     TestLeetCode3894();
     TestLeetCode3895();
     TestLeetCode3896();

@@ -112,7 +112,7 @@ public:
     /// Write a function that takes a string as input and returns the string 
     /// reversed.
     /// Example:
-    ///  Given s = "hello", return "olleh".	
+    ///  Given s = "hello", return "olleh".  
     /// </summary>
     string reverseString(string s);
 
@@ -982,7 +982,7 @@ public:
     /// Leet Code 2448. Minimum Cost to Make Array Equal
     /// 
     /// Hard
-    ///	
+    ///  
     /// You are given two 0-indexed arrays nums and cost consisting each of 
     /// n positive integers.
     ///
@@ -1023,7 +1023,7 @@ public:
     /// Leet Code 2537. Count the Number of Good Subarrays
     /// 
     /// Medium
-    ///	
+    ///  
     /// Given an integer array nums and an integer k, return the number of 
     /// good subarrays of nums.
     ///
@@ -1057,7 +1057,7 @@ public:
     /// Leet Code 2576. Find the Maximum Number of Marked Indices
     /// 
     /// Medium
-    ///	
+    ///  
     /// You are given a 0-indexed integer array nums.
     /// 
     /// Initially, all of the indices are unmarked. You are allowed to make 
@@ -1102,7 +1102,7 @@ public:
     /// Leet Code 2555. Maximize Win From Two Segments
     /// 
     /// Medium
-    ///	
+    ///  
     /// There are some prizes on the X-axis. You are given an integer array 
     /// prizePositions that is sorted in non-decreasing order, where 
     /// prizePositions[i] is the position of the ith prize. There could be 
@@ -1827,33 +1827,33 @@ public:
     /// Input: nums = [7,8,3,4,15,13,4,1]
     /// Output: 5.5
     /// Explanation:
-    /// step	nums	averages
-    /// 0	[7,8,3,4,15,13,4,1]	[]
-    /// 1	[7,8,3,4,13,4]	[8]
-    /// 2	[7,8,4,4]	[8,8]
-    /// 3	[7,4]	[8,8,6]
-    /// 4	[]	[8,8,6,5.5]
+    /// step  nums  averages
+    /// 0  [7,8,3,4,15,13,4,1]  []
+    /// 1  [7,8,3,4,13,4]  [8]
+    /// 2  [7,8,4,4]  [8,8]
+    /// 3  [7,4]  [8,8,6]
+    /// 4  []  [8,8,6,5.5]
     /// The smallest element of averages, 5.5, is returned.
     ///
     /// Example 2:
     /// Input: nums = [1,9,8,3,10,5]
     /// Output: 5.5
     /// Explanation:
-    /// step	nums	averages
-    /// 0	[1,9,8,3,10,5]	[]
-    /// 1	[9,8,3,5]	[5.5]
-    /// 2	[8,5]	[5.5,6]
-    /// 3	[]	[5.5,6,6.5]
+    /// step  nums  averages
+    /// 0  [1,9,8,3,10,5]  []
+    /// 1  [9,8,3,5]  [5.5]
+    /// 2  [8,5]  [5.5,6]
+    /// 3  []  [5.5,6,6.5]
     ///
     /// Example 3:
     /// Input: nums = [1,2,3,7,8,9]
     /// Output: 5.0
     /// Explanation:
-    /// step	nums	averages
-    /// 0	[1,2,3,7,8,9]	[]
-    /// 1	[2,3,7,8]	[5]
-    /// 2	[3,7]	[5,5]
-    /// 3	[]	[5,5,5]
+    /// step  nums  averages
+    /// 0  [1,2,3,7,8,9]  []
+    /// 1  [2,3,7,8]  [5]
+    /// 2  [3,7]  [5,5]
+    /// 3  []  [5,5,5]
     /// 
     /// Constraints:
     /// 1. 2 <= n == nums.length <= 50
@@ -2471,10 +2471,10 @@ public:
     ///
     /// The possible subarrays with k = 2 distinct integers, each appearing 
     /// at least m = 2 times are :
-    /// Subarray	Distinct
-    /// numbers	Frequency
-    /// [1, 2, 1, 2]{ 1, 2 } ? 2	{1: 2, 2 : 2}
-    /// [1, 2, 1, 2, 2] {1, 2} ? 2	{1: 2, 2 : 3}
+    /// Subarray  Distinct
+    /// numbers  Frequency
+    /// [1, 2, 1, 2]{ 1, 2 } ? 2  {1: 2, 2 : 2}
+    /// [1, 2, 1, 2, 2] {1, 2} ? 2  {1: 2, 2 : 3}
     /// Thus, the answer is 2. 
     /// 
     /// Example 2:
@@ -2484,11 +2484,11 @@ public:
     /// Explanation :
     ///
     /// The possible subarrays with k = 2 distinct integers, each appearing at least m = 1 times are :
-    /// Subarray	Distinct
-    /// numbers	Frequency
-    /// [3, 1]{ 3, 1 } ? 2	{3: 1, 1 : 1}
-    /// [1, 2] {1, 2} ? 2	{1: 1, 2 : 1}
-    /// [2, 4] {2, 4} ? 2	{2: 1, 4 : 1}
+    /// Subarray  Distinct
+    /// numbers  Frequency
+    /// [3, 1]{ 3, 1 } ? 2  {3: 1, 1 : 1}
+    /// [1, 2] {1, 2} ? 2  {1: 1, 2 : 1}
+    /// [2, 4] {2, 4} ? 2  {2: 1, 4 : 1}
     /// Thus, the answer is 3.
     /// 
     /// Constraints:

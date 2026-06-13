@@ -337,7 +337,7 @@ public:
 /// [1,2,3]
 /// [4,5,6,7]
 /// [8,9]
-/// It should return [1,4,8,2,5,9,3,6,7]. 	
+/// It should return [1,4,8,2,5,9,3,6,7].   
 /// </summary>
 class ZigzagIterator
 {
@@ -402,7 +402,7 @@ public:
 /// 2.Is one variable sufficient? Why or why not?
 /// 3.Test your design with call order of peek() before next() vs next() before peek().
 /// 4.For a clean implementation, check out Google's guava library source code.
-/// Follow up: How would you extend your design to be generic and work with all types, not just integer?	
+/// Follow up: How would you extend your design to be generic and work with all types, not just integer?  
 /// </summary>
 // Below is the interface for Iterator, which is already defined for you.
 // **DO NOT** modify the interface for Iterator.
@@ -705,7 +705,7 @@ public:
 /// 
 /// Design a Phone Directory which supports the following operations:
 /// 1.get: Provide a number which is not assigned to anyone.
-///	2.check: Check if a number is available or not.
+///  2.check: Check if a number is available or not.
 /// 3.release: Recycle or release a number.
 /// Example: 
 /// // Init a phone directory containing a total of 3 numbers: 0, 1, and 2.
@@ -1671,7 +1671,7 @@ public:
 /// Leet Code 303. Range Sum Query - Immutable
 /// 
 /// Easy
-///	
+///  
 /// Given an integer array nums, handle multiple queries of the following 
 /// type:
 ///
@@ -4594,16 +4594,16 @@ public:
 /// 3.getRandom: Returns a random element from current set of elements. 
 ///   Each element must have the same probability of being returned.
 /// Example:
-/// Init an empty set.	
+/// Init an empty set.  
 /// RandomizedSet randomSet = new RandomizedSet();
 /// Inserts 1 to the set. Returns true as 1 was inserted successfully.
 /// randomSet.insert(1);
 /// Returns false as 2 does not exist in the set.
 /// randomSet.remove(2);
-/// Inserts 2 to the set, returns true. Set now contains [1,2].	
+/// Inserts 2 to the set, returns true. Set now contains [1,2].  
 /// randomSet.insert(2);
 /// getRandom should return either 1 or 2 randomly.
-/// randomSet.getRandom();	
+/// randomSet.getRandom();  
 /// Removes 1 from the set, returns true. Set now contains [2]. 
 /// randomSet.remove(1);
 /// 2 was already in the set, so return false.
@@ -5392,15 +5392,15 @@ public:
 /// Example:
 ///
 /// MyCircularDeque circularDeque = new MycircularDeque(3); 
-/// circularDeque.insertLast(1);			// return true
-/// circularDeque.insertLast(2);			// return true
-/// circularDeque.insertFront(3);			// return true
-/// circularDeque.insertFront(4);			// return false, if full
-/// circularDeque.getRear();  			    // return 2
-/// circularDeque.isFull();				    // return true
-/// circularDeque.deleteLast();			    // return true
-/// circularDeque.insertFront(4);			// return true
-/// circularDeque.getFront();			    // return 4
+/// circularDeque.insertLast(1);      // return true
+/// circularDeque.insertLast(2);      // return true
+/// circularDeque.insertFront(3);      // return true
+/// circularDeque.insertFront(4);      // return false, if full
+/// circularDeque.getRear();            // return 2
+/// circularDeque.isFull();            // return true
+/// circularDeque.deleteLast();          // return true
+/// circularDeque.insertFront(4);      // return true
+/// circularDeque.getFront();          // return 4
 ///
 /// Note:
 ///
@@ -5826,7 +5826,7 @@ public:
 /// 1. On the input ships is only given to initialize the map internally. 
 /// 2. You must solve this problem "blindfolded". In other words, you must 
 ///    find the answer using the given hasShips API, without knowing the 
-///	   ships position.
+///     ships position.
 /// 3. 0 <= bottomLeft[0] <= topRight[0] <= 1000
 /// 4. 0 <= bottomLeft[1] <= topRight[1] <= 1000
 /// </summary>
@@ -12828,7 +12828,7 @@ public:
 /// Leet Code 2502. Design Memory Allocator
 /// 
 /// Medium
-///	
+///  
 /// You are given an integer n representing the size of a 0-indexed memory 
 /// array. All memory units are initially free.
 ///
@@ -12975,7 +12975,7 @@ public:
 /// Leet Code 2526. Find Consecutive Integers from a Data Stream
 /// 
 /// Medium
-///	
+///  
 /// For a stream of integers, implement a data structure that checks if 
 /// the last k integers parsed in the stream are equal to value.
 ///
@@ -13044,7 +13044,7 @@ public:
 /// Leet Code 2590. Design a Todo List
 /// 
 /// Medium
-///	
+///  
 /// Design a Todo List Where users can add tasks, mark them as complete, 
 /// or get a list of pending tasks. Users can also add tags to tasks and 
 /// can filter the tasks by certain tags.
@@ -13194,7 +13194,7 @@ public:
 /// Leet Code 2642. Design Graph With Shortest Path Calculator
 /// 
 /// Hard
-///	
+///  
 /// There is a directed weighted graph that consists of n nodes numbered 
 /// from 0 to n - 1. The edges of the graph are initially represented by 
 /// the given array edges where edges[i] = [fromi, toi, edgeCosti] meaning 
@@ -13287,7 +13287,7 @@ public:
 /// Leet Code 2671. Frequency Tracker
 /// 
 /// Medium
-///	
+///  
 /// Design a data structure that keeps track of the values in it and 
 /// answers some queries regarding their frequencies.
 ///

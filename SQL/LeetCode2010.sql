@@ -93,41 +93,41 @@
 WITH Candidates_Experience
 AS
 (
-	SELECT
-	    row_Id = ROW_NUMBER() OVER (PARTITION BY experience ORDER BY Salary),
-		employee_id,
-		experience,
-		Salary
-	FROM
-	   Candidates
+  SELECT
+      row_Id = ROW_NUMBER() OVER (PARTITION BY experience ORDER BY Salary),
+    employee_id,
+    experience,
+    Salary
+  FROM
+     Candidates
 ),
 Salary_Sum
 AS
 (
     SELECT
-	    A.row_id,
-		A.employee_id,
-		A.experience,
+      A.row_id,
+    A.employee_id,
+    A.experience,
         Salary = SUM(B.Salary),
-		[Count] = COUNT(B.employee_id)
-	FROM
-	   Candidates_Experience AS A
-	LEFT OUTER JOIN
-	   Candidates_Experience AS B
-	ON
-	   A.experience = B.experience AND
+    [Count] = COUNT(B.employee_id)
+  FROM
+     Candidates_Experience AS A
+  LEFT OUTER JOIN
+     Candidates_Experience AS B
+  ON
+     A.experience = B.experience AND
        A.Row_Id >= B.Row_Id
     GROUP BY 
-       A.row_id,	
-	   A.employee_id,
-	   A.experience
+       A.row_id,  
+     A.employee_id,
+     A.experience
 ),
 Senior
 AS
 (
     SELECT
         experience = 'Senior',
-		employee_id,    		
+    employee_id,        
         [Salary] = Salary
     FROM
         Salary_Sum
@@ -139,22 +139,22 @@ AS
 (
     SELECT
         experience = 'Junior',
-		employee_id,    		
+    employee_id,        
         [Salary] = A.Salary
     FROM
         Salary_Sum AS A
-	LEFT OUTER JOIN
-	(
-	    SELECT 
-		    [Salary] = MAX([Salary])
-		FROM  
-		    Senior
-	) AS B
+  LEFT OUTER JOIN
+  (
+      SELECT 
+        [Salary] = MAX([Salary])
+    FROM  
+        Senior
+  ) AS B
     ON 
        1 = 1
     WHERE
         ISNULL(A.Salary, 0.0) + ISNULL(B.Salary, 0.0) <= 70000 AND 
-		A.experience = 'Junior'
+    A.experience = 'Junior'
 )
 SELECT 
     employee_id 

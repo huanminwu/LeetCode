@@ -50,5 +50,5 @@ SELECT
 FROM 
     Store
 WHERE
- 	amount > 500
-	
+   amount > 500
+  

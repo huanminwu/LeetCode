@@ -13533,6 +13533,8 @@ public:
     /// <summary>
     /// Leet Code 3892. Minimum Operations to Achieve At Least K Peaks
     /// 
+    /// Hard
+    /// 
     /// You are given a circular integer array nums of length n.
     /// An index i is a peak if its value is strictly greater than its neighbors :
     ///
@@ -13577,5 +13579,301 @@ public:
     /// 3. 0 <= k <= n
     /// </summary>
     int minOperations(vector<int>& nums, int k); 
+
+    /// <summary>
+    /// Leet Code 3915. Maximum Sum of Alternating Subsequence With Distance 
+    ///                 at Least K
+    /// 
+    /// Hard
+    /// 
+    /// You are given an integer array nums of length n and an integer k.
+    ///
+    /// Pick a subsequence with indices 0 <= i1 < i2 < ... < im < n such that :
+    ///
+    /// For every 1 <= t < m, it + 1 - it >= k.
+    /// The selected values form a strictly alternating sequence.In other 
+    /// words, either :
+    /// nums[i1] < nums[i2] > nums[i3] < ..., or
+    /// nums[i1] > nums[i2] < nums[i3] > ...
+    /// A subsequence of length 1 is also considered strictly alternating.The 
+    /// score of a valid subsequence is the sum of its selected values.
+    /// Return an integer denoting the maximum possible score of a valid 
+    /// subsequence.
+    ///
+    /// Example 1:
+    /// Input: nums = [5, 4, 2], k = 2
+    /// Output : 7
+    /// Explanation :
+    /// An optimal choice is indices[0, 2], which gives values[5, 2].
+    ///
+    /// The distance condition holds because 2 - 0 = 2 >= k.
+    /// The values are strictly alternating because 5 > 2.
+    /// The score is 5 + 2 = 7.
+    ///
+    /// Example 2:
+    /// Input: nums = [3, 5, 4, 2, 4], k = 1
+    /// Output : 14
+    /// Explanation :
+    /// An optimal choice is indices[0, 1, 3, 4], which gives 
+    /// values[3, 5, 2, 4].
+    ///
+    /// The distance condition holds because each pair of consecutive chosen 
+    /// indices differs by at least k = 1.
+    /// The values are strictly alternating since 3 < 5 > 2 < 4.
+    /// The score is 3 + 5 + 2 + 4 = 14.
+    ///
+    /// Example 3:
+    /// Input: nums = [5], k = 1
+    /// Output : 5
+    /// Explanation :
+    /// The only valid subsequence is[5].A subsequence with 1 element is always 
+    /// strictly alternating, so the score is 5.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n == nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^5
+    /// 3. 1 <= k <= n
+    /// </summary>
+    long long maxAlternatingSum(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code #3946. Maximum Number of Items From Sale I
+    ///
+    /// Medium
+    ///
+    /// You are given a 2D integer array items, where items[i] = 
+    /// [factori, pricei] represents the ith item.You are also given an 
+    /// integer budget.
+    ///
+    /// There are unlimited copies of each item available for purchase.You may 
+    /// buy any number of copies of any items such that the total cost of the 
+    /// purchased copies is at most budget.
+    ///
+    /// After buying items, you may receive free copies according to the 
+    /// following rules :
+    ///
+    /// For each item i that you bought at least one copy of, you receive one 
+    /// free copy of every item j such that j != i and factori divides factorj.
+    /// Buying multiple copies of the same item i does not give additional 
+    /// free copies through item i.
+    /// The same item j can be received multiple times for free if it is 
+    /// received from purchases of different item types.
+    /// Return the maximum total number of item copies you can obtain, 
+    /// including both purchased copies and free copies, while spending at 
+    /// most budget on purchased items.
+    ///
+    /// Example 1:
+    /// Input: items = [[6, 2], [2, 6], [3, 4]], budget = 9
+    /// Output : 4
+    /// Explanation :
+    /// You can buy 2 copies of item 0 and 1 copy of item 2 for a total cost 
+    /// of 2 * 2 + 4 = 8, which is not greater than budget = 9.
+    /// Buying item 2 gives 1 free copy of item 0, because factor2 = 3 
+    /// divides factor0 = 6.
+    /// You leave with 3 purchased copies and 1 free copy, for a total of 4 
+    /// item copies.
+    ///
+    /// Example 2 :
+    /// Input : items = [[2, 4], [3, 2], [4, 1], [6, 4], [12, 4]], budget = 8
+    /// Output : 10
+    /// Explanation :
+    /// You can buy 1 copy of item 0, 1 copy of item 1, and 2 copies of item 2 
+    /// for a total cost of 4 + 2 + 2 * 1 = 8.
+    /// Buying item 0 gives 1 free copy of items 2, 3, and 4.
+    /// Buying item 1 gives 1 free copy of items 3 and 4.
+    /// Buying item 2 gives 1 free copy of item 4.
+    /// Thus, you receive 6 free copies.You leave with 4 purchased copies 
+    /// and 6 free copies, for a total of 10 item copies.
+    ///
+    /// Constraints:
+    /// 1. 1 <= items.length <= 1000
+    /// 2. items[i] = [factori, pricei]
+    /// 3. 1 <= factori, pricei <= 1500
+    /// 4. 1 <= budget <= 1500
+    /// </summary>
+    int maximumSaleItemsI(vector<vector<int>>& items, int budget);
+
+    /// <summary>
+    /// Leet Code #3952. Maximum Total Value of Covered Indices
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums of length n and a binary 
+    /// string s of length n, where s[i] == '1' means index i initially 
+    /// contains a token and s[i] == '0' means it does not.
+    ///
+    /// You may perform the following operation any number of times :
+    /// Choose a token currently located at index i, where i > 0, such 
+    /// that this token has not been moved before.
+    /// Move this token from index i to index i - 1.
+    /// An index is considered covered if it contains a token after all moves.
+    ///
+    /// Return an integer denoting the maximum total value of nums at the 
+    /// covered indices after optimally performing the operations.
+    ///
+    /// Example 1:
+    /// Input: nums = [9, 2, 6, 1], s = "0101"
+    /// Output : 15
+    /// Explanation :
+    /// Initially, indices 1 and 3 contain tokens.
+    /// Move the token from index 3 to index 2.
+    /// Move the token from index 1 to index 0.
+    /// The covered indices are[0, 2], so the total value is 
+    /// nums[0] + nums[2] = 9 + 6 = 15.
+    ///
+    /// Example 2:
+    /// Input: nums = [5, 1, 4], s = "001"
+    /// Output : 4
+    /// Explanation :
+    /// Initially, only index 2 contains a token.
+    /// It is optimal to leave the token at index 2.
+    /// The covered index is[2], so the total value is nums[2] = 4.
+    ///
+    /// Example 3 :
+    /// Input : nums = [9, 3, 5], s = "011"
+    /// Output : 14
+    /// Explanation :
+    /// Initially, indices 1 and 2 contain tokens.
+    /// Move the token from index 1 to index 0.
+    /// The covered indices are[0, 2], so the total value is 
+    /// nums[0] + nums[2] = 9 + 5 = 14.
+    ///
+    /// Constraints :
+    /// 1. 1 <= n == nums.length == s.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^5
+    /// 3. s[i] is either '0' or '1'
+    /// </summary>
+    long long maxTotal(vector<int>& nums, string s);
+
+    /// <summary>
+    /// Leet Code #3957. Maximum Sum of M Non - Overlapping Subarrays II
+    /// </summary>
+    pair<long long, int> maximumSumII_solve(int n, int l, int r, long long p, vector<long long>& prev);
+    
+    /// <summary>
+    /// Leet Code #3957. Maximum Sum of M Non - Overlapping Subarrays II
+    /// </summary>
+    long long maximumSumII_helper(int n, int l, int r, vector<long long>& prev);
+
+    /// <summary>
+    /// Leet Code #3957. Maximum Sum of M Non - Overlapping Subarrays II
+    ///
+    /// Hard
+    ///
+    /// You are given an integer array nums of length n, and three 
+    /// integers m, l, and r.
+    ///
+    /// Your task is to select at least one and at most m non - overlapping 
+    /// subarrays from nums such that :
+    ///
+    /// Each selected subarray has a length between[l, r](inclusive).
+    /// The total sum of all selected subarrays is maximized.
+    /// Return the maximum total sum you can achieve.
+    /// 
+    /// Example 1:
+    /// Input: nums = [4, 1, -5, 2], m = 2, l = 1, r = 3
+    /// Output : 7
+    /// Explanation :
+    /// One optimal strategy is to :
+    /// Select the subarray[4, 1] with sum 4 + 1 = 5 and the subarray[2] with 
+    /// sum 2. Both subarrays have length between[l, r].
+    /// The total sum of these subarrays is 5 + 2 = 7, which is the maximum 
+    /// achievable sum with at most m = 2 subarrays.
+    /// 
+    /// Example 2 :
+    /// Input : nums = [1, 0, 3, 4], m = 2, l = 1, r = 2
+    /// Output : 8
+    /// Explanation :
+    /// One optimal strategy is to :
+    /// Select the subarray[1] with sum 1 and the subarray[3, 4] with 
+    /// sum 3 + 4 = 7. Both subarrays have length between[l, r].
+    /// The total sum of these subarrays is 1 + 7 = 8, which is the 
+    /// maximum achievable sum with at most m = 2 subarrays.
+    /// 
+    /// Example 3 :
+    /// Input : nums = [-1, 7, -4], m = 1, l = 2, r = 3
+    /// Output : 6
+    /// Explanation :
+    /// Select the subarray[-1, 7] from nums which has length between[l, r].
+    /// The total sum of this subarray is - 1 + 7 = 6, which is the maximum 
+    /// achievable sum with at most m = 1 subarray.
+    ///
+    /// Example 4 :
+    /// Input : nums = [-3, -4, -1], m = 2, l = 1, r = 2
+    /// Output : -1
+    /// Explanation :
+    /// All subarrays of nums have negative sums.The optimal strategy is 
+    /// to select the subarray[-1], which has length between[l, r].
+    /// The total sum of this subarray is - 1, which is the maximum 
+    /// achievable sum with at most m = 2 subarrays.
+    /// 
+    /// Constraints :
+    /// 1. 1 <= n == nums.length <= 10^5
+    /// 2. - 10^5 <= nums[i] <= 10^5
+    /// 3. 1 <= m <= n
+    /// 4. 1 <= l <= r <= n    
+    /// </summary>
+    long long maximumSumII(vector<int>& nums, int m, int l, int r);
+
+    /// <summary>
+    /// Leet Code #3956. Maximum Sum of M Non - Overlapping Subarrays I
+    ///
+    /// Hard
+    ///
+    /// You are given an integer array nums of length n, and three integers 
+    /// m, l, and r.
+    ///
+    /// Your task is to select at least one and at most m non - overlapping 
+    /// subarrays from nums such that :
+    ///
+    /// Each selected subarray has a length between[l, r](inclusive).
+    /// The total sum of all selected subarrays is maximized.
+    /// Return the maximum total sum you can achieve.
+    ///
+    /// Example 1:
+    /// Input: nums = [4, 1, -5, 2], m = 2, l = 1, r = 3
+    /// Output : 7
+    /// Explanation :
+    /// One optimal strategy is to :
+    /// Select the subarray[4, 1] with sum 4 + 1 = 5 and the subarray[2] with 
+    /// sum 2. Both subarrays have length between[l, r].
+    /// The total sum of these subarrays is 5 + 2 = 7, which is the maximum 
+    /// achievable sum with at most m = 2 subarrays.
+    /// 
+    /// Example 2 :
+    /// Input : nums = [1, 0, 3, 4], m = 2, l = 1, r = 2
+    /// Output : 8
+    /// Explanation :
+    /// One optimal strategy is to :
+    /// Select the subarray[1] with sum 1 and the subarray[3, 4] with 
+    /// sum 3 + 4 = 7. Both subarrays have length between[l, r].
+    /// The total sum of these subarrays is 1 + 7 = 8, which is the maximum 
+    /// achievable sum with at most m = 2 subarrays.
+    ///
+    /// Example 3 :
+    /// Input : nums = [-1, 7, -4], m = 1, l = 2, r = 3
+    /// Output : 6
+    /// Explanation :
+    /// Select the subarray[-1, 7] from nums which has length between[l, r].
+    /// The total sum of this subarray is - 1 + 7 = 6, which is the maximum 
+    /// achievable sum with at most m = 1 subarray.
+    ///
+    /// Example 4 :
+    /// Input : nums = [-3, -4, -1], m = 2, l = 1, r = 2
+    /// Output : -1
+    /// Explanation :
+    /// All subarrays of nums have negative sums.The optimal strategy is to 
+    /// select the subarray[-1], which has length between[l, r].
+    /// The total sum of this subarray is - 1, which is the maximum achievable 
+    /// sum with at most m = 2 subarrays.
+    ///
+    /// Constraints :
+    /// 1. 1 <= n == nums.length <= 1000
+    /// 2. -10^9 <= nums[i] <= 10^9
+    /// 3. 1 <= m <= n
+    /// 4. 1 <= l <= r <= n
+    /// </summary>
+    long long maximumSumI(vector<int>& nums, int m, int l, int r);
+
  };
 #endif  // LeetCodeDP

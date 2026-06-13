@@ -67,12 +67,12 @@
 ---------------------------------------------------------------
 WITH Users_Order AS
 (
-	SELECT 
-		user_id,
-		created_at,
-		RN = ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY created_at)
-	FROM
-		Users
+  SELECT 
+    user_id,
+    created_at,
+    RN = ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY created_at)
+  FROM
+    Users
 )
 SELECT
     DISTINCT 
@@ -84,6 +84,6 @@ INNER JOIN
 ON
     A.user_id = B.user_id 
 WHERE
-	(DATEADD(day, 7, A.created_at) >= B.created_at) AND
-	A.RN < B.RN
+  (DATEADD(day, 7, A.created_at) >= B.created_at) AND
+  A.RN < B.RN
 ;

@@ -2725,8 +2725,10 @@ bool LeetCodeBFS::hasValidPath(vector<vector<int>>& grid)
 bool LeetCodeBFS::canReach(string s, int minJump, int maxJump)
 {
     int last = 0;
+    vector<int> visited(s.size());
     queue<int> stops;
     stops.push(0);
+    visited[0] = 1;
     bool result = false;
     while (!stops.empty())
     {
@@ -2741,7 +2743,11 @@ bool LeetCodeBFS::canReach(string s, int minJump, int maxJump)
             i < min(stop + maxJump + 1, (int)s.size());
             i++)
         {
-            if (s[i] == '0') stops.push(i);
+            if (s[i] == '0' && visited[i] == 0)
+            {
+                visited[i] = 1;
+                stops.push(i);
+            }
         }
         last = max(last, stop + maxJump);
     }

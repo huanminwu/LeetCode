@@ -1,4 +1,4 @@
-﻿-----------------------------------------------------------------------
+-----------------------------------------------------------------------
 ---  Leet code #1789. Primary Department for Each Employee
 --- 
 ---  Easy
@@ -62,15 +62,15 @@
 -----------------------------------------------------------------------
 SELECT
     employee_id,
-	department_id
+  department_id
 FROM
 (
-	SELECT
-		employee_id,
-		department_id,
-		ROW_NUMBER() OVER (PARTITION BY employee_id ORDER BY primary_flag DESC) AS Row_Id
-	FROM 
-		Employee
+  SELECT
+    employee_id,
+    department_id,
+    ROW_NUMBER() OVER (PARTITION BY employee_id ORDER BY primary_flag DESC) AS Row_Id
+  FROM 
+    Employee
 ) AS T
 WHERE Row_Id = 1
 ;

@@ -61,32 +61,32 @@
 ---------------------------------------------------------------
 WITH Department_Count AS
 (
-	SELECT 
-	    department_id,
-		deparemnt_people = COUNT(*)
-	FROM 
-		Students
-	GROUP BY
-	    department_id
+  SELECT 
+      department_id,
+    deparemnt_people = COUNT(*)
+  FROM 
+    Students
+  GROUP BY
+      department_id
 ),
 Department_Rank AS
 (
-	SELECT 
-	    student_id,
-		department_id,
-		deparemnt_rank = RANK() OVER (PARTITION BY department_id ORDER BY Mark DESC)
-	FROM 
-		Students
+  SELECT 
+      student_id,
+    department_id,
+    deparemnt_rank = RANK() OVER (PARTITION BY department_id ORDER BY Mark DESC)
+  FROM 
+    Students
 )
 SELECT
     A.student_id,
-	A.department_id,
+  A.department_id,
     percentage = 
         CASE WHEN B.deparemnt_people = 1 THEN 0.0 
              ELSE ROUND(CONVERT(float, (A.deparemnt_rank - 1)) * 100 / (B.deparemnt_people - 1), 2)
              END
 FROM
-	Department_Rank AS A
+  Department_Rank AS A
 INNER JOIN
     Department_Count AS B
 ON

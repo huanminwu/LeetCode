@@ -1055,7 +1055,7 @@ public:
     /// Output: 1
     /// Explanation: The longest continuous increasing subsequence is [2], 
     /// its length is 1.
-    ///	
+    ///  
     /// Note: Length of the array will not exceed 10,000.
     /// </summary>
     int findLengthOfLCIS(vector<int>& nums);
@@ -1149,7 +1149,7 @@ public:
     ///                  in Three Moves
     ///
     /// Medium
-    ///	
+    ///  
     /// Given an array nums, you are allowed to choose one element of nums and 
     /// change it by any value in one move.
     ///
@@ -5773,7 +5773,7 @@ public:
     /// Leet Code 2454. Next Greater Element IV
     /// 
     /// Hard
-    ///	
+    ///  
     /// You are given a 0-indexed array of non-negative integers nums. For 
     /// each integer in nums, you must find its respective second greater 
     /// integer.
@@ -5871,7 +5871,7 @@ public:
     /// Leet Code 2519. Count the Number of K-Big Indices
     /// 
     /// Hard
-    ///	
+    ///  
     /// You are given a 0-indexed integer array nums and a positive integer k.
     ///
     /// We call an index i k-big if the following conditions are satisfied:
@@ -5906,7 +5906,7 @@ public:
     /// Leet Code 2530. Maximal Score After Applying K Operations
     /// 
     /// Medium
-    ///	
+    ///  
     /// You are given a 0-indexed integer array nums and an integer k. You 
     /// have a starting score of 0.
     ///
@@ -5949,7 +5949,7 @@ public:
     /// Leet Code 2548. Maximum Price to Fill a Bag
     /// 
     /// Medium
-    ///	
+    ///  
     /// You are given a 2D integer array items where items[i] = 
     /// [pricei, weighti] denotes the price and weight of the ith item, 
     /// respectively.
@@ -5997,7 +5997,7 @@ public:
     /// Leet Code 2551. Put Marbles in Bags
     /// 
     /// Hard
-    ///	
+    ///  
     /// You have k bags. You are given a 0-indexed integer array weights where 
     /// weights[i] is the weight of the ith marble. You are also given the 
     /// integer k.
@@ -6041,7 +6041,7 @@ public:
     /// Leet Code 2558. Take Gifts From the Richest Pile
     /// 
     /// Easy
-    ///	
+    ///  
     /// You are given an integer array gifts denoting the number of gifts 
     /// in various piles. Every second, you do the following:
     ///
@@ -6085,7 +6085,7 @@ public:
     /// Leet Code 2561. Rearranging Fruits
     /// 
     /// Hard
-    ///	
+    ///  
     /// You have two fruit baskets containing n fruits each. You are given 
     /// two 0-indexed integer arrays basket1 and basket2 representing the 
     /// cost of fruit in each basket. You want to make both baskets equal. 
@@ -6125,7 +6125,7 @@ public:
     /// Leet Code 2567. Minimum Score by Changing Two Elements
     /// 
     /// Medium
-    ///	
+    ///  
     /// You are given a 0-indexed integer array nums.
     ///
     /// The low score of nums is the minimum value of |nums[i] - nums[j]| 
@@ -6170,7 +6170,7 @@ public:
     /// Leet Code 2594. Minimum Time to Repair Cars
     /// 
     /// Medium
-    ///	
+    ///  
     /// You are given an integer array ranks representing the ranks of some 
     /// mechanics. ranksi is the rank of the ith mechanic. A mechanic with a 
     /// rank r can repair n cars in r * n2 minutes.
@@ -6221,7 +6221,7 @@ public:
     /// Leet Code 2599. Make the Prefix Sum Non-negative
     /// 
     /// Medium
-    ///	
+    ///  
     /// You are given a 0-indexed integer array nums. You can apply the 
     /// following operation any number of times:
     ///
@@ -6260,7 +6260,7 @@ public:
     /// Leet Code 2611. Mice and Cheese
     /// 
     /// Medium
-    ///	
+    ///  
     /// There are two mice and n different types of cheese, each type of 
     /// cheese should be eaten by exactly one mouse.
     ///
@@ -6305,7 +6305,7 @@ public:
     /// Leet Code 2613. Beautiful Pairs
     /// 
     /// Hard
-    ///	
+    ///  
     /// You are given two 0-indexed integer arrays nums1 and nums2 of the same 
     /// length. A pair of indices (i,j) is called beautiful 
     /// if|nums1[i] - nums1[j]| + |nums2[i] - nums2[j]| is the smallest 
@@ -6345,7 +6345,7 @@ public:
     /// Leet Code 2653. Sliding Subarray Beauty
     /// 
     /// Medium
-    ///	
+    ///  
     /// Given an integer array nums containing n integers, find the beauty of 
     /// each subarray of size k.
     ///
@@ -6401,7 +6401,7 @@ public:
     /// Leet Code 2659. Make Array Empty
     /// 
     /// Hard
-    ///	
+    ///  
     /// You are given an integer array nums containing distinct numbers, and 
     /// you can perform the following operations until the array is empty:
     ///
@@ -6450,7 +6450,7 @@ public:
     /// Leet Code 2679. Sum in a Matrix
     /// 
     /// Medium
-    ///	
+    ///  
     /// You are given a 0-indexed 2D integer array nums. Initially, your score 
     /// is 0. Perform the following operations until the matrix becomes empty:
     ///
@@ -10273,6 +10273,195 @@ public:
     /// 2. 1 <= nums[i] <= 10^9
     /// </summary>
     vector<int> countSmallerOppositeParity(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3912. Valid Elements in an Array 
+    /// 
+    /// Easy
+    ///
+    /// You are given an integer array nums.
+    /// 
+    /// An element nums[i] is considered valid if it satisfies at least one 
+    /// of the following conditions :
+    ///
+    /// It is strictly greater than every element to its left.
+    /// It is strictly greater than every element to its right.
+    /// The first and last elements are always valid.
+    ///
+    /// Return an array of all valid elements in the same order as they 
+    /// appear in nums.
+    ///
+    /// Example 1:
+    /// Input: nums = [1, 2, 4, 2, 3, 2]
+    /// Output : [1, 2, 4, 3, 2]
+    /// Explanation :
+    /// nums[0] and nums[5] are always valid.
+    /// nums[1] and nums[2] are strictly greater than every element to their 
+    /// left.
+    /// nums[4] is strictly greater than every element to its right.
+    /// Thus, the answer is[1, 2, 4, 3, 2].
+    ///
+    /// Example 2:
+    /// Input: nums = [5, 5, 5, 5]
+    /// Output : [5, 5]
+    /// Explanation :
+    /// The first and last elements are always valid.
+    /// No other elements are strictly greater than all elements to their 
+    /// left or to their right.
+    /// Thus, the answer is[5, 5].
+    ///
+    /// Example 3 :
+    /// Input : nums = [1]
+    /// Output : [1]
+    /// Explanation :
+    /// Since there is only one element, it is always valid.Thus, the answer 
+    /// is[1].
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. 1 <= nums[i] <= 100
+    /// </summary>
+    vector<int> findValidElements(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code 3914. Minimum Operations to Make Array Non Decreasing 
+    /// 
+    /// Medium
+    ///
+    /// You are given an integer array nums of length n.
+    ///
+    /// In one operation, you may choose any subarray nums[l..r] and increase 
+    /// each element in that subarray by x, where x is any positive integer.
+    ///
+    /// Return the minimum possible sum of the values of x across all 
+    /// operations required to make the array non - decreasing.
+    ///
+    /// An array is non - decreasing if nums[i] <= nums[i + 1] for 
+    /// all 0 <= i < n - 1.
+    ///
+    /// Example 1:
+    /// Input: nums = [3, 3, 2, 1]
+    /// Output : 2
+    /// Explanation :
+    /// One optimal set of operations :
+    /// Choose subarray[2..3] and add x = 1 resulting in[3, 3, 3, 2]
+    /// Choose subarray[3..3] and add x = 1 resulting in[3, 3, 3, 3]
+    /// The array becomes non - decreasing, and the total sum of chosen x 
+    /// values is 1 + 1 = 2.
+    ///
+    /// Example 2:
+    /// Input: nums = [5, 1, 2, 3]
+    /// Output : 4
+    /// Explanation :
+    /// One optimal set of operations :
+    /// Choose subarray[1..3] and add x = 4 resulting in[5, 5, 6, 7]
+    /// The array becomes non - decreasing, and the total sum of chosen x 
+    /// values is 4.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n == nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// </summary>
+    long long minOperationsIV(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code #3942. Minimum Operations to Sort a Permutation
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums of length n, where nums is a 
+    /// permutation of the integers from 0 to n - 1.
+    ///
+    /// You may perform only the following operations :
+    ///
+    /// Reverse the entire array.
+    /// Rotate Left by One : Move the first element to the end of the array, 
+    /// and rest elements to left by one position.
+    /// Return an integer denoting the minimum number of operations 
+    /// required to sort the array in increasing order.If it is not possible 
+    /// to sort the array using only the given operations, return -1.
+    ///
+    /// Example 1 :
+    /// Input : nums = [0, 2, 1]
+    /// Output : 2
+    /// Explanation :
+    /// Rotate Left by one : [2, 1, 0]
+    /// Reverse the array : [0, 1, 2]
+    /// The array becomes sorted in 2 operations, which is minimal
+    ///
+    /// Example 2 :
+    /// Input : nums = [1, 0, 2]
+    /// Output : 2
+    /// Explanation :
+    /// Reverse the array : [2, 0, 1]
+    /// Rotate Left by one : [0, 1, 2]
+    /// The array becomes sorted in 2 operations, which is minimal.
+    ///
+    /// Example 3 :
+    /// Input : nums = [2, 0, 1, 3]
+    /// Output : -1
+    /// Explanation :
+    /// It is impossible to reach[2, 0, 1, 3].Thus, the answer is - 1.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == nums.length <= 10^5
+    /// 2. 0 <= nums[i] <= n - 1
+    /// 3. nums is a permutation of integers from 0 to n - 1.
+    /// </summary>
+    int minOperationsRotation(vector<int>& nums);
+
+    /// <summary>
+    /// Leet code 3935. Power Update After K - th Largest Insertion I
+    ///
+    /// Medium
+    ///
+    /// You are given an integer array nums and an integer p.
+    ///
+    /// You are also given a 2D integer array queries, where each 
+    /// queries[i] = [vali, ki] and the difference between consecutive ki 
+    /// values is always less than 10.
+    ///
+    /// For each query :
+    /// Insert vali into nums.
+    /// Let x be the kith largest element in the current nums.
+    /// Update p to px % (109 + 7).
+    /// Return an array ans where the ans[i] represents the value of p after 
+    /// processing the ith query.
+    ///
+    /// Example 1:
+    /// Input: nums = [2], p = 4, queries = [[3, 1], [1, 2]]
+    /// Output : [64, 4096]
+    /// Explanation :
+    /// i->vali->Current
+    /// nums->ki->kith
+    /// largest->p->New p = pk % (10^9 + 7)
+    /// 0->3[2, 3]->1->3->4->43 % (10^9 + 7) = 64
+    /// 1->1[2, 3, 1]->2->2->64->642 % (10^9 + 7) = 4096
+    /// Thus, ans = [64, 4096].
+    ///
+    /// Example 2:
+    ///
+    /// Input: nums = [7, 5], p = 6, queries = [[4, 3], [7, 2]]
+    /// Output : [1296, 220296870]
+    /// Explanation :
+    ///
+    /// i->vali->Current
+    /// nums->ki->kith
+    /// largest->p->New p = pk % (109 + 7)
+    /// 0->4[7, 5, 4]->3->4->6->64 % (109 + 7) = 1296
+    /// 1->7[7, 5, 4, 7]->2->7->1296->12967 % (109 + 7) = 220296870
+    /// Thus, ans = [1296, 220296870]
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 2 ? 10^4
+    /// 2. 1 <= nums[i] <= 10^6
+    /// 3. 1 <= p <= 10^6
+    /// 4. 1 <= queries.length <= 2 ? 10^4
+    /// 5. 1 <= vali <= 10^6
+    /// 6. 1 <= ki <= n + i + 1
+    /// | ki - ki - 1 | < 10 for i > 0
+    /// </summary>
+    vector<int> powerUpdateI(vector<int>& nums, int p, vector<vector<int>>& queries);
 
 #pragma endregion
 };

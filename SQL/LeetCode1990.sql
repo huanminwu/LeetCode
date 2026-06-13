@@ -66,34 +66,34 @@
 -------------------------------------------------------------------
 SELECT
     A.platform,
-	B.experiment_name,
-	num_experiments = ISNULL(C.num_experiments, 0)
+  B.experiment_name,
+  num_experiments = ISNULL(C.num_experiments, 0)
 FROM
 (
-	SELECT platform = 'Android'
-	UNION
-	SELECT platform = 'IOS'
-	UNION 
-	SELECT platform = 'Web'
+  SELECT platform = 'Android'
+  UNION
+  SELECT platform = 'IOS'
+  UNION 
+  SELECT platform = 'Web'
 ) AS A
 CROSS JOIN
 (
-	SELECT experiment_name = 'Reading'
-	UNION
-	SELECT experiment_name = 'Sports'
-	UNION 
-	SELECT experiment_name = 'Programming'
+  SELECT experiment_name = 'Reading'
+  UNION
+  SELECT experiment_name = 'Sports'
+  UNION 
+  SELECT experiment_name = 'Programming'
 ) AS B
 LEFT OUTER JOIN
 (
     SELECT
-	    platform, experiment_name , num_experiments = count(*)
-	FROM
-	    Experiments
-	GROUP BY
-	    platform, experiment_name
+      platform, experiment_name , num_experiments = count(*)
+  FROM
+      Experiments
+  GROUP BY
+      platform, experiment_name
 ) AS C
 ON
     A.platform = C.platform AND 
-	B.experiment_name = C.experiment_name
+  B.experiment_name = C.experiment_name
 ;

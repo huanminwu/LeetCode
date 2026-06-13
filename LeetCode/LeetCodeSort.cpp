@@ -3587,7 +3587,7 @@ int LeetCodeSort::findNumberOfLIS(vector<int>& nums)
 /// Output: 1
 /// Explanation: The longest continuous increasing subsequence is [2], 
 /// its length is 1.
-///	
+///  
 /// Note: Length of the array will not exceed 10,000.
 /// </summary>
 int LeetCodeSort::findLengthOfLCIS(vector<int>& nums)
@@ -4578,7 +4578,7 @@ string LeetCodeSort::minInteger(string num, int k)
 ///                  in Three Moves
 ///
 /// Medium
-///	
+///  
 /// Given an array nums, you are allowed to choose one element of nums and 
 /// change it by any value in one move.
 ///
@@ -9278,7 +9278,7 @@ vector<string> LeetCodeSort::sortPeople(vector<string>& names, vector<int>& heig
 /// Leet Code 2454. Next Greater Element IV
 /// 
 /// Hard
-///	
+///  
 /// You are given a 0-indexed array of non-negative integers nums. For 
 /// each integer in nums, you must find its respective second greater 
 /// integer.
@@ -9351,7 +9351,7 @@ vector<int> LeetCodeSort::secondGreaterElement(vector<int>& nums)
 /// Leet Code 2491. Divide Players Into Teams of Equal Skill
 /// 
 /// Medium
-///	
+///  
 /// You are given a positive integer array skill of even length n where 
 /// skill[i] denotes the skill of the ith player. Divide the players into 
 /// n / 2 teams of size 2 such that the total skill of each team is equal.
@@ -9412,7 +9412,7 @@ long long LeetCodeSort::dividePlayers(vector<int>& skill)
 /// Leet Code 2519. Count the Number of K-Big Indices
 /// 
 /// Hard
-///	
+///  
 /// You are given a 0-indexed integer array nums and a positive integer k.
 ///
 /// We call an index i k-big if the following conditions are satisfied:
@@ -9474,7 +9474,7 @@ int LeetCodeSort::kBigIndices(vector<int>& nums, int k)
 /// Leet Code 2530. Maximal Score After Applying K Operations
 /// 
 /// Medium
-///	
+///  
 /// You are given a 0-indexed integer array nums and an integer k. You 
 /// have a starting score of 0.
 ///
@@ -9535,7 +9535,7 @@ long long LeetCodeSort::maxKelements(vector<int>& nums, int k)
 /// Leet Code 2548. Maximum Price to Fill a Bag
 /// 
 /// Medium
-///	
+///  
 /// You are given a 2D integer array items where items[i] = 
 /// [pricei, weighti] denotes the price and weight of the ith item, 
 /// respectively.
@@ -9609,7 +9609,7 @@ double LeetCodeSort::maxPrice(vector<vector<int>>& items, int capacity)
 /// Leet Code 2551. Put Marbles in Bags
 /// 
 /// Hard
-///	
+///  
 /// You have k bags. You are given a 0-indexed integer array weights where 
 /// weights[i] is the weight of the ith marble. You are also given the 
 /// integer k.
@@ -9670,7 +9670,7 @@ long long LeetCodeSort::putMarbles(vector<int>& weights, int k)
 /// Leet Code 2558. Take Gifts From the Richest Pile
 /// 
 /// Easy
-///	
+///  
 /// You are given an integer array gifts denoting the number of gifts 
 /// in various piles. Every second, you do the following:
 ///
@@ -9733,7 +9733,7 @@ long long LeetCodeSort::pickGifts(vector<int>& gifts, int k)
 /// Leet Code 2561. Rearranging Fruits
 /// 
 /// Hard
-///	
+///  
 /// You have two fruit baskets containing n fruits each. You are given 
 /// two 0-indexed integer arrays basket1 and basket2 representing the 
 /// cost of fruit in each basket. You want to make both baskets equal. 
@@ -9827,7 +9827,7 @@ long long LeetCodeSort::minCost(vector<int>& basket1, vector<int>& basket2)
 /// Leet Code 2567. Minimum Score by Changing Two Elements
 /// 
 /// Medium
-///	
+///  
 /// You are given a 0-indexed integer array nums.
 ///
 /// The low score of nums is the minimum value of |nums[i] - nums[j]| 
@@ -9976,7 +9976,7 @@ long long LeetCodeSort::repairCars(vector<int>& ranks, int cars)
 /// Leet Code 2599. Make the Prefix Sum Non-negative
 /// 
 /// Medium
-///	
+///  
 /// You are given a 0-indexed integer array nums. You can apply the 
 /// following operation any number of times:
 ///
@@ -10035,7 +10035,7 @@ int LeetCodeSort::makePrefSumNonNegative(vector<int>& nums)
 /// Leet Code 2611. Mice and Cheese
 /// 
 /// Medium
-///	
+///  
 /// There are two mice and n different types of cheese, each type of 
 /// cheese should be eaten by exactly one mouse.
 ///
@@ -10150,7 +10150,7 @@ int query(const vector<int>& tree, const vector<int>& v, int ind, int left, int 
 /// Leet Code 2613. Beautiful Pairs
 /// 
 /// Hard
-///	
+///  
 /// You are given two 0-indexed integer arrays nums1 and nums2 of the same 
 /// length. A pair of indices (i,j) is called beautiful 
 /// if|nums1[i] - nums1[j]| + |nums2[i] - nums2[j]| is the smallest 
@@ -10233,7 +10233,7 @@ vector<int> LeetCodeSort::beautifulPair(vector<int>& nums1, vector<int>& nums2)
 /// Leet Code 2653. Sliding Subarray Beauty
 /// 
 /// Medium
-///	
+///  
 /// Given an integer array nums containing n integers, find the beauty of 
 /// each subarray of size k.
 ///
@@ -10327,7 +10327,7 @@ vector<int> LeetCodeSort::getSubarrayBeauty(vector<int>& nums, int k, int x)
 /// Leet Code 2659. Make Array Empty
 /// 
 /// Hard
-///	
+///  
 /// You are given an integer array nums containing distinct numbers, and 
 /// you can perform the following operations until the array is empty:
 ///
@@ -10395,7 +10395,7 @@ long long LeetCodeSort::countOperationsToEmptyArray(vector<int>& nums)
 /// Leet Code 2679. Sum in a Matrix
 /// 
 /// Medium
-///	
+///  
 /// You are given a 0-indexed 2D integer array nums. Initially, your score 
 /// is 0. Perform the following operations until the matrix becomes empty:
 ///
@@ -16344,7 +16344,6 @@ int LeetCodeSort::finalElement(vector<int>& nums)
     return nums[first];
 }
 
-
 /// <summary>
 /// Leet Code 3897. Maximum Value of Concatenated Binary Segments 
 /// 
@@ -16531,15 +16530,339 @@ vector<int> LeetCodeSort::countSmallerOppositeParity(vector<int>& nums)
     {
         if ((nums[i] & 1) == 0)
         {
-            result[i] = odd_tree.sum(new_nums[i]);
+            result[i] = (int)odd_tree.sum(new_nums[i]);
             even_tree.add(new_nums[i], 1);
         }
         else
         {
-            result[i] = even_tree.sum(new_nums[i]);
+            result[i] = (int)even_tree.sum(new_nums[i]);
             odd_tree.add(new_nums[i], 1);
         }
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code 3912. Valid Elements in an Array 
+/// 
+/// Easy
+///
+/// You are given an integer array nums.
+/// 
+/// An element nums[i] is considered valid if it satisfies at least one 
+/// of the following conditions :
+///
+/// It is strictly greater than every element to its left.
+/// It is strictly greater than every element to its right.
+/// The first and last elements are always valid.
+///
+/// Return an array of all valid elements in the same order as they 
+/// appear in nums.
+///
+/// Example 1:
+/// Input: nums = [1, 2, 4, 2, 3, 2]
+/// Output : [1, 2, 4, 3, 2]
+/// Explanation :
+/// nums[0] and nums[5] are always valid.
+/// nums[1] and nums[2] are strictly greater than every element to their 
+/// left.
+/// nums[4] is strictly greater than every element to its right.
+/// Thus, the answer is[1, 2, 4, 3, 2].
+///
+/// Example 2:
+/// Input: nums = [5, 5, 5, 5]
+/// Output : [5, 5]
+/// Explanation :
+/// The first and last elements are always valid.
+/// No other elements are strictly greater than all elements to their 
+/// left or to their right.
+/// Thus, the answer is[5, 5].
+///
+/// Example 3 :
+/// Input : nums = [1]
+/// Output : [1]
+/// Explanation :
+/// Since there is only one element, it is always valid.Thus, the answer 
+/// is[1].
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 100
+/// 2. 1 <= nums[i] <= 100
+/// </summary>
+vector<int> LeetCodeSort::findValidElements(vector<int>& nums)
+{
+    set<pair<int, int>> left, right;
+    for (size_t i = 0; i < nums.size(); i++) right.insert(make_pair(nums[i], i));
+    vector<int> result;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        right.insert(make_pair(nums[i], i));
+    }
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        right.erase(make_pair(nums[i], i));
+        if (left.empty() || nums[i] > left.rbegin()->first)
+        {
+            result.push_back(nums[i]);
+        }
+        else if (right.empty() || nums[i] > right.rbegin()->first)
+        {
+            result.push_back(nums[i]);
+        }
+        left.insert(make_pair(nums[i], i));
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code 3914. Minimum Operations to Make Array Non Decreasing 
+/// 
+/// Medium
+///
+/// You are given an integer array nums of length n.
+///
+/// In one operation, you may choose any subarray nums[l..r] and increase 
+/// each element in that subarray by x, where x is any positive integer.
+///
+/// Return the minimum possible sum of the values of x across all 
+/// operations required to make the array non - decreasing.
+///
+/// An array is non - decreasing if nums[i] <= nums[i + 1] for 
+/// all 0 <= i < n - 1.
+///
+/// Example 1:
+/// Input: nums = [3, 3, 2, 1]
+/// Output : 2
+/// Explanation :
+/// One optimal set of operations :
+/// Choose subarray[2..3] and add x = 1 resulting in[3, 3, 3, 2]
+/// Choose subarray[3..3] and add x = 1 resulting in[3, 3, 3, 3]
+/// The array becomes non - decreasing, and the total sum of chosen x 
+/// values is 1 + 1 = 2.
+///
+/// Example 2:
+/// Input: nums = [5, 1, 2, 3]
+/// Output : 4
+/// Explanation :
+/// One optimal set of operations :
+/// Choose subarray[1..3] and add x = 4 resulting in[5, 5, 6, 7]
+/// The array becomes non - decreasing, and the total sum of chosen x 
+/// values is 4.
+///
+/// Constraints:
+/// 1. 1 <= n == nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// </summary>
+long long LeetCodeSort::minOperationsIV(vector<int>& nums)
+{
+    long long result = 0;
+    for (size_t i = 1; i < nums.size(); i++)
+    {
+        if (nums[i] < nums[i - 1])
+        {
+            result += nums[i-1] - nums[i];
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet code #3942. Minimum Operations to Sort a Permutation
+///
+/// Medium
+///
+/// You are given an integer array nums of length n, where nums is a 
+/// permutation of the integers from 0 to n - 1.
+///
+/// You may perform only the following operations :
+///
+/// Reverse the entire array.
+/// Rotate Left by One : Move the first element to the end of the array, 
+/// and rest elements to left by one position.
+/// Return an integer denoting the minimum number of operations 
+/// required to sort the array in increasing order.If it is not possible 
+/// to sort the array using only the given operations, return -1.
+///
+/// Example 1 :
+/// Input : nums = [0, 2, 1]
+/// Output : 2
+/// Explanation :
+/// Rotate Left by one : [2, 1, 0]
+/// Reverse the array : [0, 1, 2]
+/// The array becomes sorted in 2 operations, which is minimal
+///
+/// Example 2 :
+/// Input : nums = [1, 0, 2]
+/// Output : 2
+/// Explanation :
+/// Reverse the array : [2, 0, 1]
+/// Rotate Left by one : [0, 1, 2]
+/// The array becomes sorted in 2 operations, which is minimal.
+///
+/// Example 3 :
+/// Input : nums = [2, 0, 1, 3]
+/// Output : -1
+/// Explanation :
+/// It is impossible to reach[2, 0, 1, 3].Thus, the answer is - 1.
+/// 
+/// Constraints:
+/// 1. 1 <= n == nums.length <= 10^5
+/// 2. 0 <= nums[i] <= n - 1
+/// 3. nums is a permutation of integers from 0 to n - 1.
+/// </summary>
+int LeetCodeSort::minOperationsRotation(vector<int>& nums)
+{
+    int direction = 0;
+    vector<int> block_counts;
+    int count = 0;
+    int n = nums.size();
+    for (int i = 0; i < n; i++)
+    {
+        if (i == 0)
+        {
+            count++;
+            continue;
+        }
+        if (nums[i] == nums[i - 1] + 1)
+        {
+            if (direction == -1)
+            {
+                return -1;
+            }
+            direction = 1;
+            count++;
+        }
+        else if (nums[i] == nums[i - 1] - 1)
+        {
+            if (direction == 1)
+            {
+                return -1;
+            }
+            direction = -1;
+            count++;
+        }
+        else
+        {
+            if (!block_counts.empty())
+            {
+                return -1;
+            }
+            else
+            {
+                block_counts.push_back(count);
+                count = 1;
+            }
+        }
+    }
+    block_counts.push_back(count);
+    int result = -1;
+    if (block_counts.size() == 1)
+    {
+        if (direction == -1) result = 1;
+        else result = 0;;
+    }
+    else
+    {
+        if (direction == 1)
+        {
+            result = min(block_counts[0], block_counts[1] + 2);
+        }
+        else
+        {
+            result = min(block_counts[0] + 1, block_counts[1] + 1);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code 3935. Power Update After K - th Largest Insertion I
+///
+/// Medium
+///
+/// You are given an integer array nums and an integer p.
+///
+/// You are also given a 2D integer array queries, where each 
+/// queries[i] = [vali, ki] and the difference between consecutive ki 
+/// values is always less than 10.
+///
+/// For each query :
+/// Insert vali into nums.
+/// Let x be the kith largest element in the current nums.
+/// Update p to px % (109 + 7).
+/// Return an array ans where the ans[i] represents the value of p after 
+/// processing the ith query.
+///
+/// Example 1:
+/// Input: nums = [2], p = 4, queries = [[3, 1], [1, 2]]
+/// Output : [64, 4096]
+/// Explanation :
+/// i->vali->Current
+/// nums->ki->kith
+/// largest->p->New p = pk % (109 + 7)
+/// 0->3[2, 3]->1->3->4->43 % (109 + 7) = 64
+/// 1->1[2, 3, 1]->2->2->64->642 % (109 + 7) = 4096
+/// Thus, ans = [64, 4096].
+///
+/// Example 2:
+///
+/// Input: nums = [7, 5], p = 6, queries = [[4, 3], [7, 2]]
+/// Output : [1296, 220296870]
+/// Explanation :
+///
+/// i->vali->Current
+/// nums->ki->kith
+/// largest->p->New p = pk % (10^9 + 7)
+/// 0->4[7, 5, 4]->3->4->6->64 % (10^9 + 7) = 1296
+/// 1->7[7, 5, 4, 7]->2->7->1296->12967 % (10^9 + 7) = 220296870
+/// Thus, ans = [1296, 220296870]
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 2 * 10^4
+/// 2. 1 <= nums[i] <= 10^6
+/// 3. 1 <= p <= 10^6
+/// 4. 1 <= queries.length <= 2 * 10^4
+/// 5. 1 <= vali <= 10^6
+/// 6. 1 <= ki <= n + i + 1
+/// | ki - ki - 1 | < 10 for i > 0
+/// </summary>
+vector<int> LeetCodeSort::powerUpdateI(vector<int>& nums, int p, vector<vector<int>>& queries)
+{
+    set<pair<int, int>> max_heap;
+    set<pair<int, int>> min_heap;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        min_heap.insert({ nums[i], (int)i });
+    }
+    int n = (int)nums.size();
+    vector<int> result;
+    for (size_t i = 0; i < queries.size(); i++)
+    {
+        min_heap.insert({ queries[i][0], n + (int)i });
+        while (!max_heap.empty() && !min_heap.empty() && max_heap.begin()->first < min_heap.rbegin()->first)
+        {
+            pair<int, int> val = *min_heap.rbegin();
+            max_heap.insert(val);
+            min_heap.erase(val);
+        }
+        while ((int)max_heap.size() < queries[i][1])
+        {
+            pair<int, int> val = *min_heap.rbegin();
+            max_heap.insert(val);
+            min_heap.erase(val);
+        }
+        while ((int)max_heap.size() > queries[i][1])
+        {
+            // move from max_heap to min_heap
+            pair<int, int> val = *max_heap.begin();
+            max_heap.erase(val);
+            min_heap.insert(val);
+        }
+        p = (int)modPow(p, max_heap.begin()->first, 1000000007);
+        result.push_back(p);
+    }
+    return result;
+}
+
 #pragma endregion

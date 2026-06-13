@@ -592,7 +592,7 @@ ListNode* LeetCodeLinkedList::reverseList(ListNode* head)
 /// return 1->4->3->2->5->NULL. 
 /// Note:
 /// Given m, n satisfy the following condition:
-/// 1 ¡Ü m ¡Ü n ¡Ü length of list.
+/// 1 <= m <= n <= length of list.
 /// </summary>
 ListNode* LeetCodeLinkedList::reverseBetween(ListNode* head, int m, int n)
 {
@@ -1099,8 +1099,8 @@ ListNode* LeetCodeLinkedList::addTwoNumbersII(ListNode* l1, ListNode* l2)
 /// <summary>
 /// Leet code #143. Reorder List      
 ///
-/// Given a singly linked list L: L0¡úL1¡ú¡­¡úLn-1¡úLn,
-/// reorder it to: L0¡úLn¡úL1¡úLn-1¡úL2¡úLn-2¡ú¡­
+/// Given a singly linked list L: L0??L1??????Ln-1??Ln,
+/// reorder it to: L0??Ln??L1??Ln-1??L2??Ln-2????
 ///
 /// You may not modify the values in the list's nodes, only nodes itself 
 /// may be changed.
@@ -3134,7 +3134,7 @@ ListNode* LeetCodeLinkedList::mergeNodes(ListNode* head)
 /// Leet Code 2487. Remove Nodes From Linked List
 /// 
 /// Medium
-///	
+///  
 /// You are given the head of a linked list.
 ///
 /// Remove every node which has a node with a strictly greater value 
@@ -3191,7 +3191,7 @@ ListNode* LeetCodeLinkedList::removeNodes(ListNode* head)
 /// Leet Code 2674. Split a Circular Linked List
 /// 
 /// Medium
-///	
+///  
 /// Given a circular linked list list of positive integers, your task is 
 /// to split it into 2 circular linked lists so that the first one 
 /// contains the first half of the nodes in list (exactly 

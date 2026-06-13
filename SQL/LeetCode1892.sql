@@ -107,18 +107,18 @@
 SELECT
     user_id = A.user1_id,
     B.page_id,
-    friends_likes = COUNT(DISTINCT A.user2_id) 		
+    friends_likes = COUNT(DISTINCT A.user2_id)     
 FROM
 (
    SELECT
        user1_id,
-	   user2_id
+     user2_id
    FROM
        Friendship
    UNION
    SELECT
        user1_id = user2_id,
-	   user2_id = user1_id
+     user2_id = user1_id
    FROM
        Friendship   
 )AS A

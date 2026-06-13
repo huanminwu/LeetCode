@@ -1,4 +1,4 @@
-﻿-----------------------------------------------------------------------
+-----------------------------------------------------------------------
 ---  Leet code #1741. Find Total Time Spent by Each Employee
 --- 
 ---  Easy
@@ -58,11 +58,11 @@
 -----------------------------------------------------------------------
 SELECT
     day = event_day,
-	emp_id, 
-	total_time = SUM(out_time - in_time)
+  emp_id, 
+  total_time = SUM(out_time - in_time)
 FROM 
     Employees
 GROUP BY
     event_day,
-	emp_id
+  emp_id
 ;

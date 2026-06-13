@@ -62,38 +62,38 @@
 WITH Friendship_Union 
 AS
 (
-	SELECT
-		user1_id,
-		user2_id
-	FROM
-	   Friendship
-	UNION
-	SELECT
-		user1_id = user2_id,
-		user2_id = user1_id
-	FROM
-	   Friendship
+  SELECT
+    user1_id,
+    user2_id
+  FROM
+     Friendship
+  UNION
+  SELECT
+    user1_id = user2_id,
+    user2_id = user1_id
+  FROM
+     Friendship
 ),
 Friendship_CTE
 AS
 (
-	SELECT
-		A.user1_id,
-		A.user2_id,
-		friend = B.user2_id
-	FROM
-	   Friendship AS A
-	INNER JOIN 
-	   Friendship_Union AS B
-	ON
-	   A.user1_id = B.user1_id
-	INNER JOIN 
-	   Friendship_Union AS C
-	ON
-	   A.user2_id = C.user1_id AND
+  SELECT
+    A.user1_id,
+    A.user2_id,
+    friend = B.user2_id
+  FROM
+     Friendship AS A
+  INNER JOIN 
+     Friendship_Union AS B
+  ON
+     A.user1_id = B.user1_id
+  INNER JOIN 
+     Friendship_Union AS C
+  ON
+     A.user2_id = C.user1_id AND
        B.user2_id = C.user2_id
-	WHERE
-	   B.user2_id != A.user2_id
+  WHERE
+     B.user2_id != A.user2_id
 )
 SELECT 
     user1_id, user2_id, common_friend = COUNT(*)

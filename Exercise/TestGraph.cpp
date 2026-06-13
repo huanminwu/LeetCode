@@ -2157,7 +2157,7 @@ void TestLeetCode721(void)
     {
         { "John", "johnsmith@mail.com", "john00@mail.com" },
         { "John", "johnnybravo@mail.com" },
-        { "John", "johnsmith@mail.com",	"john_newyork@mail.com" },
+        { "John", "johnsmith@mail.com",  "john_newyork@mail.com" },
         { "Mary", "mary@mail.com" }
     };
 
@@ -6788,8 +6788,107 @@ void TestLeetCode3898(void)
     Logger::WriteMessage(degrees);
 }
 
+void TestLeetCode3910(void)
+{
+    Logger::WriteMessage("Test Leet Code 3910");
+    LeetCodeGraph leetCode;
+    vector<int> nums = { 1, 0, 1 };
+    vector<vector<int>> edges = { {0, 1},{1, 2} };
+    int result = leetCode.evenSumSubgraphs(nums, edges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1 };
+    edges = { };
+    result = leetCode.evenSumSubgraphs(nums, edges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0, 0 };
+    edges = { { 0, 1 } };
+    result = leetCode.evenSumSubgraphs(nums, edges);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3924(void)
+{
+    Logger::WriteMessage("Test Leet Code 3924");
+    LeetCodeGraph leetCode;
+    int n = 6, source = 0, target = 3, k = 1;
+    vector<vector<int>> edges = 
+    {
+        {0, 1, 5}, {1, 2, 3}, {3, 4, 4}, {4, 5, 1}, {1, 4, 2}
+    };
+    int result = leetCode.minimumThreshold(n, edges, source, target, k);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("source = " + to_string(source) + "; target = " + to_string(target));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 6, source = 0, target = 4, k = 1;
+    edges =
+    {
+        {0, 1, 3} ,{1, 2, 4},{3, 4, 5},{4, 5, 6}
+    };
+    result = leetCode.minimumThreshold(n, edges, source, target, k);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("source = " + to_string(source) + "; target = " + to_string(target));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 4, source = 0, target = 0, k = 0;
+    edges =
+    {
+        {0, 1, 2} ,{1, 2, 2},{2, 3, 2},{3, 0, 2}
+    };
+    result = leetCode.minimumThreshold(n, edges, source, target, k);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage("source = " + to_string(source) + "; target = " + to_string(target));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3928(void)
+{
+    Logger::WriteMessage("Test Leet Code 3928");
+    LeetCodeGraph leetCode;
+    int n = 2;
+    vector<int> prices = {8, 3};
+    vector<vector<int>> roads = {{0, 1, 1, 2}};
+    vector<int> result = leetCode.minCostII(n, prices, roads);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage(roads);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 3;
+    prices = { 9, 4, 6 };
+    roads = {{0, 1, 1, 3}, {1, 2, 4, 2}};
+    result = leetCode.minCostII(n, prices, roads);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage(roads);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+
+    n = 3;
+    prices = { 10, 11, 1 };
+    roads = { {0, 2, 1, 3},{1, 2, 3, 4},{0, 1, 5, 2} };
+    result = leetCode.minCostII(n, prices, roads);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage(roads);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode3928();
+    TestLeetCode3924();
+    TestLeetCode3910();
     TestLeetCode3898();
     TestLeetCode3887();
     TestLeetCode3873();

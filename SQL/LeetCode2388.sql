@@ -62,17 +62,17 @@
 ---------------------------------------------------------------
 WITH CoffeeShopOrder AS
 (
-	SELECT 
-		id, 
-		drink, 
-		RN = ROW_NUMBER() OVER (ORDER BY (SELECT NULL))
-	FROM
-		CoffeeShop
+  SELECT 
+    id, 
+    drink, 
+    RN = ROW_NUMBER() OVER (ORDER BY (SELECT NULL))
+  FROM
+    CoffeeShop
 )
 SELECT
     A.id,
- 	drink = (SELECT TOP 1 drink FROM CoffeeShopOrder WHERE drink IS NOT NULL AND RN <= A.RN ORDER BY RN DESC)
+   drink = (SELECT TOP 1 drink FROM CoffeeShopOrder WHERE drink IS NOT NULL AND RN <= A.RN ORDER BY RN DESC)
 FROM 
    CoffeeShopOrder  AS A
 ;
-	
+  

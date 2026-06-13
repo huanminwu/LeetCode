@@ -1570,7 +1570,7 @@ bool LeetCodeString::isAdditiveNumber(string num1, string num2, string num)
 /// 1 + 1 = 2, 1 + 2 = 3, 2 + 3 = 5, 3 + 5 = 8
 /// "199100199" is also an additive number, the additive sequence is: 1, 99, 100, 199. 1 + 99 = 100, 99 + 100 = 199
 ///
-///	Note: Numbers in the additive sequence cannot have leading zeros, so sequence 1, 2, 03 or 1, 02, 3 is invalid. 
+///  Note: Numbers in the additive sequence cannot have leading zeros, so sequence 1, 2, 03 or 1, 02, 3 is invalid. 
 /// Given a string containing only digits '0'-'9', write a function to determine if it's an additive number.
 /// Follow up:
 /// How would you handle overflow for very large input integers? 
@@ -4208,7 +4208,7 @@ vector<string> LeetCodeString::ipToCIDR(string ip, int range)
 /// Note:
 ///
 /// 1. S has length at most 50.
-/// 2. S is guaranteed to be a special binary string as defined above.	
+/// 2. S is guaranteed to be a special binary string as defined above.  
 /// </summary>
 string LeetCodeString::makeLargestSpecial(string S)
 {
@@ -6267,14 +6267,14 @@ vector<string> LeetCodeString::parseLine(string& line)
 /// For example, assuming we have following lines
 /// John,Smith,john.smith@gmail.com,Los Angeles,1
 /// Jane, Roberts, janer@msn.com, "San Francisco, CA", 0
-///	"Alexandra ""Alex""", Menendez, alex.menendez@gmail.com, Miami, 1
-///	"""Alexandra Alex"""
+///  "Alexandra ""Alex""", Menendez, alex.menendez@gmail.com, Miami, 1
+///  """Alexandra Alex"""
 ///
 /// After we parse it, it become the followng vector of strings.
-///	John | Smith | john.smith@gmail.com | Los Angeles | 1
-///	Jane | Roberts | janer@msn.com | San Francisco, CA | 0
-///	Alexandra "Alex" | Menendez | alex.menendez@gmail.com | Miami | 1
-///	"Alexandra Alex"
+///  John | Smith | john.smith@gmail.com | Los Angeles | 1
+///  Jane | Roberts | janer@msn.com | San Francisco, CA | 0
+///  Alexandra "Alex" | Menendez | alex.menendez@gmail.com | Miami | 1
+///  "Alexandra Alex"
 /// </summary>
 vector<vector<string>> LeetCodeString::parseCSV(vector<string>& lines)
 {
@@ -7620,7 +7620,7 @@ string LeetCodeString::removeVowels(string S)
 /// Some examples:
 /// "1 + 1" = 2
 /// " 2-1 + 2 " = 3
-/// "(1+(4+5+2)-3)+(6+8)" = 23	
+/// "(1+(4+5+2)-3)+(6+8)" = 23  
 /// </summary>
 int LeetCodeString::calculate(string s)
 {
@@ -10836,7 +10836,7 @@ bool LeetCodeString::checkValidString(string s)
 /// Leet code #1507. Reformat Date
 ///
 /// Easy
-///	
+///  
 /// Given a date string in the form Day Month Year, where:
 /// Day is in the set {"1st", "2nd", "3rd", "4th", ..., "30th", "31st"}.
 /// Month is in the set {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", 
@@ -20583,7 +20583,7 @@ vector<string> LeetCodeString::twoEditWords(vector<string>& queries, vector<stri
 /// Leet Code 2490. Circular Sentence
 /// 
 /// Easy
-///	
+///  
 /// A sentence is a list of words that are separated by a single space 
 /// with no leading or trailing spaces.
 ///
@@ -20655,7 +20655,7 @@ bool LeetCodeString::isCircularSentence(string sentence)
 /// Leet Code 2486. Append Characters to String to Make Subsequence
 /// 
 /// Medium
-///	
+///  
 /// You are given two strings s and t consisting of only lowercase English 
 /// letters.
 ///
@@ -20710,7 +20710,7 @@ int LeetCodeString::appendCharacters(string s, string t)
 /// Leet Code 2496. Maximum Value of a String in an Array
 /// 
 /// Easy
-///	
+///  
 /// The value of an alphanumeric string can be defined as:
 ///
 /// The numeric representation of the string in base 10, if it comprises 
@@ -20770,7 +20770,7 @@ int LeetCodeString::maximumValue(vector<string>& strs)
 /// Leet Code 2506. Count Pairs Of Similar Strings
 /// 
 /// Easy
-///	
+///  
 /// You are given a 0-indexed string array words.
 ///
 /// Two strings are similar if they consist of the same characters.
@@ -20846,7 +20846,7 @@ int LeetCodeString::similarPairs(vector<string>& words)
 /// Leet Code 2512. Reward Top K Students
 /// 
 /// Medium
-///	
+///  
 /// You are given two string arrays positive_feedback and 
 /// negative_feedback, containing the words denoting positive and negative 
 /// feedback, respectively. Note that no word is both positive and 
@@ -20954,7 +20954,7 @@ vector<int> LeetCodeString::topStudents(
 /// Leet Code 2516. Take K of Each Character From Left and Right
 /// 
 /// Medium
-///	
+///  
 /// You are given a string s consisting of the characters 'a', 'b', 
 /// and 'c' and a non-negative integer k. Each minute, you may take 
 /// either the leftmost character of s, or the rightmost character of s.
@@ -21020,7 +21020,7 @@ int LeetCodeString::takeCharacters(string s, int k)
 /// Leet Code 2522. Partition String Into Substrings With Values at Most K
 /// 
 /// Medium
-///	
+///  
 /// You are given a string s consisting of digits from 1 to 9 and an 
 /// integer k.
 ///
@@ -21078,7 +21078,7 @@ int LeetCodeString::minimumPartition(string s, int k)
 /// Leet Code 2531. Make Number of Distinct Characters Equal
 /// 
 /// Medium
-///	
+///  
 /// You are given two 0-indexed strings word1 and word2.
 ///
 /// A move consists of choosing two indices i and j such that 
@@ -21159,7 +21159,7 @@ bool LeetCodeString::isItPossible(string word1, string word2)
 /// Leet Code 2565. Subsequence With the Minimum Score
 /// 
 /// Hard
-///	
+///  
 /// You are given two strings s and t.
 /// You are allowed to remove any number of characters from the string t.
 /// The score of the string is 0 if no characters are removed from the 
@@ -21246,7 +21246,7 @@ int LeetCodeString::minimumScore(string s, string t)
 /// Leet Code 2586. Count the Number of Vowel Strings in Range
 /// 
 /// Easy
-///	
+///  
 /// You are given a 0-indexed array of string words and two integers left 
 /// and right.
 ///
@@ -21304,7 +21304,7 @@ int LeetCodeString::vowelStrings(vector<string>& words, int left, int right)
 /// Leet Code 2606. Find the Substring With Maximum Cost
 /// 
 /// Medium
-///	
+///  
 /// You are given a string s, a string chars of distinct characters and 
 /// an integer array vals of the same length as chars.
 ///
@@ -21376,7 +21376,7 @@ int LeetCodeString::maximumCostSubstring(string s, string chars, vector<int>& va
 /// Leet Code 2645. Minimum Additions to Make Valid String
 /// 
 /// Medium
-///	
+///  
 /// Given a string word to which you can insert letters "a", "b" or "c" 
 /// anywhere and any number of times, return the minimum number of 
 /// letters that must be inserted so that word becomes valid.
@@ -21437,7 +21437,7 @@ int LeetCodeString::addMinimum(string word)
 /// Leet Code 2663. Lexicographically Smallest Beautiful String
 /// 
 /// Hard
-///	
+///  
 /// A string is beautiful if:
 ///
 /// It consists of the first k letters of the English lowercase alphabet.
@@ -21515,7 +21515,7 @@ string LeetCodeString::smallestBeautifulString(string s, int k)
 /// Leet Code 2678. Number of Senior Citizens
 /// 
 /// Easy
-///	
+///  
 /// You are given a 0-indexed array of strings details. Each element of 
 /// details provides information about a given passenger compressed into
 /// a string of length 15. The system is such that:
@@ -21562,7 +21562,7 @@ int LeetCodeString::countSeniors(vector<string>& details)
 /// Leet Code 2696. Minimum String Length After Removing Substrings
 /// 
 /// Easy
-///	
+///  
 /// You are given a string s consisting only of uppercase English letters.
 ///
 /// You can apply some operations to this string where, in one operation, 
@@ -21620,7 +21620,7 @@ int LeetCodeString::minLength(string s)
 /// Leet Code 2697. Lexicographically Smallest Palindrome
 /// 
 /// Easy
-///	
+///  
 /// You are given a string s consisting of lowercase English letters, and 
 /// you are allowed to perform operations on it. In one operation, you 
 /// can replace a character in s with another lowercase English letter.
@@ -21684,7 +21684,7 @@ string LeetCodeString::makeSmallestPalindrome(string s)
 /// Leet Code 2710. Remove Trailing Zeros From a String
 /// 
 /// Easy
-///	
+///  
 /// Given a positive integer num represented as a string, return the 
 /// integer num without trailing zeros as a string.
 ///
@@ -24352,64 +24352,67 @@ vector<int> LeetCodeString::stringIndices(vector<string>& wordsContainer, vector
 {
     struct Trie
     {
-        Trie* children[26] = {};
+        int children[26];
         pair<int, int> shortest_word;
         Trie()
         {
+            fill(begin(children), end(children), -1);
         }
-        void insert(string& w, int index, int length)
+        static void insert(string& w, int index, int length, vector<Trie>& heap)
         {
-            Trie* curr = this;
-            if (shortest_word.first == 0 || shortest_word.first > length ||
-                (shortest_word.first == length && shortest_word.second > index))
+            int curr_id = 0;
+            if (heap[curr_id].shortest_word.first == 0 || heap[curr_id].shortest_word.first > length ||
+                (heap[curr_id].shortest_word.first == length && heap[curr_id].shortest_word.second > index))
             {
-                shortest_word.first = length;
-                shortest_word.second = index;
+                heap[curr_id].shortest_word.first = length;
+                heap[curr_id].shortest_word.second = index;
             }
             for (char c : w)
             {
-                if (curr->children[c - 'a'] == nullptr)
+                if (heap[curr_id].children[c - 'a'] == -1)
                 {
-                    curr->children[c - 'a'] = new Trie();
+                    heap.emplace_back();
+                    heap[curr_id].children[c - 'a'] = heap.size() - 1;
                 }
-                curr = curr->children[c - 'a'];
-                if (curr->shortest_word.first == 0 || curr->shortest_word.first > length ||
-                    (curr->shortest_word.first == length && curr->shortest_word.second > index))
+                curr_id = heap[curr_id].children[c - 'a'];
+                if (heap[curr_id].shortest_word.first == 0 || heap[curr_id].shortest_word.first > length ||
+                    (heap[curr_id].shortest_word.first == length && heap[curr_id].shortest_word.second > index))
                 {
-                    curr->shortest_word.first = length;
-                    curr->shortest_word.second = index;
+                    heap[curr_id].shortest_word.first = length;
+                    heap[curr_id].shortest_word.second = index;
                 }
             }
         }
-        int query(string& w)
+        static int query(string& w, vector<Trie>& heap)
         {
-            Trie* curr = this;
-            int result = shortest_word.second;
+            int curr_id = 0;
+            int result = heap[curr_id].shortest_word.second;
             for (char c : w)
             {
-                if (curr->children[c - 'a'] == nullptr)
+                if (heap[curr_id].children[c - 'a'] == -1)
                 {
                     break;
                 }
-                curr = curr->children[c - 'a'];
-                result = curr->shortest_word.second;
+                curr_id = heap[curr_id].children[c - 'a'];
+                result = heap[curr_id].shortest_word.second;
             }
             return result;
         }
     };
-    Trie* trie = new Trie();
+    vector<Trie> heap(1);
+    Trie &trie = heap[0];
     for (size_t i = 0; i < wordsContainer.size(); i++)
     {
         string word = wordsContainer[i];
         reverse(word.begin(), word.end());
-        trie->insert(word, i, word.size());
+        Trie::insert(word, i, word.size(), heap);
     }
     vector<int> result(wordsQuery.size());
     for (size_t i = 0; i < wordsQuery.size(); i++)
     {
         string word = wordsQuery[i];
         reverse(word.begin(), word.end());
-        result[i] = trie->query(word);
+        result[i] = Trie::query(word, heap);
     }
     return result;
 }
@@ -24974,10 +24977,10 @@ bool LeetCodeString::isValidWord(string word)
 /// Explanation:
 /// We can obtain a 2-periodic string by applying the operations in the 
 /// table below.
-/// i	j	word
-/// 0	2	etetcoleet
-/// 4	0	etetetleet
-/// 6	0	etetetetet
+/// i  j  word
+/// 0  2  etetcoleet
+/// 4  0  etetetleet
+/// 6  0  etetetetet
 /// 
 /// Constraints:
 /// 1. 1 <= n == word.length <= 10^5
@@ -25743,30 +25746,30 @@ int LeetCodeString::numberOfDominantSubstrings(string s)
 /// Input: n = 2, commands = ["RIGHT","DOWN"]
 /// Output: 3
 /// Explanation:
-/// 0	1
-/// 2	3
-/// 0	1
-/// 2	3
-/// 0	1
-/// 2	3
+/// 0  1
+/// 2  3
+/// 0  1
+/// 2  3
+/// 0  1
+/// 2  3
 ///
 /// Example 2:
 /// Input: n = 3, commands = ["DOWN","RIGHT","UP"]
 /// Output: 1
 ///
 /// Explanation:
-/// 0	1	2
-/// 3	4	5
-/// 6	7	8
-/// 0	1	2
-/// 3	4	5
-/// 6	7	8
-/// 0	1	2
-/// 3	4	5
-/// 6	7	8
-/// 0	1	2
-/// 3	4	5
-/// 6	7	8
+/// 0  1  2
+/// 3  4  5
+/// 6  7  8
+/// 0  1  2
+/// 3  4  5
+/// 6  7  8
+/// 0  1  2
+/// 3  4  5
+/// 6  7  8
+/// 0  1  2
+/// 3  4  5
+/// 6  7  8
 ///
 /// Constraints:
 /// 1. 2 <= n <= 10
@@ -26530,7 +26533,7 @@ long long LeetCodeString::countOfSubstringsII(string word, int k)
 /// 
 /// Constraints:
 /// 1. 1 <= pattern.length < s.length <= 10^5
-/// 2. s and pattern consist only of lowercase English letters.	
+/// 2. s and pattern consist only of lowercase English letters.  
 /// </summary>
 int LeetCodeString::minStartingIndex(string s, string pattern)
 {
@@ -32470,6 +32473,355 @@ int LeetCodeString::mirrorFrequency(string s)
         result += abs(digit_freq[i] - digit_freq[9 - i]);
     }
     return result / 2;
+}
+
+/// <summary> 
+/// Leet Code 3913. Sort Vowels by Frequency
+/// 
+/// Medium
+///
+/// You are given a string s consisting of lowercase English characters.
+///
+/// Rearrange only the vowels in the string so that they appear in 
+/// non - increasing order of their frequency.
+///
+/// If multiple vowels have the same frequency, order them by the position 
+/// of their first occurrence in s.
+///
+/// Return the modified string.
+///
+/// Vowels are 'a', 'e', 'i', 'o', and 'u'.
+///
+/// The frequency of a letter is the number of times it occurs in the 
+/// string.
+/// 
+/// Example 1:
+/// Input: s = "leetcode"
+/// Output : "leetcedo"
+/// Explanation : 
+///
+/// Vowels in the string are['e', 'e', 'o', 'e'] with frequencies : 
+/// e = 3, o = 1.
+/// Sorting in non - increasing order of frequency and placing them back 
+/// into the vowel positions results in "leetcedo".
+/// 
+/// Example 2 :
+/// Input : s = "aeiaaioooa"
+/// Output : "aaaaoooiie"
+/// Explanation : 
+/// Vowels in the string are['a', 'e', 'i', 'a', 'a', 'i', 'o', 'o', 
+/// 'o', 'a'] with frequencies : a = 4, o = 3, i = 2, e = 1.
+/// Sorting them in non - increasing order of frequency and placing them 
+/// back into the vowel positions results in "aaaaoooiie".
+///
+/// Example 3 :
+/// Input : s = "baeiou"
+/// Output : "baeiou"
+/// Explanation :
+/// Each vowel appears exactly once, so all have the same frequency.
+/// Thus, they retain their relative order based on first occurrence, and 
+/// the string remains unchanged.
+/// 
+/// Constraints :
+/// 1. 1 <= s.length <= 10^5
+/// 2. s consists of lowercase English letters
+/// </summary>
+string LeetCodeString::sortVowelsII(string s)
+{
+    string result = s;
+    unordered_map<char, int> vowel_count;
+    unordered_map<char, int> vowel_position;
+    for (size_t i = 0; i < result.size(); i++)
+    {
+        if (result[i] == 'a' || result[i] == 'e' || result[i] == 'i' || result[i] == 'o' || result[i] == 'u')
+        {
+            vowel_count[result[i]]++;
+            if (vowel_position.count(result[i]) == 0)
+            {
+                vowel_position[result[i]] = i;
+            }
+            result[i] = '*';
+        }
+    }
+    size_t p = 0;
+    char ch = '#';
+    int count = 0;
+    while (p < s.size())
+    {
+        if (result[p] != '*') p++;
+        else
+        {
+            if (count == 0)
+            {
+                int position = INT_MAX;
+                for (auto itr : vowel_count)
+                {
+                    if (itr.second > count || (itr.second == count && vowel_position[itr.first] < position))
+                    {
+                        ch = itr.first;
+                        count = itr.second;
+                        position = vowel_position[ch];
+                    }
+                }
+                vowel_count.erase(ch);
+                vowel_position.erase(ch);
+            }
+            result[p] = ch;
+            count--;
+        }
+    }
+    return result;
+}
+
+/// <summary> 
+/// Leet Code 3921. Score Validator
+/// 
+/// Easy
+///
+/// You are given a string array events.
+/// Initially, score = 0 and counter = 0. Each element in events is one 
+/// of the following :
+///
+/// "0", "1", "2", "3", "4", "6" : Add that value to the total score.
+/// "W" : Increase the counter by 1. No score is added.
+/// "WD" : Add 1 to the total score.
+/// "NB" : Add 1 to the total score.
+/// Process the array from left to right.Stop processing when either :
+/// All elements in events have been processed, or
+/// The counter becomes 10.
+/// Return an integer array[score, counter], where :
+///
+/// score is the final total score.
+/// counter is the final counter value.
+///
+///
+/// Example 1:
+/// Input: events = ["1", "4", "W", "6", "WD"]
+/// Output : [12, 1]
+/// Explanation :
+///
+/// Event  Score  Counter
+/// "1"  1  0
+/// "4"  5  0
+/// "W"  5  1
+/// "6"  11  1
+/// "WD"  12  1
+/// Final result : [12, 1] .
+///
+/// Example 2 :
+/// Input : events = ["WD", "NB", "0", "4", "4"]
+/// Output : [10, 0]
+/// Explanation :
+/// Event  Score  Counter
+/// "WD"  1  0
+/// "NB"  2  0
+/// "0"  2  0
+/// "4"  6  0
+/// "4"  10  0
+/// Final result : [10, 0] .
+///
+/// Example 3 :
+/// Input : events = ["W", "W", "W", "W", "W", "W", "W", 
+/// "W", "W", "W", "W"]
+/// Output : [0, 10]
+///
+/// Explanation :
+/// After 10 occurrences of "W", the counter reaches 10, so processing 
+/// stops.The remaining events are ignored.
+///
+/// Constraints:
+/// 1. 1 <= events.length <= 1000
+/// 2. events[i] is one of "0", "1", "2", "3", "4", "6", "W", 
+///    "WD", or "NB".
+/// </summary>
+vector<int> LeetCodeString::scoreValidator(vector<string>& events)
+{
+    int score = 0;
+    int counter = 0;
+    for (const auto& event : events)
+    {
+        if (event == "W")
+        {
+            counter++;
+            if (counter == 10) break;
+        }
+        else if (event == "WD" || event == "NB")
+        {
+            score += 1;
+        }
+        else
+        {
+            score += stoi(event);
+        }
+    }
+    return {score, counter};
+}
+
+/// <summary> 
+/// Leet Code 3926. Count Valid Word Occurrences
+/// 
+/// Medium
+///
+/// You are given an array of strings chunks.The strings are concatenated 
+/// in order to form a single string s.
+///
+/// You are also given an array of strings queries.
+///
+/// A word is defined as a substring of s that :
+///
+/// consists of lowercase English letters('a' to 'z'),
+/// may include hyphens('-') only if each hyphen is surrounded by 
+/// lowercase English letters, and
+/// is not part of a longer substring that also satisfies the above 
+/// conditions.
+/// Any character that is not a lowercase English letter or a valid 
+/// hyphen acts as a separator.
+///
+/// Return an integer array ans such that ans[i] is the number of 
+/// occurrences of queries[i] as a word in s.
+///
+/// A substring is a contiguous non - empty sequence of characters 
+/// within a string.
+///
+/// Example 1:
+/// Input: chunks = ["hello wor", "ld hello"], 
+/// queries = ["hello", "world", "wor"]
+/// Output : [2, 1, 0]
+/// Explanation :
+/// Concatenating all strings in chunks gives s = "hello world hello".
+/// The valid words in s are "hello" which appears twice and "world" 
+/// which appears once.
+/// Thus, the ans = [2, 1, 0].
+/// Example 2 :
+///
+/// Input : chunks = ["a--b a-", "-c"], queries = ["a", "b", "c"]
+/// Output : [2, 1, 1]
+/// Explanation :
+/// Concatenating all strings in chunks gives s = "a--b a--c".
+/// The valid words in s are "a" which appears twice, "b" which appears 
+/// once, and "c" which appears once.
+/// Thus, the ans = [2, 1, 1].
+///
+/// Example 3 :
+/// Input : chunks = ["hello"], queries = ["hello", "ell"]
+/// Output : [1, 0]
+/// Explanation :
+/// The valid word in s is "hello" which appears once.
+/// Thus, the ans = [1, 0].
+/// Constraints :
+/// 1. 1 <= chunks.length <= 10^5
+/// 2. 1 <= chunks[i].length <= 10^5
+/// 3. chunks[i] may consist of lowercase English letters, spaces, 
+///    and hyphens.
+/// 4. The total length of all strings in chunks does not exceed 10^5
+/// 5. 1 <= queries.length <= 10^5
+/// 6. 1 <= queries[i].length <= 10^5
+/// 7. queries[i] is a valid word
+/// 8. The total length of all strings in queries does not exceed 10^5
+/// </summary>
+vector<int> LeetCodeString::countWordOccurrences(vector<string>& chunks, vector<string>& queries)
+{
+    unordered_map<string, int> word_count;
+    string s;
+    for (size_t i = 0; i < chunks.size(); i++)
+    {
+        s += chunks[i];
+    }
+    size_t start = 0;
+    while (start < s.size())
+    {
+        while (start < s.size() && !isalpha(s[start]))
+        {
+            start++;
+        }
+        if (start == s.size()) break;
+        size_t end = start + 1;
+        while (end < s.size() && 
+              (isalpha(s[end]) || 
+               (s[end] == '-' && end > start && end < s.size() - 1 && isalpha(s[end - 1]) && isalpha(s[end + 1]))))
+        {
+            end++;
+        }
+        string word = s.substr(start, end - start);
+        word_count[word]++;
+        start = end;
+    }
+    vector<int> result;
+    for (const auto& query : queries)
+    {
+        result.push_back(word_count[query]);
+    }
+    return result;
+}
+
+/// <summary> 
+/// Leet Code #3941. Password Strength
+/// 
+/// Medium
+/// 
+/// You are given a string password.
+/// The strength of the password is calculated based on the following 
+/// rules :
+///
+/// 1 point for each distinct lowercase letter('a' to 'z').
+/// 2 points for each distinct uppercase letter('A' to 'Z').
+/// 3 points for each distinct digit('0' to '9').
+/// 5 points for each distinct special character from the set "!@#$".
+/// Each character contributes at most once, even if it appears multiple 
+/// times.
+///
+/// Return an integer denoting the strength of the password.
+/// Example 1:
+/// Input: password = "aA1!"
+/// Output : 11
+/// Explanation :
+/// The distinct characters are 'a', 'A', '1' and '!'.
+/// Thus, the strength = 1 + 2 + 3 + 5 = 11.
+///
+/// Example 2 :
+/// Input : password = "bbB11#"
+/// Output : 11
+/// Explanation :
+/// The distinct characters are 'b', 'B', '1' and '#'.
+/// Thus, the strength = 1 + 2 + 3 + 5 = 11.
+/// 
+/// Constraints :
+/// 1. 1 <= password.length <= 10^5
+/// 2. password consists of lowercase and uppercase English letters, 
+///    digits, and special characters from "!@#$".
+/// </summary>
+int LeetCodeString::passwordStrength(string password)
+{
+    unordered_set<char> char_set;
+    int result = 0;
+    for (size_t i = 0; i < password.size(); i++)
+    {
+        if (char_set.count(password[i]) > 0)
+        {
+            continue;
+        }
+        if (isalpha(password[i]))
+        {
+            if (islower(password[i]))
+            {
+                result += 1;
+            }
+            else
+            {
+                result += 2;
+            }
+        }
+        else if (isdigit(password[i]))
+        {
+            result += 3;
+        }
+        else if (password[i] == '!' || password[i] == '@' || password[i] == '#' || password[i] == '$')
+        {
+            result += 5;
+        }
+        char_set.insert(password[i]);
+    }
+    return result;
 }
 
 #pragma endregion

@@ -84,17 +84,17 @@
 ---------------------------------------------------------------
 SELECT
     A.bus_id,
-	passengers_cnt = ISNULL(COUNT(DISTINCT B.passenger_id), 0)
+  passengers_cnt = ISNULL(COUNT(DISTINCT B.passenger_id), 0)
 FROM
    Buses AS A
 LEFT OUTER JOIN
 (
-	SELECT
-		A.passenger_id,
-		A.arrival_time,
-		bus_arrival_time = (SELECT TOP 1 arrival_time FROM Buses AS B WHERE A.arrival_time <= B.arrival_time ORDER BY B.arrival_time) 
-	FROM 
-	   Passengers AS A
+  SELECT
+    A.passenger_id,
+    A.arrival_time,
+    bus_arrival_time = (SELECT TOP 1 arrival_time FROM Buses AS B WHERE A.arrival_time <= B.arrival_time ORDER BY B.arrival_time) 
+  FROM 
+     Passengers AS A
 ) AS B
 ON
    A.arrival_time = B.bus_arrival_time

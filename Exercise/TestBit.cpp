@@ -1894,18 +1894,50 @@ void TestLeetCode3878(void)
     Logger::WriteMessage("Test Leet Code 3878");
     LeetCodeBit leetCode;
     vector<int> nums = {4, 2, 3};
-    int result = leetCode.countGoodSubarrays(nums);
+    int result = (int)leetCode.countGoodSubarrays(nums);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("result = " + to_string(result));
 
     nums = { 1,3,1 };
-    result = leetCode.countGoodSubarrays(nums);
+    result = (int)leetCode.countGoodSubarrays(nums);
     Logger::WriteMessage(nums);
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3950(void)
+{
+    Logger::WriteMessage("Test Leet Code 3950");
+    LeetCodeBit leetCode;
+    int num = 6;
+    bool result = (int)leetCode.consecutiveSetBits(num);
+    Logger::WriteMessage("num = " + to_string(num));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    num = 5;
+    result = (int)leetCode.consecutiveSetBits(num);
+    Logger::WriteMessage("num = " + to_string(num));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode3955(void)
+{
+    Logger::WriteMessage("Test Leet Code 3955");
+    LeetCodeBit leetCode;
+    int n = 3, k = 1;
+    vector<string> result = leetCode.generateValidStrings(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    n = 1, k = 0;
+    result = leetCode.generateValidStrings(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode3955();
+    TestLeetCode3950();
     TestLeetCode3878();
     TestLeetCode3858();
     TestLeetCode3849();

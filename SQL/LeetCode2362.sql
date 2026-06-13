@@ -75,38 +75,38 @@
 ---------------------------------------------------------------
 WITH Invoice_Sum AS
 (
-	SELECT 
-	    A.invoice_id,
-		total_price = SUM(A.quantity  * B.price)
-	FROM 
-		Purchases AS A
-	INNER JOIN 
-	    Products AS B
-	ON
-	    A.product_id  = B.product_id
-	GROUP BY
-	    A.invoice_id
+  SELECT 
+      A.invoice_id,
+    total_price = SUM(A.quantity  * B.price)
+  FROM 
+    Purchases AS A
+  INNER JOIN 
+      Products AS B
+  ON
+      A.product_id  = B.product_id
+  GROUP BY
+      A.invoice_id
 ),
 Invoice_Rank AS
 (
-	SELECT 
-	    invoice_id,
-		invoice_rank = ROW_NUMBER() OVER (ORDER BY total_price DESC, invoice_id ASC)
-	FROM 
-		Invoice_Sum
+  SELECT 
+      invoice_id,
+    invoice_rank = ROW_NUMBER() OVER (ORDER BY total_price DESC, invoice_id ASC)
+  FROM 
+    Invoice_Sum
 )
 SELECT
     A.product_id,
-	A.quantity,
+  A.quantity,
     price = A.quantity * B.price
 FROM
-	Purchases AS A
+  Purchases AS A
 INNER JOIN
     Products AS B
 ON
     A.product_id  = B.product_id
 WHERE A.invoice_id IN
 (
-	SELECT invoice_id FROM Invoice_Rank WHERE invoice_rank = 1
+  SELECT invoice_id FROM Invoice_Rank WHERE invoice_rank = 1
 )
 ;

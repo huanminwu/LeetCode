@@ -40,7 +40,7 @@
 --- Fall: September, October, November
 --- The popularity of a category is determined by the total quantity sold in 
 --- that season. If there is a tie, select the category with the highest total 
---- revenue (quantity × price).
+--- revenue (quantity * price).
 ---
 --- Return the result table ordered by season in ascending order.
 --- The result format is in the following example.
@@ -93,7 +93,7 @@
 ---
 --- Fall (Sep, Oct, Nov):
 --- Apparel: 10 items sold (6 Jackets in Sep, 4 Jeans in Nov), revenue 
---- $120.00 (6×$10.00 + 4×$15.00)
+--- $120.00 (6*$10.00 + 4*$15.00)
 --- Fitness: 3 Yoga Mats sold in Sep, revenue $36.00
 --- Most popular: Apparel with highest total quantity (10)
 --- Spring (Mar, Apr, May):

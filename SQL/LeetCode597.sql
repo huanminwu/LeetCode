@@ -6,7 +6,7 @@
 --  SQL Schema
 --
 --  In social network like Facebook or Twitter, people send friend requests 
---  and accept others’ requests as well. Now given two tables as below: 
+--  and accept others? requests as well. Now given two tables as below: 
 --
 --  Table: friend_request 
 --  | sender_id | send_to_id |request_date|
@@ -43,7 +43,7 @@
 --  the number of requests to get the acceptance rate.
 --  It is possible that a sender sends multiple requests to the same receiver, 
 --  and a request could be accepted more than once. In this case, the 
---  ‘duplicated’ requests or acceptances are only counted once.
+--  'duplicated? requests or acceptances are only counted once.
 --  If there is no requests at all, you should return 0.00 as the accept_rate.
 --  Explanation: There are 4 unique accepted requests, and there are 5 requests 
 --  in total. So the rate is 0.80. 

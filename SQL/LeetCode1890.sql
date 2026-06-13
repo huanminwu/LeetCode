@@ -56,7 +56,7 @@
 -----------------------------------------------------------------------
 SELECT
     [user_id],
-	[last_stamp] = max(time_stamp)
+  [last_stamp] = max(time_stamp)
 FROM
     [Logins] 
 WHERE

@@ -1,4 +1,4 @@
-﻿-----------------------------------------------------------------------
+-----------------------------------------------------------------------
 ---  Leet code #1667. Fix Names in a Table
 --- 
 ---  Easy
@@ -41,7 +41,7 @@
 -----------------------------------------------------------------------
 SELECT 
     user_id,
-	name = UPPER(SUBSTRING(name, 1, 1)) + LOWER(SUBSTRING(name, 2, LEN(name)))
+  name = UPPER(SUBSTRING(name, 1, 1)) + LOWER(SUBSTRING(name, 2, LEN(name)))
 FROM Users
 ORDER BY user_id
 ;

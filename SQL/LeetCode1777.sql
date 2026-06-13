@@ -1,4 +1,4 @@
-﻿-----------------------------------------------------------------------
+-----------------------------------------------------------------------
 ---  Leet code #1777. Product's Price for Each Store
 --- 
 ---  Easy
@@ -47,50 +47,50 @@
 -----------------------------------------------------------------------
 SELECT
     A.product_id,
-	B.store1,
-	C.store2,
-	D.store3
+  B.store1,
+  C.store2,
+  D.store3
 FROM
 (
-	SELECT
-		DISTINCT
-		product_id
-	FROM 
-		Products
+  SELECT
+    DISTINCT
+    product_id
+  FROM 
+    Products
 ) AS A
 LEFT OUTER JOIN
 (
-	SELECT
-		product_id, 
-		store1 = price
-	FROM 
-		Products
-	WHERE 
-	    store = 'store1'
+  SELECT
+    product_id, 
+    store1 = price
+  FROM 
+    Products
+  WHERE 
+      store = 'store1'
 ) AS B
 ON 
     A.product_id = B.product_id
 LEFT OUTER JOIN
 (
-	SELECT
-		product_id, 
-		store2 = price
-	FROM 
-		Products
-	WHERE 
-	    store = 'store2'
+  SELECT
+    product_id, 
+    store2 = price
+  FROM 
+    Products
+  WHERE 
+      store = 'store2'
 ) AS C
 ON 
     A.product_id = C.product_id
 LEFT OUTER JOIN
 (
-	SELECT
-		product_id, 
-		store3 = price
-	FROM 
-		Products
-	WHERE 
-	    store = 'store3'
+  SELECT
+    product_id, 
+    store3 = price
+  FROM 
+    Products
+  WHERE 
+      store = 'store3'
 ) AS D
 ON 
     A.product_id = D.product_id

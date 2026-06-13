@@ -94,17 +94,17 @@
 --- Alice Johnson (employee_id = 1):
 --- Has 4 reviews with ratings: 2, 3, 4, 5
 --- Last 3 reviews (by date): 2023-04-15 (3), 2023-07-15 (4), 2023-10-15 (5)
---- Ratings are strictly increasing: 3 → 4 → 5
+--- Ratings are strictly increasing: 3    4    5
 --- Improvement score: 5 - 3 = 2
 --- Carol Davis (employee_id = 3):
 --- Has 4 reviews with ratings: 1, 2, 3, 4
 --- Last 3 reviews (by date): 2023-06-10 (2), 2023-09-10 (3), 2023-12-10 (4)
---- Ratings are strictly increasing: 2 → 3 → 4
+--- Ratings are strictly increasing: 2    3    4
 --- Improvement score: 4 - 2 = 2
 --- Bob Smith (employee_id = 2):
 --- Has 4 reviews with ratings: 3, 2, 4, 5
 --- Last 3 reviews (by date): 2023-05-01 (2), 2023-08-01 (4), 2023-11-01 (5)
---- Ratings are strictly increasing: 2 → 4 → 5
+--- Ratings are strictly increasing: 2    4    5
 --- Improvement score: 5 - 2 = 3
 --- Employees not included:
 --- David Wilson (employee_id = 4): Last 3 reviews are all 4 (no improvement)

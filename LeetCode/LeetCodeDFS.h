@@ -6664,7 +6664,6 @@ public:
     long long countGoodIntegersOnPath(string& str_num, int is_limit, int position, int prev_digit, string& str_bits, 
         vector<long long>& cache);
 
-
     /// <summary>
     /// Leet code #3906. Count Good Integers on a Grid Path
     /// 

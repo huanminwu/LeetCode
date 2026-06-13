@@ -115,8 +115,8 @@ LEFT OUTER JOIN
         DISTINCT
         [post_id],
         B.[topic_id] 
-	FROM
-	    PostWords AS A
+  FROM
+      PostWords AS A
     INNER JOIN
         Keywords AS B
     ON

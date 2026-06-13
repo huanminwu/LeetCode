@@ -19094,6 +19094,223 @@ public:
     /// </summary>
     int mirrorFrequency(string s);
 
+    /// <summary> 
+    /// Leet Code 3913. Sort Vowels by Frequency
+    /// 
+    /// Medium
+    ///
+    /// You are given a string s consisting of lowercase English characters.
+    ///
+    /// Rearrange only the vowels in the string so that they appear in 
+    /// non - increasing order of their frequency.
+    ///
+    /// If multiple vowels have the same frequency, order them by the position 
+    /// of their first occurrence in s.
+    ///
+    /// Return the modified string.
+    ///
+    /// Vowels are 'a', 'e', 'i', 'o', and 'u'.
+    ///
+    /// The frequency of a letter is the number of times it occurs in the 
+    /// string.
+    /// 
+    /// Example 1:
+    /// Input: s = "leetcode"
+    /// Output : "leetcedo"
+    /// Explanation : 
+    ///
+    /// Vowels in the string are['e', 'e', 'o', 'e'] with frequencies : 
+    /// e = 3, o = 1.
+    /// Sorting in non - increasing order of frequency and placing them back 
+    /// into the vowel positions results in "leetcedo".
+    /// 
+    /// Example 2 :
+    /// Input : s = "aeiaaioooa"
+    /// Output : "aaaaoooiie"
+    /// Explanation : 
+    /// Vowels in the string are['a', 'e', 'i', 'a', 'a', 'i', 'o', 'o', 
+    /// 'o', 'a'] with frequencies : a = 4, o = 3, i = 2, e = 1.
+    /// Sorting them in non - increasing order of frequency and placing them 
+    /// back into the vowel positions results in "aaaaoooiie".
+    ///
+    /// Example 3 :
+    /// Input : s = "baeiou"
+    /// Output : "baeiou"
+    /// Explanation :
+    /// Each vowel appears exactly once, so all have the same frequency.
+    /// Thus, they retain their relative order based on first occurrence, and 
+    /// the string remains unchanged.
+    /// 
+    /// Constraints :
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s consists of lowercase English letters
+    /// </summary>
+    string sortVowelsII(string s);
+    
+    /// <summary> 
+    /// Leet Code 3921. Score Validator
+    /// 
+    /// Easy
+    ///
+    /// You are given a string array events.
+    /// Initially, score = 0 and counter = 0. Each element in events is one 
+    /// of the following :
+    ///
+    /// "0", "1", "2", "3", "4", "6" : Add that value to the total score.
+    /// "W" : Increase the counter by 1. No score is added.
+    /// "WD" : Add 1 to the total score.
+    /// "NB" : Add 1 to the total score.
+    /// Process the array from left to right.Stop processing when either :
+    /// All elements in events have been processed, or
+    /// The counter becomes 10.
+    /// Return an integer array[score, counter], where :
+    ///
+    /// score is the final total score.
+    /// counter is the final counter value.
+    ///
+    ///
+    /// Example 1:
+    /// Input: events = ["1", "4", "W", "6", "WD"]
+    /// Output : [12, 1]
+    /// Explanation :
+    ///
+    /// Event  Score  Counter
+    /// "1"  1  0
+    /// "4"  5  0
+    /// "W"  5  1
+    /// "6"  11  1
+    /// "WD"  12  1
+    /// Final result : [12, 1] .
+    ///
+    /// Example 2 :
+    /// Input : events = ["WD", "NB", "0", "4", "4"]
+    /// Output : [10, 0]
+    /// Explanation :
+    /// Event  Score  Counter
+    /// "WD"  1  0
+    /// "NB"  2  0
+    /// "0"  2  0
+    /// "4"  6  0
+    /// "4"  10  0
+    /// Final result : [10, 0] .
+    ///
+    /// Example 3 :
+    /// Input : events = ["W", "W", "W", "W", "W", "W", "W", 
+    /// "W", "W", "W", "W"]
+    /// Output : [0, 10]
+    ///
+    /// Explanation :
+    /// After 10 occurrences of "W", the counter reaches 10, so processing 
+    /// stops.The remaining events are ignored.
+    ///
+    /// Constraints:
+    /// 1. 1 <= events.length <= 1000
+    /// 2. events[i] is one of "0", "1", "2", "3", "4", "6", "W", 
+    ///    "WD", or "NB".
+    /// </summary>
+    vector<int> scoreValidator(vector<string>& events);
+
+    /// <summary> 
+    /// Leet Code 3926. Count Valid Word Occurrences
+    /// 
+    /// Medium
+    ///
+    /// You are given an array of strings chunks.The strings are concatenated 
+    /// in order to form a single string s.
+    ///
+    /// You are also given an array of strings queries.
+    ///
+    /// A word is defined as a substring of s that :
+    ///
+    /// consists of lowercase English letters('a' to 'z'),
+    /// may include hyphens('-') only if each hyphen is surrounded by 
+    /// lowercase English letters, and
+    /// is not part of a longer substring that also satisfies the above 
+    /// conditions.
+    /// Any character that is not a lowercase English letter or a valid 
+    /// hyphen acts as a separator.
+    ///
+    /// Return an integer array ans such that ans[i] is the number of 
+    /// occurrences of queries[i] as a word in s.
+    ///
+    /// A substring is a contiguous non - empty sequence of characters 
+    /// within a string.
+    ///
+    /// Example 1:
+    /// Input: chunks = ["hello wor", "ld hello"], 
+    /// queries = ["hello", "world", "wor"]
+    /// Output : [2, 1, 0]
+    /// Explanation :
+    /// Concatenating all strings in chunks gives s = "hello world hello".
+    /// The valid words in s are "hello" which appears twice and "world" 
+    /// which appears once.
+    /// Thus, the ans = [2, 1, 0].
+    /// Example 2 :
+    ///
+    /// Input : chunks = ["a--b a-", "-c"], queries = ["a", "b", "c"]
+    /// Output : [2, 1, 1]
+    /// Explanation :
+    /// Concatenating all strings in chunks gives s = "a--b a--c".
+    /// The valid words in s are "a" which appears twice, "b" which appears 
+    /// once, and "c" which appears once.
+    /// Thus, the ans = [2, 1, 1].
+    /// Example 3 :
+    /// Input : chunks = ["hello"], queries = ["hello", "ell"]
+    /// Output : [1, 0]
+    /// Explanation :
+    /// The valid word in s is "hello" which appears once.
+    /// Thus, the ans = [1, 0].
+    /// Constraints :
+    /// 1. 1 <= chunks.length <= 10^5
+    /// 2. 1 <= chunks[i].length <= 10^5
+    /// 3. chunks[i] may consist of lowercase English letters, spaces, 
+    ///    and hyphens.
+    /// 4. The total length of all strings in chunks does not exceed 10^5
+    /// 5. 1 <= queries.length <= 10^5
+    /// 6. 1 <= queries[i].length <= 10^5
+    /// 7. queries[i] is a valid word
+    /// 8. The total length of all strings in queries does not exceed 10^5
+    /// </summary>
+    vector<int> countWordOccurrences(vector<string>& chunks, vector<string>& queries);
+
+    /// <summary> 
+    /// Leet Code #3941. Password Strength
+    /// 
+    /// Medium
+    /// 
+    /// You are given a string password.
+    /// The strength of the password is calculated based on the following 
+    /// rules :
+    ///
+    /// 1 point for each distinct lowercase letter('a' to 'z').
+    /// 2 points for each distinct uppercase letter('A' to 'Z').
+    /// 3 points for each distinct digit('0' to '9').
+    /// 5 points for each distinct special character from the set "!@#$".
+    /// Each character contributes at most once, even if it appears multiple 
+    /// times.
+    ///
+    /// Return an integer denoting the strength of the password.
+    /// Example 1:
+    /// Input: password = "aA1!"
+    /// Output : 11
+    /// Explanation :
+    /// The distinct characters are 'a', 'A', '1' and '!'.
+    /// Thus, the strength = 1 + 2 + 3 + 5 = 11.
+    ///
+    /// Example 2 :
+    /// Input : password = "bbB11#"
+    /// Output : 11
+    /// Explanation :
+    /// The distinct characters are 'b', 'B', '1' and '#'.
+    /// Thus, the strength = 1 + 2 + 3 + 5 = 11.
+    /// 
+    /// Constraints :
+    /// 1. 1 <= password.length <= 10^5
+    /// 2. password consists of lowercase and uppercase English letters, 
+    ///    digits, and special characters from "!@#$".
+    /// </summary>
+    int passwordStrength(string password);
+ 
 #pragma endregion
 };
 

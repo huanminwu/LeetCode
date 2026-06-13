@@ -63,19 +63,19 @@
 --- 2021-12-12 --> withdraw 7000. Balance is 7000 - 7000 = 0.
 ---------------------------------------------------------------
 SELECT
-	A.[account_id],
+  A.[account_id],
     A.[day],
-	balance = SUM (CASE WHEN B.[type] = 'Deposit' THEN B.amount ELSE 0 - B.amount END)
+  balance = SUM (CASE WHEN B.[type] = 'Deposit' THEN B.amount ELSE 0 - B.amount END)
 FROM
-	Transactions AS A
+  Transactions AS A
 LEFT OUTER JOIN
     Transactions AS B
 ON
-	A.account_id = B.account_id AND A.day >= B.day
+  A.account_id = B.account_id AND A.day >= B.day
 GROUP BY
-	A.[account_id],
+  A.[account_id],
     A.[day]
 ORDER BY 
-	A.[account_id],
+  A.[account_id],
     A.[day]
 

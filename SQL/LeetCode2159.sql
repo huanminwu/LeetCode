@@ -43,22 +43,22 @@
 ---------------------------------------------------------------
 SELECT
     A.first_col,
-    B.second_col	
+    B.second_col  
 FROM
 (
-	SELECT
-		first_col,
-		RN = ROW_NUMBER() OVER (ORDER BY first_col)		
-	FROM
-		[Data]
+  SELECT
+    first_col,
+    RN = ROW_NUMBER() OVER (ORDER BY first_col)    
+  FROM
+    [Data]
 ) AS A
 INNER JOIN
 (
-	SELECT
-		first_col,
-		RN = ROW_NUMBER() OVER (ORDER BY first_col)		
-	FROM
-		[Data]
+  SELECT
+    first_col,
+    RN = ROW_NUMBER() OVER (ORDER BY first_col)    
+  FROM
+    [Data]
 ) AS B
 ON
    A.RN = B.RN

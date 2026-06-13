@@ -58,9 +58,9 @@
 ---------------------------------------------------------------
 SELECT
     teacher_id,
-	cnt = COUNT (DISTINCT subject_id)
+  cnt = COUNT (DISTINCT subject_id)
 FROM
-	Teacher
+  Teacher
 GROUP BY
     teacher_id
 ;

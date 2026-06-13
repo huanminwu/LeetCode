@@ -23,7 +23,7 @@
 --- letters to lowercase
 --- Special handling for words containing special characters:
 --- For words connected with a hyphen -, both parts should be capitalized 
---- (e.g., top-rated → Top-Rated)
+--- (e.g., top-rated ' Top-Rated)
 --- All other formatting and spacing should remain unchanged
 --- Return the result table that includes both the original content_text 
 --- and the modified text following the above rules.
@@ -65,8 +65,8 @@
 --- Hyphenated word "modern-day" becomes "Modern-Day"
 --- "DATA" is converted to "Data"
 --- For content_id = 4:
---- Contains two hyphenated words: "web-based" → "Web-Based"
---- And "FRONT-end" → "Front-End"
+--- Contains two hyphenated words: "web-based"    "Web-Based"
+--- And "FRONT-end"    "Front-End"
 ---------------------------------------------------------------
 /* Write your T-SQL query statement below */
 SELECT

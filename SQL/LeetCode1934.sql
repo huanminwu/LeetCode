@@ -85,19 +85,19 @@
 -----------------------------------------------------------------------
 SELECT
     A.user_id,
-	confirmation_rate = CONVERT(NUMERIC(5, 2), ISNULL(CONVERT(float, B.confirmed) / B.total, 0)) 
+  confirmation_rate = CONVERT(NUMERIC(5, 2), ISNULL(CONVERT(float, B.confirmed) / B.total, 0)) 
 FROM
     Signups AS A
 LEFT OUTER JOIN
 (
-	SELECT
-		user_id,
-		confirmed = SUM(CASE WHEN action = 'confirmed' THEN 1 ELSE 0 END),
-		total = SUM(1)
-	FROM
-		Confirmations
-	GROUP BY 
-	    user_id
+  SELECT
+    user_id,
+    confirmed = SUM(CASE WHEN action = 'confirmed' THEN 1 ELSE 0 END),
+    total = SUM(1)
+  FROM
+    Confirmations
+  GROUP BY 
+      user_id
 ) AS B
 ON
    A.user_id = B.user_id

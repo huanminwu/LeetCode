@@ -53,12 +53,12 @@
 ---------------------------------------------------------------
 SELECT
     artist, 
-	occurrences
+  occurrences
 FROM
 (
     SELECT
         artist, 
-	    occurrences = count(id)
+      occurrences = count(id)
     FROM 
         Spotify
     GROUP BY artist

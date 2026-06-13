@@ -1,4 +1,4 @@
-﻿-----------------------------------------------------------------------
+-----------------------------------------------------------------------
 ---  Leet code #1677. Product's Worth Over Invoices
 --- 
 ---  Easy
@@ -77,22 +77,22 @@
 -----------------------------------------------------------------------
 SELECT
     A.name,
-	rest = ISNULL(B.rest, 0),
-	paid = ISNULL(B.paid, 0),
-	canceled = ISNULL(B.canceled,0),
-	refunded = ISNULL(B.refunded, 0)
+  rest = ISNULL(B.rest, 0),
+  paid = ISNULL(B.paid, 0),
+  canceled = ISNULL(B.canceled,0),
+  refunded = ISNULL(B.refunded, 0)
 FROM
     Product AS A
 LEFT OUTER JOIN
 (
     SELECT 
         product_id, 
-		SUM(rest) AS rest,
+    SUM(rest) AS rest,
         SUM(paid) AS paid,
-		SUM(canceled) AS canceled,
+    SUM(canceled) AS canceled,
         SUM(refunded) AS refunded 
-	FROM
-	    Invoice 
+  FROM
+      Invoice 
     GROUP BY
         product_id    
 ) AS B

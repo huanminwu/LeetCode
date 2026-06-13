@@ -83,30 +83,30 @@ DECLARE @max_avg_quantity FLOAT;
 SET @max_avg_quantity = 
 (
     SELECT
-	    max(avg_quantity)
-	FROM
-	(
-		SELECT
-			order_id,
-			avg_quantity = AVG(CONVERT(FLOAT, quantity))
-		FROM
-			OrdersDetails
-		GROUP BY
-			order_id
-	) AS T
+      max(avg_quantity)
+  FROM
+  (
+    SELECT
+      order_id,
+      avg_quantity = AVG(CONVERT(FLOAT, quantity))
+    FROM
+      OrdersDetails
+    GROUP BY
+      order_id
+  ) AS T
 )
 
 SELECT
     order_id
 FROM
 (
-	SELECT
-		order_id,
-		max_quantity = MAX (quantity)
-	FROM
-		OrdersDetails
-	GROUP BY
-		order_id
+  SELECT
+    order_id,
+    max_quantity = MAX (quantity)
+  FROM
+    OrdersDetails
+  GROUP BY
+    order_id
 ) AS A
 WHERE 
   max_quantity > @max_avg_quantity

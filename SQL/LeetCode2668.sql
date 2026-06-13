@@ -70,20 +70,20 @@
 ---------------------------------------------------------------
 SELECT
     emp_id, 
-	firstname,
-	lastname,
-	salary,
-	department_id
+  firstname,
+  lastname,
+  salary,
+  department_id
 FROM 
 (
-	SELECT
-		emp_id, 
-		firstname,
-		lastname,
-		salary,
-		department_id,
-		RN = ROW_NUMBER() OVER (PARTITION BY emp_id ORDER BY salary DESC)
-	FROM 
-		Salary
+  SELECT
+    emp_id, 
+    firstname,
+    lastname,
+    salary,
+    department_id,
+    RN = ROW_NUMBER() OVER (PARTITION BY emp_id ORDER BY salary DESC)
+  FROM 
+    Salary
 ) AS T
 WHERE RN = 1;

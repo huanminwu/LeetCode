@@ -63,20 +63,20 @@ SELECT
     transaction_id
 FROM
 (
-	SELECT
-		transaction_id,
-		day,
-		amount,
-		rank = RANK() OVER (PARTITION BY day ORDER BY amount DESC)
-	FROM
-	(	
-		SELECT
-			transaction_id,
-			day = YEAR(day) * 10000 + MONTH(day)*100 + DAY(day),
-			amount 
-		FROM 
-			Transactions
-	) AS T
+  SELECT
+    transaction_id,
+    day,
+    amount,
+    rank = RANK() OVER (PARTITION BY day ORDER BY amount DESC)
+  FROM
+  (  
+    SELECT
+      transaction_id,
+      day = YEAR(day) * 10000 + MONTH(day)*100 + DAY(day),
+      amount 
+    FROM 
+      Transactions
+  ) AS T
 ) AS T
 WHERE rank = 1
 ORDER BY transaction_id

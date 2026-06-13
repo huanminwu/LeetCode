@@ -112,8 +112,8 @@ WITH TeamPointsOld AS
         [team_id],
         [name], 
         [points]
-	FROM
-	    TeamPoints
+  FROM
+      TeamPoints
 ),
 TeamPointsNew AS
 (
@@ -121,8 +121,8 @@ TeamPointsNew AS
         A.[team_id],
         A.[name], 
         [points] = A.[points] + B.[points_change]
-	FROM
-	    TeamPoints AS A
+  FROM
+      TeamPoints AS A
     INNER JOIN
         PointsChange AS B
     ON
@@ -137,8 +137,8 @@ FROM
     SELECT
         A.[team_id],
         A.[name], 
-	    Rank_Old = ROW_NUMBER() OVER (ORDER BY A.[points] DESC, A.[name] ASC),
-	    Rank_New = ROW_NUMBER() OVER (ORDER BY B.[points] DESC, B.[name] ASC)
+      Rank_Old = ROW_NUMBER() OVER (ORDER BY A.[points] DESC, A.[name] ASC),
+      Rank_New = ROW_NUMBER() OVER (ORDER BY B.[points] DESC, B.[name] ASC)
     FROM
         TeamPointsOld AS A
     INNER JOIN 

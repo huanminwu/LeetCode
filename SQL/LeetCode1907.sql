@@ -54,25 +54,25 @@
 -----------------------------------------------------------------------
 WITH Salary AS
 (
-	SELECT
-		[Low Salary] = SUM(CASE WHEN Income < 20000 THEN 1 ELSE 0 END),
-		[Average Salary] = SUM(CASE WHEN Income BETWEEN 20000 AND 50000 THEN 1 ELSE 0 END),
-		[High Salary] = SUM(CASE WHEN Income > 50000 THEN 1 ELSE 0 END)
-	FROM 
-		Accounts
+  SELECT
+    [Low Salary] = SUM(CASE WHEN Income < 20000 THEN 1 ELSE 0 END),
+    [Average Salary] = SUM(CASE WHEN Income BETWEEN 20000 AND 50000 THEN 1 ELSE 0 END),
+    [High Salary] = SUM(CASE WHEN Income > 50000 THEN 1 ELSE 0 END)
+  FROM 
+    Accounts
 )
 SELECT 
     category = 'Low Salary',
-	accounts_count = [Low Salary]
+  accounts_count = [Low Salary]
 FROM Salary
 UNION
 SELECT 
     category = 'Average Salary',
-	accounts_count = [Average Salary]
+  accounts_count = [Average Salary]
 FROM Salary
 UNION
 SELECT 
     category = 'High Salary',
-	accounts_count = [High Salary]
+  accounts_count = [High Salary]
 FROM Salary
 ;

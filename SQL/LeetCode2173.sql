@@ -68,10 +68,10 @@ WITH MatchesPlayers AS
 (
     SELECT
         player_id,
-		Win = CASE WHEN result = 'Win' THEN 1 ELSE 0 END,
-		RN = ROW_NUMBER() OVER (PARTITION BY player_id ORDER BY match_day)
-	FROM
-	    Matches
+    Win = CASE WHEN result = 'Win' THEN 1 ELSE 0 END,
+    RN = ROW_NUMBER() OVER (PARTITION BY player_id ORDER BY match_day)
+  FROM
+      Matches
 )
 SELECT
     A.player_id,
@@ -93,9 +93,9 @@ LEFT OUTER JOIN
     (
         SELECT
             player_id,
-	        Win,
-	        Win_Day = RN,
-	        Lose_Day = ISNULL((SELECT MAX(RN) FROM MatchesPlayers WHERE Win = 0 AND RN < A.RN AND player_id = A.player_id), 0)
+          Win,
+          Win_Day = RN,
+          Lose_Day = ISNULL((SELECT MAX(RN) FROM MatchesPlayers WHERE Win = 0 AND RN < A.RN AND player_id = A.player_id), 0)
         FROM 
             MatchesPlayers AS A
         WHERE 

@@ -2215,9 +2215,39 @@ void TestLeetCode3893(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3951(void)
+{
+    Logger::WriteMessage("Test Leet Code 3951");
+    LeetCodeGreedy leetCode;
+    int n = 5, brightness = 5;
+    vector<vector<int>> intervals = { {6, 12} };
+    long long result = leetCode.minEnergy(n, brightness, intervals);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("brightness = " + to_string(brightness));
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 2, brightness = 1; 
+    intervals = { {0, 0}, {2, 2} };
+    result = leetCode.minEnergy(n, brightness, intervals);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("brightness = " + to_string(brightness));
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 4, brightness = 2;
+    intervals = { {1, 3}, {2, 4} };
+    result = leetCode.minEnergy(n, brightness, intervals);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("brightness = " + to_string(brightness));
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
     Logger::WriteMessage("Test Leet Code Greedy");
+    TestLeetCode3951();
     TestLeetCode3893();
     TestLeetCode3683();
     TestLeetCode1353();

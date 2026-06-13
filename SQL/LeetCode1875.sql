@@ -72,25 +72,25 @@
 WITH Salary AS
 (
     SELECT
-	    salary,
+      salary,
         RANK() OVER (ORDER BY salary) AS team_id
-	FROM
-	(
-		SELECT
-			salary,
-			COUNT(*) AS [Count]
-		FROM 
-			Employees
-		GROUP BY
-			salary
-	) AS T
+  FROM
+  (
+    SELECT
+      salary,
+      COUNT(*) AS [Count]
+    FROM 
+      Employees
+    GROUP BY
+      salary
+  ) AS T
     WHERE [Count] > 1
 )
 SELECT
     A.employee_id,
-	A.name,
-	A.salary,
-	B.team_id
+  A.name,
+  A.salary,
+  B.team_id
 FROM
     Employees AS A
 INNER JOIN 

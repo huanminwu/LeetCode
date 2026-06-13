@@ -1,4 +1,4 @@
-﻿-----------------------------------------------------------------------
+-----------------------------------------------------------------------
 ---  Leet code #1709. Biggest Window Between Visits
 --- 
 ---  Medium
@@ -59,51 +59,51 @@ WITH
    User_Visits_CTE
 AS
 (
-	SELECT
-		user_id,
-		visit_date,
-		Row_Id = ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY visit_date)
-	FROM
-	(
-		SELECT
-			user_id,
-			visit_date
-		FROM
-			UserVisits
-		UNION ALL
-		SELECT 
-			user_id,
-			visit_date
-		FROM
-		(
-			SELECT
-				DISTINCT
-				user_id
-			FROM 
-			   UserVisits
-		) AS A
-		CROSS JOIN
-		(
-			SELECT
-				visit_date = CONVERT(DATETIME, '2021-01-01')
-		) AS B
-	) AS T
+  SELECT
+    user_id,
+    visit_date,
+    Row_Id = ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY visit_date)
+  FROM
+  (
+    SELECT
+      user_id,
+      visit_date
+    FROM
+      UserVisits
+    UNION ALL
+    SELECT 
+      user_id,
+      visit_date
+    FROM
+    (
+      SELECT
+        DISTINCT
+        user_id
+      FROM 
+         UserVisits
+    ) AS A
+    CROSS JOIN
+    (
+      SELECT
+        visit_date = CONVERT(DATETIME, '2021-01-01')
+    ) AS B
+  ) AS T
 )
 SELECT
     user_id,
-	biggest_window = MAX(window)
+  biggest_window = MAX(window)
 FROM
 (
-	SELECT
-		A.user_id,
-		window = DATEDIFF (DAY , A.visit_date , B.visit_date)
-	FROM
-		User_Visits_CTE AS A
-	INNER JOIN
-		User_Visits_CTE AS B
-	ON
-		A.user_id = B.user_id AND
-		A.Row_Id + 1= B.Row_Id
+  SELECT
+    A.user_id,
+    window = DATEDIFF (DAY , A.visit_date , B.visit_date)
+  FROM
+    User_Visits_CTE AS A
+  INNER JOIN
+    User_Visits_CTE AS B
+  ON
+    A.user_id = B.user_id AND
+    A.Row_Id + 1= B.Row_Id
 ) AS T
 GROUP BY
     user_id

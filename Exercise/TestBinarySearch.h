@@ -63,5 +63,7 @@ void TestLeetCode3520(void);
 void TestLeetCode3605(void);
 void TestLeetCode3710(void);
 void TestLeetCode3733(void);
+void TestLeetCode3824(void);
+void TestLeetCode3911(void);
 void TestLeetCodeBinarySearch(void);
 #endif  // TestBinarySearch

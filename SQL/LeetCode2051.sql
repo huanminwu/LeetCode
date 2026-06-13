@@ -114,33 +114,33 @@
 ---------------------------------------------------------------
 SELECT
     member_id,
-	name,
-	category = 
-	    CASE 
+  name,
+  category = 
+      CASE 
              WHEN visit_count = 0 THEN 'Bronze'
              WHEN purchase_count * 100 / visit_count >= 80 THEN 'Diamond'
-		     WHEN purchase_count * 100 / visit_count >= 50 THEN 'Gold'
-		     ELSE 'Silver'
+         WHEN purchase_count * 100 / visit_count >= 50 THEN 'Gold'
+         ELSE 'Silver'
              END
 FROM
 (
-	SELECT
-		A.member_id,
-		A.name,
-		visit_count = SUM(CASE WHEN B.visit_id IS NULL THEN 0 ELSE 1 END),
-		purchase_count = SUM(CASE WHEN C.charged_amount IS NULL THEN 0 ELSE 1 END)
-	FROM
-		Members AS A
-	LEFT OUTER JOIN
-		Visits AS B
-	ON
-		A.member_id = B.member_id 
-	LEFT OUTER JOIN
-		Purchases AS C
-	ON
-		B.visit_id = C.visit_id
-	GROUP BY
-		A.member_id,
-		A.name
+  SELECT
+    A.member_id,
+    A.name,
+    visit_count = SUM(CASE WHEN B.visit_id IS NULL THEN 0 ELSE 1 END),
+    purchase_count = SUM(CASE WHEN C.charged_amount IS NULL THEN 0 ELSE 1 END)
+  FROM
+    Members AS A
+  LEFT OUTER JOIN
+    Visits AS B
+  ON
+    A.member_id = B.member_id 
+  LEFT OUTER JOIN
+    Purchases AS C
+  ON
+    B.visit_id = C.visit_id
+  GROUP BY
+    A.member_id,
+    A.name
 ) AS T
 ;

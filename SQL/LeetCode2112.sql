@@ -86,31 +86,31 @@ SELECT
     airport_id = airport
 FROM
 (
-	SELECT
-		airport,
-		RN = RANK() OVER (ORDER BY flights_count DESC)
-	FROM
-	(
-		SELECT
-			airport,
-			flights_count = SUM(flights_count)
-		FROM
-		(
-			SELECT
-				airport = departure_airport,
-				flights_count
-			FROM 
-				Flights
-			UNION ALL
-			SELECT
-				airport = arrival_airport,
-				flights_count
-			FROM 
-				Flights
-		) AS T
-		GROUP BY
-			airport
-	) AS T
+  SELECT
+    airport,
+    RN = RANK() OVER (ORDER BY flights_count DESC)
+  FROM
+  (
+    SELECT
+      airport,
+      flights_count = SUM(flights_count)
+    FROM
+    (
+      SELECT
+        airport = departure_airport,
+        flights_count
+      FROM 
+        Flights
+      UNION ALL
+      SELECT
+        airport = arrival_airport,
+        flights_count
+      FROM 
+        Flights
+    ) AS T
+    GROUP BY
+      airport
+  ) AS T
 ) AS T
 WHERE 
     RN = 1

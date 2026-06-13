@@ -59,14 +59,14 @@
 --- percentages are less than 60%.
 -------------------------------------------------------------------
 SELECT
-	problem_id
+  problem_id
 FROM
 (
-	SELECT
-		problem_id,
-		like_percent = CONVERT(float, likes) * 100 / (likes + dislikes)
-	FROM
-		Problems
+  SELECT
+    problem_id,
+    like_percent = CONVERT(float, likes) * 100 / (likes + dislikes)
+  FROM
+    Problems
 ) AS A
 WHERE 
     A.like_percent < 60

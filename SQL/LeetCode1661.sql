@@ -1,4 +1,4 @@
-﻿-----------------------------------------------------------------------
+-----------------------------------------------------------------------
 ---  Leet code #1661. Average Time of Process per Machine
 --- 
 ---  Easy
@@ -77,22 +77,22 @@ AS
     SELECT 
         A.machine_id,
         A.process_id,
-		B.timestamp - A.timestamp 
+    B.timestamp - A.timestamp 
     FROM
-	    Activity AS A
-	INNER JOIN
-	    Activity AS B
-	ON
-	    A.machine_id = B.machine_id AND
-	    A.process_id = B.process_id
-	WHERE
-	    A.activity_type = 'start' AND
-		B.activity_type = 'end'
+      Activity AS A
+  INNER JOIN
+      Activity AS B
+  ON
+      A.machine_id = B.machine_id AND
+      A.process_id = B.process_id
+  WHERE
+      A.activity_type = 'start' AND
+    B.activity_type = 'end'
 )
 
 SELECT 
     machine_id, 
-	processing_time = ROUND(AVG(time), 3)
+  processing_time = ROUND(AVG(time), 3)
 FROM process
 GROUP BY
     machine_id

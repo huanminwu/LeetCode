@@ -83,19 +83,19 @@
 ---------------------------------------------------------------
 SELECT
     A.[user_id],
-	A.[name],
-	[traveled distance] = ISNULL(B.distance, 0)
+  A.[name],
+  [traveled distance] = ISNULL(B.distance, 0)
 FROM 
     Users AS A
 LEFT OUTER JOIN
 (
-	SELECT
-		[user_id],
-		[distance] = SUM([distance])
-	FROM
-	    Rides
-	GROUP BY
-	    [user_id]
+  SELECT
+    [user_id],
+    [distance] = SUM([distance])
+  FROM
+      Rides
+  GROUP BY
+      [user_id]
 ) AS B
 ON
     A.[user_id] = B.[user_id]

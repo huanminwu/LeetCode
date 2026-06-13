@@ -164,7 +164,7 @@ void LeetCodeDFS::solveNQueens(vector<string> &board, int row,
 /// The n-queens puzzle is the problem of placing n queens on an nxn 
 /// chessboard such that no two queens attack each other. 
 /// Given an integer n, return all distinct solutions to the n-queens puzzle.
-///	
+///  
 /// Each solution contains a distinct board configuration of the n-queens' 
 /// placement, where 'Q' and '.' 
 /// both indicate a queen and an empty space respectively. 
@@ -180,7 +180,7 @@ void LeetCodeDFS::solveNQueens(vector<string> &board, int row,
 ///    "Q...",
 ///    "...Q",
 ///    ".Q.."]
-/// ]	
+/// ]  
 /// </summary>
 vector<vector<string>> LeetCodeDFS::solveNQueens(int n)
 {
@@ -930,7 +930,7 @@ void LeetCodeDFS::subsets(vector<int>& nums, int index, vector<int>& path,
 /// Leet code #78. Subsets
 /// Given a set of distinct integers, nums, return all possible subsets.  
 /// Note: The solution set must not contain duplicate subsets. 
-///	For example,
+///  For example,
 /// If nums = [1,2,3], a solution is: 
 /// [
 ///  [3],
@@ -973,7 +973,7 @@ void LeetCodeDFS::subsetsWithDup(vector<int>& nums, int index, vector<int>& path
 /// Given a collection of integers that might contain duplicates, nums, 
 /// return all possible subsets.  
 /// Note: The solution set must not contain duplicate subsets. 
-///	For example,
+///  For example,
 /// If nums = [1,2,2], a solution is: 
 /// [
 ///  [2],
@@ -1038,7 +1038,7 @@ bool LeetCodeDFS::wordSearch(vector<vector<char>>& board,
 /// ]
 /// word = "ABCCED", -> returns true,
 /// word = "SEE", -> returns true,
-/// word = "ABCB", -> returns false.	
+/// word = "ABCB", -> returns false.  
 /// </summary>
 bool LeetCodeDFS::wordSearch(vector<vector<char>>& board, string word)
 {
@@ -1395,7 +1395,7 @@ void LeetCodeDFS::calculate(vector<string> & result, string path, string num, lo
 /// Leet Code 282. Expression Add Operators
 /// 
 /// Hard
-///	
+///  
 /// Given a string num that contains only digits and an integer target, 
 /// return all possibilities to insert the binary operators '+', '-', 
 /// and/or '*' between the digits of num so that the resultant expression 
@@ -4819,7 +4819,7 @@ int LeetCodeDFS::maxStudents(vector<vector<char>>& seats, int level, vector<vect
 /// Output: 4
 /// Explanation: Teacher can place 4 students in available seats so they 
 /// don't cheat on the exam.
-///	
+///  
 /// Example 2:
 /// Input: seats = 
 /// [[".","#"],
@@ -8491,7 +8491,7 @@ int LeetCodeDFS::squareFreeSubsets(vector<int>& nums, vector<vector<int>>& dp,
 /// Leet Code 2572. Count the Number of Square-Free Subsets
 /// 
 /// Medium
-///	
+///  
 /// You are given a positive integer 0-indexed array nums.
 ///
 /// A subset of the array nums is square-free if the product of its 
@@ -8570,7 +8570,7 @@ int LeetCodeDFS::beautifulSubsets(vector<int>& nums, int i, int bits, int k, vec
 /// Leet Code 2597. The Number of Beautiful Subsets
 /// 
 /// Medium
-///	
+///  
 /// You are given an array nums of positive integers and a positive 
 /// integer k.
 /// 
@@ -8648,7 +8648,7 @@ bool LeetCodeDFS::tourOfKnight(int m, int n, int r, int c,
 /// Leet Code 2664. The Knight's Tour
 /// 
 /// Medium
-///	
+///  
 /// Given two positive integers m and n which are the height and width of 
 /// a 0-indexed 2D-array board, a pair of positive integers (r, c) which 
 /// is the starting position of the knight on the board.
@@ -8699,7 +8699,7 @@ vector<vector<int>> LeetCodeDFS::tourOfKnight(int m, int n, int r, int c)
 }
 
 /// <summary>
-/// Leet Code 	2741. Special Permutations
+/// Leet Code   2741. Special Permutations
 /// </summary>
 int LeetCodeDFS::specialPerm(int k, int bits, vector<vector<int>>& neighbors, vector<vector<int>>& dp)
 {
@@ -8732,7 +8732,7 @@ int LeetCodeDFS::specialPerm(int k, int bits, vector<vector<int>>& neighbors, ve
 
 
 /// <summary>
-/// Leet Code 	2741. Special Permutations
+/// Leet Code   2741. Special Permutations
 /// 
 /// Medium
 ///
@@ -10008,12 +10008,12 @@ int LeetCodeDFS::findMinimumTime(vector<int>& strength, vector<int>& factors, ve
 /// Input: strength = [3,4,1], K = 1
 /// Output: 4
 /// Explanation:
-/// Time	Energy	X	Action	Updated X
-/// 0	0	1	Nothing	1
-/// 1	1	1	Break 3rd Lock	2
-/// 2	2	2	Nothing	2
-/// 3	4	2	Break 2nd Lock	3
-/// 4	3	3	Break 1st Lock	3
+/// Time  Energy  X  Action  Updated X
+/// 0  0  1  Nothing  1
+/// 1  1  1  Break 3rd Lock  2
+/// 2  2  2  Nothing  2
+/// 3  4  2  Break 2nd Lock  3
+/// 4  3  3  Break 1st Lock  3
 /// The locks cannot be broken in less than 4 minutes; thus, the answer 
 /// is 4.
 ///
@@ -10021,13 +10021,13 @@ int LeetCodeDFS::findMinimumTime(vector<int>& strength, vector<int>& factors, ve
 /// Input: strength = [2,5,4], K = 2
 /// Output: 5
 /// Explanation:
-/// Time	Energy	X	Action	Updated X
-/// 0	0	1	Nothing	1
-/// 1	1	1	Nothing	1
-/// 2	2	1	Break 1st Lock	3
-/// 3	3	3	Nothing	3
-/// 4	6	3	Break 2nd Lock	5
-/// 5	5	5	Break 3rd Lock	7
+/// Time  Energy  X  Action  Updated X
+/// 0  0  1  Nothing  1
+/// 1  1  1  Nothing  1
+/// 2  2  1  Break 1st Lock  3
+/// 3  3  3  Nothing  3
+/// 4  6  3  Break 2nd Lock  5
+/// 5  5  5  Break 3rd Lock  7
 /// The locks cannot be broken in less than 5 minutes; thus, the answer 
 /// is 5.
 /// 
@@ -10738,9 +10738,9 @@ int LeetCodeDFS::minTravelTime(int pre_pos, int accum_count, int curr_k, int cur
 /// After the merge:
 /// position array: [0, 8, 10]
 /// time array: [5, 11, 6]
-/// Segment Distance (km) Time per km (min)	Segment Travel Time (min)
-/// 0  8	8	5	8 ? 5 = 40
-/// 8  10	2	11	2 ? 11 = 22
+/// Segment Distance (km) Time per km (min)  Segment Travel Time (min)
+/// 0  8  8  5  8 ? 5 = 40
+/// 8  10  2  11  2 ? 11 = 22
 /// Total Travel Time: 40 + 22 = 62, which is the minimum possible time after 
 /// exactly 1 merge.
 ///
@@ -10754,7 +10754,7 @@ int LeetCodeDFS::minTravelTime(int pre_pos, int accum_count, int curr_k, int cur
 /// After the merge:
 /// position array: [0, 2, 3, 5]
 /// time array: [8, 12, 3, 3]
-/// Segment	Distance (km)	Time per km (min)	Segment Travel Time (min)
+/// Segment  Distance (km)  Time per km (min)  Segment Travel Time (min)
 /// 0  2   2   8   2 ? 8 = 16
 /// 2  3   1   12  1 ? 12 = 12
 /// 3  5   2   3   2 ? 3 = 6

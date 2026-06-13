@@ -39,7 +39,7 @@
 --- Add 10 points for each skill where proficiency > importance
 --- Subtract 5 points for each skill where proficiency < importance
 --- Include only the top candidate (highest score) for each project. If 
---- there’s a tie, choose the candidate with the lower candidate_id. If 
+--- there's a tie, choose the candidate with the lower candidate_id. If 
 --- there is no suitable candidate for a project, do not return that project.
 ---
 --- Return a result table ordered by project_id in ascending order.

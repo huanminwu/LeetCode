@@ -72,15 +72,15 @@ SELECT
     immediate_percentage = CONVERT(NUMERIC(18, 2), CONVERT(FLOAT, SUM(immediate_delivery)) * 100 / COUNT (delivery_id))
 FROM
 (
-	SELECT
-		delivery_id,
-		order_date, 
-		immediate_delivery = 
-			CASE WHEN order_date = customer_pref_delivery_date  THEN 1
-				 ELSE 0
-				 END
-	FROM 
-		Delivery
+  SELECT
+    delivery_id,
+    order_date, 
+    immediate_delivery = 
+      CASE WHEN order_date = customer_pref_delivery_date  THEN 1
+         ELSE 0
+         END
+  FROM 
+    Delivery
 ) AS T
 GROUP BY 
     order_date

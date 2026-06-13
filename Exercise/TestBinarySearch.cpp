@@ -1699,8 +1699,42 @@ void TestLeetCode3824(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3911(void)
+{
+    Logger::WriteMessage("Test Leet Code 3911");
+    LeetCodeBinarySearch leetCode;
+    vector<int> nums = { 1, 4, 7 };
+    vector<vector<int>> queries = { {0, 2, 1},{1, 1, 2},{0, 0, 3} };
+    vector<int> result = leetCode.kthRemainingInteger(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums = { 2, 5, 8 };
+    queries = { {0, 1, 2},{1, 2, 1},{0, 2, 4} };
+    result = leetCode.kthRemainingInteger(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums = { 3, 6 };
+    queries = { {0, 1, 1},{1, 1, 3} };
+    result = leetCode.kthRemainingInteger(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums = { 2, 4, 6, 8, 10 };
+    queries = { {0,4,1000000000} };
+    result = leetCode.kthRemainingInteger(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode3911();
     TestLeetCode3824();
     TestLeetCode3733();
     TestLeetCode3710();

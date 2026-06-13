@@ -122,20 +122,20 @@
 SELECT
     winner = 
     CASE WHEN A.winners > B.winners THEN 'New York University'
-	     WHEN A.winners < B.winners THEN 'California University'
-		 ELSE 'No Winner'
-		 END
+       WHEN A.winners < B.winners THEN 'California University'
+     ELSE 'No Winner'
+     END
 FROM
 (
-	SELECT
-		winners = SUM(CASE WHEN score >= 90 THEN 1 ELSE 0 END) 
-	FROM 
-		NewYork 
+  SELECT
+    winners = SUM(CASE WHEN score >= 90 THEN 1 ELSE 0 END) 
+  FROM 
+    NewYork 
 ) AS A
 CROSS JOIN
 (
-	SELECT
-		winners = SUM(CASE WHEN score >= 90 THEN 1 ELSE 0 END) 
-	FROM 
-		California
+  SELECT
+    winners = SUM(CASE WHEN score >= 90 THEN 1 ELSE 0 END) 
+  FROM 
+    California
 ) AS B

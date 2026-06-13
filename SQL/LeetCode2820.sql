@@ -66,41 +66,41 @@ SELECT
     candidate
 FROM 
 (
-	SELECT
-		candidate,
-		votes,
-		RN = RANK() OVER (ORDER BY votes DESC)
-	FROM
-	(
-		SELECT
-			candidate,
-			votes = SUM(vote)
-		FROM
-		(
-			SELECT 
-				A.voter,
-				A.candidate,
-				vote = 1 / CONVERT(NUMERIC(18, 6), B.[count])
-			FROM
-			   Votes AS A
-			INNER JOIN
-			(
-				SELECT
-					voter,
-					[count] = count(*)
-				FROM
-					votes
-				WHERE
-					candidate IS NOT NULL
-				GROUP BY
-					voter
-			) AS B
-			ON
-			   A.Voter = B.Voter
-		) AS A
-		GROUP BY 
-			candidate
-	) AS T
+  SELECT
+    candidate,
+    votes,
+    RN = RANK() OVER (ORDER BY votes DESC)
+  FROM
+  (
+    SELECT
+      candidate,
+      votes = SUM(vote)
+    FROM
+    (
+      SELECT 
+        A.voter,
+        A.candidate,
+        vote = 1 / CONVERT(NUMERIC(18, 6), B.[count])
+      FROM
+         Votes AS A
+      INNER JOIN
+      (
+        SELECT
+          voter,
+          [count] = count(*)
+        FROM
+          votes
+        WHERE
+          candidate IS NOT NULL
+        GROUP BY
+          voter
+      ) AS B
+      ON
+         A.Voter = B.Voter
+    ) AS A
+    GROUP BY 
+      candidate
+  ) AS T
 ) AS T
 WHERE 
     RN = 1

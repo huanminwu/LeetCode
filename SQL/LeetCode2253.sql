@@ -75,9 +75,9 @@ BEGIN
         SELECT STRING_AGG(COLUMN_NAME, ',') 
         FROM 
         (
-			SELECT COLUMN_NAME
-			FROM INFORMATION_SCHEMA.COLUMNS
-			WHERE TABLE_NAME='Products'  AND COLUMN_NAME != 'product_id'  
+      SELECT COLUMN_NAME
+      FROM INFORMATION_SCHEMA.COLUMNS
+      WHERE TABLE_NAME='Products'  AND COLUMN_NAME != 'product_id'  
         ) AS T
     );
     DECLARE @sql_statement AS varchar(max);
