@@ -1732,8 +1732,43 @@ void TestLeetCode3911(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3971(void)
+{
+    Logger::WriteMessage("Test Leet Code 3971");
+    LeetCodeBinarySearch leetCode;
+    vector<int> value = { 6, 5, 4 };
+    vector<int> decay = { 2, 1, 1 };
+    int m = 4;
+    int result = leetCode.maxTotalValue(value, decay, m);
+    Logger::WriteMessage(value);
+    Logger::WriteMessage(decay);
+    Logger::WriteMessage("m = " + to_string(m));
+    Logger::WriteMessage("result = " + to_string(result));
+    
+
+    value = { 7,2,2 };
+    decay = { 3,2,1 };
+    m = 2;
+    result = leetCode.maxTotalValue(value, decay, m);
+    Logger::WriteMessage(value);
+    Logger::WriteMessage(decay);
+    Logger::WriteMessage("m = " + to_string(m));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    value = { 4, 3 };
+    decay = { 5, 4 };
+    m = 5;
+    result = leetCode.maxTotalValue(value, decay, m);
+    Logger::WriteMessage(value);
+    Logger::WriteMessage(decay);
+    Logger::WriteMessage("m = " + to_string(m));
+    Logger::WriteMessage("result = " + to_string(result));
+
+}
+
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode3971();
     TestLeetCode3911();
     TestLeetCode3824();
     TestLeetCode3733();

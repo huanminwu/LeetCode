@@ -45575,4 +45575,254 @@ vector<int> LeetCodeArray::maximumMEX(vector<int>& nums)
     return result;
 }
 
+/// <summary>
+/// Leet code 3962. Maximum Subarray Sum After at Most K Swaps
+///
+/// Hard
+///
+/// You are given an integer array nums and an integer k.
+///
+/// You are allowed to perform at most k swap operations on the array.
+///
+/// In one swap operation, you may choose any two indices i and j and 
+/// swap nums[i] and nums[j].
+///
+/// Return an integer denoting the maximum possible subarray sum after 
+/// performing the swaps.
+///
+/// Example 1:
+/// Input: nums = [1, -1, 0, 2], k = 1
+/// Output : 3
+/// Explanation :
+/// We can swap on indices 1 and 3, resulting in the array[1, 2, 0, -1].
+/// The subarray[1, 2] has a sum of 3, which is the maximum possible 
+/// subarray sum after at most k = 1 swap.
+/// 
+/// Example 2 :
+/// Input : nums = [4, 3, 2, 4], k = 2
+/// Output : 13
+/// Explanation :
+/// The maximum possible subarray sum after at most k = 2 swaps is the 
+/// sum of the entire array, which is 13.
+///
+/// Example 3 :
+/// Input : nums = [-1, -2], k = 0
+/// Output : -1
+/// Explanation :
+/// k = 0 swaps are allowed.
+/// The possible subarrays are[-1], [-2], and [-1, -2], with sums - 1, -2, 
+/// and -3 respectively.
+/// Among these sums, the maximum is - 1.
+///
+/// Constraints :
+/// 1. 1 <= nums.length <= 1500
+/// 2. -10^5 <= nums[i] <= 10^5
+/// 3. 0 <= k <= nums.length
+/// </summary>
+long long LeetCodeArray::maxSumKSwap(vector<int>& nums, int k)
+{
+    int n = nums.size();
+    vector<pair<int, int>> sorted_nums(n);
+    for (int i = 0; i < n; i++)
+    {
+        sorted_nums[i] = { nums[i], i };
+    }
+    sort(sorted_nums.begin(), sorted_nums.end());
+    long long result = LLONG_MIN;
+    for (int i = 0; i < n; i++)
+    {
+        long long sum = 0;
+        int pos = n - 1;
+        vector<int> visited(n);
+        priority_queue<int> pq;
+        for (int j = i; j < n; j++)
+        {
+            if (visited[j] == 0)
+            {
+                pq.push(nums[j]);
+                visited[j] = 1;
+            }
+            if ((int)pq.size() <= k)
+            {
+                while (pos >= 0 && visited[sorted_nums[pos].second] == 1)
+                {
+                    pos--;
+                }
+                if (pos >= 0)
+                {
+                    pq.push(sorted_nums[pos].first);
+                    visited[sorted_nums[pos].second] = 1;
+                }
+            }
+            sum += pq.top();
+            pq.pop();
+            result = max(result, sum);
+        } 
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #3969. Valid Subarrays With Matching Sum Digits I
+///
+/// Medium
+///
+/// You are given an integer array nums and an integer digit x.
+///
+/// A subarray nums[l..r] is considered valid if the sum of its elements 
+/// satisfies both of the following conditions :
+///
+/// The first digit of the sum is equal to x.
+/// The last digit of the sum is equal to x.
+/// Return the number of valid subarrays.
+///
+/// Example 1:
+/// Input: nums = [1, 100, 1], x = 1
+/// Output : 4
+/// Explanation :
+/// The valid subarrays are :
+///
+/// nums[0..0] : sum = 1
+/// nums[0..1] : sum = 1 + 100 = 101
+/// nums[1..2] : sum = 100 + 1 = 101
+/// nums[2..2] : sum = 1
+/// Thus, the answer is 4.
+///
+/// Example 2 :
+/// Input : nums = [1], x = 2
+/// Output : 0
+/// Explanation :
+/// The only subarray is nums[0..0] with a sum of 1, which does not 
+/// satisfy the conditions.
+///
+/// Thus, the answer is 0.
+///
+/// Constraints :
+/// 1. 1 <= nums.length <= 1500
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. 1 <= x <= 9
+/// </summary>
+int LeetCodeArray::countValidSubarraysI(vector<int>& nums, int x)
+{
+    int result = 0;
+    vector<long long> prefix_sum(nums.size() + 1);
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        prefix_sum[i + 1] = prefix_sum[i] + nums[i];
+    }
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        for (size_t j = 1; j <= nums.size(); j++)
+        {
+            long long sum = prefix_sum[j] - prefix_sum[i];
+            int last = sum % 10;
+            if (last != x) continue;
+            while (sum >= 10)
+            {
+                sum /= 10;
+            }
+            int first = (int)sum;
+            if (first == x && last == x)
+            {
+                result++;
+            }
+        }
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code #3972. Valid Subarrays With Matching Sum Digits II
+///
+/// Hard
+///
+/// You are given an integer array nums and an integer digit x.
+/// 
+/// A subarray nums[l..r] is considered valid if the sum of its elements 
+/// satisfies both of the following conditions :
+///
+/// The first digit of the sum is equal to x.
+/// The last digit of the sum is equal to x.
+/// Return the number of valid subarrays.
+///
+/// Example 1:
+/// Input: nums = [1, 100, 1], x = 1
+/// Output : 4
+/// Explanation :
+/// The valid subarrays are :
+/// nums[0..0] : sum = 1
+/// nums[0..1] : sum = 1 + 100 = 101
+/// nums[1..2] : sum = 100 + 1 = 101
+/// nums[2..2] : sum = 1
+/// Thus, the answer is 4.
+///
+/// Example 2 :
+/// Input : nums = [1], x = 2
+/// Output : 0
+/// Explanation :
+/// The only subarray is nums[0..0] with a sum of 1, which does 
+/// not satisfy the conditions.
+/// Thus, the answer is 0.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. 1 <= x <= 9
+/// </summary>
+int LeetCodeArray::countValidSubarraysII(vector<int>& nums, int x)
+{
+    int n = nums.size();
+    vector<long long> prefix_sum(n + 1);
+    vector<vector<int>> dp(n + 1, vector<int>(10));
+    dp[0][0] = 1;
+    for (int i = 0; i < n; i++)
+    {
+        prefix_sum[i + 1] = prefix_sum[i] + nums[i];
+        for (int j = 0; j < 10; j++)
+        {
+            dp[i + 1][j] = dp[i][j];
+        }
+        dp[i + 1][prefix_sum[i + 1] % 10]++;
+    }
+    int result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        long long first = x;
+        long long last = x;
+        long long min_val = last;
+        long long max_val = last;
+        long long factor = 9;
+        long long factor_sum = 0;
+        while (min_val <= prefix_sum[i + 1])
+        {
+            long long low = prefix_sum[i + 1] - max_val;
+            long long high = prefix_sum[i + 1] - min_val;
+            int d = prefix_sum[i + 1] % 10 - x;
+            if (d < 0) d += 10;
+            int low_index = lower_bound(prefix_sum.begin(), prefix_sum.end(), low) - prefix_sum.begin();
+            int high_index = upper_bound(prefix_sum.begin(), prefix_sum.end(), high) - prefix_sum.begin();
+            if (prefix_sum[high_index] > high) high_index--;
+            if (low_index == 0)
+            {
+                result += dp[high_index][d];
+            }
+            else
+            {
+                result += dp[high_index][d] - dp[low_index - 1][d];
+            }
+
+            first = first * 10;        
+            while (factor * 10 < first)
+            {
+                factor_sum += factor * 10;
+                factor = factor * 10;
+            }
+            min_val = first + last;
+            max_val = first + factor_sum + last;
+        }
+    }
+    return result;
+}
+
 #pragma endregion

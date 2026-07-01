@@ -16865,4 +16865,172 @@ vector<int> LeetCodeSort::powerUpdateI(vector<int>& nums, int p, vector<vector<i
     return result;
 }
 
+/// <summary>
+/// Leet code 3961. Maximize Sum of Device Ratings
+///
+/// Medium
+///
+/// You are given a 2D integer array units of size m * n where units[i][j] 
+/// represents the capacity of the jth unit in the ith device.Each device 
+/// contains exactly n units.
+///
+/// The rating of a device is the minimum capacity among all its units.
+///
+/// You may perform the following operation any number of times(including 
+/// zero) :
+///
+/// Choose a device i that has not been used as a source before.
+/// Remove exactly one unit from device i and add it to any different 
+/// device.
+/// Then mark device i as used, so it cannot be chosen again as a source.
+/// 
+/// Return the maximum possible sum of the ratings of all devices after any
+/// number of such operations.
+///
+/// Note :
+///
+/// Devices can receive units from multiple devices, regardless of whether 
+/// they have been selected.
+/// The rating of an empty device is 0.
+///
+/// Example 1:
+/// Input: units = [[1, 3], [2, 2]]
+/// Output : 4
+/// Explanation :
+/// Select device i = 0 and transfer units[0][0] = 1 to device i = 1.
+/// After the transfer, the ratings are :
+/// Device 0 = [3] : rating[0] = 3
+/// Device 1 = [2, 2, 1] : rating[1] = 1
+/// Thus, the sum of ratings is 3 + 1 = 4.
+/// 
+/// Example 2 :
+/// Input : units = [[1, 2, 3], [4, 5, 6]]
+/// Output : 6
+/// Explanation :
+/// Select device i = 1 and transfer units[1][0] = 4 to device i = 0.
+/// After the transfer, the ratings are :
+/// Device 0 = [1, 2, 3, 4] : rating[0] = 1
+/// Device 1 = [5, 6] : rating[1] = 5
+/// Thus, the sum of ratings is 1 + 5 = 6.
+///
+/// Example 3 :
+/// Input : units = [[5, 5, 5], [1, 1, 1]]
+/// Output : 6
+/// Explanation :
+///
+/// No transfers increase the sum of ratings.Thus, the sum of ratings 
+/// is 5 + 1 = 6.
+/// 
+/// Constraints :
+/// 1. 1 <= m == units.length <= 10^5
+/// 2. 1 <= n == units[i].length <= 10^5
+/// 3. m * n <= 2 * 10^5
+/// 4. 1 <= units[i][j] <= 10^5
+/// </summary>
+long long LeetCodeSort::maxRatings(vector<vector<int>>& units)
+{
+    int n = units.size();
+    int m = units[0].size();
+    vector<int> first(n), second(n);
+    for (int i = 0; i < n; i++)
+    {
+        sort(units[i].begin(), units[i].end());
+        first[i] = units[i][0];
+        if (m > 1) second[i] = units[i][1];
+    }
+    sort(first.begin(), first.end());
+    sort(second.begin(), second.end());
+    long long result = first[0];
+    for (int i = 1; i < n; i++)
+    {
+        if (m == 1)
+        {
+            result += first[i];
+        }
+        else
+        {
+            result += second[i];
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code 3974. Maximum Total Sum of K Selected Elements
+///
+/// Medium
+///
+/// You are given an integer array nums and two integers k and mul.
+///
+/// Select exactly k elements from nums.Process these elements one 
+/// by one in any order you choose.
+///
+/// For each selected element, independently choose one of the following :
+/// Add the element's value to the total sum, or
+/// Multiply the element by the current value of mul and add the result 
+/// to the total sum.
+/// After processing each selected element, mul decreases by 1, 
+/// regardless of which option was chosen.The current value of mul may
+/// become 0 or negative.
+///
+/// Return an integer denoting the maximum possible total sum.
+///
+/// Example 1:
+/// Input: nums = [6, 1, 2, 9], k = 3, mul = 2
+/// Output : 26
+/// Explanation :
+/// One optimal way :
+/// One optimal selection is nums[3] = 9, nums[0] = 6, and nums[2] = 2.
+/// Process nums[3] = 9 first : choose multiplication, so it 
+/// contributes 9 * 2 = 18. Now, mul becomes 1.
+/// Process nums[0] = 6 next : choose multiplication, so it 
+/// contributes 6 * 1 = 6. Now, mul becomes 0.
+/// Process nums[2] = 2 last : choose addition, so it contributes 2.
+/// The total sum is 18 + 6 + 2 = 26.
+/// 
+/// Example 2 :
+/// Input : nums = [3, 7, 5, 2], k = 2, mul = 4
+/// Output : 43
+/// Explanation :
+/// One optimal way :
+/// One optimal selection is nums[1] = 7 and nums[2] = 5.
+/// Process nums[1] = 7 first : choose multiplication, so it 
+/// contributes 7 * 4 = 28. Now, mul becomes 3.
+/// Process nums[2] = 5 next : choose multiplication, so it 
+/// contributes 5 * 3 = 15.
+/// The total sum is 28 + 15 = 43.
+///
+/// Example 3 :
+/// Input : nums = [4, 4], k = 1, mul = 1
+/// Output : 4
+/// Explanation :
+/// One optimal way :
+/// One optimal selection is nums[0] = 4.
+/// Process nums[0] = 4 : choose multiplication, so it contributes 
+/// 4 * 1 = 4.
+/// The total sum is 4.
+///
+/// Constraints :
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// 3. 1 <= k <= nums.length
+/// 4. 1 <= mul <= 10^5
+/// </summary>
+long long LeetCodeSort::maxSum(vector<int>& nums, int k, int mul)
+{
+    sort(nums.begin(), nums.end(), greater<int>());
+    long long result = 0;
+    for (int i = 0; i < k; i++)
+    {
+        if (mul - i <= 0)
+        {
+            result += nums[i];
+        }
+        else
+        {
+            result += (long long)nums[i] * (mul - i);
+        }
+    }
+    return result;
+}
 #pragma endregion

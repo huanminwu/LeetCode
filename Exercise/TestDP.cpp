@@ -6782,9 +6782,29 @@ void TestLeetCode3956(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3976(void)
+{
+    Logger::WriteMessage("Test Leet Code 3976");
+    LeetCodeDP leetCode;
+    vector<int> nums = {1, -2, 3, 4, -5};
+    int k = 2;
+    long long result = leetCode.maxSubarraySum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -5,-4,-3 };
+    k = 2;
+    result = leetCode.maxSubarraySum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 
 void TestLeetCodeDP(void)
 {
+    TestLeetCode3976();
     TestLeetCode3956();
     TestLeetCode3952();
     TestLeetCode3946();

@@ -1185,8 +1185,29 @@ void TestLeetCode3884(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3960(void)
+{
+    Logger::WriteMessage("Test Leet Code 3960");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = {1, 2, 2, 1, 2, 3, 3, 3};
+    int result = leetCode.getLengthFrequency(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,5,5,5 };
+    result = leetCode.getLengthFrequency(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4 };
+    result = leetCode.getLengthFrequency(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode3960();
     TestLeetCode3884();
     TestLeetCode3859();
     TestLeetCode3853();

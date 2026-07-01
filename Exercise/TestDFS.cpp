@@ -3038,8 +3038,36 @@ void TestLeetCode3906(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+
+void TestLeetCode3966(void)
+{
+    Logger::WriteMessage("Test Leet Code 3966");
+    LeetCodeDFS leetCode;
+    long long  l = 10, r = 15;
+    int k = 1;
+    long long result = leetCode.goodIntegers(l, r, k);
+    Logger::WriteMessage("l = " + to_string(l) + "; r = " + to_string(r));
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    l = 201, r = 204; 
+    k = 2;
+    result = leetCode.goodIntegers(l, r, k);
+    Logger::WriteMessage("l = " + to_string(l) + "; r = " + to_string(r));
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    l = 10, r = 30;
+    k = 1;
+    result = leetCode.goodIntegers(l, r, k);
+    Logger::WriteMessage("l = " + to_string(l) + "; r = " + to_string(r));
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode3966();
     TestLeetCode3906();
     TestLeetCode3869();
     TestLeetCode3864();

@@ -13782,8 +13782,85 @@ void TestLeetCode3948(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3962(void)
+{
+    Logger::WriteMessage("Test Leet Code 3962");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 16,8,-31,27 };
+    int k = 1;
+    long long result = leetCode.maxSumKSwap(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 20, 17, -6, 4 };
+    k = 2;
+    result = leetCode.maxSumKSwap(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+
+    nums = {1, -1, 0, 2};
+    k = 1;
+    result = leetCode.maxSumKSwap(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = {4, 3, 2, 4}; 
+    k = 2;
+    result = leetCode.maxSumKSwap(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -1, -2 };
+    k = 0;
+    result = leetCode.maxSumKSwap(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -40, 7, -3, -39, 18, 42 };
+    k = 1;
+    result = leetCode.maxSumKSwap(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3969(void)
+{
+    Logger::WriteMessage("Test Leet Code 3969");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1,100,1 };
+    int x = 1;
+    int result = leetCode.countValidSubarraysI(nums, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("x = " + to_string(x));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3972(void)
+{
+    Logger::WriteMessage("Test Leet Code 3969");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1,100,1 };
+    int x = 1;
+    int result = leetCode.countValidSubarraysII(nums, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("x = " + to_string(x));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1 };
+    x = 2;
+    result = leetCode.countValidSubarraysII(nums, x);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("x = " + to_string(x));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode3972();
+    TestLeetCode3969();
+    TestLeetCode3962();
     TestLeetCode3948();
     TestLeetCode3944();
     TestLeetCode3943();

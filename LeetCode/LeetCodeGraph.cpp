@@ -23994,6 +23994,380 @@ vector<int> LeetCodeGraph::minCostII(int n, vector<int>& prices, vector<vector<i
     }
 
     return result;
-
 }
+
+
+/// <summary>
+/// Leet Code #3963. Create Grid With Exactly One Path
+///
+/// Easy
+///
+/// You are given two integers m and n, representing the number of rows 
+/// and columns of a grid.
+///
+/// Construct any m x n grid consisting only of the characters '.' 
+/// and '#', where:
+///
+/// '.' represents a free cell.
+/// '#' represents an obstacle cell.
+/// A valid path is a sequence of free cells that :
+///
+/// Starts at the top - left cell(0, 0).
+/// Ends at the bottom - right cell(m - 1, n - 1).
+/// Moves only :
+/// Right, from(i, j) to(i, j + 1), or
+/// Down, from(i, j) to(i + 1, j).
+/// Return any grid such that there is exactly one valid path from the 
+/// top - left cell to the bottom - right cell.
+///
+/// Example 1:
+/// Input: m = 2, n = 3
+/// Output : ["..#", "#.."]
+/// Explanation :
+/// The only valid path is : (0, 0) ->(0, 1) ->(1, 1) ->(1, 2)
+///
+/// Example 2 :
+/// Input : m = 3, n = 3
+/// Output : ["..#", "#..", "##."]
+/// Explanation :
+/// The only valid path is : (0, 0) ->(0, 1) ->(1, 1) ->(1, 2) ->(2, 2)
+///
+/// Example 3 :
+/// Input : m = 1, n = 4
+/// Output : ["...."]
+///
+/// Explanation :
+/// The only valid path is : (0, 0) ->(0, 1) ->(0, 2) ->(0, 3)
+/// 
+/// Constraints:
+/// 1. 1 <= m, n <= 25
+/// </summary>
+vector<string> LeetCodeGraph::createGrid(int m, int n)
+{
+    vector<string> grid(m, string(n, '.'));
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (i != 0 && j != n - 1)
+            {
+                grid[i][j] = '#';
+            }
+        }
+    }
+    return grid;
+}
+
+/// <summary>
+/// Leet Code #3968. Maximum Manhattan Distance After All Moves
+///
+/// Medium
+/// 
+/// You are given a string moves consisting of the characters 'U', 'D', 
+/// 'L', 'R', and '_'.
+///
+/// Starting from the origin(0, 0), each character represents one move on 
+/// a 2D plane :
+///
+/// 'U' : Move up by 1 unit.
+/// 'D' : Move down by 1 unit.
+/// 'L' : Move left by 1 unit.
+/// 'R' : Move right by 1 unit.
+/// '_' : Can be independently replaced with any one of 
+/// 'U', 'D', 'L', or 'R'.
+/// Return the maximum Manhattan distance from the origin that can be 
+/// achieved after all moves have been performed.
+///
+/// Example 1 :
+/// Input : moves = "L_D_"
+/// Output : 4
+/// Explanation :
+/// One optimal choice is :
+/// 'L' : (0, 0) -> (-1, 0)
+/// '_' treated as 'D' : (-1, 0) -> (-1, -1)
+/// 'D' : (-1, -1) -> (-1, -2)
+/// '_' treated as 'L' : (-1, -2) -> (-2, -2)
+/// The final Manhattan distance from the origin is 
+/// | 0 - (-2) | +| 0 - (-2) | = 4.
+///
+/// Example 2 :
+/// Input : moves = "U_R"
+/// Output : 3
+/// Explanation :
+/// One optimal choice is :
+/// 'U' : (0, 0) -> (0, 1)
+/// '_' treated as 'U' : (0, 1) -> (0, 2)
+/// 'R' : (0, 2) -> (1, 2)
+/// The final Manhattan distance from the origin 
+/// is | 0 - 1 | +| 0 - 2 | = 3.
+///
+/// Constraints:
+/// 1. 1 <= moves.length <= 10^5
+/// 2. moves consists of only 'U', 'D', 'L', 'R', and '_'.
+/// </summary>
+int LeetCodeGraph::maxManhattanDistance(string moves)
+{
+    int x = 0, y = 0, count = 0;
+    for (size_t i = 0; i < moves.size(); i++)
+    {
+        if (moves[i] == 'U')
+        {
+            y++;
+        }
+        else if (moves[i] == 'D')
+        {
+            y--;
+        }
+        else if (moves[i] == 'L')
+        {
+            x--;
+        }
+        else if (moves[i] == 'R')
+        {
+            x++;
+        }
+        else
+        {
+            count++;
+        }
+    }
+    return abs(x) + abs(y) + count;
+}
+
+
+/// <summary>
+/// Leet Code #3970. Shortest Path With At Most K Consecutive Identical 
+///                  Characters
+/// Medium
+///
+/// You are given an integer n representing the number of nodes in a 
+/// directed weighted graph, numbered from 0 to n - 1. This is represented 
+/// by a 2D integer array edges, where edges[i] = [ui, vi, wi] represents 
+/// a directed edge from node ui to node vi with weight wi.
+///
+/// You are also given a string labels of length n, where labels[i] is 
+/// the character assigned to node i, and an integer k.
+///
+/// Return the minimum total edge weight of a path from node 0 to node 
+/// n - 1 such that the concatenation of the labels of the nodes along 
+/// the path contains at most k consecutive identical characters.
+/// If no valid path exists, return -1.
+///
+/// Example 1:
+/// Input: n = 3, edges = [[0, 1, 1], [1, 2, 1], [0, 2, 3]], 
+/// labels = "aab", k = 1
+/// Output : 3
+/// Explanation :
+/// The optimal valid path from node 0 to node 2 is as follows :
+/// Use edges[2] = [0, 2, 3] to reach node 2 with a weight wi = 3.
+ /// The corresponding concatenation of labels is "ab", which satisfies 
+ /// at most k = 1 consecutive identical characters.Thus, the answer is 3.
+ /// 
+/// Example 2 :
+/// Input : n = 3, edges = [[0, 1, 1], [1, 2, 1], [0, 2, 3]], 
+/// labels = "aab", k = 2
+/// Output : 2
+/// Explanation :
+/// The optimal valid path from node 0 to node 2 is as follows :
+/// Use edges[0] = [0, 1, 1] to reach node 1 with weight wi = 1.
+ /// Use edges[1] = [1, 2, 1] to reach node 2 with weight wi = 1.
+/// The corresponding concatenation of labels is "aab", which 
+/// satisfies at most k = 2 consecutive identical characters.
+/// Thus, the answer is 2.
+/// 
+/// Example 3 :
+/// Input : n = 3, edges = [[0, 1, 1], [1, 2, 1]], labels = "aaa", k = 2
+/// Output : -1
+/// Explanation :
+/// There is no valid path from node 0 to node 2 that satisfies at most 
+/// k = 2 consecutive identical characters.Thus, the answer is - 1.
+///
+/// Constraints:
+/// 1. 1 <= n == labels.length <= 5 * 10^4
+/// 2. 0 <= edges.length <= 5 * 104
+/// 3. edges[i] == [ui, vi, wi]
+/// 4. 0 <= ui, vi <= n - 1
+/// 5. ui != vi
+/// 6. 1 <= wi <= 10^4
+/// 7. There are no duplicate edges in the graph
+/// 8. labels consists of lowercase English letters
+/// 9. 1 <= k <= 50
+/// </summary>
+int LeetCodeGraph::shortestPath(int n, vector<vector<int>>& edges, string labels, int k)
+{
+    vector<vector<pair<int, int>>> neighbors(n);
+    vector<vector<int>> distances(n, vector<int>(k + 1, INT_MAX));
+    set<pair<int, pair<int, int>>> pq;
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].push_back({ edges[i][1], edges[i][2] });
+    }
+    pq.insert({ 0, {0, 1} });
+    distances[0][1] = 0;
+    while (!pq.empty())
+    {
+        auto [distance, node_info] = *pq.begin();
+        pq.erase(pq.begin());
+        int node = node_info.first;
+        int count = node_info.second;
+        if (node == n - 1)
+        {
+            return distance;
+        }
+        if (distances[node][count] < distance) continue;
+        for (size_t i = 0; i < neighbors[node].size(); i++)
+        {
+            int next = neighbors[node][i].first;
+            int weight = neighbors[node][i].second;
+            int next_count = 1;
+            if (labels[next] == labels[node])
+            {
+                next_count = count + 1;
+            }
+            if (next_count > k) continue;
+            if (distances[next][next_count] > distance + weight)
+            {
+                distances[next][next_count] = distance + weight;
+                pq.insert({ distances[next][next_count], {next, next_count} });
+            }
+        }
+    }
+    return -1;
+}
+
+
+/// <summary>
+/// Leet Code #3977. Minimum Time to Reach Target With Limited Power
+/// 
+/// Hard
+///
+/// You are given a directed weighted graph with n nodes labeled from 0 
+/// to n - 1.
+///
+/// The graph is represented by a 2D integer array edges, where 
+/// edges[i] = [ui, vi, ti] indicates a directed edge from node ui 
+/// to node vi that takes ti seconds to traverse.
+///
+/// You are also given an integer power representing the initial 
+/// available power, and an integer array cost of length n, 
+/// where cost[u] represents the power required to forward the signal 
+/// from node u through any one of its outgoing edges.
+///
+/// You are given two integers source and target.
+///
+/// The signal starts at source at time 0 with power units of power 
+/// and follows these rules :
+///
+/// The signal may traverse a directed edge from node u only if the 
+/// remaining power is at least cost[u].
+/// No power is consumed when the signal arrives at a node, unless it 
+/// later leaves that node by traversing another edge.
+/// When the signal is forwarded from node u, the remaining power is 
+/// decreased by cost[u] units.
+/// Traversing an edge edges[i] = [ui, vi, ti] increases the total 
+/// time by ti seconds.
+/// Return an integer array answer of size 2, where:
+///
+/// answer[0] is the minimum time required for the signal to reach 
+/// node target.
+/// answer[1] is the maximum remaining power among all paths that 
+/// achieve answer[0].
+/// If the signal cannot reach target, return[-1, -1].
+///
+/// Example 1:
+/// Input: n = 5, edges = [[0, 1, 1], [1, 4, 1], [0, 2, 1], 
+/// [2, 3, 1], [3, 4, 1]], power = 4, cost = [2, 3, 1, 1, 1], 
+/// source = 0, target = 4
+///
+/// Output : [3, 0]
+/// Explanation :
+/// The signal starts at node 0 with 4 units of power.
+/// The path 0 -> 1 -> 4 is not valid, because after leaving node 0, 
+/// the signal has 2 units of power remaining, which is less than 
+/// cost[1] = 3.
+/// The valid path 0 -> 2 -> 3 -> 4 takes a total time of 3.
+///
+/// The total power consumed along this path is 
+/// cost[0] + cost[2] + cost[3] = 4, leaving 0 remaining power.
+/// Hence, the answer is[3, 0].
+///
+/// Example 2:
+/// Input: n = 3, edges = [[0, 1, 2], [1, 2, 2], [2, 0, 2]], 
+/// power = 3, cost = [1, 1, 1], source = 1, target = 1
+/// Output : [0, 3]
+/// Explanation :
+/// Since the source and target are the same node, no traversal is 
+/// required.
+/// Hence, the minimum total time taken is 0, and no power is consumed.
+/// Therefore, the answer is[0, 3].
+/// 
+/// Example 3 :
+/// Input : n = 4, edges = [[0, 1, 3], [2, 3, 4]], power = 3, 
+/// cost = [1, 1, 1, 1], source = 0, target = 3
+/// Output : [-1, -1]
+/// Explanation :
+/// There is no valid path from source to target, therefore return[-1, -1].
+///
+/// Constraints:
+/// 1. 1 <= n <= 1000
+/// 2. 0 <= edges.length <= 1000
+/// 3. edges[i] = [ui, vi, ti]
+/// 4. 0 <= ui, vi <= n - 1
+/// 5. 1 <= ti <= 10^9
+/// 6. 1 <= power <= 1000
+/// 7. cost.length == n
+/// 8. 1 <= cost[i] <= 2000
+/// 9. 0 <= source, target <= n - 1
+/// </summary>
+vector<long long> LeetCodeGraph::minTimeMaxPower(int n, vector<vector<int>>& edges, int power, vector<int>& cost, int source, int target)
+{
+    vector<vector<pair<int, int>>> neighbors(n);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].push_back(make_pair(edges[i][1], edges[i][2]));
+    }
+    set<vector<long long>> pq;
+    vector<vector<long long>> distance(n, vector<long long>(power + 1, LLONG_MAX));
+    pq.insert({ 0, -power, source});
+    distance[source][power] = 0;
+    vector<long long> result = { LLONG_MAX, 0 };
+    while (!pq.empty())
+    {
+
+        vector<long long> next = *pq.begin();
+        pq.erase(pq.begin());
+        long long curr_time = next[0];
+        int curr_power = -(int)next[1];
+        int curr_node = (int)next[2];
+        if (curr_time > result[0]) continue;
+        if (curr_node == target)
+        {
+            result[0] = curr_time;
+            result[1] = max(result[1], (long long)curr_power);
+        }
+        else
+        {
+            if (distance[curr_node][curr_power] < curr_time) continue;
+            int next_power = curr_power - cost[curr_node];
+            if (next_power < 0LL) continue;
+            for (size_t i = 0; i < neighbors[curr_node].size(); i++)
+            {
+                int next_node = neighbors[curr_node][i].first;
+                long long next_time = curr_time + neighbors[curr_node][i].second;
+                if (distance[next_node][next_power] > next_time)
+                {
+                    distance[next_node][next_power] = next_time;
+                    pq.insert({ next_time, -next_power, next_node });
+                }
+            }
+        }
+    }
+    if (result[0] == LLONG_MAX)
+    {
+        result = { -1, -1 };
+    }
+    return result;
+}
+
+
 #pragma endregion

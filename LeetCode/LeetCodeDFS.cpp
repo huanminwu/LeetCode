@@ -12947,4 +12947,87 @@ long long LeetCodeDFS::countGoodIntegersOnPath(long long l, long long r, string 
     long long count2 = countGoodIntegersOnPath(str_l, 1, 0, 0, bits, cache2);
     return count1 - count2;
 }
+
+/// <summary>
+/// Leet code #3966. Count Good Integers in a Range
+/// </summary>
+long long LeetCodeDFS::goodIntegers(string str_num, int position, int is_limit, int is_leading_zero, int prev_digit, int k,
+    vector<long long>& cache)
+{
+    if (position == str_num.size())
+    {
+        return 1;
+    }
+    int cache_index = position * 10 * 4 + prev_digit * 4 + is_limit * 2 + is_leading_zero;
+    if (cache[cache_index] != -1)
+    {
+        return cache[cache_index];
+    }
+    long long result = 0;
+    for (int d = 0; d <= (is_limit ? str_num[position] - '0' : 9); d++)
+    {
+        int new_is_limit = (is_limit == 1 && d == str_num[position] - '0') ? 1 : 0;
+        int new_is_leading_zero = (is_leading_zero == 1 && d == 0) ? 1 : 0;
+        if (is_leading_zero == 0  && std::abs(prev_digit - d) > k)
+        {
+            continue;
+        }
+        else
+        {
+            result += goodIntegers(str_num, position + 1, new_is_limit, new_is_leading_zero, d, k, cache);
+        }
+    }
+    cache[cache_index] = result;
+    return result;
+}
+
+
+/// <summary>
+/// Leet code #3966. Count Good Integers in a Range
+/// 
+/// Hard
+///
+/// You are given three integers l, r and k.
+/// A number is considered good if the absolute difference between every 
+/// pair of adjacent digits is at most k.
+///
+/// Return the number of good integers in the range[l, r](inclusive).
+///
+/// The absolute difference between values x and y is defined as 
+/// abs(x - y).
+///
+/// Example 1:
+/// Input: l = 10, r = 15, k = 1
+/// Output : 3
+/// Explanation :
+/// The good integers in the range are 10, 11, and 12.
+/// For 10, abs(1 - 0) = 1.
+/// For 11, abs(1 - 1) = 0.
+/// For 12, abs(1 - 2) = 1.
+/// All these differences are at most k = 1. Thus, the answer is 3.
+/// 
+/// Example 2:
+/// Input: l = 201, r = 204, k = 2
+/// Output : 2
+/// Explanation :
+/// The good integers in the range are 201 and 202.
+/// For 201, abs(2 - 0) = 2 and abs(0 - 1) = 1.
+/// For 202, abs(2 - 0) = 2 and abs(0 - 2) = 2.
+/// Thus, the answer is 2.
+///
+/// Constraints :
+/// 1. 10 <= l <= r <= 10^15
+/// 2. 0 <= k <= 9
+/// </summary>
+long long LeetCodeDFS::goodIntegers(long long l, long long r, int k)
+{
+    string str_l = to_string(l - 1);
+    string str_r = to_string(r);
+    vector<long long> cache1(16 * 10 * 4, -1);
+    vector<long long> cache2(16 * 10 * 4, -1);
+    long long count1 = goodIntegers(str_r, 0, 1, 1, 0, k, cache1);
+    long long count2 = goodIntegers(str_l, 0, 1, 1, 0, k, cache2);
+    return count1 - count2;
+}
+
 #pragma endregion

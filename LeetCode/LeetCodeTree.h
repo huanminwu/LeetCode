@@ -9388,6 +9388,227 @@ public:
     /// 8. It is guaranteed that edges forms a tree.
     /// </summary>
     int subtreeInversionSumII(vector<vector<int>>& edges, vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code #3965. Finish Time of Tasks I
+    /// </summary>
+    long long finishTimeI(int node, int parent, vector<vector<int>>& children, vector<int>& baseTime);
+
+    /// <summary>
+    /// Leet Code #3965. Finish Time of Tasks I
+    ///
+    /// Medium
+    ///
+    /// You are given an integer n representing the number of tasks in a 
+    /// project, numbered from 0 to n - 1. These tasks are connected as a 
+    /// tree rooted at task 0. This is represented by a 2D integer array 
+    /// edges of length n - 1, where edges[i] = [ui, vi] indicates that 
+    /// task ui is the parent of task vi.
+    ///
+    /// You are also given an array baseTime of length n, where 
+    /// baseTime[i] represents the time to complete task i.
+    ///
+    /// The finish time of each task is calculated as follows :
+    ///
+    /// Leaf task : The finish time is baseTime[i].
+    /// Non - leaf task :
+    /// Let earliest be the minimum finish time among its children, and 
+    /// latest be the maximum finish time among its children.
+    /// Let ownDuration be (latest - earliest) + baseTime[i].
+    /// The finish time of task i is latest + ownDuration.
+    /// Return the finish time of the root task 0.
+    ///
+    ///
+    /// Example 1:
+    /// Input: n = 3, edges = [[0, 1], [1, 2]], baseTime = [9, 5, 3]
+    /// Output : 17
+    /// Explanation :
+    /// 0
+    /// 9
+    /// 1
+    /// 5
+    /// 2
+    /// 3
+    /// Task 2 is a leaf, so its finish time is baseTime[2] = 3.
+    /// Task 1 has one child task 2:
+    /// earliest = latest = 3
+    /// ownDuration = (latest - earliest) + baseTime[1] = 5
+    /// Finish time of task 1 is 3 + 5 = 8
+    /// Task 0 has one child with finish time 8 :
+    /// earliest = latest = 8
+    /// ownDuration = (latest - earliest) + baseTime[0] = 9
+    /// Finish time of task 0 is 8 + 9 = 17
+    /// 
+    /// Example 2 :
+    /// Input : n = 3, edges = [[0, 1], [0, 2]], baseTime = [4, 7, 6]
+    ///
+    /// Output : 12
+    ///
+    /// Explanation :
+    /// 0
+    /// 4
+    /// 1
+    /// 7
+    /// 2
+    /// 6
+    /// Task 1 is a leaf, so its finish time is baseTime[1] = 7.
+    /// Task 2 is a leaf, so its finish time is baseTime[2] = 6.
+    /// Task 0 has two children with finish times 7 and 6:
+    /// earliest = 6, latest = 7
+    /// ownDuration = (latest - earliest) + baseTime[0] = (7 - 6) + 4 = 5
+    /// Finish time of task 0 is latest + ownDuration = 7 + 5 = 12
+    /// Example 3 :
+    ///
+    /// Input : n = 4, edges = [[0, 1], [0, 2], [2, 3]], 
+    /// baseTime = [5, 8, 2, 1]
+    /// Output : 18
+    ///
+    /// Explanation :
+    ///
+    /// Task 1 is a leaf, so its finish time is baseTime[1] = 8.
+    /// Task 3 is a leaf, so its finish time is baseTime[3] = 1.
+    /// Task 2 has one child task 3 :
+    /// earliest = latest = 1
+    /// ownDuration = (latest - earliest) + baseTime[2] = 0 + 2 = 2
+    /// Finish time of task 2 is latest + ownDuration = 1 + 2 = 3
+    /// Task 0 has two children with finish times 8 and 3 :
+    /// earliest = 3, latest = 8
+    /// ownDuration = (latest - earliest) + baseTime[0] = (8 - 3) + 5 = 10
+    /// Finish time of task 0 is latest + ownDuration = 8 + 10 = 18
+    ///
+    /// Constraints :
+    /// 1. 1 <= n <= 10^5
+    /// 2. edges.length = n - 1
+    /// 3. edges[i] == [ui, vi]
+    /// 4. 0 <= ui, vi <= n - 1
+    /// 5. ui != vi
+    /// 6. The input is generated such that edges represents a valid tree.
+    /// 7. baseTime.length == n
+    /// 8. 1 <= baseTime[i] <= 10^5
+    /// </summary>
+    long long finishTimeI(int n, vector<vector<int>>& edges, vector<int>& baseTime);
+
+    /// <summary>
+    /// Leet Code #3967. Finish Time of Tasks II
+    /// </summary>
+    long long finishTimeII_InPath(int node, int parent, vector<vector<int>>& children, vector<int>& baseTime, 
+        vector<set<pair<long long, int>>>& minTimes, vector<set<pair<long long, int>>>& maxTimes);
+
+    /// <summary>
+    /// Leet Code #3967. Finish Time of Tasks II
+    /// </summary>
+    long long finishTimeII_OutPath(int node, int parent, vector<vector<int>>& children, vector<int>& baseTime,
+        vector<set<pair<long long, int>>>& inPathMinTimes, vector<set<pair<long long, int>>>& inPathMaxTimes,
+        vector<long long>& outPathTimes);
+
+    /// <summary>
+    /// Leet Code #3967. Finish Time of Tasks II
+    ///
+    /// Hard
+    ///
+    /// You are given an integer n representing the number of tasks in a 
+    /// project, numbered from 0 to n - 1. These tasks are connected as an 
+    /// undirected tree.This is represented by a 2D integer array edges of 
+    /// length n - 1, where edges[i] = [ui, vi] indicates an undirected 
+    /// connection between task ui and task vi.
+    ///
+    /// You are also given an array baseTime of length n, where baseTime[i] 
+    /// represents the time to complete task i.
+    ///
+    /// For any chosen task as the root, the finish time of each task is 
+    /// calculated as follows :
+    ///
+    /// Leaf task : The finish time is baseTime[i].
+    /// Non - leaf task :
+    /// Let earliest be the minimum finish time among its children, and 
+    /// latest be the maximum finish time among its children.
+    /// Let ownDuration be(latest - earliest) + baseTime[i].
+    /// Finish time of task i is latest + ownDuration.
+    /// Choose any task as the root and compute the finish time of that 
+    /// root based on the rules above.
+    ///
+    /// Return the minimum possible finish time among all choices of root.
+    /// Example 1:
+    /// Input: n = 3, edges = [[0, 1], [1, 2]], baseTime = [9, 1, 5]
+    /// Output : 14
+    /// Explanation :
+    /// 0
+    /// 9
+    /// 1
+    /// 1
+    /// 2
+    /// 5
+    /// The optimal choice is to treat task 1 as the root.
+    /// Task 0 is a leaf, so its finish time is baseTime[0] = 9.
+    /// Task 2 is a leaf, so its finish time is baseTime[2] = 5.
+    /// Task 1 has two children with finish times 9 and 5:
+    /// earliest = 5, latest = 9
+    /// ownDuration = (latest - earliest) + baseTime[1] = (9 - 5) + 1 = 5
+    /// Finish time of task 1 is latest + ownDuration = 9 + 5 = 14
+    /// Thus, the minimum possible finish time among all choices of root is 14.
+    ///
+    /// Example 2:
+    /// Input: n = 3, edges = [[0, 1], [0, 2]], baseTime = [4, 7, 6]
+    /// Output : 12
+    /// Explanation :
+    /// 0
+    /// 4
+    /// 1
+    /// 7
+    /// 2
+    /// 6
+    /// The optimal choice is to treat task 0 as the root.
+    /// Task 1 is a leaf, so its finish time is baseTime[1] = 7.
+    /// Task 2 is a leaf, so its finish time is baseTime[2] = 6.
+    /// Task 0 has two children with finish times 7 and 6:
+    /// earliest = 6, latest = 7
+    /// ownDuration = (latest - earliest) + baseTime[0] = 
+    /// (7 - 6) + 4 = 5
+    /// Finish time of task 0 is latest + ownDuration = 7 + 5 = 12
+    /// Thus, the minimum possible finish time among all choices of root is 12.
+    ///
+    /// Example 3:
+    /// Input: n = 4, edges = [[0, 1], [0, 2], [2, 3]], baseTime = [5, 8, 2, 1]
+    /// Output : 16
+    /// Explanation :
+    /// 0
+    /// 5
+    /// 1
+    /// 8
+    /// 2
+    /// 2
+    /// 3
+    /// 1
+    /// The optimal choice is to treat task 1 as the root.
+    /// Task 3 is a leaf, so its finish time is baseTime[3] = 1.
+    /// Task 2 has one child task 3:
+    /// earliest = latest = 1
+    /// ownDuration = (latest - earliest) + baseTime[2] = 0 + 2 = 2
+    /// Finish time of task 2 is latest + ownDuration = 1 + 2 = 3
+    /// Task 0 has one child task 2 :
+    /// earliest = latest = 3
+    /// ownDuration = (latest - earliest) + baseTime[0] = 0 + 5 = 5
+    /// Finish time of task 0 is latest + ownDuration = 3 + 5 = 8
+    /// Task 1 has one child task 0 :
+    /// earliest = latest = 8
+    /// ownDuration = (latest - earliest) + baseTime[1] = 0 + 8 = 8
+    /// Finish time of task 1 is latest + ownDuration = 8 + 8 = 16
+    /// Thus, the minimum possible finish time among all choices of 
+    /// root is 16.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 10^5
+    /// 2. edges.length = n - 1
+    /// 3. edges[i] == [ui, vi]
+    /// 4. 0 <= ui, vi <= n - 1
+    /// 5. ui != vi
+    /// 6. The input is generated such that edges represents a valid 
+    ///    undirected tree.
+    /// 7. baseTime.length == n
+    /// 8. 1 <= baseTime[i] <= 10^5
+    /// </summary>
+    long long finishTimeII(int n, vector<vector<int>>& edges, vector<int>& baseTime);
+
 #pragma endregion
 };
 

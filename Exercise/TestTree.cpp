@@ -4914,8 +4914,74 @@ void TestLeetCode3949(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3965(void)
+{
+    Logger::WriteMessage("Test Leet Code 3965");
+    LeetCodeTree leetCode;
+    int n = 3;
+    vector<vector<int>> edges = { {0, 1}, {1, 2} };
+    vector<int> baseTime = { 9, 5, 3 };
+    long long result = leetCode.finishTimeI(n, edges, baseTime);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(baseTime);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3;
+    edges = { {0, 1},{0, 2} };
+    baseTime = {4, 7, 6};
+    result = leetCode.finishTimeI(n, edges, baseTime);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(baseTime);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 4; 
+    edges = { {0, 1},{0, 2},{2, 3} };
+    baseTime = { 5, 8, 2, 1 };
+    result = leetCode.finishTimeI(n, edges, baseTime);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(baseTime);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3967(void)
+{
+    Logger::WriteMessage("Test Leet Code 3967");
+    LeetCodeTree leetCode;
+    int n = 3;
+    vector<vector<int>> edges = { {0, 1}, {1, 2} };
+    vector<int> baseTime = { 9,1,5 };
+    long long result = leetCode.finishTimeII(n, edges, baseTime);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(baseTime);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3;
+    edges = { {0, 1},{0, 2} };
+    baseTime = { 4, 7, 6 };
+    result = leetCode.finishTimeII(n, edges, baseTime);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(baseTime);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 4;
+    edges = { {0, 1},{0, 2},{2, 3} };
+    baseTime = { 5, 8, 2, 1 };
+    result = leetCode.finishTimeII(n, edges, baseTime);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(baseTime);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3967();
+    TestLeetCode3965();
     TestLeetCode3949();
     TestLeetCode3939();
     TestLeetCode3902();

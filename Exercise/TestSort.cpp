@@ -5054,9 +5054,57 @@ void TestLeetCode3935(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3961(void)
+{
+    Logger::WriteMessage("Test Leet Code 3961");
+    LeetCodeSort leetCode;
+    vector<vector<int>> units = { {1, 3},{2, 2} };
+    long long result = leetCode.maxRatings(units);
+    Logger::WriteMessage(units);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    units = { {1, 2, 3}, {4, 5, 6} };
+    result = leetCode.maxRatings(units);
+    Logger::WriteMessage(units);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    units = { {5, 5, 5}, {1, 1, 1} };
+    result = leetCode.maxRatings(units);
+    Logger::WriteMessage(units);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3974(void)
+{
+    Logger::WriteMessage("Test Leet Code 3974");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 6,1,2,9 };
+    int k = 3, mul = 2;
+    long long result = leetCode.maxSum(nums, k, mul);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; mul = " + to_string(mul));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3, 7, 5, 2 };
+    k = 2, mul = 4;
+    result = leetCode.maxSum(nums, k, mul);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; mul = " + to_string(mul));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,4 };
+    k = 1, mul = 1;
+    result = leetCode.maxSum(nums, k, mul);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k) + "; mul = " + to_string(mul));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 
 void TestLeetCodeSort(void)
 {
+    TestLeetCode3974();
+    TestLeetCode3961();
     TestLeetCode3942();
     TestLeetCode3935();
     TestLeetCode3914();

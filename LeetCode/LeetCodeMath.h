@@ -19263,5 +19263,87 @@ public:
     /// 1. 2 <= n <= 5 * 107
     /// </summary>
     long long minCost(int n);
+
+    /// <summary>
+    /// Leet Code #3959. Check Good Integer
+    ///
+    /// Easy
+    ///
+    /// You are given a positive integer n.
+    /// Let digitSum be the sum of the digits of n, and let squareSum be the 
+    /// sum of the squares of the digits of n.
+    /// An integer is called good if squareSum - digitSum >= 50.
+    /// Return true if n is good.Otherwise, return false.
+    ///
+    /// Example 1:
+    /// Input: n = 1000
+    /// Output : false
+    /// Explanation :
+    /// The digits of 1000 are 1, 0, 0, and 0.
+    /// The digitSum is 1 + 0 + 0 + 0 = 1.
+    /// The squareSum is 12 + 02 + 02 + 02 = 1.
+    /// The squareSum - digitSum is 1 - 1 = 0. As 0 is not greater than or 
+    /// equal to 50, the output is false.
+    ///
+    /// Example 2:
+    /// Input: n = 19
+    /// Output : true
+    /// Explanation :
+    /// The digits of 19 are 1 and 9.
+    /// The digitSum is 1 + 9 = 10.
+    /// The squareSum is 12 + 92 = 1 + 81 = 82.
+    /// The squareSum - digitSum is 82 - 10 = 72. As 72 is greater than 
+    /// or equal to 50, the output is true.
+    ///
+    /// Constraints :
+    /// 1. 1 <= n <= 10^9
+    /// </summary>
+    bool checkGoodInteger(int n);
+
+    /// <summary>
+    /// Leet Code #3916. Number of ZigZag Arrays III
+    ///
+    /// Hard
+    ///
+    /// You are given three integers n, l, and r.
+    ///
+    /// A ZigZag array of length n is defined as follows :
+    ///
+    /// Each element lies in the range[l, r].
+    /// No two adjacent elements are equal.
+    /// No three consecutive elements form a strictly increasing or strictly 
+    /// decreasing sequence.
+    /// Return the total number of valid ZigZag arrays.
+    ///
+    /// Since the answer may be large, return it modulo 10^9 + 7.
+    ///
+    /// Example 1:
+    /// Input: n = 3, l = 4, r = 5
+    /// Output : 2
+    /// Explanation :
+    /// There are only 2 valid ZigZag arrays of length n = 3 using values in 
+    /// the range[4, 5] :
+    ///
+    /// [4, 5, 4]
+    /// [5, 4, 5]
+    /// Example 2 :
+    ///
+    /// Input : n = 3, l = 1, r = 3
+    /// Output : 10
+    ///
+    /// Explanation :
+    ///
+    /// There are 10 valid ZigZag arrays of length n = 3 using values in the 
+    /// range[1, 3] :
+    /// [1, 2, 1] , [1, 3, 1], [1, 3, 2]
+    /// [2, 1, 2], [2, 1, 3], [2, 3, 1], [2, 3, 2]
+    /// [3, 1, 2], [3, 1, 3], [3, 2, 3]
+    /// All arrays meet the ZigZag conditions.
+    ///
+    /// Constraints:
+    /// 1. 3 <= n <= 200
+    /// 2. 1 <= l < r <= 10^?9
+    /// </summary>
+    int zigZagArraysIII(int n, int l, int r);
 };
 #endif

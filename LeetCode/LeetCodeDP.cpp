@@ -24499,7 +24499,7 @@ long long LeetCodeDP::maximumSumI(vector<int>& nums, int m, int l, int r)
             int k = j - l;
             if (k >= 0)
             {
-                while (!dq.empty() && dp[dq.back()][curr] - prefix[dq.back()] <= dp[k][curr] - prefix[k])
+                while (!dq.empty() && dp[(int)dq.back()][curr] - prefix[(int)dq.back()] <= dp[k][curr] - prefix[k])
                 {
                     dq.pop_back();
                 }
@@ -24510,13 +24510,83 @@ long long LeetCodeDP::maximumSumI(vector<int>& nums, int m, int l, int r)
                 }
                 if (!dq.empty()) 
                 {
-                    dp[j][next] = max(dp[j][next], prefix[j] + dp[dq.front()][curr] - prefix[dq.front()]);
+                    dp[j][next] = max(dp[j][next], prefix[j] + dp[(int)dq.front()][curr] - prefix[(int)dq.front()]);
                 }
                 dp[j][next] = max(dp[j][next], dp[j - 1][next]);
             }
         }
         result = max(result, dp[n][next]);
         swap(curr, next);
+    }
+    return result;
+}
+
+
+/// <summary>
+/// Leet Code #3976. Maximum Subarray Sum After Multiplier
+///
+/// Medium
+/// 
+/// You are given an integer array nums and a positive integer k.
+///
+/// You must choose exactly one subarray of nums and perform exactly 
+/// one of the following operations :
+///
+/// Multiply each number in the chosen subarray by k.
+/// Divide each number in the chosen subarray by k.
+/// When dividing a positive number by k, use the floor value of the 
+/// division result.
+/// When dividing a negative number by k, use the ceiling value of the 
+/// division result.
+/// Return the maximum possible sum of a non - empty subarray in the 
+/// resulting array.
+/// Note that the subarray chosen for the operation and the subarray 
+/// chosen for the sum may be different.
+///
+/// Example 1:
+/// Input: nums = [1, -2, 3, 4, -5], k = 2
+/// Output : 14
+/// Explanation :
+/// Multiply each number in the subarray[3, 4] by 2.
+/// This results in nums = [1, -2, 6, 8, -5].
+/// The subarray with the largest sum is[6, 8], so the output is 
+/// 6 + 8 = 14.
+///
+/// Example 2 :
+///
+/// Input : nums = [-5, -4, -3], k = 2
+///
+/// Output : -1
+///
+/// Explanation :
+///
+/// Divide each number in the subarray[-3] by 2.
+/// This results in nums = [-5, -4, -1].
+/// The subarray with the largest sum is[-1], so the output is - 1.
+/// 
+/// Constraints :
+/// 1. 1 <= nums.length <= 10^5
+/// 2. -10^5 <= nums[i] <= 10^5
+/// 3. 1 <= k <= 10^5
+/// </summary>
+long long LeetCodeDP::maxSubarraySum(vector<int>& nums, int k)
+{
+    vector<vector<long long>> dp(nums.size(), vector<long long>(4));
+    long long result = LLONG_MIN;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        dp[i][0] = (long long)nums[i];
+        dp[i][1] = (long long)nums[i] * k;
+        dp[i][2] = (long long)nums[i] / k;
+        dp[i][3] = (long long)nums[i];
+        if (i > 0)
+        {
+            dp[i][0] += max(0LL, dp[i - 1][0]);
+            dp[i][1] += max(0LL, max(dp[i - 1][0], dp[i - 1][1]));
+            dp[i][2] += max(0LL, max(dp[i - 1][0], dp[i - 1][2]));
+            dp[i][3] += max(0LL, max(max(dp[i - 1][1], dp[i - 1][2]), dp[i - 1][3]));
+        }
+        result = max(result, max({ dp[i][0], dp[i][1], dp[i][2], dp[i][3] }));
     }
     return result;
 }

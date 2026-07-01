@@ -2244,9 +2244,51 @@ void TestLeetCode3951(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3964(void)
+{
+    Logger::WriteMessage("Test Leet Code 3964");
+    LeetCodeGreedy leetCode;
+    vector<int> lights = {0, 0, 0, 0};
+    int result = leetCode.minLights(lights);
+    Logger::WriteMessage(lights);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    lights = { 0,0,0,2,0 };
+    result = leetCode.minLights(lights);
+    Logger::WriteMessage(lights);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    lights = { 0,0,0,2,0 };
+    result = leetCode.minLights(lights);
+    Logger::WriteMessage(lights);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode3975(void)
+{
+    Logger::WriteMessage("Test Leet Code 3975");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> occupiedIntervals =
+    { {2, 6},{4, 8},{10, 10},{10, 12},{14, 16} }; 
+    int freeStart = 7, freeEnd = 11;
+    vector<vector<int>> result = leetCode.filterOccupiedIntervals(occupiedIntervals, freeStart, freeEnd);
+    Logger::WriteMessage(occupiedIntervals);
+    Logger::WriteMessage("freeStart = " + to_string(freeStart) + "; freeEnd = " + to_string(freeEnd));
+    Logger::WriteMessage(result);
+
+    occupiedIntervals = {{1, 5}, {2, 3}};
+    freeStart = 3, freeEnd = 8;
+    result = leetCode.filterOccupiedIntervals(occupiedIntervals, freeStart, freeEnd);
+    Logger::WriteMessage(occupiedIntervals);
+    Logger::WriteMessage("freeStart = " + to_string(freeStart) + "; freeEnd = " + to_string(freeEnd));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeGreedy(void)
 {
     Logger::WriteMessage("Test Leet Code Greedy");
+    TestLeetCode3975();
+    TestLeetCode3964();
     TestLeetCode3951();
     TestLeetCode3893();
     TestLeetCode3683();

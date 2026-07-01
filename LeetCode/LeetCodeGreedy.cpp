@@ -7663,4 +7663,194 @@ long long LeetCodeGreedy::minEnergy(int n, int brightness, vector<vector<int>>& 
     int bulbs = (brightness + 2) / 3;
     return (long long)total_time * bulbs;
 }
+
+/// <summary>
+/// Leet Code #3964. Minimum Lights to Illuminate a Road
+///
+/// Medium
+///
+/// You are given an integer array lights of length n, representing 
+/// positions 0 through n - 1 on a road.
+///
+///For each position i :
+/// If lights[i] = v, where v > 0, there is a working bulb at position 
+/// i that illuminates every position from max(0, i - v) to 
+/// min(n - 1, i + v), inclusive.
+/// If lights[i] = 0, there is no working bulb at position i.
+/// A position is visible if it is illuminated by at least one working 
+/// bulb.
+///
+/// You may install additional bulbs at any positions.Each additional 
+/// bulb installed at position j illuminates positions from 
+/// max(0, j - 1) to min(n - 1, j + 1), inclusive.
+///
+/// Return the minimum number of additional bulbs required to make every 
+/// position on the road visible.
+///
+/// Example 1:
+/// Input: lights = [0, 0, 0, 0]
+/// Output : 2
+/// Explanation :
+/// One optimal placement is :
+/// Install an additional bulb at position 1, illuminating 
+/// positions[0, 1, 2].
+/// Install an additional bulb at position 3, illuminating 
+/// positions[2, 3].
+/// Therefore, the minimum number of additional bulbs required is 2.
+///
+/// Example 2:
+///
+/// Input: lights = [0, 0, 0, 2, 0]
+/// Output : 1
+/// Explanation :
+/// Since lights[3] = 2, the working bulb at position 3 illuminates 
+/// positions[1, 2, 3, 4].
+/// Installing an additional bulb at position 1 illuminates 
+/// positions[0, 1, 2], making every position visible.
+/// Therefore, the minimum number of additional bulbs required is 1.
+///
+/// Constraints :
+/// 1. 1 <= n == lights.length <= 10^5
+/// 2. 0 <= lights[i] <= n
+/// </summary>
+int LeetCodeGreedy::minLights(vector<int>& lights)
+{
+    vector<int> dp(lights.size() + 1, 0);
+    for (size_t i = 0; i < lights.size(); i++)
+    {
+        if (lights[i] > 0)
+        {
+            int start = max(0, (int)i - lights[i]);
+            int end = min((int)lights.size() - 1, (int)i + lights[i]);
+            dp[start] += 1;
+            dp[end + 1] -= 1;
+        }
+    }
+    int count = 0;
+    int current_illumination = 0;
+    int result = 0;
+    for (size_t i = 0; i < lights.size(); i++)
+    {
+        current_illumination += dp[i];
+        if (current_illumination == 0)
+        {
+            count++;
+        }
+        else
+        {
+            result += (count + 2) / 3;
+            count = 0;
+        }
+    }
+    result += (count + 2) / 3;
+    return result;
+}
+
+/// <summary>
+/// Leet Code #3975. Filter Occupied Intervals
+///
+/// Medium
+///
+/// You are given a 2D integer array occupiedIntervals, where 
+/// occupiedIntervals[i] = [starti, endi] represents a time interval 
+/// during which you are occupied.Each interval starts at starti and 
+/// ends at endi, inclusive.These intervals may overlap.
+///
+/// You are also given two integers freeStart and freeEnd, which define 
+/// a free time interval from freeStart to freeEnd, inclusive.
+///
+/// Your task is to merge all occupied intervals that overlap or touch, 
+/// then remove all integer points in the free interval from the merged 
+/// occupied intervals.
+///
+/// Two intervals touch if the second interval starts immediately after 
+/// the first one ends.For example, [1, 1] and [2, 2] touch and should 
+/// be merged into[1, 2].
+///
+/// Return the remaining occupied intervals in sorted order.The 
+/// returned intervals must be non - overlapping and must contain the 
+/// minimum number of intervals possible.If there are no remaining 
+/// occupied points, return an empty list.
+///
+/// Example 1:
+/// Input: occupiedIntervals = [[2, 6], [4, 8], [10, 10], [10, 12], 
+/// [14, 16]], freeStart = 7, freeEnd = 11
+/// Output : [[2, 6], [12, 12], [14, 16]]
+/// Explanation :
+/// After merging, the occupied intervals are[2, 8], [10, 12], 
+/// and [14, 16].
+/// Excluding the free interval[7, 11] results in[2, 6], [12, 12], 
+/// and [14, 16].
+/// 
+/// Example 2 :
+/// Input : occupiedIntervals = [[1, 5], [2, 3]], freeStart = 3, 
+/// freeEnd = 8
+/// Output : [[1, 2]]
+/// Explanation :
+/// After merging, the occupied interval is[1, 5].
+/// Excluding the free interval[3, 8] results in[1, 2].
+///
+/// Constraints :
+/// 1. 1 <= occupiedIntervals.length <= 5 * 10^4
+/// 2. occupiedIntervals[i].length == 2
+/// 3. 1 <= starti <= endi <= 10^9
+/// 4. 1 <= freeStart <= freeEnd <= 10^9
+/// </summary>
+vector<vector<int>> LeetCodeGreedy::filterOccupiedIntervals(vector<vector<int>>& occupiedIntervals, int freeStart, int freeEnd)
+{
+    sort(occupiedIntervals.begin(), occupiedIntervals.end());
+    vector<vector<int>> result;
+    int start = -1, end = -1;
+    for (size_t i = 0; i < occupiedIntervals.size(); i++)
+    {
+        if (i == 0)
+        {
+            start = occupiedIntervals[i][0];
+            end = occupiedIntervals[i][1];
+        }
+        else
+        {
+            if (occupiedIntervals[i][0] > end + 1)
+            {
+                if (end < freeStart || start > freeEnd)
+                {
+                    result.push_back({ start, end });
+                }
+                else
+                {
+                    if (start < freeStart)
+                    {
+                        result.push_back({ start, freeStart - 1 });
+                    }
+                    if (end > freeEnd)
+                    {
+                        result.push_back({ freeEnd + 1, end });
+                    }
+                }
+                start = occupiedIntervals[i][0];
+                end = occupiedIntervals[i][1];
+            }
+            else
+            {
+                end = max(end, occupiedIntervals[i][1]);
+            }
+        }
+    }
+    if (end < freeStart || start > freeEnd)
+    {
+        result.push_back({ start, end });
+    }
+    else
+    {
+        if (start < freeStart)
+        {
+            result.push_back({ start, freeStart - 1 });
+        }
+        if (end > freeEnd)
+        {
+            result.push_back({ freeEnd + 1, end });
+        }
+    }
+    return result;
+}
 #pragma endregion

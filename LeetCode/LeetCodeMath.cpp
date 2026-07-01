@@ -30559,5 +30559,197 @@ long long LeetCodeMath::minCost(int n)
     long long result = (long long) n * (n - 1) / 2;
     return result;
 }
+
+
+/// <summary>
+/// Leet Code #3959. Check Good Integer
+///
+/// Easy
+///
+/// You are given a positive integer n.
+/// Let digitSum be the sum of the digits of n, and let squareSum be the 
+/// sum of the squares of the digits of n.
+/// An integer is called good if squareSum - digitSum >= 50.
+/// Return true if n is good.Otherwise, return false.
+///
+/// Example 1:
+/// Input: n = 1000
+/// Output : false
+/// Explanation :
+/// The digits of 1000 are 1, 0, 0, and 0.
+/// The digitSum is 1 + 0 + 0 + 0 = 1.
+/// The squareSum is 12 + 02 + 02 + 02 = 1.
+/// The squareSum - digitSum is 1 - 1 = 0. As 0 is not greater than or 
+/// equal to 50, the output is false.
+///
+/// Example 2:
+/// Input: n = 19
+/// Output : true
+/// Explanation :
+/// The digits of 19 are 1 and 9.
+/// The digitSum is 1 + 9 = 10.
+/// The squareSum is 12 + 92 = 1 + 81 = 82.
+/// The squareSum - digitSum is 82 - 10 = 72. As 72 is greater than 
+/// or equal to 50, the output is true.
+///
+/// Constraints :
+/// 1. 1 <= n <= 10^9
+/// </summary>
+bool LeetCodeMath::checkGoodInteger(int n)
+{
+    int digit_sum = 0;
+    int square_sum = 0;
+    while (n > 0)
+    {
+        int digit = n % 10;
+        digit_sum += digit;
+        square_sum += digit * digit;
+        n /= 10;
+    }
+    return square_sum - digit_sum >= 50;
+}
+
+/// <summary>
+/// Leet Code #3916. Number of ZigZag Arrays III
+///
+/// Hard
+///
+/// You are given three integers n, l, and r.
+///
+/// A ZigZag array of length n is defined as follows :
+///
+/// Each element lies in the range[l, r].
+/// No two adjacent elements are equal.
+/// No three consecutive elements form a strictly increasing or strictly 
+/// decreasing sequence.
+/// Return the total number of valid ZigZag arrays.
+///
+/// Since the answer may be large, return it modulo 10^9 + 7.
+///
+/// Example 1:
+/// Input: n = 3, l = 4, r = 5
+/// Output : 2
+/// Explanation :
+/// There are only 2 valid ZigZag arrays of length n = 3 using values in 
+/// the range[4, 5] :
+///
+/// [4, 5, 4]
+/// [5, 4, 5]
+/// Example 2 :
+///
+/// Input : n = 3, l = 1, r = 3
+/// Output : 10
+///
+/// Explanation :
+///
+/// There are 10 valid ZigZag arrays of length n = 3 using values in the 
+/// range[1, 3] :
+/// [1, 2, 1] , [1, 3, 1], [1, 3, 2]
+/// [2, 1, 2], [2, 1, 3], [2, 3, 1], [2, 3, 2]
+/// [3, 1, 2], [3, 1, 3], [3, 2, 3]
+/// All arrays meet the ZigZag conditions.
+///
+/// Constraints:
+/// 1. 3 <= n <= 200
+/// 2. 1 <= l < r <= 10^9
+/// </summary>
+int LeetCodeMath::zigZagArraysIII(int n, int l, int r)
+{
+    static constexpr long long MOD = 1000000007LL;
+    long long m = r - l + 1;
+
+    auto countForSize = [&](int k) -> long long 
+    {
+        if (k == 0) return 0;
+
+        vector<long long> up(k), down(k);
+
+        for (int i = 0; i < k; i++) 
+        {
+            up[i] = i;
+            down[i] = k - 1 - i;
+        }
+
+        for (int len = 3; len <= n; len++) 
+        {
+            vector<long long> newUp(k), newDown(k);
+
+            long long prefix = 0;
+            for (int i = 0; i < k; i++) 
+            {
+                newUp[i] = prefix;
+                prefix = (prefix + down[i]) % MOD;
+            }
+
+            long long suffix = 0;
+            for (int i = k - 1; i >= 0; i--) {
+                newDown[i] = suffix;
+                suffix = (suffix + up[i]) % MOD;
+            }
+
+            up = std::move(newUp);
+            down = std::move(newDown);
+        }
+
+        long long total = 0;
+        for (int i = 0; i < k; i++) {
+            total = (total + up[i] + down[i]) % MOD;
+        }
+
+        return total;
+    };
+
+    vector<long long> values(n + 1);
+    for (int k = 0; k <= n; k++) 
+    {
+        values[k] = countForSize(k);
+    }
+
+    if (m <= n) 
+    {
+        return (int)values[(int)m];
+    }
+
+    vector<long long> fact(n + 1, 1), invFact(n + 1, 1);
+
+    for (int i = 1; i <= n; i++) 
+    {
+        fact[i] = fact[i - 1] * i % MOD;
+    }
+
+    invFact[n] = modPow(fact[n], MOD - 2, MOD);
+
+    for (int i = n - 1; i >= 0; i--) 
+    {
+        invFact[i] = invFact[i + 1] * (i + 1) % MOD;
+    }
+
+    long long x = m % MOD;
+
+    long long product = 1;
+    for (int i = 0; i <= n; i++) 
+    {
+        product = product * ((x - i + MOD) % MOD) % MOD;
+    }
+
+    long long result = 0;
+
+    for (int i = 0; i <= n; i++) 
+    {
+        long long denominatorInverse = invFact[i] * invFact[n - i] % MOD;
+
+        if ((n - i) & 1) 
+        {
+            denominatorInverse = (MOD - denominatorInverse) % MOD;
+        }
+
+        long long numerator = values[i] * product % MOD;
+        long long inverseTerm = modPow((x - i + MOD) % MOD, MOD - 2, MOD);
+
+        result = (result + numerator * inverseTerm % MOD * denominatorInverse) % MOD;
+    }
+
+    return (int)result;
+}
 #pragma endregion
 

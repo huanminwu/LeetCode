@@ -9015,10 +9015,25 @@ void TestLeetCode3958(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3959(void)
+{
+    Logger::WriteMessage("Test Leet Code 3959");
+    LeetCodeMath leetCode;
+    int n = 1000;
+    bool result = leetCode.checkGoodInteger(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    n = 19;
+    result = leetCode.checkGoodInteger(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
 
 
 void TestLeetCodeMath(void)
 {
+    TestLeetCode3959();
     TestLeetCode3958();
     TestLeetCode3947();
     TestLeetCode3953();
