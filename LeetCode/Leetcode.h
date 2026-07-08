@@ -183,6 +183,52 @@ static bool isPrime(long long N)
     }
 }
 
+/// <summary>
+/// Leet Code #3985. Palindromic Subarray Sum
+/// </summary>
+static pair<int, int> getMaxPalindromicSubarray(vector<int>& arr)
+{
+    // Manacher's algorithm
+    int n = arr.size();
+    vector<int> P(n, 0);
+
+    int center = 0;
+    int right = 0;
+
+    for (int i = 1; i < n - 1; i++) 
+    {
+        int mirror = 2 * center - i;
+
+        if (i < right)
+        {
+            P[i] = min(right - i, P[mirror]);
+        }
+
+        while (arr[i + P[i] + 1] == arr[i - P[i] - 1])
+        {
+            P[i]++;
+        }
+
+        if (i + P[i] > right) 
+        {
+            center = i;
+            right = i + P[i];
+        }
+    }
+
+    int maxLen = 0, centerIndex = 0;
+    for (int i = 1; i < n - 1; i++) 
+    {
+        if (P[i] > maxLen) 
+        {
+            maxLen = P[i];
+            centerIndex = i;
+        }
+    }
+    pair<int, int> result = {centerIndex, maxLen};
+    return result;
+}
+
 #pragma region Design
 struct BinaryIndexTree
 {

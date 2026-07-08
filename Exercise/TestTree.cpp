@@ -4072,6 +4072,12 @@ void TestLeetCode3241(void)
     Logger::WriteMessage(edges);
     Logger::WriteMessage(result);
 
+    edges = { {2, 0}, {7, 6}, {4, 0}, {3, 2}, {1, 0}, {6, 5}, {5, 4} };
+    result = leetCode.timeTaken(edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(result);
+
+
     edges = { {1, 0},{2, 1},{3, 1},{4, 3} };
     result = leetCode.timeTaken(edges);
     Logger::WriteMessage(edges);
@@ -4980,6 +4986,7 @@ void TestLeetCode3967(void)
 
 void TestLeetCodeTree(void)
 {
+    TestLeetCode3241();
     TestLeetCode3967();
     TestLeetCode3965();
     TestLeetCode3949();
@@ -5010,7 +5017,6 @@ void TestLeetCodeTree(void)
     TestLeetCode3319();
     TestLeetCode3313();
     TestLeetCode3249();
-    TestLeetCode3241();
     TestLeetCode3203();
     TestLeetCode3157();
     TestLeetCode3068();

@@ -13254,66 +13254,57 @@ int LeetCodeTree::minimumDiameterAfterMerge(vector<vector<int>>& edges1, vector<
 /// <summary>
 /// Leet Code 3241. Time Taken to Mark All Nodes
 /// </summary>
-int LeetCodeTree::timeTakenDFS(int parent, int node, vector<vector<int>>& neighbors, vector<vector<int>>& treeNodes)
+int LeetCodeTree::timeTakenInPath(int parent, int node, vector<vector<int>>& neighbors, vector<set<pair<int, int>>>& max_time)
 {
-    // search for all path
-    if (treeNodes[node][1] == -1)
+    int result = 0;
+    for (size_t i = 0; i < neighbors[node].size(); i++)
     {
-        treeNodes[node][4] = parent;
-        for (size_t i = 0; i < neighbors[node].size(); i++)
+        if (neighbors[node][i] == parent) continue;
+        int cost = timeTakenInPath(node, neighbors[node][i], neighbors, max_time);
+        max_time[node].insert(make_pair(cost, neighbors[node][i]));
+        if (max_time[node].size() > 2)
         {
-            if (neighbors[node][i] == parent) continue;
-            int cost = (neighbors[node][i] % 2 == 0) ? 2 : 1;
-            cost += timeTakenDFS(node, neighbors[node][i], neighbors, treeNodes);
-            if (cost > treeNodes[node][0])
+            max_time[node].erase(max_time[node].begin());
+        }
+        result = max(result, cost);
+    }
+    result += (node % 2 == 0) ? 2 : 1;
+    return result;
+}
+
+int LeetCodeTree::timeTakenOutPath(int parent, int node, vector<vector<int>>& neighbors, 
+    vector<set<pair<int, int>>>& max_time, vector<int>& out_time)
+{
+    if (parent == -1)
+    {
+        out_time[node] = 0;
+    }
+    else
+    {
+        int cost = (parent % 2 == 0) ? 2 : 1;
+        if (max_time[parent].size() < 2)
+        {
+            out_time[node] = cost + out_time[parent];
+        }
+        else
+        {
+            if (max_time[parent].rbegin()->second == node)
             {
-                treeNodes[node][2] = treeNodes[node][0];
-                treeNodes[node][3] = treeNodes[node][1];
-                treeNodes[node][0] = cost;
-                treeNodes[node][1] = neighbors[node][i];
+                out_time[node] = cost + max(out_time[parent], max_time[parent].begin()->first);
             }
-            else if (cost > treeNodes[node][2])
+            else
             {
-                treeNodes[node][2] = cost;
-                treeNodes[node][3] = neighbors[node][i];
+                out_time[node] = cost + max(out_time[parent], max_time[parent].rbegin()->first);
             }
         }
     }
-    else if (treeNodes[node][4] != parent)
+    
+    for (size_t i = 0; i < neighbors[node].size(); i++)
     {
-        int child = treeNodes[node][4];
-        treeNodes[node][4] = parent;
-        if (treeNodes[node][1] == parent)
-        {
-            treeNodes[node][0] = treeNodes[node][2];
-            treeNodes[node][1] = treeNodes[node][3];
-            treeNodes[node][2] = 0;
-            treeNodes[node][3] = -1;
-        }
-        else if (treeNodes[node][3] == parent)
-        {
-            treeNodes[node][2] = 0;
-            treeNodes[node][3] = -1;
-        }
-        if (child != -1)
-        {
-            int cost = (child % 2 == 0) ? 2 : 1;
-            cost += timeTakenDFS(node, child, neighbors, treeNodes);
-            if (cost > treeNodes[node][0])
-            {
-                treeNodes[node][2] = treeNodes[node][0];
-                treeNodes[node][3] = treeNodes[node][1];
-                treeNodes[node][0] = cost;
-                treeNodes[node][1] = child;
-            }
-            else if (cost > treeNodes[node][2])
-            {
-                treeNodes[node][2] = cost;
-                treeNodes[node][3] = child;
-            }
-        }
+        if (neighbors[node][i] == parent) continue;
+        timeTakenOutPath(node, neighbors[node][i], neighbors, max_time, out_time);
     }
-    return treeNodes[node][0];
+    return out_time[node];
 }
 
 /// <summary>
@@ -13372,16 +13363,28 @@ int LeetCodeTree::timeTakenDFS(int parent, int node, vector<vector<int>>& neighb
 vector<int> LeetCodeTree::timeTaken(vector<vector<int>>& edges)
 {
     int n = edges.size() + 1;
-    vector<vector<int>> neighbors(n), treeNodes(n, {0, -1, 0, -1, -1});
+    vector<vector<int>> neighbors(n);
     for (size_t i = 0; i < edges.size(); i++)
     {
         neighbors[edges[i][0]].push_back(edges[i][1]);
         neighbors[edges[i][1]].push_back(edges[i][0]);
     }
     vector<int> result;
+    vector<set<pair<int, int>>> max_in_time(n);
+    vector<int> out_time(n, 0);
+    timeTakenInPath(-1, 0, neighbors, max_in_time);
+    timeTakenOutPath(-1, 0, neighbors, max_in_time, out_time);
+
     for (int i = 0; i < n; i++)
     {
-        result.push_back(timeTakenDFS(-1, i, neighbors, treeNodes));
+        if (max_in_time[i].empty())
+        {
+            result.push_back(out_time[i]);
+        }
+        else
+        {
+            result.push_back(max(max_in_time[i].rbegin()->first, out_time[i]));
+        }
     }
     return result;
 }

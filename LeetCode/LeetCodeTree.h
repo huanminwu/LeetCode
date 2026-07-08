@@ -7397,7 +7397,14 @@ public:
     /// <summary>
     /// Leet Code 3241. Time Taken to Mark All Nodes
     /// </summary>
-    int timeTakenDFS(int parent, int node, vector<vector<int>>& neighbors, vector<vector<int>>&treeNodes);
+    int timeTakenInPath(int parent, int node, vector<vector<int>>& neighbors, vector<set<pair<int, int>>>& max_time);
+
+    /// <summary>
+    /// Leet Code 3241. Time Taken to Mark All Nodes
+    /// </summary>
+    int timeTakenOutPath(int parent, int node, vector<vector<int>>& neighbors, vector<set<pair<int, int>>>& max_time,
+                 vector<int>&out_time);
+
 
     /// <summary>
     /// Leet Code 3241. Time Taken to Mark All Nodes

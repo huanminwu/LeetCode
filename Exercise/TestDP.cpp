@@ -6801,6 +6801,30 @@ void TestLeetCode3976(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3981(void)
+{
+    Logger::WriteMessage("Test Leet Code 3981");
+    LeetCodeDP leetCode;
+    string word1 = "abc", word2 = "bac", target = "abc";
+    int result = leetCode.interleaveCharacters(word1, word2, target);
+    Logger::WriteMessage("word1 = " + word1 + ", word2 = " + word2 + ", target = " + target);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    word1 = "cd", word2 = "cd", target = "ccd";
+    result = leetCode.interleaveCharacters(word1, word2, target);
+    Logger::WriteMessage("word1 = " + word1 + ", word2 = " + word2 + ", target = " + target);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    word1 = "xy", word2 = "xy", target = "xyxy";
+    result = leetCode.interleaveCharacters(word1, word2, target);
+    Logger::WriteMessage("word1 = " + word1 + ", word2 = " + word2 + ", target = " + target);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    word1 = "ab", word2 = "cde", target = "ace";
+    result = leetCode.interleaveCharacters(word1, word2, target);
+    Logger::WriteMessage("word1 = " + word1 + ", word2 = " + word2 + ", target = " + target);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeDP(void)
 {

@@ -45,12 +45,12 @@
 int main(int argc, char* argv[])
 {
     TestLeetCodeGraph();
+    TestLeetCodeArray();
+    TestLeetCodeTree();
     TestLeetCodeDP();
     TestLeetCodeGreedy();
     TestLeetCodeSort();
-    TestLeetCodeTree();
     TestLeetCodeBinarySearch();
-    TestLeetCodeArray();
     TestLeetCodeDFS();
     TestLeetCodeTwoPointer();
     TestLeetCodeMath();

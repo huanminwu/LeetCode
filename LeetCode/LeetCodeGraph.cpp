@@ -10933,6 +10933,8 @@ int LeetCodeGraph::minCost(int maxTime, vector<vector<int>>& edges, vector<int>&
     }
     set<vector<int>> pq;
     pq.insert({ passingFees[0], 0, 0 });
+    city_cost[0] = 0;
+    city_time[0] = 0;
     while (!pq.empty())
     {
         vector<int> destination = *pq.begin();
