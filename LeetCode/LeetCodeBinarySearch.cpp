@@ -6041,4 +6041,229 @@ int LeetCodeBinarySearch::maxTotalValue(vector<int>& value, vector<int>& decay, 
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code #4008. Minimum Initial Strength to Defeat All Monsters
+///
+/// Medium
+///
+/// You are given an integer array monsters, where monsters[i] represents 
+/// the strength of the ith monster.
+///
+/// You are also given a 2D integer array boosts, where boosts[i] = 
+/// [li, ri, vi] indicates that vi is added to your temporary bonus while 
+/// fighting any monster whose index lies in[li, ri].Boost ranges may 
+/// overlap, and the values of all applicable boosts are added together.
+///
+/// You start with a non - negative initial strength and fight the 
+/// monsters from left to right.
+///
+/// For each monster at index i :
+///
+/// Let bonus be the sum of the values of all boosts that apply to 
+/// monster i.
+/// You can defeat the monster only if your current strength plus bonus 
+/// is at least monsters[i].
+/// After defeating the monster, only your current strength decreases by 
+/// monsters[i].If it becomes negative, it is set to 0.
+/// Return the minimum initial strength required to defeat all monsters.
+///
+/// Note : The temporary bonus is used only to determine whether the 
+/// current monster can be defeated.It does not otherwise change your 
+/// current strength.
+///
+/// Example 1 :
+/// Input : monsters = [5, 10, 15], boosts = [[1, 1, 10]]
+/// Output : 30
+/// Explanation :
+/// Let's start with an initial strength of 30.
+/// monsters[0] = 5 : At index 0, the bonus is 0. Since 30 + 0 >= 5, 
+/// this monster can be defeated.The strength becomes 30 - 5 = 25.
+/// monsters[1] = 10 : At index 1, the bonus is 10. Since 25 + 10 >= 10, 
+/// this monster can be defeated.The strength becomes 25 - 10 = 15.
+/// monsters[2] = 15 : At index 2, the bonus is 0. Since 15 + 0 >= 15, 
+/// this monster can be defeated.The strength becomes 15 - 15 = 0.
+/// Thus, the minimum initial strength required is 30.
+///
+/// Example 2 :
+/// Input : monsters = [5, 10, 15], boosts = [[1, 2, 10], [1, 2, 5]]
+/// Output : 5
+/// Explanation :
+/// Let's start with an initial strength of 5.
+/// monsters[0] = 5 : The bonus is 0. Since 5 + 0 >= 5, the monster 
+/// can be defeated.The strength becomes 5 - 5 = 0.
+/// monsters[1] = 10 : The two overlapping boosts provide 
+/// bonus = 10 + 5 = 15.
+/// Since 0 + 15 >= 10, the monster can be defeated.The strength 
+/// remains 0.
+/// monsters[2] = 15 : The two overlapping boosts again provide 
+/// bonus = 15. Since 0 + 15 >= 15, the monster can be defeated.
+/// The strength remains 0.
+/// Thus, the minimum initial strength required is 5.
+///
+/// Constraints:
+/// 1. 1 <= monsters.length <= 5 * 10^4
+/// 2. 1 <= monsters[i] <= 10^9
+/// 3. 0 <= boosts.length <= 5 * 10^4
+/// 4. boosts[i] == [li, ri, vi]
+/// 5. 0 <= li <= ri < monsters.length
+/// 6. 1 <= vi <= 10^9
+/// </summary>
+long long LeetCodeBinarySearch::minInitialStrength(vector<int>& monsters, vector<vector<int>>& boosts)
+{
+    vector<long long> bonus(monsters.size() + 1);
+    for (auto& b : boosts)
+    {
+        bonus[b[0]] += b[2];
+        if (b[1] + 1 < bonus.size()) bonus[b[1] + 1] -= b[2];
+    }
+    for (int i = 1; i < bonus.size(); i++)
+    {
+        bonus[i] += bonus[i - 1];
+    }
+    long long left = 0, right = 0;
+    for (int i = 0; i < monsters.size(); i++)
+    {
+        right += monsters[i];
+    }
+    long long result = right;
+    while (left <= right)
+    {
+        long long mid = left + (right - left) / 2;
+        long long strength = mid;
+        bool can_defeat = true;
+        for (int i = 0; i < monsters.size(); i++)
+        {
+            if (strength + bonus[i] < monsters[i])
+            {
+                can_defeat = false;
+                break;
+            }
+            strength = max(0LL, strength - monsters[i]);
+        }
+        if (can_defeat)
+        {
+            result = mid;
+            right = mid - 1;
+        }
+        else
+        {
+            left = mid + 1;
+        }
+    }
+    return left;
+}
+
+
+/// <summary>
+/// Leet Code #4016. Maximum Area of Two Non - Overlapping Square 
+///                  Submatrices
+///
+/// Medium
+///
+/// You are given a 2D integer matrix mat of size m × n, where:
+/// mat[r][c] == 1 means the cell at row r and column c is usable.
+/// mat[r][c] == 0 means it is not usable.
+/// Your task is to find two submatrices that satisfy the following 
+/// conditions :
+///
+/// Both submatrices must be squares of the same side length k.
+/// The two submatrices must not share any cell.
+/// Each submatrix can only cover cells where mat[r][c] == 1.
+/// Return the maximum possible area of each of the two squares.If it is 
+/// not possible to choose two such squares, return 0.
+///
+/// Example 1:
+/// Input: mat = [[1, 1, 1, 0], [1, 1, 1, 1], [0, 0, 1, 1]]
+/// Output : 4
+/// Explanation :
+/// The largest equal non - overlapping squares have side length k = 2 
+/// with area 4.
+///
+/// First square starts at top - left(0, 0) and covers cells(0, 0), 
+/// (0, 1), (1, 0), and (1, 1).
+/// Second square starts at top - left(1, 2) and covers cells(1, 2), 
+/// (1, 3), (2, 2), and (2, 3).
+/// Thus, the answer is 4.
+///
+/// Example 2:
+/// Input: mat = [[0, 1], [1, 0]]
+/// Output : 1
+/// Explanation :
+/// The largest equal non - overlapping squares have side length k = 1 
+/// with area 1.
+/// First square starts at top - left(0, 1) and covers cell(0, 1).
+/// Second square starts at top - left(1, 0) and covers cell(1, 0).
+/// Thus, the answer is 1.
+///
+/// Example 3:
+/// Input: mat = [[0, 0], [0, 1]]
+/// Output : 0
+/// Explanation :
+/// There is only one usable cell, so it is impossible to choose two 
+/// non - overlapping squares.Thus, the answer is 0.
+/// 
+/// Constraints:
+/// 1. mat.length == m
+/// 2. mat[i].length == n
+/// 3. 1 <= m, n <= 500
+/// 4. mat[i][j] is either 0 or 1.
+/// </summary>
+int LeetCodeBinarySearch::maxArea(vector<vector<int>>& mat)
+{
+    vector<vector<int>> square(mat.size(), vector<int>(mat[0].size()));
+    int n = mat.size();
+    int m = mat[0].size();
+    int max_side = 0;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            if (mat[i][j] == 1)
+            {
+                square[i][j] = 1;
+                if (i > 0 && j > 0)
+                {
+                    square[i][j] += min({ square[i - 1][j], square[i][j - 1], square[i - 1][j - 1] });
+                }
+                max_side = max(max_side, square[i][j]);
+            }
+        }
+    }
+    int first = 1, last = max_side;
+    int result = 0;
+    while (first <= last)
+    {
+        int middle = first + (last - first) / 2;
+        set<int> rows, cols;
+        bool valid = false;
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                if (square[i][j] >= middle)
+                {
+                    rows.insert(i);
+                    cols.insert(j);
+                    if ((i - *rows.begin()) >= middle || (j - *cols.begin()) >= middle || (*cols.rbegin() - j) >= middle)
+                    {
+                        valid = true;
+                        break;
+                    }
+                }
+            }
+            if (valid) break;
+        }
+        if (valid)
+        {
+            result = middle;
+            first = middle + 1;
+        }
+        else
+        {
+            last = middle - 1;
+        }
+    }
+    return result * result;
+}
 #pragma endregion  

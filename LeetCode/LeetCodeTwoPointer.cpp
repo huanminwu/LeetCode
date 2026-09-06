@@ -4181,4 +4181,164 @@ int LeetCodeTwoPointer::getLengthFrequency(vector<int>& nums)
     }
     return result;
 }
+
+/// <summary>
+/// Leet Code #3979. Maximum Valid Pair Sum
+///
+/// Medium
+///
+/// You are given an integer array nums of length n and an integer k.
+///
+/// A pair of indices(i, j) is called valid if:
+///
+/// 0 <= i < j < n
+/// j - i >= k
+/// Return the maximum value of nums[i] + nums[j] among all valid pairs.
+///
+/// Example 1:
+/// Input: nums = [1, 3, 5, 2, 8], k = 2
+/// Output : 13
+/// Explanation :
+///
+/// The valid pairs are :
+///
+/// (0, 2) : nums[0] + nums[2] = 6
+/// (0, 3) : nums[0] + nums[3] = 3
+/// (0, 4) : nums[0] + nums[4] = 9
+/// (1, 3) : nums[1] + nums[3] = 5
+/// (1, 4) : nums[1] + nums[4] = 11
+/// (2, 4) : nums[2] + nums[4] = 13
+/// Thus, the answer is 13.
+///
+/// Example 2 :
+/// Input : nums = [5, 1, 9], k = 1
+/// Output : 14
+/// Explanation :
+/// Since k = 1, every pair is valid.
+/// The maximum value is obtained from a pair(0, 2)​, 
+/// which is nums[0] + nums[2] = 5 + 9 = 14.
+/// Thus, the answer is 14.
+///
+/// Constraints :
+/// 1. 2 <= n == nums.length <= 105
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. 1 <= k <= n - 1
+/// </summary>
+int LeetCodeTwoPointer::maxValidPairSum(vector<int>& nums, int k)
+{
+    int result = 0;
+    int max_val = 0;
+    int n = nums.size();
+    deque<int> dq;
+    for (int i = 0; i < n; i++)
+    {
+        dq.push_back(nums[i]);
+        if ((int)dq.size() > k)
+        {
+            max_val = max(max_val, dq.front());
+            dq.pop_front();
+            result = max(result, max_val + nums[i]);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code #4032. Longest Subarray With at Most K Distinct Prime Factors
+///
+/// Medium
+/// 
+/// You are given an integer array nums consisting of positive integers 
+/// and an integer k.
+///
+/// The prime factor set of a subarray is the union of the distinct prime 
+/// factors of all its elements.
+///
+/// Return the length of the longest subarray whose prime factor set 
+/// contains at most k distinct prime factors.If no such subarray exists, 
+/// return 0.
+///
+/// Example 1:
+/// Input: nums = [7, 6, 10, 12, 11], k = 3
+/// Output : 3
+/// Explanation :
+/// Consider the subarray[6, 10, 12] :
+/// The distinct prime factors of 6 are{ 2, 3 }.
+/// The distinct prime factors of 10 are{ 2, 5 }.
+/// The distinct prime factors of 12 are{ 2, 3 }.
+/// The union of these sets is { 2, 3, 5 }, which contains 3 distinct 
+/// prime factors.
+/// No longer subarray satisfies the condition.Therefore, the answer is 3.
+///
+/// Example 2:
+/// Input: nums = [4, 6, 9, 18], k = 4
+/// Output : 4
+/// Explanation :
+/// Consider the entire array[4, 6, 9, 18] :
+/// The distinct prime factors of 4 are{ 2 }.
+/// The distinct prime factors of 6 are{ 2, 3 }.
+/// The distinct prime factors of 9 are{ 3 }.
+/// The distinct prime factors of 18 are{ 2, 3 }.
+/// The union of these sets is { 2, 3 }, which contains 2 distinct prime 
+/// factors.
+/// Since 2 <= 4, the entire array is valid.Therefore, the answer is 4.
+///
+/// Example 3:
+/// Input: nums = [6, 10, 15], k = 2
+/// Output : 1
+/// Explanation :
+/// Every subarray of length at least 2 has prime factor set{ 2, 3, 5 }, 
+/// which contains 3 distinct prime factors.
+/// Since 3 > 2, only subarrays of length 1 are valid.Therefore, 
+/// the answer is 1.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 2 <= nums[i] <= 10^5
+/// 3. 1 <= k <= 10^4
+/// </summary>
+int LeetCodeTwoPointer::longestSubarrayKMostPrimes(vector<int>& nums, int k)
+{
+    unordered_map<int, int> prime_count;
+    int left = -1;
+    int result = 0;
+    vector<vector<int>>primes(nums.size());
+
+    for (int right = 0; right < (int)nums.size(); right++)
+    {
+        int value = nums[right];
+        for (int prime = 2; prime * prime <= value; prime++)
+        {
+            if (value % prime == 0)
+            {
+                primes[right].push_back({prime});
+                prime_count[prime]++;
+                while (value % prime == 0)
+                {
+                    value /= prime;
+                }
+            }
+        }
+        if (value > 1)
+        {
+            primes[right].push_back({ value });
+            prime_count[value]++;
+        }
+        while ((int)prime_count.size() > k)
+        {
+            left++;
+            for (int prime : primes[left])
+            {
+                prime_count[prime]--;
+                if (prime_count[prime] == 0)
+                {
+                    prime_count.erase(prime);
+                }
+            }
+        }
+        result = max(result, right - left);
+    }
+    return result;
+}
+
 #pragma endregion

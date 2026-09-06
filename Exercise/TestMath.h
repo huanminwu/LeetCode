@@ -428,5 +428,18 @@ void TestLeetCode3954(void);
 void TestLeetCode3947(void);
 void TestLeetCode3958(void);
 void TestLeetCode3959(void);
+void TestLeetCode3982(void);
+void TestLeetCode3984(void);
+void TestLeetCode3987(void);
+void TestLeetCode3996(void);
+void TestLeetCode3993(void);
+void TestLeetCode4000(void);
+void TestLeetCode4002(void);
+void TestLeetCode4010(void);
+void TestLeetCode4024(void);
+void TestLeetCode4022(void);
+void TestLeetCode4034(void);
+void TestLeetCode4035(void);
+void TestLeetCode4039(void);
 void TestLeetCodeMath(void);
 #endif  // TestMath

@@ -19310,7 +19310,636 @@ public:
     ///    digits, and special characters from "!@#$".
     /// </summary>
     int passwordStrength(string password);
- 
+
+    /// <summary> 
+    /// Leet Code #3980. Minimum Operations to Transform Binary String
+    /// 
+    /// Medium
+    /// 
+    /// ou are given two binary strings s1 and s2 of the same length n.
+    /// You can perform the following operations on s1 any number of times, 
+    /// in any order :
+    /// Choose an index i such that s1[i] == '0', and change it to '1'.
+    /// Choose an index i such that 0 <= i < n - 1, and both s1[i] and 
+    /// s1[i + 1] are '1'.Change both characters to '0'.
+    /// Return the minimum number of operations required to make s1 equal 
+    /// to s2.If it is impossible, return -1.
+    ///
+    /// Example 1:
+    /// Input: s1 = "11", s2 = "00"
+    /// Output : 1
+    /// Explanation :
+    /// Change indices 0 and 1 from '1' to '0' in one operation, 
+    /// so "11" becomes "00".Thus, the answer is 1.
+    ///
+    /// Example 2 :
+    /// Input : s1 = "01", s2 = "10"
+    /// Output : 3
+    /// Explanation :
+    /// Change index 0 from '0' to '1', so "01" becomes "11".
+    /// Change indices 0 and 1 from '1' to '0', so "11" becomes "00".
+    /// Change index 0 from '0' to '1', so "00" becomes "10".
+    /// Thus, the answer is 3.
+    /// 
+    /// Example 3:
+    /// Input: s1 = "1", s2 = "0"
+    /// Output : -1
+    /// Explanation :
+    /// The first operation cannot change '1' to '0', and the second 
+    /// operation requires two adjacent characters.Therefore, it is impossible.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n == s1.length == s2.length <= 10^5
+    /// 2. s1 and s2 consist only of '0' and '1'.
+    /// </summary>
+    int minOperations_binarystring(string s1, string s2);
+
+    /// <summary> 
+    /// Leet Code #3983. Subsequence After One Replacement
+    /// 
+    /// Medium
+    ///
+    /// You are given two strings s and t consisting of lowercase English 
+    /// letters.
+    ///
+    /// You may choose at most one index in s and replace the character at 
+    /// that index with any lowercase English letter.
+    ///
+    /// Return true if it is possible to make s a subsequence of t; otherwise, 
+    /// return false.
+    ///
+    /// Example 1:
+    /// Input: s = "cat", t = "chat"
+    /// Output : true
+    /// Explanation :
+    /// Replace s[1] from 'a' to 'h'.The resulting string is "cht".
+    /// "cht" is a subsequence of "chat" because we can match 'c', 'h', 
+    /// and 't' in order.
+    ///
+    /// Example 2 :
+    /// Input : s = "plane", t = "apple"
+    /// Output : false
+    /// Explanation :
+    /// The characters 'p', 'l', and 'e' can be matched in t, but the 
+    /// remaining characters cannot be matched while preserving the 
+    /// required order.
+    /// Even after replacing any one character in s, it is impossible 
+    /// to make s a subsequence of t.
+    ///
+    /// Constraints :
+    /// 1. 1 <= s.length, t.length <= 10^5
+    /// 2. s and t consist only of lowercase English letters.
+    /// </summary>
+    bool canMakeSubsequenceII(string s, string t);
+
+    /// <summary> 
+    /// Leet Code #3986. Number of Elapsed Seconds Between Two Times
+    /// 
+    /// Easy
+    ///
+    /// You are given two valid times startTime and endTime, each represented 
+    /// as a string in the format "HH:MM:SS".
+    ///
+    /// Return the number of seconds that have elapsed from startTime to 
+    /// endTime.
+    ///
+    /// Example 1:
+    /// Input: startTime = "01:00:00", endTime = "01:00:25"
+    /// Output : 25
+    /// Explanation :
+    /// endTime is 25 seconds ahead of startTime.
+    ///
+    /// Example 2 :
+    /// Input : startTime = "12:34:56", endTime = "13:00:00"
+    /// Output : 1504
+    /// Explanation :
+    /// endTime is 25 minutes and 4 seconds ahead of startTime, which 
+    /// equals 1504 seconds.
+    ///
+    /// Constraints:
+    /// 1. startTime.length == 8
+    /// 2. endTime.length == 8
+    /// 3. startTime and endTime are valid times in the format "HH:MM:SS"
+    /// 4. 00 <= HH <= 23
+    /// 5. 00 <= MM <= 59
+    /// 6. 00 <= SS <= 59
+    /// 7. endTime is not earlier than startTime
+    /// </summary>
+    int secondsBetweenTimes(string startTime, string endTime);
+
+    /// <summary> 
+    /// Leet Code #3992. Rearrange String to Avoid Character Pair
+    /// 
+    /// Easy
+    /// 
+    /// You are given a string s and two distinct lowercase English letters 
+    /// x and y.
+    ///
+    /// Rearrange the characters of s to construct a new string t such that :
+    ///
+    /// 1. t is a permutation of s.
+    /// 2. Every occurrence of y appears before every occurrence of x in t.
+    /// 3. Return any valid string t.
+    ///
+    /// Example 1:
+    ///
+    /// Input: s = "aabc", x = "a", y = "c"
+    /// Output : "cbaa"
+    ///
+    /// Explanation :
+    ///
+    /// The string "cbaa" is a permutation of "aabc", and every occurrence 
+    /// of 'c' appears before every occurrence of 'a'.
+    ///
+    /// Example 2 :
+    /// Input : s = "dcab", x = "d", y = "b"
+    /// Output : "cabd"
+    /// Explanation :
+    /// The string "cabd" is a permutation of "dcab", and every occurrence 
+    /// of 'b' appears before every occurrence of 'd'.
+    ///
+    /// Example 3 :
+    /// Input : s = "axe", x = "o", y = "x"
+    /// Output : "axe"
+    /// Explanation :
+    /// The string "axe" is already valid.Since 'o' does not occur in the 
+    /// string, the required condition is automatically satisfied.
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 100 
+    /// 2. s consists of lowercase English letters.
+    /// 3. x and y are lowercase English letters.
+    /// 4. x != y
+    /// </summary>
+    string rearrangeString(string s, char x, char y);
+
+    /// <summary> 
+    /// Leet Code #3998. Transform Binary String Using Subsequence Sort
+    /// 
+    /// Medium
+    /// 
+    /// You are given a binary string s.
+    ///
+    /// You are also given an array of strings strs, where each strs[i] has 
+    /// the same length as s and consists of characters '0', '1', and '?'.
+    /// Each '?' can be replaced by either '0' or '1'.
+    ///
+    /// You may perform the following operation any number of times
+    /// (including zero) :
+    ///
+    /// Choose any subsequence sub of s.
+    /// Sort sub in non - decreasing order.
+    /// Replace the chosen subsequence in s with the sorted sub, keeping all 
+    /// other characters unchanged.
+    /// Return a boolean array ans, where ans[i] is true if it's possible to 
+    /// replace all ' ? ' in strs[i] with '0' or '1' and transform s into the 
+    /// resulting string using the allowed operation above, otherwise return 
+    /// false.
+    ///
+    /// Example 1 :
+    /// Input : s = "101", strs = ["1?1", "0?1", "0?0"]
+    /// Output : [true, true, false]
+    /// Explanation :
+    /// i->strs[i]->Replacement->Result strs[i]->Operation(s)->Result
+    /// 0->"1?1" ? -> 0->"101"->Matches s.->true
+    /// 1->"0?1" ? -> 1->"011"->Select the subsequence at indices[0..2] 
+    /// of s -> "101".
+    /// Sort "101" to get "011" = strs[i].->true
+    /// 2->"0?0" ? -> 0 or 1->"000" or "010"->Not feasible.->false
+    /// Thus, ans = [true, true, false].
+    ///
+    /// Example 2 :
+    /// Input : s = "1100", strs = ["0011", "11?1", "1?1?"]
+    /// Output : [true, false, true]
+    /// Explanation :
+    /// i->strs[i]->Replacement->Result strs[i]->Operation(s)->Result
+    /// 0->"0011" -> "0011"->Select the subsequence at indices[0..3] of 
+    /// s -> "1100".
+    /// Sort "1100" to get "0011" = strs[i].->true
+    /// 1->"11?1" ? -> 0->"1101"->Not feasible.->false
+    /// 2->"1?1?"->First ? -> 0
+    /// Second ? -> 0->"1010"->Select the subsequence at indices[1, 2] of 
+    /// s -> "10".
+    /// Sort "10" to get "01", so s = "1010".->true
+    /// Thus, ans = [true, false, true].
+    ///
+    /// Example 3 :
+    /// Input : s = "1010", strs = ["0011"]
+    /// Output : [true]
+    /// Explanation :
+    /// i->strs[i]->Replacement->Result strs[i]->Operation(s)->Result
+    /// 0->"0011" - "0011"->Select the subsequence at indices[0, 2, 3] of 
+    /// s -> "110".
+    /// Sort "110" to get "011", so s = "0011" = strs[i].->true
+    /// Thus, ans = [true].
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == s.length <= 2000
+    /// 2. s[i] is either '0' or '1'.
+    /// 3. 1 <= strs.length <= 2000
+    /// 4. strs[i].length == n
+    /// 5. strs[i] is either '0', '1', or '?'
+    /// </summary>
+    vector<bool> transformStr(string s, vector<string>& strs);
+    
+    /// <summary> 
+    /// Leet Code #3995. Minimum Cost to Convert String III
+    /// 
+    /// Hard
+    ///
+    /// You are given two strings, source and target.
+    ///
+    /// You are also given a 2D string array rules, where rules[i] = 
+    /// [patterni, replacementi], and an integer array costs, where costs[i] 
+    /// is the base cost of applying rules[i].Both arrays have the same length.
+    /// Additionally, patterni and replacementi have the same length.
+    ///
+    /// You may apply any rule any number of times.Each rule application works 
+    /// as follows :
+    ///
+    /// Choose an index l such that the range of positions from l to 
+    /// l + patterni.length - 1 exists in the current string and none of these 
+    /// positions has been used in a previous rule application.
+    /// For each index j, the character patterni[j] must either be equal to 
+    /// the current character at position l + j, or be '*'.
+    /// Replace the characters in this range with replacementi.The replacement 
+    /// is used exactly as given and does not contain wildcards.
+    /// The cost of this rule application is costs[i] plus the number of '*' 
+    /// characters in patterni.
+    /// Once a character position has been used in a rule application, it 
+    /// cannot be used in any later rule application.
+    /// Since every patterni and replacementi have the same length, character 
+    /// positions are preserved after every rule application.
+    ///
+    /// Return the minimum total cost required to transform source into target.
+    /// If it is impossible, return -1.
+    ///
+    /// Example 1:
+    /// Input: source = "hello", target = "world", rules = [["he", "wo"], 
+    /// ["llo", "rld"]], costs = [3, 4]
+    /// Output : 7
+    /// Explanation :
+    /// Apply rules[0] to replace "he" with "wo" at cost 3, so the string 
+    /// becomes "wollo".
+    /// Apply rules[1] to replace "llo" with "rld" at cost 4, so the string 
+    /// becomes "world".
+    /// The total cost is 3 + 4 = 7.
+    ///
+    /// Example 2 :
+    /// Input : source = "cat", target = "dog", rules = [["c*t", "dog"]], 
+    /// costs = [2]
+    /// Output : 3
+    /// Explanation :
+    /// Apply rules[0] to replace "cat" with "dog".The wildcard '*' 
+    /// matches 'a', adding 1 to the base cost 2.
+    /// The total cost is 2 + 1 = 3.
+    ///
+    /// Example 3 :
+    /// Input : source = "test", target = "next", rules = [["*e*t", "next"]], 
+    /// costs = [4]
+    /// Output : 6
+    /// Explanation :
+    /// Apply rules[0] to replace "test" with "next".The first wildcard 
+    /// matches 't' and the second wildcard matches 's', adding 2 to the base 
+    /// cost 4.
+    /// The total cost is 4 + 2 = 6.
+    /// 
+    /// Example 4 :
+    /// Input : source = "ab", target = "bc", rules = [["a*", "bd"]], 
+    /// costs = [9]
+    /// Output : -1
+    /// Explanation :  
+    /// No sequence of rule applications can transform source into target, so 
+    /// the answer is - 1.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= source.length == target.length <= 5000
+    /// 2. source and target consist of lowercase English letters.
+    /// 3. 1 <= rules.length == costs.length <= 200
+    /// 4. rules[i] = [patterni, replacementi]
+    /// 5. 1 <= patterni.length == replacementi.length <= 20
+    /// 6. patterni contains at least one lowercase English letter and at 
+    /// most 5 '*' characters.
+    /// 7. replacementi contains only lowercase English letters.
+    /// 8. 1 <= costs[i] <= 1000
+    /// </summary>
+    int minCost(string source, string target, vector<vector<string>>& rules, vector<int>& costs);
+
+    /// <summary> 
+    /// Leet Code #3999. Minimum Number of String Groups Through 
+    ///                  Transformations
+    /// </summary>
+    int minimumGroups_rotate_hashcode(string str);
+
+    /// <summary> 
+    /// Leet Code #3999. Minimum Number of String Groups Through 
+    ///                  Transformations
+    /// Hard
+    /// 
+    /// You are given an array of strings words.
+    /// Define a transformation on a string s as follows :
+    /// 
+    /// Let E be the subsequence of characters at even indices of s.
+    /// Let O be the subsequence of characters at odd indices of s.
+    /// Independently cyclically shift E and O by any number of positions to 
+    /// the right, possibly zero.
+    /// Reconstruct the string by placing the shifted E characters back into 
+    /// even indices and the shifted O characters back into odd indices.
+    /// Two strings are equivalent if one can be transformed into the other 
+    /// by a single transformation.
+    ///
+    /// Partition words into the minimum number of groups such that :
+    /// Every string belongs to exactly one group.
+    /// Every pair of strings in the same group are equivalent.
+    /// Return an integer denoting the minimum number of groups.
+    ///
+    /// Example 1:
+    /// Input: words = ["ntgwz", "zwntg"]
+    /// Output : 1
+    /// Explanation :
+    /// For "ntgwz", the even - index subsequence is "ngz" and the 
+    /// odd - index subsequence is "tw".
+    /// Shift "ngz" right by 1 position to obtain "zng", and shift 
+    /// "tw" right by 1 position to obtain "wt".
+    /// After reconstructing the string, we obtain "zwntg".
+    /// Therefore, both strings are equivalent and belong to the same group.
+    ///
+    /// Example 2:
+    /// Input: words = ["abc", "cab", "bac", "acb", "bca", "cba"]
+    /// Output : 3
+    /// Explanation :
+    /// The strings can be partitioned into the following groups :
+    /// ["abc", "cba"]
+    /// ["cab", "bac"]
+    /// ["acb", "bca"]
+    ///
+    /// Example 3 :
+    /// Input : words = ["leet", "abb", "bab", "deed", "edde", "code", "bba"]
+    /// Output : 5
+    /// Explanation :
+    /// The strings can be partitioned into the following groups :
+    /// ["abb", "bba"]
+    /// ["deed", "edde"]
+    /// ["leet"]
+    /// ["bab"]
+    /// ["code"]
+    /// All pairs of strings in each group are equivalent.
+    ///
+    /// Constraints:
+    /// 1. 1 <= words.length <= 10^5
+    /// 2. 1 <= words[i].length <= 5 * 10^5
+    /// 3. The sum of words[i].length does not exceed 5 * 10^5.
+    /// 4. words[i] consist of lowercase English letters.
+    /// </summary>
+    int minimumGroups(vector<string>& words);
+
+    /// <summary> 
+    /// Leet Code #4006. Count Valid Prefixes
+    /// 
+    /// Easy
+    /// 
+    /// You are given a binary string s.
+    /// 
+    /// A prefix of s is considered valid if its characters can be rearranged 
+    /// to form an alternating string.
+    ///
+    /// Return the number of valid prefixes of s.
+    /// A string is considered alternating if no two adjacent characters are 
+    /// equal.
+    /// 
+    /// Example 1:
+    /// Input: s = "00101"
+    /// Output : 3
+    /// Explanation :
+    /// The valid prefixes are :
+    /// "0" : It is already an alternating string.
+    /// "001" : It can be rearranged into "010", which is an alternating 
+    /// string.
+    /// "00101" : It can be rearranged into "01010", which is an alternating 
+    /// string.
+    /// Thus, the answer is 3.
+    ///
+    /// Example 2 :
+    /// Input : s = "101"
+    /// Output : 3
+    /// Explanation :
+    /// All prefixes of s = "101" are already alternating strings.Thus, 
+    /// the answer is 3.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 100
+    /// 2. s consists only of '0' and '1'.
+    /// </summary>
+    int countValidPrefixes(string s);
+
+    /// <summary> 
+    /// Leet Code #4019. Merge Close Characters II
+    /// 
+    /// Medium
+    ///
+    /// You are given a string s consisting of lowercase English letters and 
+    /// an integer k.
+    ///
+    /// Two equal characters s[i] and s[j], where 0 <= i < j < s.length, are 
+    /// considered close if j - i <= k.All indices refer to the current string.
+    ///
+    /// Repeatedly perform the following operation until no close pair remains :
+    /// Among all close pairs(i, j), choose the pair with the smallest i.If 
+    /// multiple pairs have the same i, choose the one with the smallest j.
+    /// Merge the right character into the left character by removing s[j] 
+    /// from s.The character s[i] remains unchanged, and the remaining 
+    /// characters are reindexed.
+    /// Return the resulting string after performing all possible merges.
+    ///
+    /// Example 1:
+    /// Input: s = "abca", k = 3
+    /// Output : "abc"
+    /// Explanation :
+    /// The characters 'a' at indices 0 and 3 are close because 3 - 0 = 3 <= k.
+    /// Remove the right 'a', resulting in s = "abc".
+    /// No close pair remains, so no further merges are performed.
+    ///
+    /// Example 2 :
+    /// Input : s = "aabca", k = 2
+    /// Output : "abca"
+    /// Explanation :
+    /// The characters 'a' at indices 0 and 1 are close because 1 - 0 = 1 <= k.
+    /// Remove the right 'a', resulting in s = "abca".
+    /// The remaining 'a' characters are at indices 0 and 3. 
+    /// Since 3 - 0 = 3 > k, no further merges are performed.
+    ///
+    /// Example 3:
+    /// Input: s = "yybyzybz", k = 2
+    /// Output : "ybzybz"
+    /// Explanation :
+    /// The characters 'y' at indices 0 and 1 are close because 1 - 0 = 1 <= k.
+    /// This pair has the smallest left index among all close pairs.
+    /// Remove the right 'y', resulting in s = "ybyzybz".
+    /// The characters 'y' at indices 0 and 2 are now close 
+    /// because 2 - 0 = 2 <= k.
+    /// Remove the right 'y', resulting in s = "ybzybz".
+    /// No close pair remains, so no further merges are performed.
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5 
+    /// 2. 1 <= k <= s.length
+    /// 3. 1 <= s.length <= 5 * 10^5
+    /// 4. s consists of lowercase English letters.
+    /// </summary>
+    string mergeCharacters(string s, int k);
+
+    /// <summary> 
+    /// Leet Code #4026. Maximum Gap Between Stations
+    /// 
+    /// Medium
+    ///
+    /// You are given two strings skill and station of lengths n and m, 
+    /// respectively.
+    ///
+    /// skill[i] represents the skill of worker i, and station[j] represents 
+    /// the skill supported by station j.
+    ///
+    /// You must assign every worker to a distinct station.Let ji be the index 
+    /// of the station assigned to worker i.A valid assignment must satisfy :
+    ///
+    /// station[ji] == skill[i] for every 0 <= i < n.
+    /// The assigned station indices must be strictly increasing in worker 
+    /// order, meaning j0 < j1 < ... < jn - 1.
+    /// The gap of an assignment is the maximum difference between the station 
+    /// indices assigned to two consecutive workers.In other words, it is 
+    /// max(ji - ji - 1) over all 1 <= i < n.
+    /// If there is only one worker, the gap is 0.
+    ///
+    /// Return the maximum possible gap among all valid assignments.It is 
+    /// guaranteed that at least one valid assignment exists.
+    ///
+    /// Example 1:
+    /// Input: skill = "aa", station = "aaaa"
+    /// Output : 3
+    /// Explanation :
+    /// The two workers must be assigned to two different 'a' stations.
+    /// Assigning them to stations[0, 3] gives a gap of 3.
+    ///
+    /// Example 2 :
+    /// Input : skill = "xyz", station = "xyzz"
+    /// Output : 2
+    /// Explanation :
+    /// Assign worker 0 to station j = 0, and worker 1 to station j = 1.
+    /// To maximize the gap, assign worker 2 to station j = 3.
+    /// This gives the assignment[0, 1, 3] with gaps[1, 2], so the gap is 2.
+    ///
+    /// Example 3 :
+    /// Input : skill = "cbc", station = "cbcdbc"
+    /// Output : 4
+    /// Explanation :
+    /// Assign worker 0 to station j = 0, and worker 1 to station j = 1.
+    /// To maximize the gap, assign worker 2 to station j = 5.
+    /// This gives the assignment[0, 1, 5] with gaps[1, 4], so the gap is 4.
+    ///
+    /// Constraints :
+    /// 1. skill.length == n
+    /// 2. station.length == m
+    /// 3. 1 <= n <= m <= 10^5
+    /// 4. skill and station consist of lowercase English letters.
+    /// 5. It is guaranteed that a valid assignment exists for every worker.
+    /// </summary>
+    int maximumGap(string skill, string station);
+
+    /// <summary> 
+    /// Leet Code #4030. Check ASCII Palindromic.
+    /// 
+    /// Easy
+    ///
+    /// You are given a string s consisting of lowercase English letters.
+    /// Construct a binary string by replacing each character in s with 
+    /// the 8 - bit binary representation of its ASCII value, including 
+    /// leading zeros, while preserving the original order of the characters.
+    ///
+    /// Return true if the resulting binary string is a palindrome.Otherwise, 
+    /// return false.
+    ///
+    /// Example 1:
+    /// Input: s = "ff"
+    /// Output : true
+    /// Explanation :
+    /// The ASCII value of f is 102, whose 8 - bit binary representation 
+    /// is 01100110.
+    /// Thus, the binary string is 0110011001100110.
+    /// Since this binary string is a palindrome, the output is true.
+    /// Example 2 :
+    ///
+    /// Input : s = "leet"
+    /// Output : false
+    /// Explanation :
+    /// The ASCII values of l, e, e, and t are 108, 101, 101, and 116, 
+    /// respectively.
+    /// Their 8 - bit binary representations are 01101100, 01100101, 
+    /// 01100101, and 01110100.
+    /// Thus, the binary string is 01101100011001010110010101110100.
+    /// Since this binary string is not a palindrome, the output is false.
+    ///
+    /// Constraints :
+    /// 1. 1 <= s.length <= 100
+    /// 2. s consists of lowercase English letters.
+    /// </summary>
+    bool isPalindromic(string s);
+
+    /// <summary> 
+    /// Leet Code #4036. Lexicographically Largest String After Pair 
+    ///                  Transformations
+    /// 
+    /// Medium
+    /// 
+    /// You are given an integer array nums.
+    /// 
+    /// For each integer x in nums, start with a string consisting of exactly 
+    /// x lowercase 'a' characters.
+    ///
+    /// You may perform the following operation any number of times(including 
+    /// zero) :
+    ///
+    /// Choose two adjacent equal letters and replace them with the next 
+    /// letter in the alphabet.
+    /// For example, "aa" can be replaced with "b", and "bb" can be replaced 
+    /// with "c".The pair "zz" cannot be replaced.
+    ///
+    /// For each x, determine the lexicographically largest string that can 
+    /// be obtained.
+    ///
+    /// Return an array of strings where the ith string is the answer for 
+    /// nums[i].
+    ///
+    /// A string a is lexicographically larger than a string b if, at the 
+    /// first position where they differ, a contains a letter that appears 
+    /// later in the alphabet than the corresponding letter in b.If the 
+    /// first min(a.length, b.length) characters are equal, the longer 
+    /// string is lexicographically larger.
+    ///
+    /// Example 1:
+    /// Input: nums = [2, 5, 7]
+    /// Output : ["b", "ca", "cba"]
+    /// Explanation :
+    /// nums[0] = 2 : "aa" → "b".
+    /// nums[1] = 5 : "aaaaa" → "baaa" → "bba" → "ca".
+    /// nums[2] = 7 : "aaaaaaa" → "baaaaa" → "bbaaa" → "bbba" → "cba".
+    /// Therefore, ans = ["b", "ca", "cba"].
+    ///
+    /// Example 2 :
+    /// Input : nums = [3, 9, 1]
+    /// Output : ["ba", "da", "a"]
+    /// Explanation :
+    /// nums[0] = 3 : "aaa" → "ba".
+    /// nums[1] = 9 : "aaaaaaaaa" → "baaaaaaa" → "bbaaaaa" → 
+    /// "bbbaaa" → "bbbba" → "cbba" → "cca" → "da".
+    /// nums[2] = 1 : No transformation can be applied, so the result is "a".
+    /// Therefore, ans = ["ba", "da", "a"].
+    /// 
+    /// Constraints :
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^8
+    /// </summary>
+    vector<string> largestString(vector<int>& nums);
+
 #pragma endregion
 };
 

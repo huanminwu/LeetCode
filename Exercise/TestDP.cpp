@@ -6806,7 +6806,7 @@ void TestLeetCode3981(void)
     Logger::WriteMessage("Test Leet Code 3981");
     LeetCodeDP leetCode;
     string word1 = "abc", word2 = "bac", target = "abc";
-    int result = leetCode.interleaveCharacters(word1, word2, target);
+    long long result = leetCode.interleaveCharacters(word1, word2, target);
     Logger::WriteMessage("word1 = " + word1 + ", word2 = " + word2 + ", target = " + target);
     Logger::WriteMessage("result = " + to_string(result));
 
@@ -6826,8 +6826,69 @@ void TestLeetCode3981(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode4027(void)
+{
+    Logger::WriteMessage("Test Leet Code 4027");
+    LeetCodeDP leetCode;
+    int n = 9, start = 0;
+    vector<vector<int>> requests = {{0, 8}, {6, 5}};
+    long long result = leetCode.elevatorRequestsIII (n, start, requests);
+    Logger::WriteMessage("n = " + to_string(n) + ", start = " + to_string(start));
+    Logger::WriteMessage("requests = ");
+    Logger::WriteMessage(requests);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 8, start = 5;
+    requests = { {1, 7}, {7, 3} };
+    result = leetCode.elevatorRequestsIII(n, start, requests);
+    Logger::WriteMessage("n = " + to_string(n) + ", start = " + to_string(start));
+    Logger::WriteMessage("requests = ");
+    Logger::WriteMessage(requests);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 7, start = 3;
+    requests = { {0, 5},{0, 1},{6, 3} };
+    result = leetCode.elevatorRequestsIII(n, start, requests);
+    Logger::WriteMessage("n = " + to_string(n) + ", start = " + to_string(start));
+    Logger::WriteMessage("requests = ");
+    Logger::WriteMessage(requests);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
+void TestLeetCode4040(void)
+{
+    Logger::WriteMessage("Test Leet Code 4040");
+    LeetCodeDP leetCode;
+    vector<int> nums = {5, 6, 10};
+    int sum = 4;
+    int result = leetCode.minOperationsI(nums, sum);
+    Logger::WriteMessage("nums = ");
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("sum = " + to_string(sum));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 10,2 };
+    sum = 13;
+    result = leetCode.minOperationsI(nums, sum);
+    Logger::WriteMessage("nums = ");
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("sum = " + to_string(sum));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 6,3 };
+    sum = 8;
+    result = leetCode.minOperationsI(nums, sum);
+    Logger::WriteMessage("nums = ");
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("sum = " + to_string(sum));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode4040();
+    TestLeetCode4027();
     TestLeetCode3976();
     TestLeetCode3956();
     TestLeetCode3952();

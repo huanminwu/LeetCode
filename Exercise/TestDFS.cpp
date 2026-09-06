@@ -3038,7 +3038,6 @@ void TestLeetCode3906(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-
 void TestLeetCode3966(void)
 {
     Logger::WriteMessage("Test Leet Code 3966");
@@ -3065,8 +3064,35 @@ void TestLeetCode3966(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode4009(void)
+{
+    Logger::WriteMessage("Test Leet Code 4009");
+    LeetCodeDFS leetCode;
+    vector<int> demand = {6, 8, 4, 6, 5};
+    vector<int> fuel = {16, 13};
+    int result = leetCode.minMaxWaitingTime(demand, fuel);
+    Logger::WriteMessage(demand);
+    Logger::WriteMessage(fuel);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    demand = { 10,15 };
+    fuel = { 12,17 };
+    result = leetCode.minMaxWaitingTime(demand, fuel);
+    Logger::WriteMessage(demand);
+    Logger::WriteMessage(fuel);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    demand = { 10,5 };
+    fuel = { 8,8 };
+    result = leetCode.minMaxWaitingTime(demand, fuel);
+    Logger::WriteMessage(demand);
+    Logger::WriteMessage(fuel);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode4009();
     TestLeetCode3966();
     TestLeetCode3906();
     TestLeetCode3869();

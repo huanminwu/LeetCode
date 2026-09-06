@@ -5100,9 +5100,92 @@ void TestLeetCode3974(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode4001(void)
+{
+    Logger::WriteMessage("Test Leet Code 4001");
+    LeetCodeSort leetCode;
+    vector<vector<int>> series1 = { {1, 3}, {4, 1} }, series2 = { {2, 2}, {5, 2} };
+    vector<vector<int>> result = leetCode.aggregateTimeSeries(series1, series2);
+    Logger::WriteMessage(series1);
+    Logger::WriteMessage(series2);
+    Logger::WriteMessage(result);
+
+    series1 = { {1, 5}, {3, 1} }, series2 = { {2, 2} };
+    result = leetCode.aggregateTimeSeries(series1, series2);
+    Logger::WriteMessage(series1);
+    Logger::WriteMessage(series2);
+    Logger::WriteMessage(result);
+
+    series1 = { {1, 5} }, series2 = { {1000000000, 2} };
+    result = leetCode.aggregateTimeSeries(series1, series2);
+    Logger::WriteMessage(series1);
+    Logger::WriteMessage(series2);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode4014(void)
+{
+    Logger::WriteMessage("Test Leet Code 4014");
+    LeetCodeSort leetCode;
+    vector<int> prices = { 10, 30, 21 };
+    vector<int> discounts = { 50, 60 };
+    double result = leetCode.minPrice(prices, discounts);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage(discounts);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    prices = { 100, 70 };
+    discounts = { 10, 40, 50 };
+    result = leetCode.minPrice(prices, discounts);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage(discounts);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    prices = { 7, 3, 9 };
+    discounts = { 100, 100 };
+    result = leetCode.minPrice(prices, discounts);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage(discounts);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4025(void)
+{
+    Logger::WriteMessage("Test Leet Code 4025");
+    LeetCodeSort leetCode;
+    int period = 8;
+    vector<int> lights = { 2, 3 };
+    vector<int> arrivalTime = { 2, 5, 8, 11 };
+    int result = leetCode.minPenalty(period, lights, arrivalTime);
+    Logger::WriteMessage("period = " + to_string(period));
+    Logger::WriteMessage(lights);
+    Logger::WriteMessage(arrivalTime);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    period = 10;
+    lights = { 3, 6, 8 };
+    arrivalTime = { 4, 9, 15 };
+    result = leetCode.minPenalty(period, lights, arrivalTime);
+    Logger::WriteMessage("period = " + to_string(period));
+    Logger::WriteMessage(lights);
+    Logger::WriteMessage(arrivalTime);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    period = 5;
+    lights = { 2 };
+    arrivalTime = { 2, 3, 4, 5, 6 };
+    result = leetCode.minPenalty(period, lights, arrivalTime);
+    Logger::WriteMessage("period = " + to_string(period));
+    Logger::WriteMessage(lights);
+    Logger::WriteMessage(arrivalTime);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeSort(void)
 {
+    TestLeetCode4025();
+    TestLeetCode4014();
+    TestLeetCode4001();
     TestLeetCode3974();
     TestLeetCode3961();
     TestLeetCode3942();

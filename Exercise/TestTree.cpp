@@ -4663,7 +4663,7 @@ void TestLeetCode3786(void)
     int n = 3;
     vector<vector<int>> edges = { {0, 1},{1, 2} };
     vector<int> group = { 1, 1, 1 };
-    long long result = leetCode.interactionCosts(n, edges, group);
+    long long result = leetCode.interactionCostsI(n, edges, group);
     Logger::WriteMessage("n = " + to_string(n));
     Logger::WriteMessage(edges);
     Logger::WriteMessage(group);
@@ -4672,7 +4672,7 @@ void TestLeetCode3786(void)
     n = 3;
     edges = { {0, 1},{1, 2} };
     group = { 3, 2, 3 };
-    result = leetCode.interactionCosts(n, edges, group);
+    result = leetCode.interactionCostsI(n, edges, group);
     Logger::WriteMessage("n = " + to_string(n));
     Logger::WriteMessage(edges);
     Logger::WriteMessage(group);
@@ -4681,7 +4681,7 @@ void TestLeetCode3786(void)
     n = 4;
     edges = { {0, 1},{0, 2},{0, 3} };
     group = { 1, 1, 4, 4 };
-    result = leetCode.interactionCosts(n, edges, group);
+    result = leetCode.interactionCostsI(n, edges, group);
     Logger::WriteMessage("n = " + to_string(n));
     Logger::WriteMessage(edges);
     Logger::WriteMessage(group);
@@ -4690,7 +4690,7 @@ void TestLeetCode3786(void)
     n = 2;
     edges = { {0, 1} };
     group = { 9, 8 };
-    result = leetCode.interactionCosts(n, edges, group);
+    result = leetCode.interactionCostsI(n, edges, group);
     Logger::WriteMessage("n = " + to_string(n));
     Logger::WriteMessage(edges);
     Logger::WriteMessage(group);
@@ -4984,8 +4984,69 @@ void TestLeetCode3967(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3997(void)
+{
+    Logger::WriteMessage("Test Leet Code 3997");
+    LeetCodeTree leetCode;
+    string input = "[5,3,8,2,4,7,1]";
+    TreeNode* root = leetCode.deserialize(input);
+    int result = leetCode.countDominantNodes(root);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    input = "[1,2,3,1,2]";
+    root = leetCode.deserialize(input);
+    result = leetCode.countDominantNodes(root);
+    Logger::WriteMessage("input = " + input);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4018(void)
+{
+    Logger::WriteMessage("Test Leet Code 4018");
+    LeetCodeTree leetCode;
+    int n = 3;
+    vector<vector<int>> edges = { {0, 1},{1, 2 } };
+    vector<int> group = { 1, 1, 1 };
+    long long result = leetCode.interactionCostsII(n, edges, group);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(group);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3;
+    edges = { {0, 1} , {1, 2} };
+    group = { 3, 2, 3 };
+    result = leetCode.interactionCostsII(n, edges, group);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(group);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 4;  
+    edges = { {0, 1},{0, 2},{0, 3} };
+    group = { 1, 1, 4, 4 };
+    result = leetCode.interactionCostsII(n, edges, group);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(group);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 2; 
+    edges = { {0, 1} };
+    group = { 1, 2 };
+    result = leetCode.interactionCostsII(n, edges, group);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(group);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode4018();
+    TestLeetCode3997();
     TestLeetCode3241();
     TestLeetCode3967();
     TestLeetCode3965();

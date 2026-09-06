@@ -30751,5 +30751,1134 @@ int LeetCodeMath::zigZagArraysIII(int n, int l, int r)
 
     return (int)result;
 }
+
+/// <summary>
+/// Leet Code #3982. Sum of Integers with Maximum Digit Range
+///
+/// Easy
+/// 
+/// You are given an integer array nums.
+///
+/// The digit range of an integer is defined as the difference between its 
+/// largest digit and smallest digit.
+///
+/// For example, the digit range of 5724 is 7 - 2 = 5.
+///
+/// Return the sum of all integers in nums whose digit range is equal to 
+/// the maximum digit range among all integers in the array.
+///
+/// Example 1:
+/// Input: nums = [5724, 111, 350]
+/// Output : 6074
+/// Explanation :
+/// i  nums[i]  Largest  Smallest  Digit Range
+/// 0  5724  7  2  5
+/// 1  111  1  1  0
+/// 2  350  5  0  5
+/// The maximum digit range is 5. The integers with this digit range 
+/// are 5724 and 350, so the answer is 5724 + 350 = 6074.
+///
+/// Example 2:
+/// Input: nums = [90, 900]
+/// Output : 990
+/// Explanation :
+/// i  nums[i]  Largest  Smallest  Digit Range
+/// 0  90  9  0  9
+/// 1  900  9  0  9
+/// The maximum digit range is 9. Both integers have this digit range, 
+/// so the answer is 90 + 900 = 990.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 100  
+/// 2. 10 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeMath::maxDigitRange(vector<int>& nums)
+{
+    int max_diff = 0;
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int max_digit = 0;
+        int min_digit = 9;
+        int n = nums[i];
+        while (n > 0)
+        {
+            int digit = n % 10;
+            max_digit = max(max_digit, digit);
+            min_digit = min(min_digit, digit);
+            n /= 10;
+        }
+        if (max_digit - min_digit > max_diff)
+        {
+            result = nums[i];
+            max_diff = max_digit - min_digit;
+        }
+        else if (max_digit - min_digit == max_diff)
+        {
+            result += nums[i];
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code #3984. Divisible Game
+///
+/// Medium
+///
+/// You are given an integer array nums of length n.
+///
+/// Alice and Bob are playing a game.Alice chooses :
+///
+/// An integer k such that k > 1.
+/// Two integers l and r such that 0 <= l <= r < n.
+/// Initially, both Alice's and Bob's scores are 0.
+///
+/// For each index i in the range[l, r](inclusive) :
+///
+/// If nums[i] is divisible by k, Alice's score increases by nums[i].
+/// Otherwise, Bob's score increases by nums[i].
+/// The score difference is Alice's score minus Bob's score.
+///
+/// Alice wants to maximize the score difference.If there are multiple 
+/// values of k that achieve the maximum score difference, she chooses 
+/// the smallest such k.
+///
+/// Return the product of the maximum score difference and the chosen 
+/// value of k.Since the result can be large, return it modulo 10^9 + 7.
+/// 
+/// Example 1:
+/// Input: nums = [1, 4, 6, 8]
+/// Output : 36
+/// Explanation :
+/// Alice can choose k = 2, l = 1, and r = 3.
+/// All values in nums[1..3] are divisible by 2, so Alice's score is 
+/// 4 + 6 + 8 = 18, while Bob's score is 0.
+/// The score difference is 18, which is the maximum possible.Among 
+/// all values of k that achieve this score difference, the smallest is 2.
+/// Therefore, the answer is 18 * 2 = 36.
+///
+/// Example 2:
+/// Input: nums = [2, 1, 2]
+/// Output : 6
+/// Explanation :
+/// Alice can choose k = 2, l = 0, and r = 2.
+/// The values nums[0] and nums[2] are divisible by 2, so Alice's 
+/// score is 2 + 2 = 4. The value nums[1] is not divisible by 2, so 
+/// Bob's score is 1.
+/// The score difference is 4 - 1 = 3, which is the maximum possible.
+/// Among all values of k that achieve this score difference, the 
+/// smallest is 2.
+/// Therefore, the answer is 3 * 2 = 6.
+///
+/// Example 3:
+/// Input: nums = [1]
+/// Output : 1000000005
+/// Explanation :
+///
+/// Alice must choose some k > 1. The smallest possible choice is k = 2.
+/// Since nums[0] is not divisible by 2, Alice's score is 0, while Bob's 
+/// score is 1.
+/// The score difference is - 1, which is the maximum possible.
+/// Therefore, the answer is - 1 * 2 = -2. Modulo 10^9 + 7, this 
+/// equals 1000000005.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 1000
+/// 2. 1 <= nums[i] <= 10^6
+/// </summary>
+int LeetCodeMath::divisibleGame(vector<int>& nums)
+{
+    long long MOD = 1000000007;
+    int max_num = *max_element(nums.begin(), nums.end());
+    if (max_num == 1)
+    {
+        return (int)(-2 % MOD + MOD) % MOD;
+    }
+    vector<int> prime(max_num + 1, 1);
+    for (int i = 0; i < max_num + 1; i++)
+    {
+        if ((i == 0) || (i == 1)) continue;
+        if (prime[i] == 0) continue;
+        int factor = 2;
+        while (i * factor < max_num)
+        {
+            prime[i * factor] = 0;
+            factor++;
+        }
+    }
+    long long max_diff = LLONG_MIN;
+    long long curr_k = 0;
+    for (int k = 2; k <= max_num; k++)
+    {
+        if (prime[k] == 0) continue;
+        long long alice_score = 0;
+        long long bob_score = 0;
+        vector<long long> arr(nums.size());
+        long long min_sum = 0;
+        for (size_t i = 0; i < arr.size(); i++)
+        {
+            if (nums[i] % k == 0)
+            {
+                arr[i] = nums[i];
+            }
+            else
+            {
+                arr[i] -= nums[i];
+            }
+            if (i > 0) arr[i] += arr[i - 1];
+            if (arr[i] - min_sum > max_diff)
+            {
+                max_diff = arr[i] - min_sum;
+                curr_k = k;
+            }
+            min_sum = min(min_sum, arr[i]);
+        }
+    }
+    int result = (int)(max_diff * curr_k % MOD);
+    return result;
+}
+
+/// <summary>
+/// Leet Code #3987. Minimum Total Cost to Process All Elements
+///
+/// Medium
+/// 
+/// You are given an integer array nums and an integer k.
+///
+/// Initially, you have k units of resources.
+///
+/// You must process the elements of nums from left to right.To process 
+/// the ith element, you need nums[i] resources.
+///
+/// If your available resources are less than nums[i], you may perform 
+/// an operation that increases your available resources by k.The value 
+/// of k is fixed and does not change throughout the process.The first 
+/// such operation incurs a cost of 1, the second incurs a cost of 2, 
+/// and so on.
+/// After processing the ith element, your available resources 
+/// decrease by nums[i].
+///
+/// Return an integer denoting the minimum total cost required to 
+/// process all elements.Since the answer may be very large, 
+/// return it modulo 10^9 + 7.
+///
+/// Example 1:
+/// Input: nums = [1, 2, 3, 4], k = 4
+/// Output : 3
+/// Explanation :
+/// After processing nums[0], we have 4 - 1 = 3 units of resources left.
+/// After processing nums[1], we have 3 - 2 = 1 unit of resources left.
+/// Since nums[2] = 3 and only 1 unit of resources is available, we 
+/// perform the first operation costing 1. After processing nums[2], we 
+/// have 1 + 4 - 3 = 2 units of resources left.
+/// Since nums[3] = 4 and only 2 units of resources are available, we 
+/// perform the second operation costing 2, to have 2 + 4 = 6 units of 
+/// resources, which is enough to process nums[3].
+/// Thus, the total cost is 1 + 2 = 3.
+///
+/// Example 2:
+/// Input: nums = [1, 1, 7, 14], k = 4
+/// Output : 15
+/// Explanation :
+/// After processing nums[0], we have 4 - 1 = 3 units of resources left.
+/// After processing nums[1], we have 3 - 1 = 2 units of resources left.
+/// Since nums[2] = 7 and only 2 units of resources are available, we 
+/// perform two operations costing 1 + 2 = 3. After processing nums[2], 
+/// we have 2 + 4 + 4 - 7 = 3 units of resources left.
+/// Since nums[3] = 14 and only 3 units of resources are available, we 
+/// perform three operations costing 3 + 4 + 5 = 12, to have 
+/// 3 + 4 + 4 + 4 = 15 units of resources, which is enough to process 
+/// nums[3].
+/// Thus, the total cost is 3 + 12 = 15.
+///
+/// Example 3:
+/// Input: nums = [1, 2, 3, 4], k = 10
+/// Output : 0
+/// Explanation :
+/// To process all elements, we can use the initial 10 units of resources 
+/// without performing any operations.Thus, the total cost required is 0.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// 3. 1 <= k <= 10^9
+/// </summary>
+int LeetCodeMath::minimumCost(vector<int>& nums, int k)
+{
+    long long MOD = 1000000007;
+    long long cost = 0;
+    long long available = k;
+    long long operation_count = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        if (available < nums[i])
+        {
+            long long count = (nums[i] - available + k - 1) / k;
+            available += k * count;
+            cost = (cost + (operation_count * count + (1 + count) * count / 2 % MOD) % MOD) % MOD;
+            operation_count =  (operation_count + count) % MOD;
+        }
+        available -= nums[i];
+    }
+    return (int)cost;
+}
+
+/// <summary>
+/// Leet Code #3996. Even Number of Knight Moves
+///
+/// Easy
+///
+/// You are given two integer arrays start and target, where each array is 
+/// of the form[x, y] representing a cell on a standard 8 x 8 chessboard.
+///
+/// Return true if a knight can move from start to target in an even 
+/// number of moves.Otherwise, return false.
+///
+/// Note: A valid knight move consists of moving two squares in one 
+/// direction and one square perpendicular to it.The figure below 
+/// illustrates all eight possible moves from a cell.
+///
+/// Example 1:
+/// Input: start = [1, 1], target = [2, 2]
+/// Output : true
+/// Explanation :
+/// One possible sequence of moves is(1, 1) -> (3, 2) -> (2, 4) -> (4, 3) 
+/// -> (2, 2).
+/// The knight reaches the target in 4 moves, which is even.Thus, the 
+/// answer is true.
+///
+/// Example 2:
+/// Input: start = [4, 5], target = [6, 6]
+/// Output : false
+/// Explanation : 
+/// It is impossible to reach target = [6, 6] from start = [4, 5] in an 
+/// even number of moves.Thus, the answer is false.
+///
+/// Constraints:
+/// 1. start.length == target.length == 2
+/// 2. 0 <= start[i], target[i] <= 7
+/// </summary>
+bool LeetCodeMath::canReach(vector<int>& start, vector<int>& target)
+{
+    if ((start[0] + start[1]) % 2 == (target[0] + target[1]) % 2) return true;
+    return false;
+}
+
+/// <summary>
+/// Leet Code #3993. Maximum Value of an Alternating Sequence
+///
+/// Medium
+///
+/// You are given three integers n, s, and m.
+///
+/// A sequence seq of integers of length n is considered valid if:
+///
+/// seq[0] = s.
+/// The sequence is alternating, meaning that either :
+/// seq[0] > seq[1] < seq[2] > ..., or
+/// seq[0] < seq[1] > seq[2] < ....
+/// For every adjacent pair, | seq[i] - seq[i - 1]| <= m.
+/// A sequence of length 1 is considered alternating.
+/// Return the maximum possible element that can appear in any valid 
+/// sequence.
+///
+/// Example 1:
+/// Input: n = 4, s = 3, m = 5
+/// Output : 12
+/// Explanation :
+/// One valid sequence is[3, 8, 7, 12].
+/// The maximum element in the sequence is 12.
+///
+/// Example 2 :
+/// Input : n = 2, s = 4, m = 3
+/// Output : 7
+/// Explanation :
+/// One valid sequence is[4, 7].
+/// The maximum element in the sequence is 7.
+///
+/// Constraints :
+/// 1. 1 <= n, s <= 10^9
+/// 2. 1 <= m <= 10^5
+/// </summary>
+long long LeetCodeMath::maximumValue(int n, int s, int m)
+{
+    long long result = (long long)s + (long long)(n - 1) / 2 * (m - 1);
+    if (n % 2 == 0)
+    {
+        result += m;
+    }
+    else if (n > 1)
+    {
+        result++;
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code #4002. Count Valid Sequences
+///
+/// Medium
+///
+/// You are given two positive integers n and k.
+///
+/// A valid sequence is a sequence of k positive integers such that :
+///
+/// The sum of all integers in the sequence is equal to n.
+/// The product of all integers in the sequence is even.
+/// Return the number of valid sequences.Since the answer may be very 
+/// large, return it modulo 10^9 + 7.
+/// 
+/// Two sequences are considered different if they differ at any index.
+/// For example, [1, 1, 2] and [1, 2, 1] are considered different 
+/// sequences.
+///
+/// Example 1:
+/// Input: n = 5, k = 3
+/// Output : 3
+/// Explanation :
+/// The sequences of length k = 3 whose sum is 5 are :
+/// Sequence->Product->Parity
+/// [1, 1, 3]->1 * 1 * 3 = 3->Odd
+/// [1, 2, 2]->1 * 2 * 2 = 4->Even
+/// [2, 1, 2]->2 * 1 * 2 = 4->Even
+/// [2, 2, 1]->2 * 2 * 1 = 4->Even
+/// [1, 3, 1]->1 * 3 * 1 = 3->Odd
+/// [3, 1, 1]->3 * 1 * 1 = 3->Odd
+/// There are 3 sequences with an even product, thus the answer is 3.
+///
+/// Example 2:
+/// Input: n = 3, k = 2
+/// Output : 2
+/// Explanation :
+/// The sequences of length k = 2 whose sum is 3 are :
+///
+/// Sequence->Product->Parity
+/// [1, 2]->1 * 2 = 2->Even
+/// [2, 1]->2 * 1 = 2->Even
+/// There are 2 sequences with an even product, thus the answer is 2.
+///
+/// Example 3:
+/// Input: n = 5, k = 5
+/// Output : 0
+/// Explanation :
+/// The only possible sequence of length k = 5 whose sum is 5 
+/// is [1, 1, 1, 1, 1], which has an odd product.Thus, the answer is 0.
+///
+/// Constraints:
+/// 1. 1 <= n <= 5 * 10^5
+/// 2. 1 <= k <= n
+/// </summary>
+int LeetCodeMath::countValidSequences(int n, int k)
+{
+    long long MOD = 1000000007;
+    long long result = combination(n - 1, k - 1, MOD);
+    if ((n - k) % 2 == 0)
+    {
+        result = (result - combination((n + k) / 2 - 1, k - 1, MOD) + MOD) % MOD;
+    }
+    return (int)result;
+}
+
+
+/// <summary>
+/// Leet Code #4000. Largest Integer With Given Digit Sum
+///
+/// Easy
+///
+/// You are given two non - negative integers n and s.
+/// Return the largest integer that has at most n digits and whose sum of 
+/// digits is s.If no such integer exists, return -1.
+///
+/// Example 1:
+/// Input: n = 2, s = 9
+/// Output : 90
+/// Explanation :
+/// The largest integer with at most 2 digits that has a sum of digits of 
+/// 9 is 90.
+///
+/// Example 2 :
+/// Input : n = 2, s = 19
+/// Output : -1
+/// Explanation :
+/// There is no integer with at most 2 digits that has a sum of digits of 19, 
+/// so the answer is - 1.
+///
+/// Example 3 :
+/// Input : n = 5, s = 0
+/// Output : 0
+/// Explanation :
+/// The only non - negative integer whose digits sum to 0 is 0.
+/// 
+/// Constraints:
+/// 1. 1 <= n <= 5
+/// 2. 0 <= s <= 100
+/// </summary>
+int LeetCodeMath::largestInteger(int n, int s)
+{
+    int result = 0;
+    for (int i = 0; i < n; i++)
+    {
+        int digit = min(9, s);
+        result = result * 10 + digit;
+        s -= digit;
+    }
+    if (s > 0)
+    {
+        return -1;
+    }
+    return result;
+}
+
+/// <summary> 
+/// Leet Code #4010. Maximize Pair Strength Using GCD
+/// 
+/// Easy
+///
+/// You are given an integer array nums.
+///
+/// Choose exactly one pair of distinct indices i and j.The strength of 
+/// the pair is defined as(nums[i] * nums[j]) / gcd(nums[i], nums[j])^2.
+///
+/// Return the maximum strength over all possible pairs.
+/// 
+/// Example 1:
+/// Input: nums = [2, 3, 5]
+/// Output : 15
+/// Explanation :
+/// Choosing i = 1 and j = 2 gives strength (3 * 5) / gcd(3, 5)^2 
+/// = 15 / 1 = 15, which is the maximum over all pairs.
+///
+/// Example 2 :
+/// Input : nums = [4, 6, 8]
+/// Output : 12
+/// Explanation :
+/// Choosing i = 1 and j = 2 gives strength(6 * 8) / gcd(6, 8)^2 
+/// = 48 / 4 = 12, which is the maximum over all pairs.
+///
+/// Example 3 :
+/// Input : nums = [3, 3]
+/// Output : 1
+/// Explanation :
+/// Choosing i = 0 and j = 1 gives strength(3 * 3) / gcd(3, 3)^2 
+/// = 9 / 9 = 1, the maximum over all pairs.
+/// 
+/// Constraints:
+/// 1. 2 <= nums.length <= 2000
+/// 2. 1 <= nums[i] <= 10^5
+/// </summary>
+long long LeetCodeMath::maxPairStrength(vector<int>& nums)
+{
+    long long result = -1;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        for (size_t j = i + 1; j < nums.size(); j++)
+        {
+            int g = std::gcd(nums[i], nums[j]);
+            result = max(result, (long long)nums[i] * nums[j] / ((long long)g * g));
+        }
+    }
+    return result;
+}
+
+/// <summary> 
+/// Leet Code #4005. Minimum Operations to Make Array Equal III
+/// 
+/// Hard
+///
+/// You are given an integer array nums.
+/// 
+/// In one operation, you may choose any element nums[i] and perform one 
+/// of the following :
+///
+/// Multiply nums[i] by an integer k, where k >= 2.
+/// Divide nums[i] by an integer k, where 2 <= k < nums[i], provided that 
+/// nums[i] is divisible by k.
+/// Return the minimum number of operations required to make all elements 
+/// of nums equal.
+///
+/// Example 1:
+/// Input: nums = [6, 12, 8]
+/// Output : 3
+/// Explanation :
+/// We can perform following operates to make all numbers to 6 :
+/// 
+/// Divide nums[1] = 12 by 2 to get 6.
+/// Divide nums[2] = 8 by 4 to get 2.
+/// Multiply nums[2] = 2 by 3 to get 6.
+///
+/// Example 2 :
+/// Input : nums = [5, 15, 20]
+/// Output : 2
+/// Explanation :
+/// We can perform following operates to make all numbers to 5 :
+/// Divide nums[1] = 15 by 3 to get 5.
+/// Divide nums[2] = 20 by 4 to get 5.
+///
+/// Example 3 :
+/// Input : nums = [7, 7, 7]
+/// Output : 0
+/// Explanation :
+/// All elements are already equal, so no operations are needed.
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// </summary>
+long long LeetCodeMath::minOperationsIII(vector<int>& nums)
+{
+    map<int, int> frequency;
+    for(size_t i = 0; i < nums.size(); i++)
+    {
+        frequency[nums[i]]++;
+    }
+    int n = nums.size();
+    vector<pair<int, int>> values;
+    for (auto it = frequency.begin(); it != frequency.end(); it++)
+    {
+        values.push_back(make_pair(it->first, it->second));
+    }
+    vector<int> saving(values.size());
+    int max_value = values.back().first;
+    for (size_t i = 0; i < values.size(); i++)
+    {
+        int value = values[i].first;
+        for (int d = value * 2; d <= max_value; d += value)
+        {
+            int j = lower_bound(values.begin(), values.end(), make_pair(d, 0)) - values.begin();
+            if (j == values.size()) break;
+            if (values[j].first % value == 0)
+            {
+                saving[j] += values[i].second;
+                saving[i] += values[j].second;
+                d = values[j].first;
+            }
+            else
+            {
+                d = values[j].first / value * value;
+            }
+        }
+    }
+    long long result = n;
+    for (size_t i = 0; i < values.size(); i++)
+    {
+        if (values[i].first == 1 && values[i].second != n)
+        {
+            continue;
+        }
+        saving[i] += 2 * values[i].second;
+        result = min(result, (long long)2 * n - saving[i]);
+    }
+    return result;
+}
+
+/// <summary> 
+/// Leet Code #4024. Nearest Available Drone
+/// 
+/// Easy
+///
+/// You are given a 2D integer array drones, where drones[i] = 
+/// [xi, yi, rangei] represents the x - coordinate, y - coordinate, 
+/// and travel range of the ith drone.
+///
+/// You are also given an integer array target = [tx, ty], representing 
+/// the coordinates of the target.
+///
+/// A drone drones[i] can reach the target if the Manhattan distance 
+/// between its coordinates and the target coordinates is less than or 
+/// equal to its rangei.
+///
+/// Return the index of the reachable drone with the minimum Manhattan 
+/// distance to the target.If there is a tie, return the smallest index.
+/// If no drone can reach the target, return -1.
+///
+/// Example 1:
+/// Input: drones = [[0, 0, 8], [2, 2, 9]], target = [3, 4]
+/// Output : 1
+/// Explanation :
+/// The distance between drones[0] and target is | 0 - 3 | +| 0 - 4 | = 7,
+/// which is within its range of 8.
+/// The distance between drones[1] and target is | 2 - 3 | +| 2 - 4 | = 3, 
+/// which is within its range of 9.
+/// Since drones[1] is the nearest drone, the answer is 1.
+///
+/// Example 2 :
+/// Input : drones = [[2, 1, 5], [4, 4, 5], [6, 6, 8]], target = [5, 5]
+/// Output : 1
+/// Explanation :
+/// The distance between drones[0] and target is | 2 - 5 | +| 1 - 5 | = 7, 
+/// which is greater than its range of 5.
+/// The distance between drones[1] and target is | 4 - 5 | +| 4 - 5 | = 2, 
+/// which is within its range of 5.
+/// The distance between drones[2] and target is | 6 - 5 | +| 6 - 5 | = 2, 
+/// which is within its range of 8.
+/// Both drones[1] and drones[2] are the nearest drones.Since we should 
+/// return the smallest index, the answer is 1.
+///
+/// Example 3:
+/// Input: drones = [[4, 4, 5]], target = [8, 6]
+/// Output : -1
+/// Explanation :
+/// The distance between drones[0] and target is | 4 - 8 | +| 4 - 6 | = 6, 
+/// which is greater than its range of 5.
+/// No drone can reach the target, so the answer is - 1.
+/// 
+/// Constraints :
+/// 1. 1 <= drones.length <= 100
+/// 2. drones[i] = [xi, yi, rangei]
+/// 3. target = [tx, ty]
+/// 4. - 25 <= xi, yi, tx, ty <= 25
+/// 5. 1 <= rangei <= 100
+/// </summary>
+int LeetCodeMath::nearestDrone(vector<vector<int>>& drones, vector<int>& target)
+{
+    int min_distance = INT_MAX;
+    int result = -1;
+    for (size_t i = 0; i < drones.size(); i++)
+    {
+        int distance = abs(drones[i][0] - target[0]) + abs(drones[i][1] - target[1]);
+        if (distance <= drones[i][2])
+        {
+            if (distance < min_distance)
+            {
+                min_distance = distance;
+                result = (int)i;
+            }
+        }
+    }
+    return result;
+}
+
+
+/// <summary> 
+/// Leet Code #4022. K - th Digit in Infinite String
+/// 
+/// Medium
+///
+/// You are given an integer k.
+/// An infinite string is formed by concatenating the decimal 
+/// representations of the positive integers, without separators.
+///
+/// For every nonnegative integer b, block b contains the positive 
+/// integers from 10 * b through 10 * b + 9. The integers in each 
+/// block are appended as follows :
+///
+/// If b is even, append the integers in increasing order.
+/// If b is odd, append the integers in decreasing order.
+/// Therefore, the string starts with the integers 1 through 9, 
+/// followed by 19 through 10, then 20 through 29, then 39 through 30, 
+/// and so on.
+///
+/// Return the kth digit(1 - indexed) of this string.
+///
+/// Example 1:
+/// Input: k = 4
+/// Output : 4
+/// Explanation :
+/// The string begins as "123456789..".The 4th digit is '4'.
+///
+/// Example 2 :
+/// Input : k = 15
+/// Output : 7
+/// Explanation :
+/// The string begins as "123456789191817..".The 15th digit is '7'.
+///
+/// Example 3 :
+/// Input : k = 11
+/// Output : 9
+/// Explanation :
+/// The string begins as "12345678919..".The 11th digit is '9'.
+///
+/// Constraints:
+/// 1. 1 <= k <= 10^15
+/// </summary>
+int LeetCodeMath::kthDigit(long long k)
+{
+    long long digits = 1;
+    long long multiples = 1;
+    while (k > digits * multiples * 9)
+    {
+        k -= digits * multiples * 9;
+        digits++;
+        multiples *= 10;
+    }
+    k = k - 1;
+    long long offset = k / digits + multiples;
+    long long reminder = k % digits;
+    string str = to_string(offset);
+    int result = -1;
+    if (reminder < digits - 1)
+    {
+        result = str[(int)reminder] - '0';
+    }
+    else
+    {
+        long long high = offset / 10;
+        long long low = offset % 10;
+        if (high % 2 == 0)
+        {
+            result = (int)low;
+        }
+        else
+        {
+            result = 9 - (int)low;
+        }
+    }
+    return result;
+}
+
+/// <summary> 
+/// Leet Code #4034. Minimum Bishop Moves to Reach Target
+/// 
+/// Medium
+/// 
+/// There is an 8 x 8 empty chessboard with 1 - indexed rows and columns.
+///
+/// You are given an array source = [sr, sc] representing the starting 
+/// position of a bishop, and an array target = [tr, tc].In one move, 
+/// the bishop travels any number of squares along a single diagonal 
+/// direction, staying within the board.
+///
+/// Return the minimum number of moves for the bishop to land exactly on 
+/// target.If it can never reach target, return -1.
+///
+/// Example 1:
+/// Input: source = [8, 1], target = [1, 8]
+/// Output : 1
+///
+/// Explanation :
+/// A single diagonal move takes the bishop straight from(8, 1) to(1, 8).
+///
+/// Example 2:
+/// Input: source = [4, 2], target = [1, 3]
+/// Output : 2
+/// Explanation :
+/// The bishop moves from(4, 2) to(3, 1), then from(3, 1) to(1, 3), 
+/// reaching the target in 2 moves.
+///
+/// Example 3:
+/// Input: source = [1, 1], target = [3, 4]
+/// Output : -1
+/// Explanation :
+/// No matter how many diagonal moves it makes, the bishop starting 
+/// at (1, 1) can never land on(3, 4).Thus, the answer is - 1.
+///
+/// Constraints:
+/// 1. source.length == target.length == 2
+/// 2. 1 <= sr, sc, tr, tc <= 8
+/// 3. source != target
+/// </summary>
+int LeetCodeMath::minBishopMoves(vector<int>& source, vector<int>& target)
+{
+    if ((source[0] + source[1]) % 2 != (target[0] + target[1]) % 2)
+    {
+        return -1;
+    }
+    if (abs(source[0] - target[0]) == abs(source[1] - target[1]))
+    {
+        return 1;
+    }
+    return 2;
+}
+
+/// <summary> 
+/// Leet Code #4035. Maximum Valid Split Positions I
+/// 
+/// Medium
+/// 
+/// You are given an integer array nums.
+///
+/// You may remove at most one element from nums.Let arr be the array of 
+/// remaining elements in their original order, and let m be its length.
+///
+/// A split position i of arr is valid if:
+///
+/// 0 <= i < m - 1, and
+/// gcd(arr[0..i]) == gcd(arr[i + 1..m - 1]).
+/// An array of length 1 has no valid split positions.
+/// The score of arr is the number of valid split positions in it.
+///
+/// Return the maximum possible score of arr.
+///
+/// Here, gcd(a) denotes the greatest common divisor of all elements in 
+/// the array a.
+///
+/// Example 1:
+/// Input: nums = [10, 30, 15, 10]
+/// Output : 2
+/// Explanation :
+/// One optimal solution is to remove nums[2] = 15. Then 
+/// arr = [10, 30, 10].
+///
+/// The split positions are :
+///
+/// Split Position i  gcd(arr[0..i])  gcd(arr[i + 1..m - 1])
+/// 0  10  10
+/// 1  10  10
+/// All split positions are valid.Thus, the answer is 2.
+///
+/// Example 2:
+/// Input: nums = [2, 10, 14]
+/// Output : 1
+/// Explanation :
+/// One optimal solution is to not remove any element.Then 
+/// arr = [2, 10, 14].
+///
+/// The split positions are :
+///
+/// Split Position i  gcd(arr[0..i])  gcd(arr[i + 1..m - 1])
+/// 0  2  2 
+/// 1  2  14
+/// Only the split position at index 0 is valid.Thus, the answer is 1.
+///
+/// Example 3:
+/// Input: nums = [2, 4]
+/// Output : 0
+/// Explanation :
+/// The only remaining array that has a split position is arr = [2, 4].
+/// The split positions are :
+/// Split Position i  gcd(arr[0..i])  gcd(arr[i + 1..m - 1])
+/// 0  2  4
+/// There are no valid split positions.Thus, the answer is 0.
+///
+/// Constraints:
+/// 1. 2 <= nums.length <= 1000
+/// 2. 1 <= nums[i] <= 10^9
+/// </summary>
+int LeetCodeMath::maxValidSplitsI(vector<int>& nums)
+{
+    int result = 0;
+    int n = nums.size();
+    for (int i = 0; i <= n; i++)
+    {
+        vector<int> arr;
+        for (int j = 0; j < n; j++)
+        {
+            if (j != i)
+            {
+                arr.push_back(nums[j]);
+            }
+        }
+        if (arr.size() < 2) continue;
+        int m = arr.size();
+        vector<int> left_gcd(m);
+        vector<int> right_gcd(m);
+        left_gcd[0] = arr[0];
+        for (int j = 1; j < m; j++)
+        {
+            left_gcd[j] = std::gcd(left_gcd[j - 1], arr[j]);
+        }
+        right_gcd[m - 1] = arr[m - 1];
+        for (int j = m - 2; j >= 0; j--)
+        {
+            right_gcd[j] = std::gcd(right_gcd[j + 1], arr[j]);
+        }
+        int score = 0;
+        for (int j = 0; j < m - 1; j++)
+        {
+            if (left_gcd[j] == right_gcd[j + 1])
+            {
+                score++;
+            }
+        }
+        result = max(result, score);
+    }
+    return result;
+}
+
+/// <summary> 
+/// Leet Code #4039. Sum of Decoded Numbers
+/// 
+/// Medium
+/// 
+/// You are given an integer array nums.
+/// Each nums[i] is an encoded integer representing two positive integers 
+/// xi and yi.To decode nums[i], define:
+///
+/// widthi = nums[i] % 10.
+/// di = floor(nums[i] / 10).
+/// xi as the integer formed by the first widthi digits of the decimal 
+/// representation of di.
+/// yi as the integer formed by all remaining digits of the decimal 
+/// representation of di.
+/// It is guaranteed that the decimal representation of di contains more 
+/// than widthi digits.Therefore, both xi and yi contain at least one 
+/// digit.
+/// The decoded value of nums[i] is xiyi.
+///
+/// Return the sum of the decoded values of all elements in nums, 
+/// modulo 10^9 + 7.
+///
+/// The floor() function returns the integer part of the division.
+///
+/// Example 1:
+/// Input: nums = [231]
+/// Output : 8
+/// Explanation :
+/// For 231, we have width = 1, d = 23, x = 2, and y = 3.
+/// The decoded value of 231 is 23 = 8.
+/// Since there is only one element in nums, the sum of the decoded values 
+/// is 8.
+///
+/// Example 2 :
+///
+/// Input : nums = [2522, 2101] 
+/// Output : 1649
+///
+/// Explanation :
+/// For 2522, we have width = 2, d = 252, x = 25, and y = 2.
+/// The decoded value of 2522 is 252 = 625.
+/// For 2101, we have width = 1, d = 210, x = 2, and y = 10.
+/// The decoded value of 2101 is 210 = 1024.
+/// The sum of the decoded values is 625 + 1024 = 1649.
+/// 
+/// Example 3:
+///
+/// Input: nums = [2301]
+/// Output : 73741817
+/// Explanation :
+///
+/// For 2301, we have width = 1, d = 230, x = 2, and y = 30.
+/// The decoded value is 230 = 1073741824.
+/// Therefore, the answer is 1073741824 modulo(10^9 + 7) = 73741817.
+/// 
+/// Constraints :
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 100 < nums[i] < 10^15
+/// 3. 1 <= widthi <= 9
+/// 4. 1 <= xi, yi < 10^9
+/// 5. The digit sequences used to form xi and yi do not have leading 
+///     zeros.
+/// 6. It is guaranteed that every element in nums is a valid encoded 
+///    integer.
+/// </summary>
+int LeetCodeMath::sumDecoded(vector<long long>& nums)
+{
+    long long MOD = 1000000007;
+    int result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        long long width = nums[i] % 10;
+        long long d = nums[i] / 10;
+        string str = to_string(d);
+        long long x = stoll(str.substr(0, width));
+        long long y = stoll(str.substr(width));
+        result = (result + (int)modPow(x, y, MOD)) % MOD;
+    }
+    return result;
+}
+
+/// <summary> 
+/// Leet Code #4037. Maximum Valid Split Positions II
+/// 
+/// Hard
+///
+/// You are given an integer array nums.
+///
+/// You may remove at most one element from nums.Let arr be the array 
+/// of remaining elements in their original order, and let m be its length.
+/// A split position i of arr is valid if:
+/// 0 <= i < m - 1, and
+/// gcd(arr[0..i]) == gcd(arr[i + 1..m - 1]).
+/// An array of length 1 has no valid split positions.
+///
+/// The score of arr is the number of valid split positions in it.
+/// Return the maximum possible score of arr.
+///
+/// Here, gcd(a) denotes the greatest common divisor of all elements in 
+/// the array a.
+///
+/// Example 1:
+/// Input: nums = [10, 30, 15, 10]
+/// Output : 2
+///
+/// Explanation :
+///
+/// One optimal solution is to remove nums[2] = 15. Then arr = [10, 30, 10].
+///
+/// The split positions are :
+///
+/// Split Position i  gcd(arr[0..i])  gcd(arr[i + 1..m - 1])
+/// 0  10  10
+/// 1  10  10
+/// All split positions are valid.Thus, the answer is 2.
+///
+/// Example 2:
+/// Input: nums = [2, 10, 14]
+/// Output : 1
+/// Explanation :
+/// One optimal solution is to not remove any element.Then 
+/// arr = [2, 10, 14].
+/// The split positions are :
+/// Split Position i  gcd(arr[0..i])  gcd(arr[i + 1..m - 1])
+/// 0  2  2
+/// 1  2  14
+/// Only the split position at index 0 is valid.Thus, the answer is 1.
+///
+/// Example 3:
+/// Input: nums = [2, 4]
+/// Output : 0
+/// Explanation :
+/// The only remaining array that has a split position is arr = [2, 4].
+/// The split positions are :
+/// Split Position i  gcd(arr[0..i])  gcd(arr[i + 1..m - 1])
+/// 0  2  4
+/// There are no valid split positions.Thus, the answer is 0.
+/// 
+/// Constraints:
+/// 1. 2 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// </summary>
+int LeetCodeMath::maxValidSplitsII(vector<int>& nums)
+{
+    vector<int> break_points;
+    int n = nums.size();
+    vector<int> gcd(n);
+    for (int i = 0; i < n; i++)
+    {
+        gcd[i] = (i == 0 ? nums[i] : std::gcd(gcd[i - 1], nums[i]));
+        if (i == 0 || gcd[i] != gcd[i - 1])
+        {
+            break_points.push_back(i);
+        }
+    }
+    int result = 0;
+    for (size_t i = 0; i <= break_points.size(); i++)
+    {
+        vector<int> arr;
+        for (int j = 0; j < n; j++)
+        {
+            if (i == break_points.size() || j != break_points[i])
+            {
+                arr.push_back(nums[j]);
+            }
+        }
+        if (arr.size() < 2) continue;
+        int m = arr.size();
+        vector<int> left_gcd(m);
+        vector<int> right_gcd(m);
+        left_gcd[0] = arr[0];
+        for (int j = 1; j < m; j++)
+        {
+            left_gcd[j] = std::gcd(left_gcd[j - 1], arr[j]);
+        }
+        right_gcd[m - 1] = arr[m - 1];
+        for (int j = m - 2; j >= 0; j--)
+        {
+            right_gcd[j] = std::gcd(right_gcd[j + 1], arr[j]);
+        }
+        int score = 0;
+        for (int j = 0; j < m - 1; j++)
+        {
+            if (left_gcd[j] == right_gcd[j + 1])
+            {
+                score++;
+            }
+        }
+        result = max(result, score);
+    }
+    return result;
+}
+
+
 #pragma endregion
 

@@ -76,5 +76,6 @@ void TestLeetCode3893(void);
 void TestLeetCode3951(void);
 void TestLeetCode3964(void);
 void TestLeetCode3975(void);
+void TestLeetCode4031(void);
 void TestLeetCodeGreedy(void);
 #endif  // TestArray

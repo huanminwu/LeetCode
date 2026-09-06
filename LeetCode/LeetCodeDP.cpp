@@ -24695,11 +24695,513 @@ long long LeetCodeDP::interleaveCharacters(int i, int j, int k, string& word1, s
 /// 1. 1 <= word1.length, word2.length, target.length <= 100
 /// 2. word1, word2, and target consist of lowercase English letters only.
 /// </summary>
-int LeetCodeDP::interleaveCharacters(string word1, string word2, string target)
+long long LeetCodeDP::interleaveCharacters(string word1, string word2, string target)
 {
     vector<vector<vector<long long>>> dp(word1.size() + 1, 
         vector<vector<long long>>(word2.size() + 1, vector<long long>(target.size() + 1, -1)));
     return interleaveCharacters(0, 0, 0, word1, word2, target, dp);
 }
 
+/// <summary>
+/// Leet Code #4027. Elevator Requests III
+///
+/// Hard
+///
+/// You are given an integer n denoting the number of floors in a 
+/// building, where the floors are numbered from 0 to n - 1.
+///
+/// You are also given an integer start and a 2D integer array requests, 
+/// where requests[i] = [arrivali, floori] indicates that a request for 
+/// floori is made at time arrivali.
+///
+/// At time 0, the elevator is at floor start.
+///
+/// At each second, the elevator may move up by 1 floor, move down by 1 
+/// floor, or remain on its current floor.
+///
+/// A request can be fulfilled only at or after its arrival time; it is 
+/// fulfilled instantly when the elevator is on its requested floor at 
+/// any time from its arrival time onward.
+/// Return the minimum time needed to fulfill all requests.
+///
+/// Example 1:
+/// Input: n = 9, start = 0, requests = [[0, 8], [6, 5]]
+/// Output : 9
+/// Explanation :
+///
+/// Move from floor 0 (start)to floor 5 (requests[1][1]) in 5 seconds, 
+/// reaching at time 5. Since requests[1][0] = 6, wait until time 6 to 
+/// fulfill it.
+/// Move from floor 5 to floor 8 (requests[0][1]) in 3 seconds, 
+/// fulfilling it at time 9.
+/// Thus, all requests are fulfilled by time 9.
+///
+/// Example 2:
+/// Input: n = 8, start = 5, requests = [[1, 7], [7, 3]]
+/// Output : 7
+/// Explanation :
+/// Move from floor 5 (start)to floor 7 (requests[0][1]) in 2 seconds, 
+/// reaching at time 2. Since requests[0][0] = 1 has already passed, 
+/// floor 7 is fulfilled at time 2.
+/// Move from floor 7 to floor 3 (requests[1][1]) in 4 seconds, reaching 
+/// at time 6. Since requests[1][0] = 7, wait until time 7.
+/// Thus, all requests are fulfilled by time 7.
+///
+/// Example 3:
+/// Input: n = 7, start = 3, requests = [[0, 5], [0, 1], [6, 3]]
+/// Output : 8
+/// Explanation :
+/// Move from floor 3 (start)to floor 5 (requests[0][1]) in 2 seconds, 
+/// fulfilling it at time 2.
+/// Move from floor 5 to floor 1 (requests[1][1]) in 4 seconds, 
+/// fulfilling it at time 6.
+/// Move from floor 1 to floor 3 (requests[2][1]) in 2 seconds, reaching 
+/// at time 8. Its request arrived at requests[2][0] = 6, so floor 3 is 
+/// fulfilled at time 8.
+/// Thus, all requests are fulfilled by time 8.
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^9
+/// 2. 1 <= requests.length <= 16
+/// 3. requests[i] == [arrivali, floori]
+/// 4. 0 <= arrivali <= 10^9
+/// 5. 0 <= start, floori <= n - 1
+/// </summary>
+long long LeetCodeDP::elevatorRequestsIII(int n, int start, vector<vector<int>>& requests)
+{
+    int m = 1 << requests.size();
+    vector<unordered_map<int, long long>> dp(m);
+    dp[0][start] = 0;
+    queue<pair<int, int>> queue;
+    queue.push({ 0, start });
+    long long result = LLONG_MAX;
+    while (!queue.empty())
+    {
+        pair<int, int> current = queue.front();
+        queue.pop();
+        int state = current.first;
+        int floor = current.second;
+        if (state == m - 1)
+        {
+            result = min(result, dp[state][floor]);
+        }
+        for (size_t i = 0; i < requests.size(); i++)
+        {
+            if ((state & (1 << i)) == 0)
+            {
+                int next_state = state | (1 << i);
+                long long time = max(dp[state][floor] + abs(floor - requests[i][1]), (long long)requests[i][0]);
+                if (dp[next_state].count(requests[i][1]) == 0 || time < dp[next_state][requests[i][1]])
+                {
+                    if (dp[next_state].count(requests[i][1]) == 0)
+                    {
+                        queue.push({ next_state, requests[i][1] });
+                    }
+                    dp[next_state][requests[i][1]] = time;
+                }
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code #4029. Elevator Requests IV
+///
+/// Hard
+/// 
+/// You are given an integer n denoting the number of floors in a 
+/// building, where the floors are numbered from 0 to n - 1.
+///
+///
+/// You are also given an integer start and a 2D integer array requests, 
+/// where requests[i] = [arrivali, floori] indicates that a request for 
+/// floori is made at time arrivali.
+///
+/// At time 0, the elevator is at floor start.
+///
+/// At each second, the elevator may move up by 1 floor, move down 
+/// by 1 floor, or remain on its current floor.
+///
+/// A request can be fulfilled only at or after its arrival time; it 
+/// is fulfilled instantly when the elevator is on its requested floor 
+/// at any time from its arrival time onward.
+/// Return the minimum time needed to fulfill all requests.
+///
+/// Example 1:
+/// Input: n = 9, start = 0, requests = [[0, 8], [6, 5]]
+/// Output : 9
+/// Explanation :
+/// Move from floor 0 (start)to floor 5 (requests[1][1]) in 5 seconds, 
+/// reaching at time 5. Since requests[1][0] = 6, wait until time 6 to 
+/// fulfill it.
+/// Move from floor 5 to floor 8 (requests[0][1]) in 3 seconds, fulfilling 
+/// it at time 9.
+/// Thus, all requests are fulfilled by time 9.
+///
+/// Example 2:
+/// Input: n = 8, start = 5, requests = [[1, 7], [7, 3]]
+/// Output : 7
+/// Explanation :
+/// Move from floor 5 (start)to floor 7 (requests[0][1]) in 2 seconds, 
+/// reaching at time 2. Since requests[0][0] = 1 has already passed, 
+/// floor 7 is fulfilled at time 2.
+/// Move from floor 7 to floor 3 (requests[1][1]) in 4 seconds, reaching 
+/// at time 6. Since requests[1][0] = 7, wait until time 7.
+/// Thus, all requests are fulfilled by time 7.
+///
+/// Example 3:
+/// Input: n = 7, start = 3, requests = [[0, 5], [0, 1], [6, 3]]
+/// Output : 8
+/// Explanation :
+/// Move from floor 3 (start)to floor 5 (requests[0][1]) in 2 seconds, 
+/// fulfilling it at time 2.
+/// Move from floor 5 to floor 1 (requests[1][1]) in 4 seconds, 
+/// fulfilling it at time 6.
+/// Move from floor 1 to floor 3 (requests[2][1]) in 2 seconds, 
+/// reaching at time 8. Its request arrived at requests[2][0] = 6, so 
+/// floor 3 is fulfilled at time 8.
+/// Thus, all requests are fulfilled by time 8.
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^9
+/// 2. 1 <= requests.length <= 500
+/// 3. requests[i] == [arrivali, floori]
+/// 4. 0 <= arrivali <= 10^9
+/// 5. 0 <= start, floori <= n - 1
+/// </summary>
+long long LeetCodeDP::elevatorRequestsIV(int n, int start, vector<vector<int>>& requests)
+{
+    sort(requests.begin(), requests.end(),
+        [](const vector<int>& a, const vector<int>& b) 
+        {
+            return a[1] < b[1];
+        });
+
+    vector<long long> floorPos(505);
+    vector<long long> lastArrival(505);
+
+    int m = 0;
+    long long maxArrival = 0;
+
+    for (const auto& request : requests) 
+    {
+        long long time = request[0];
+        long long floor = request[1];
+
+        if (m == 0 || floorPos[m - 1] != floor) 
+        {
+            floorPos[m] = floor;
+            lastArrival[m] = time;
+            ++m;
+        }
+        else 
+        {
+            lastArrival[m - 1] = max(lastArrival[m - 1], time);
+        }
+
+        maxArrival = max(maxArrival, time);
+    }
+
+    auto canFinishBy = [&](long long T) -> bool 
+    {
+        const long long INF = (1LL << 60);
+
+        static long long dpLeft[505];
+        static long long dpRight[505];
+        static long long nextLeft[505];
+        static long long nextRight[505];
+
+        for (int i = 0; i < m; ++i) 
+        {
+            if (lastArrival[i] > T) return false;
+            dpLeft[i] = dpRight[i] = 0;
+        }
+
+        // Current interval length is len.
+        for (int len = 1; len < m; ++len) 
+        {
+            for (int i = 0; i < m; ++i) 
+            {
+                nextLeft[i] = INF;
+                nextRight[i] = INF;
+            }
+
+            for (int l = 0; l + len - 1 < m; ++l) 
+            {
+                int r = l + len - 1;
+
+                // Visit floor l - 1 next.
+                if (l > 0) {
+                    int nl = l - 1;
+
+                    long long reach = min
+                    (
+                        dpLeft[l] + floorPos[l] - floorPos[nl],
+                        dpRight[l] + floorPos[r] - floorPos[nl]
+                    );
+
+                    if (reach <= T - lastArrival[nl]) 
+                    {
+                        nextLeft[nl] = reach;
+                    }
+                }
+
+                // Visit floor r + 1 next.
+                if (r + 1 < m) 
+                {
+                    int nr = r + 1;
+
+                    long long reach = min
+                    (
+                        dpLeft[l] + floorPos[nr] - floorPos[l],
+                        dpRight[l] + floorPos[nr] - floorPos[r]
+                    );
+
+                    if (reach <= T - lastArrival[nr]) 
+                    {
+                        nextRight[l] = reach;
+                    }
+                }
+            }
+
+            for (int i = 0; i < m; ++i) 
+            {
+                dpLeft[i] = nextLeft[i];
+                dpRight[i] = nextRight[i];
+            }
+        }
+        long long value1 = dpLeft[0] + llabs(floorPos[0] - (long long)start);
+        long long value2 = dpRight[0] + llabs(floorPos[m - 1] - (long long)start);
+        return min(value1, value2) <= T;
+    };
+
+    long long low = -1;
+    long long high = maxArrival + 2LL * (n - 1);
+
+    while (high - low > 1) 
+    {
+        long long mid = low + (high - low) / 2;
+
+        if (canFinishBy(mid)) 
+        {
+            high = mid;
+        }
+        else 
+        {
+            low = mid;
+        }
+    }
+
+    return high;
+}
+
+/// <summary>
+/// Leet Code #4040. Minimum Operations to Form Subset Sum I
+/// 
+/// Medium
+/// 
+/// You are given an integer array nums and an integer sum.
+/// In one operation, choose an element with current value x and replace 
+/// it with either 2 * x or floor(x / 2).
+///
+/// For each element, all multiplication operations performed on it must 
+/// occur before any division operations performed on it.
+///
+/// Return the minimum number of operations needed so that some subset of 
+/// the resulting array has a sum exactly equal to sum.If it is 
+/// impossible, return -1.
+///
+/// The floor() function returns the integer part of the division.
+///
+/// Example 1:
+/// Input: nums = [5, 6, 10], sum = 4
+/// Output : 3
+///
+/// Explanation :
+/// Divide nums[0] = 5 twice : 5 → 2 → 1, costing 2 operations.
+/// Divide nums[1] = 6 once : 6 → 3, costing 1 operation.
+/// After these operations, nums = [1, 3, 10].The subset{ 1, 3 } sums 
+/// to 4 using 3 operations in total.
+/// 
+/// Example 2 :
+/// Input : nums = [10, 2], sum = 13
+/// Output : 3
+///
+/// Explanation :
+/// Divide nums[0] = 10 once : 10 → 5, costing 1 operation.
+/// Multiply nums[1] = 2 twice : 2 → 4 → 8, costing 2 operations.
+/// After these operations, nums = [5, 8].The subset{ 5, 8 } sums to 13 
+/// using 3 operations in total.
+///
+/// Example 3 :
+/// Input : nums = [6, 3], sum = 8
+/// Output : -1
+/// Explanation : 
+/// No sequence of operations lets a subset of nums sum to 8, so the 
+/// answer is - 1.
+///
+/// Constraints :
+/// 1. 1 <= nums.length <= 100
+/// 2. 1 <= nums[i] <= 500
+/// 2. 1 <= sum <= 5000
+/// </summary>
+int LeetCodeDP::minOperationsI(vector<int>& nums, int sum)
+{
+    vector<int> dp(sum + 1, INT_MAX);
+    dp[0] = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        vector<int> cost(sum + 1, INT_MAX);
+        vector<int> next(dp);
+        int curr = nums[i];
+        int ops = 0;
+        while (curr <= sum)
+        {
+            cost[curr] = min(cost[curr], ops);
+            curr *= 2;
+            ops++;
+        }
+        curr = nums[i] / 2;
+        ops = 1;
+        while(curr > 0)
+        {
+            if (curr <= sum)
+            {
+                cost[curr] = min(cost[curr], ops);
+            }
+            curr /= 2;
+            ops++;
+        }
+        vector<pair<int, int>> operations;
+        for (int j = 1; j <= sum; j++)
+        {
+            if (cost[j] != INT_MAX)
+            {
+                operations.push_back(make_pair(j, cost[j]));
+            }
+        }
+
+        for (int j = 0; j <= sum; j++)
+        {
+            if (dp[j] == INT_MAX) continue;
+            for (size_t k = 0; k < operations.size(); k++)
+            {
+                if (j + operations[k].first > sum) continue;
+                next[j + operations[k].first] = min(next[j + operations[k].first], dp[j] + operations[k].second);
+            }
+        }
+        dp = move(next);
+    }
+    if (dp[sum] == INT_MAX) return -1;
+    else return dp[sum];
+}
+
+/// <summary>
+/// Leet Code #4041. Minimum Operations to Form Subset Sum II
+/// 
+/// Hard
+/// 
+/// You are given an integer array nums and an integer sum.
+/// In one operation, choose an element with current value x and replace 
+/// it with either 2 * x or floor(x / 2).
+///
+/// For each element, multiplication and division operations may be 
+/// performed in any order.
+///
+/// Return the minimum number of operations needed so that some subset of 
+/// the resulting array has a sum exactly equal to sum.If it is 
+/// impossible, return -1.
+///
+/// The floor() function returns the integer part of the division.
+///
+/// Example 1:
+/// Input: nums = [10, 2], sum = 13
+/// Output : 3
+/// Explanation :
+/// Divide nums[0] = 10 once : 10 → 5, costing 1 operation.
+/// Multiply nums[1] = 2 twice : 2 → 4 → 8, costing 2 operations.
+/// After these operations, nums = [5, 8].The subset{ 5, 8 } sums to 13 
+/// using 3 operations in total.
+///
+/// Example 2 :
+/// Input : nums = [6, 3], sum = 8
+/// Output : 2
+/// Explanation : 
+/// Turn nums[1] = 3 into 2 using 2 operations :
+/// Divide nums[1] to get 1.
+/// Multiply nums[1] = 1 to get 2.
+/// After these operations, nums = [6, 2].The subset{ 6, 2 } sums to 8 
+/// using 2 operations in total.
+/// 
+/// Example 3 :
+/// Input : nums = [2, 2], sum = 7
+/// Output : -1
+/// Explanation :
+/// No sequence of operations lets a subset of nums sum to 7, so the 
+/// answer is - 1.
+///
+/// Constraints :
+/// 1. 1 <= nums.length <= 100
+/// 2. 1 <= nums[i] <= 500
+/// 3. 1 <= sum <= 5000
+/// </summary>
+int LeetCodeDP::minOperationsII(vector<int>& nums, int sum)
+{
+    vector<int> dp(sum + 1, INT_MAX);
+    dp[0] = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        vector<int> cost(sum + 1, INT_MAX);
+        vector<int> next(dp);
+        int curr = nums[i];
+        int up = 0;
+        while (curr <= sum)
+        {
+            cost[curr] = min(cost[curr], up);
+            curr *= 2;
+            up++;
+        }
+        curr = nums[i] / 2;
+        int down = 1;
+        while (curr > 0)
+        {
+            if (curr <= sum)
+            {
+                cost[curr] = min(cost[curr], down);
+                int temp = curr * 2;
+                up = 1;
+                while (temp <= sum && cost[temp] == INT_MAX)
+                {
+                    cost[temp] = min(cost[temp], down + up);
+                    temp *= 2;
+                    up++;
+                }
+            }
+            curr /= 2;
+            down++;
+        }
+        vector<pair<int, int>> operations;
+        for (int j = 1; j <= sum; j++)
+        {
+            if (cost[j] != INT_MAX)
+            {
+                operations.push_back(make_pair(j, cost[j]));
+            }
+        }
+
+        for (int j = 0; j <= sum; j++)
+        {
+            if (dp[j] == INT_MAX) continue;
+            for (size_t k = 0; k < operations.size(); k++)
+            {
+                if (j + operations[k].first > sum) continue;
+                next[j + operations[k].first] = min(next[j + operations[k].first], dp[j] + operations[k].second);
+            }
+        }
+        dp = move(next);
+    }
+    if (dp[sum] == INT_MAX) return -1;
+    else return dp[sum];
+}
 #pragma endregion

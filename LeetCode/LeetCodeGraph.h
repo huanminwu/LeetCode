@@ -12967,6 +12967,291 @@ public:
     /// </summary>
     vector<long long> minTimeMaxPower(int n, vector<vector<int>>& edges, int power, vector<int>& cost, int source, int target);
 
+    /// <summary>
+    /// Leet Code #3990. Create Grid With Exactly K Paths II
+    /// 
+    /// Hard
+    ///
+    /// You are given an integer k.
+    /// Construct any grid consisting only of the characters '.' and '#', 
+    /// where:
+    ///
+    /// '.' represents a free cell.
+    /// '#' represents an obstacle cell.
+    /// The grid must contain at most 25 rows and at most 25 columns.
+    ///
+    /// A valid path is a sequence of free cells that :
+    /// Starts at the top - left cell(0, 0).
+    /// Ends at the bottom - right cell(m - 1, n - 1), where m and n are the 
+    /// dimensions of your constructed grid.
+    /// Moves only :
+    /// Right, from(i, j) to(i, j + 1), or
+    /// Down, from(i, j) to(i + 1, j).
+    /// Return any grid such that there are exactly k valid paths from the 
+    /// top - left cell to the bottom - right cell.If no such grid exists, 
+    /// return an empty array.
+    ///
+    /// Example 1:
+    /// Input: k = 2
+    /// Output : ["..#", "#..", "#.."]
+    /// Explanation :
+    /// The grid contains exactly 2 valid paths from(0, 0) to(2, 2) :
+    ///  (0, 0) ->(0, 1) ->(1, 1) ->(1, 2) ->(2, 2)
+    ///  (0, 0) ->(0, 1) ->(1, 1) ->(2, 1) ->(2, 2)
+    ///
+    /// Example 2 :
+    /// Input : k = 3
+    /// Output : ["...", "#..", "#.."]
+    /// Explanation :
+    /// 
+    /// The grid contains exactly 3 valid paths from(0, 0) to(2, 2) :
+    /// (0, 0) ->(0, 1) ->(0, 2) ->(1, 2) ->(2, 2)
+    /// (0, 0) ->(0, 1) ->(1, 1) ->(1, 2) ->(2, 2)
+    /// (0, 0) ->(0, 1) ->(1, 1) ->(2, 1) ->(2, 2)
+    /// Constraints : 
+    /// 1 <= k <= 1000
+    /// </summary>
+    vector<string> createGridII(int k);
+
+    /// <summary>
+    /// Leet Code #3988. Create Grid With Exactly K Paths I
+    /// 
+    /// Medium
+    ///
+    /// You are given three integers m, n, and k.
+    /// Construct any m x n grid consisting only of the characters '.' 
+    /// and '#', where:
+    ///
+    /// '.' represents a free cell.
+    /// '#' represents an obstacle cell.
+    /// A valid path is a sequence of free cells that :
+    ///
+    /// Starts at the top - left cell(0, 0).
+    /// Ends at the bottom - right cell(m - 1, n - 1).
+    /// Moves only :
+    /// Right, from(i, j) to(i, j + 1), or
+    /// Down, from(i, j) to(i + 1, j).
+    /// Return any grid such that there are exactly k valid paths from the 
+    /// top - left cell to the bottom - right cell.If no such grid exists, 
+    /// return an empty array.
+    ///
+    /// Example 1:
+    /// Input: m = 2, n = 3, k = 2
+    /// Output : ["...", "#.."]
+    /// Explanation :
+    /// There are exactly k = 2 valid paths from(0, 0) to(1, 2) :
+    /// (0, 0) ->(0, 1) ->(0, 2) ->(1, 2)
+    /// (0, 0) ->(0, 1) ->(1, 1) ->(1, 2)
+    ///
+    /// Example 2 :
+    /// Input : m = 3, n = 3, k = 4
+    /// Output : ["..#", "...", "#.."]
+    /// Explanation :
+    /// There are exactly k = 4 valid paths from(0, 0) to(2, 2) :
+    /// (0, 0) ->(0, 1) ->(1, 1) ->(1, 2) ->(2, 2)
+    /// (0, 0) ->(0, 1) ->(1, 1) ->(2, 1) ->(2, 2)
+    /// (0, 0) ->(1, 0) ->(1, 1) ->(1, 2) ->(2, 2)
+    /// (0, 0) ->(1, 0) ->(1, 1) ->(2, 1) ->(2, 2)
+    ///
+    /// Example 3:
+    /// Input: m = 1, n = 4, k = 2
+    /// Output : []
+    /// Explanation : 
+    /// No grid exists with exactly k = 2 valid paths for a 1 x 4 grid, 
+    /// so the answer is an empty array.
+    ///
+    /// Constraints:
+    /// 1. 1 <= m, n <= 10  
+    /// 2. 1 <= k <= 4
+    /// </summary>
+    vector<string> createGridI(int m, int n, int k);
+
+    /// <summary>
+    /// Leet Code #4003. Minimum Cost Path with Alternating Directions III
+    /// 
+    /// Hard
+    ///
+    /// You are given two integers m and n representing the number of rows and 
+    /// columns of a grid.Your goal is to reach cell(m - 1, n - 1).You are 
+    /// also given a 2D integer array penalty.
+    ///
+    /// The cost to enter cell(i, j) is(i + 1) * (j + 1).
+    /// You begin at cell(0, 0) and initially pay its entrance cost.Actions 
+    /// performed after entering(0, 0) are numbered starting from 1.
+    ///
+    /// On each action, you may move to an adjacent cell or wait in the 
+    /// current cell.A move follows the parity rule if:
+    ///
+    /// On an odd - numbered action, you move right or down.
+    /// On an even - numbered action, you move left or up.
+    /// The cost of an action is determined as follows :
+    /// If you move according to the parity rule, pay only the entrance cost 
+    /// of the destination cell.
+    /// If you move in a direction that violates the parity rule, pay the 
+    /// entrance cost of the destination cell plus penalty[i][j], 
+    /// where(i, j) is the cell you move from.
+    /// If you wait in cell(i, j), pay penalty[i][j].
+    /// After every move or wait, the action number increases by 1. 
+    /// Therefore, the required parity alternates after every action, 
+    /// regardless of whether a penalty was paid.
+    ///
+    /// Return the minimum total cost required to reach(m - 1, n - 1).
+    /// Example 1:
+    /// Input: m = 2, n = 2, penalty = [[5, 3], [1, 4]]
+    /// Output : 8
+    /// Explanation :
+    /// The optimal path is :
+    /// Start at cell(0, 0) with entry cost(0 + 1) * (0 + 1) = 1.
+    /// Move 1 : Move down to cell(1, 0) with entry cost(1 + 1) * (0 + 1) = 2.
+    /// Move 2 : Move right to cell(1, 1) with entry 
+    /// cost(1 + 1) * (1 + 1) = 4 and an extra cost of penalty[1][0] = 1 for 
+    /// violating the even parity rule.
+    /// Thus, the total cost is 1 + 2 + 4 + 1 = 8.
+    ///
+    /// Example 2 :
+    /// Input : m = 2, n = 2, penalty = [[0, 7], [3, 2]]
+    /// Output : 7
+    /// Explanation :
+    /// The optimal path is :
+    /// Start at cell(0, 0) with entry cost(0 + 1) * (0 + 1) = 1.
+    /// Move 1 : Wait at cell(0, 0) with an extra cost of penalty[0][0] = 0 to 
+    /// flip to even parity.
+    /// Move 2 : Move right to cell(0, 1) with entry cost(0 + 1) * (1 + 1) = 2 
+    /// and an extra cost of penalty[0][0] = 0 for violating the even parity 
+    /// rule.
+    /// Move 3 : Move down to cell(1, 1) with entry cost(1 + 1) * (1 + 1) = 4.
+    /// Thus, the total cost is 1 + 0 + 2 + 0 + 4 = 7.
+    ///
+    /// Example 3 :
+    /// Input : m = 2, n = 3, penalty = [[8, 0, 9], [7, 4, 1]]
+    /// Output : 12
+    /// Explanation :
+    /// The optimal path is :
+    /// Start at cell(0, 0) with entry cost(0 + 1) * (0 + 1) = 1.
+    /// Move 1 : Move right to cell(0, 1) with entry cost(0 + 1) * (1 + 1) = 2.
+    /// Move 2 : Move right to cell(0, 2) with entry cost(0 + 1) * (2 + 1) = 3 
+    /// and an extra cost of penalty[0][1] = 0 for violating the even parity 
+    /// rule.
+    /// Move 3 : Move down to cell(1, 2) with entry cost(1 + 1) * (2 + 1) = 6.
+    /// Thus, the total cost is 1 + 2 + 3 + 0 + 6 = 12.
+    ///
+    /// Constraints:
+    /// 1. 1 <= m, n <= 10^5
+    /// 2. 2 <= m * n <= 10^5
+    /// 3. penalty.length == m
+    /// 4. penalty[i].length == n
+    /// 5. 0 <= penalty[i][j] <= 10^5
+    /// </summary>
+    long long minCost(int m, int n, vector<vector<int>>& penalty);
+
+    /// <summary>
+    /// Leet Code #4004. Minimum Moves to Balance Circular Array II
+    /// 
+    /// Hard
+    ///
+    /// You are given a circular array balance of length n, where balance[i] 
+    /// is the net balance of person i.
+    ///
+    /// In one move, a person can transfer exactly 1 unit of balance to either 
+    /// their left or right neighbor.
+    ///
+    /// Return the minimum number of moves required so that every person has 
+    /// a non - negative balance.If it is impossible, return -1.
+    ///
+    /// Example 1:
+    /// Input: balance = [-1, 2, -1]
+    /// Output : 2
+    /// Explanation :
+    /// One optimal sequence of moves is :
+    /// Move 1 unit from i = 1 to i = 0, resulting in balance = [0, 1, -1]
+    /// Move 1 unit from i = 1 to i = 2, resulting in balance = [0, 0, 0]
+    /// Thus, the minimum number of moves required is 2.
+    ///
+    /// Example 2:
+    /// Input: balance = [4, -1, -2]
+    /// Output : 3
+    /// Explanation :
+    /// One optimal sequence of moves is :
+    /// Move 1 unit from i = 0 to i = 1, resulting in balance = [3, 0, -2]
+    /// Move 1 unit from i = 0 to i = 2, resulting in balance = [2, 0, -1]
+    /// Move 1 unit from i = 0 to i = 2, resulting in balance = [1, 0, 0]
+    /// Thus, the minimum number of moves required is 3.
+    ///
+    /// Example 3:
+    /// Input: balance = [-3, -3, 5]
+    /// Output : -1
+    /// Explanation :
+    /// It is impossible to make all balances non - negative for 
+    /// balance = [-3, -3, 5], so the answer is - 1.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n == balance.length <= 1000
+    /// 2. -10^5 <= balance[i] <= 10^5
+    /// </summary>
+    long long minMoves(vector<int>& balance);
+
+    /// <summary>
+    /// Leet Code #4023. Elevator Requests II
+    /// 
+    /// Hard
+    ///
+    /// You are given an integer n denoting the number of floors in a 
+    /// building, where the floors are numbered from 0 to n - 1.
+    ///
+    /// You are also given an integer start, representing the floor where 
+    /// the elevator begins, and an integer array requests, where requests[i] 
+    /// is a floor that the elevator is requested to reach.All floors in 
+    /// requests are distinct.
+    ///
+    /// At time 0, the elevator is on floor start, and all requests are made 
+    /// simultaneously.
+    ///
+    /// During each second before all requests are fulfilled, the elevator 
+    /// moves exactly one floor, either up or down.A request is fulfilled 
+    /// instantly when the elevator reaches its requested floor.If start 
+    /// appears in requests, that request is fulfilled at time 0.
+    /// For each second that a request remains unfulfilled, you receive 1 
+    /// penalty.Equivalently, a request fulfilled at time t contributes t to 
+    /// the total penalty.
+    ///
+    /// Return the minimum total penalty required to fulfill all requests.
+    ///
+    /// Example 1:
+    /// Input: n = 6, start = 4, requests = [1, 5]
+    /// Output : 6
+    /// Explanation :
+    /// Move from floor 4 (start)to floor 5 in 1 second.Penalty for floor 5 
+    /// is 1.
+    /// Move from floor 5 to floor 1 in 4 seconds.Penalty for floor 1 is 5.
+    /// Thus, the total penalty is 1 + 5 = 6.
+    ///
+    /// Example 2:
+    /// Input: n = 8, start = 3, requests = [3, 7, 1]
+    /// Output : 10
+    /// Explanation :
+    /// Floor 3 (start)is fulfilled instantly.Penalty for floor 3 is 0.
+    /// Move from floor 3 to floor 1 in 2 seconds.Penalty for floor 1 is 2.
+    /// Move from floor 1 to floor 7 in 6 seconds.Penalty for floor 7 is 8.
+    /// Thus, the total penalty is 0 + 2 + 8 = 10.
+    ///
+    /// Example 3:
+    /// Input: n = 10, start = 5, requests = [0, 2, 9]
+    /// Output : 22
+    /// Explanation :
+    /// Move from floor 5 (start)to floor 2 in 3 seconds.Penalty for 
+    /// floor 2 is 3.
+    /// Move from floor 2 to floor 0 in 2 seconds.Penalty for floor 0 is 5.
+    /// Move from floor 0 to floor 9 in 9 seconds.Penalty for floor 9 is 14.
+    /// Thus, the total penalty is 3 + 5 + 14 = 22.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n <= 10^9
+    /// 2. 1 <= requests.length <= 1500
+    /// 3. 0 <= start, requests[i] <= n - 1
+    /// 4. All values in requests are distinct.
+    /// </summary>
+    long long elevatorRequestsII(int n, int start, vector<int>& requests);
+
 #pragma endregion
 };
 #endif  // LeetCodeGraph_H

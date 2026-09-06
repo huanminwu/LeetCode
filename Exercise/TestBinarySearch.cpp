@@ -1763,11 +1763,62 @@ void TestLeetCode3971(void)
     Logger::WriteMessage(decay);
     Logger::WriteMessage("m = " + to_string(m));
     Logger::WriteMessage("result = " + to_string(result));
+}
 
+void TestLeetCode4008(void)
+{
+    Logger::WriteMessage("Test Leet Code 4008");
+    LeetCodeBinarySearch leetCode;
+    vector<int> monsters = {5, 10, 15};
+    vector<vector<int>> boosts = {{1, 1, 10}};
+    int result = leetCode.minInitialStrength(monsters, boosts);
+    Logger::WriteMessage(monsters);
+    Logger::WriteMessage(boosts);
+    Logger::WriteMessage("result = " + to_string(result));
+
+
+    monsters = { 5,10,15 };
+    boosts = { {1, 2, 10}, {1, 2, 5} };
+    result = leetCode.minInitialStrength(monsters, boosts);
+    Logger::WriteMessage(monsters);
+    Logger::WriteMessage(boosts);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
+void TestLeetCode4016(void)
+{
+    Logger::WriteMessage("Test Leet Code 4016");
+    LeetCodeBinarySearch leetCode;
+    vector<vector<int>> mat = {{1, 0, 1}};
+    int result = leetCode.maxArea(mat);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    mat = { {1, 1, 1, 0},{1, 1, 1, 1},{0, 0, 1, 1} };
+    result = leetCode.maxArea(mat);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    mat = { {0, 1}, {1, 0} };
+    result = leetCode.maxArea(mat);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    mat = { {0, 0},{0, 1} };
+    result = leetCode.maxArea(mat);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    mat = { {1, 0} };
+    result = leetCode.maxArea(mat);
+    Logger::WriteMessage(mat);
+    Logger::WriteMessage("result = " + to_string(result));
 }
 
 void TestLeetCodeBinarySearch(void)
 {
+    TestLeetCode4016();
     TestLeetCode3971();
     TestLeetCode3911();
     TestLeetCode3824();

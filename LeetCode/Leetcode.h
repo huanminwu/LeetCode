@@ -241,7 +241,7 @@ struct BinaryIndexTree
         m_arr = vector<long long>(n + 1, 0);
         m_size = n + 1;
     }
-    void add(int index, int val)
+    void add(int index, long long val)
     {
         if (index == 0) return;
         while (index < m_size)

@@ -8810,13 +8810,13 @@ public:
     /// <summary>
     /// Leet Code 3786. Total Sum of Interaction Cost in Tree Groups
     /// </summary>
-    void interactionCosts(int parent, int node, vector<vector<int>>& neighbors, 
+    void interactionCostsI(int parent, int node, vector<vector<int>>& neighbors, 
         vector<vector<int>>&node_groups, vector<int>& group);
 
     /// <summary>
     /// Leet Code 3786. Total Sum of Interaction Cost in Tree Groups
     /// </summary>
-    long long interactionCosts(int parent, int node, vector<vector<int>>& neighbors,
+    long long interactionCostsI(int parent, int node, vector<vector<int>>& neighbors,
         vector<vector<int>>& node_groups);
 
     /// <summary>
@@ -8886,7 +8886,7 @@ public:
     /// 6. 1 <= group[i] <= 20
     /// 7. The input is generated such that edges represents a valid tree.
     /// </summary>
-    long long interactionCosts(int n, vector<vector<int>>& edges, vector<int>& group);
+    long long interactionCostsI(int n, vector<vector<int>>& edges, vector<int>& group);
 
     /// <summary>
     /// Leet Code 3787. Find Diameter Endpoints of a Tree
@@ -9615,6 +9615,179 @@ public:
     /// 8. 1 <= baseTime[i] <= 10^5
     /// </summary>
     long long finishTimeII(int n, vector<vector<int>>& edges, vector<int>& baseTime);
+
+    /// <summary>
+    /// Leet Code #3997. Count Dominant Nodes in a Binary Tree
+    ///
+    /// Medium
+    ///
+    /// You are given the root of a complete binary tree.
+    ///
+    /// A node x is called dominant if its value is equal to the maximum value 
+    /// among all nodes in the subtree rooted at x.
+    ///
+    /// Return the number of dominant nodes in the tree.
+    /// 
+    /// Example 1:
+    /// Input: root = [5, 3, 8, 2, 4, 7, 1]
+    /// Output : 5
+    /// Explanation :
+    /// The leaf nodes with values 2, 4, 7, and 1 are dominant.
+    /// The node with value 8 is dominant because its value is the maximum 
+    /// value in its subtree[8, 7, 1].
+    /// Thus, the answer is 5.
+    ///
+    /// Example 2 :
+    /// Input: root = [1, 2, 3, 1, 2]
+    /// Output : 4
+    /// Explanation :
+    /// The leaf nodes with values 1, 2, and 3 are dominant.
+    /// The node with value 2 whose subtree is[2, 1, 2] is dominant because 
+    /// its value is the maximum value in its subtree.
+    /// Thus, the answer is 4.
+    ///
+    /// Constraints :
+    /// 1. The number of nodes in the tree is in the range[1, 10^5].
+    /// 2. 1 <= Node.val <= 10^9
+    /// 3. The tree is guaranteed to be a complete binary tree.
+    /// </summary>
+    int countDominantNodes(TreeNode* root);
+
+    /// <summary>
+    /// Leet Code #4015. Weighted Sum of a Tree
+    ///
+    /// Medium
+    /// 
+    /// You are given an integer array parent of length n representing a 
+    /// rooted tree with nodes labeled from 0 to n - 1.
+    ///
+    /// The tree is rooted at node 0, so parent[0] = -1. For each node i 
+    /// where 1 <= i <= n - 1, parent[i] denotes the parent of node i.
+    ///
+    /// You are also given an integer array nums of length n, where 
+    /// nums[i] denotes the value of node i.
+    ///
+    /// The weight of a node i at depth d is nums[i] * (h - d + 1), where 
+    /// h is the height of the tree.
+    /// Return the sum of the weights of all nodes in the tree.
+    ///
+    /// The depth of a node is the number of nodes on the path from the root 
+    /// to that node, inclusive, with the root having depth 1.
+    ///
+    /// The height of the tree is the maximum depth among all nodes in the 
+    /// tree.
+    ///
+    /// Example 1:
+    /// Input : parent = [-1, 0, 0, 0, 2, 2], nums = [5, 2, 3, 1, 4, 6]
+    /// Output : 37
+    /// Explanation :
+    /// The height of the tree is 3.
+    /// Node  nums[i]  Depth(d)  Weight
+    /// 0  5  1  5 * (3 - 1 + 1) = 15
+    /// 1  2  2  2 * (3 - 2 + 1) = 4
+    /// 2  3  2  3 * (3 - 2 + 1) = 6
+    /// 3  1  2  1 * (3 - 2 + 1) = 2
+    /// 4  4  3  4 * (3 - 3 + 1) = 4
+    /// 5  6  3  6 * (3 - 3 + 1) = 6
+    /// The sum of all node weights is 15 + 4 + 6 + 2 + 4 + 6 = 37.
+    ///
+    /// Example 2:
+    /// Input : parent = [-1, 0, 1, 2], nums = [1, 2, 3, 4]
+    /// Output : 20
+    /// Explanation :
+    /// The height of the tree is 4.
+    /// Node  nums[i]  Depth(d)  Weight
+    /// 0  1  1  1 * (4 - 1 + 1) = 4
+    /// 1  2  2  2 * (4 - 2 + 1) = 6
+    /// 2  3  3  3 * (4 - 3 + 1) = 6
+    /// 3  4  4  4 * (4 - 4 + 1) = 4
+    /// The sum of all node weights is 4 + 6 + 6 + 4 = 20.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n <= 10^5
+    /// 2. n == parent.length == nums.length
+    /// 3. parent[0] == -1
+    /// 4. 0 <= parent[i] <= n - 1 for all i in[1, n - 1]
+    /// 5. 1 <= nums[i] <= 10^6
+    /// 6. The input is generated such that the array parent represents a 
+    ///    valid tree rooted at node 0.
+    /// </summary>
+    long long weightedSum(vector<int>& parent, vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code #4018. Total Sum of Interaction Cost in Tree Groups II
+    ///
+    /// Hard
+    /// 
+    /// You are given an integer n and an undirected tree rooted at node 0 
+    /// with n nodes numbered from 0 to n - 1. The tree is represented by a 2D 
+    /// integer array edges of length n - 1, where edges[i] = [ui, vi] 
+    /// indicates an undirected edge between nodes ui and vi.
+    ///
+    /// You are also given an integer array group of length n, where group[i] 
+    /// denotes the group label assigned to node i.
+    ///
+    /// Two nodes u and v belong to the same group if and only if 
+    /// group[u] == group[v].
+    /// The interaction cost between two nodes is the shortest distance 
+    /// between them in the tree.
+    /// Return the sum of interaction costs over all pairs of node 
+    /// indices(u, v) such that 0 <= u < v < n and group[u] == group[v].
+    ///
+    /// The shortest distance between two nodes is the number of edges on the 
+    /// unique path connecting them in the tree.
+    ///
+    /// Example 1:
+    /// Input: n = 3, edges = [[0, 1], [1, 2]], group = [1, 1, 1]
+    /// Output : 4
+    ///
+    /// Explanation :
+    /// All nodes belong to group 1. The interaction costs between the pairs 
+    /// of nodes are :
+    /// Nodes[0, 1] : 1
+    /// Nodes[1, 2] : 1
+    /// Nodes[0, 2] : 2
+    /// Thus, the total interaction cost is 1 + 1 + 2 = 4.
+    ///
+    /// Example 2 :
+    /// Input : n = 3, edges = [[0, 1], [1, 2]], group = [3, 2, 3]
+    /// Output : 2
+    ///
+    /// Explanation :
+    /// 
+    /// Nodes 0 and 2 belong to group 3. The interaction cost between this 
+    /// pair is 2.
+    /// Node 1 belongs to a different group and forms no valid pair.
+    /// Therefore, the total interaction cost is 2.
+    /// 
+    /// Example 3:
+    /// Input: n = 4, edges = [[0, 1], [0, 2], [0, 3]], group = [1, 1, 4, 4]
+    /// Output : 3
+    /// Explanation :
+    /// 
+    /// Nodes belonging to the same groups and their interaction costs are :
+    /// Group 1 : Nodes[0, 1] : 1
+    /// Group 4 : Nodes[2, 3] : 2
+    /// Thus, the total interaction cost is 1 + 2 = 3.
+    ///
+    /// Example 4 :
+    /// Input : n = 2, edges = [[0, 1]], group = [1, 2]
+    /// Output : 0
+    /// Explanation :
+    ///
+    /// All nodes belong to different groups and there are no valid pairs.
+    /// Therefore, the total interaction cost is 0.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n <= 10^5
+    /// 2. edges.length == n - 1
+    /// 3. edges[i] = [ui, vi]
+    /// 4. 0 <= ui, vi <= n - 1
+    /// 5. group.length == n
+    /// 6. 1 <= group[i] <= n
+    /// 7. The input is generated such that edges represents a valid tree.
+    /// </summary>
+    long long interactionCostsII(int n, vector<vector<int>>& edges, vector<int>& group);
 
 #pragma endregion
 };

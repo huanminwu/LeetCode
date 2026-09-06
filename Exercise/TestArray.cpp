@@ -10389,35 +10389,35 @@ void TestLeetCode3187(void)
     LeetCodeArray leetCode;
     vector<int> nums = { 3, 1, 4, 2, 5 };
     vector<vector<int>> queries = { {2, 3, 4},{1, 0, 4} };
-    vector<int> result = leetCode.countOfPeaks(nums, queries);
+    vector<int> result = leetCode.countOfPeaksI(nums, queries);
     Logger::WriteMessage(nums);
     Logger::WriteMessage(queries);
     Logger::WriteMessage(result);
 
     nums = { 4, 1, 4, 2, 1, 5 };
     queries = { {2, 2, 4},{1, 0, 2},{1, 0, 4} };
-    result = leetCode.countOfPeaks(nums, queries);
+    result = leetCode.countOfPeaksI(nums, queries);
     Logger::WriteMessage(nums);
     Logger::WriteMessage(queries);
     Logger::WriteMessage(result);
 
     nums = { 8, 10, 10, 9, 10 };
     queries = { {2, 0, 1},{2, 2, 7},{1, 0, 2} };
-    result = leetCode.countOfPeaks(nums, queries);
+    result = leetCode.countOfPeaksI(nums, queries);
     Logger::WriteMessage(nums);
     Logger::WriteMessage(queries);
     Logger::WriteMessage(result);
 
     nums = { 10, 7, 10 };
     queries = { {2, 0, 1},{2, 1, 3},{2, 0, 6} };
-    result = leetCode.countOfPeaks(nums, queries);
+    result = leetCode.countOfPeaksI(nums, queries);
     Logger::WriteMessage(nums);
     Logger::WriteMessage(queries);
     Logger::WriteMessage(result);
 
     nums = { 6, 7, 4 };
     queries = { {2, 2, 8},{1, 0, 2} };
-    result = leetCode.countOfPeaks(nums, queries);
+    result = leetCode.countOfPeaksI(nums, queries);
     Logger::WriteMessage(nums);
     Logger::WriteMessage(queries);
     Logger::WriteMessage(result);
@@ -13885,8 +13885,217 @@ void TestLeetCode3985(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode4011(void)
+{
+    Logger::WriteMessage("Test Leet Code 4011");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 1, 2 };
+    int a = 3;
+    int b = 2;
+    long long result = leetCode.countRatioSubarraysI(nums, a, b);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2, 2, 1 };
+    a = 2, b = 1;
+    result = leetCode.countRatioSubarraysI(nums, a, b);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2, 2, 2 };
+    a = 1, b = 1;
+    result = leetCode.countRatioSubarraysI(nums, a, b);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("a = " + to_string(a) + "; b = " + to_string(b));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4012(void)
+{
+    Logger::WriteMessage("Test Leet Code 4012");
+    LeetCodeArray leetCode;
+    vector<int> tasks = { 1, 4, 4 };
+    vector<int> shifts = { 9, 1, 4 };
+    vector<int> result = leetCode.countTasks(tasks, shifts);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage(shifts);
+    Logger::WriteMessage(result);
+
+    tasks = { 2,3,4 };
+    shifts = { 20,4,5 };
+    result = leetCode.countTasks(tasks, shifts);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage(shifts);
+    Logger::WriteMessage(result);
+
+    tasks = { 4,2 };
+    shifts = { 3,6,1 };
+    result = leetCode.countTasks(tasks, shifts);
+    Logger::WriteMessage(tasks);
+    Logger::WriteMessage(shifts);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode4013(void)
+{
+    Logger::WriteMessage("Test Leet Code 4013");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 1, 2 };
+    int a = 3, b = 2;
+    long long result = leetCode.countRatioSubarraysII(nums, a, b);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("a = " + to_string(a));
+    Logger::WriteMessage("b = " + to_string(b));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,2,1 };
+    a = 2, b = 1;
+    result = leetCode.countRatioSubarraysII(nums, a, b);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("a = " + to_string(a));
+    Logger::WriteMessage("b = " + to_string(b));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,2,2 };
+    a = 1, b = 1;
+    result = leetCode.countRatioSubarraysII(nums, a, b);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("a = " + to_string(a));
+    Logger::WriteMessage("b = " + to_string(b));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4017(void)
+{
+    Logger::WriteMessage("Test Leet Code 4017");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 3, 2, 4 };
+    vector<vector<int>> queries = { {1, 0, 3},{2, 1, 1},{1, 0, 3} };
+    vector<long long> result = leetCode.countOfPeaksII(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums = { 9, 8, 9, 8 };
+    queries = { {1, 1, 3},{2, 2, 1},{1, 0, 2} };
+    result = leetCode.countOfPeaksII(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums = { 3,6,2,7,1 };
+    queries = { {1, 1, 3},{2, 3, 0},{1, 0, 4} };
+    result = leetCode.countOfPeaksII(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums = { 5,2,2 };
+    queries = { {2, 1, 11} };
+    result = leetCode.countOfPeaksII(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums = { 10, 8, 12, 9, 0, 12, 11, 14, 3, 6 };
+    queries = { {2, 3, 16}, {1, 4, 8}, {2, 2, 11}, {1, 4, 7} };
+    result = leetCode.countOfPeaksII(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums = { 24, 10, 12, 2, 7, 14, 23, 21, 15, 2, 3, 18, 19, 21 };
+    queries = { {2, 6, 4}, {1, 3, 13} };
+    result = leetCode.countOfPeaksII(nums, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode4020(void)
+{
+    Logger::WriteMessage("Test Leet Code 4020");
+    LeetCodeArray leetCode;
+    int n = 5;
+    vector<int> requests = {2, 1, 4, 3};
+    int result = leetCode.elevatorRequests(n, requests);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(requests);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3;
+    requests = { 2, 0, 0 };
+    result = leetCode.elevatorRequests(n, requests);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(requests);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4021(void)
+{
+    Logger::WriteMessage("Test Leet Code 4021");
+    LeetCodeArray leetCode;
+    string s = "abc";
+    int result = leetCode.minOperationsI(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "yb";
+    result = leetCode.minOperationsI(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4033(void)
+{
+    Logger::WriteMessage("Test Leet Code 4033");
+    LeetCodeArray leetCode;
+    vector<int> nums = {1, 2, 2, 1};
+    int k = 2;
+    vector<vector<int>> queries = {{0, 1}, {0, 3}, {1, 2}};
+    vector<bool> result = leetCode.validSubarrays(nums, k, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+
+    nums = { 3,3,3 };
+    k = 1;
+    queries = { {1, 2},{0, 2} };
+    result = leetCode.validSubarrays(nums, k, queries);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(queries);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode4038(void)
+{
+    Logger::WriteMessage("Test Leet Code 4038");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 2, 1 };
+    int result = leetCode.countSpecialIntegers(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,3,1,2,2,1 };
+    result = leetCode.countSpecialIntegers(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode4038();
+    TestLeetCode4033();
+    TestLeetCode4021();
+    TestLeetCode4020();
+    TestLeetCode4017();
+    TestLeetCode4013();
+    TestLeetCode4012();
+    TestLeetCode4011();
     TestLeetCode3985();
     TestLeetCode3972();
     TestLeetCode3969();

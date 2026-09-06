@@ -7493,4 +7493,129 @@ int LeetCodeHashtable::minCost(vector<int>& nums1, vector<int>& nums2)
     }
     return cost / 2;
 }
+
+/// <summary>
+/// Leet Code 3978. Unique Middle Element
+/// 
+/// Easy
+/// 
+/// You are given an integer array nums of odd length n.
+///
+/// Return true if the middle element of nums appears exactly once in the 
+/// array.Otherwise return false.
+///
+/// Example 1:
+/// Input: nums = [1, 2, 3]
+/// Output : true
+/// Explanation :
+/// The middle element of nums is 2, which appears exactly once.
+/// Thus, the answer is true.
+///
+/// Example 2:
+/// Input: nums = [1, 2, 2]
+/// Output : false
+/// Explanation :
+/// The middle element of nums is 2, which appears twice.
+/// Thus, the answer is false.
+///
+/// Constraints:
+///
+/// 1. 1 <= n == nums.length <= 100
+/// 2. n is odd.
+/// 3. 1 <= nums[i] <= 100
+/// </summary>
+bool LeetCodeHashtable::isMiddleElementUnique(vector<int>& nums)
+{
+    int n = nums.size();
+    int middle = nums[n / 2];
+    int count = 0;
+    for (int num : nums)
+    {
+        if (num == middle)
+        {
+            count++;
+        }
+    }
+    return count == 1;
+}
+
+/// <summary>
+/// Leet Code 4007. Widest Possible Fence
+/// 
+/// Medium
+/// 
+/// You are given an integer array planks, where planks[i] represents 
+/// the height of the ith wooden plank.Each plank has a width of 1 unit.
+///
+/// You want to build a fence consisting of planks that all have the same 
+/// height.
+///
+/// You may either use a plank as is, or combine exactly two distinct 
+/// original planks into a single plank whose height equals the sum of 
+/// their heights.Each original plank can be used at most once, and not 
+/// all original planks need to be used.
+///
+/// Return the maximum possible width of the fence that can be built.
+///
+/// Example 1:
+/// Input: planks = [1, 3, 2, 5, 7, 5, 4, 2, 1]
+/// Output : 4
+/// Explanation :
+/// We can have four planks of height 5.
+/// planks[3] = 5
+/// planks[5] = 5
+/// planks[0] + planks[6] = 1 + 4 = 5
+/// planks[1] + planks[2] = 3 + 2 = 5
+/// Hence, the maximum width is 4.
+///
+/// Example 2:
+/// Input: planks = [2, 3, 7]
+/// Output : 1
+/// Explanation :
+/// It is impossible to form two planks of the same height, even after 
+/// combining two distinct original planks.
+/// Since not all original planks need to be used, we can choose any 
+/// one plank as the fence.
+/// Therefore, the maximum possible width is 1.
+///
+/// Constraints :
+/// 1. 1 <= planks.length <= 1000
+/// 2. 1 <= planks[i] <= 10^9
+/// </summary>
+int LeetCodeHashtable::maximumWidth(vector<int>& planks)
+{
+    // Count the frequency of each plank height
+    map<int, int> height_count;
+    for (int height : planks)
+    {
+        height_count[height]++;
+    }
+    vector<int> heights;
+    vector<int> counts;
+    for (auto& [height, count] : height_count)
+    {
+        heights.push_back(height);
+        counts.push_back(count);
+    }
+
+    for (size_t i = 0; i < heights.size(); i++)
+    {
+        if (counts[i] > 1)
+        {
+            height_count[heights[i] * 2] += counts[i] / 2;
+        }
+        for (size_t j = i + 1; j < heights.size(); j++)
+        {
+            int combined_height = heights[i] + heights[j];
+            height_count[combined_height] += min(counts[i], counts[j]);
+        }
+    }
+    int max_width = 0;
+    for (auto& [height, count] : height_count)
+    {
+        max_width = max(max_width, count);
+    }
+
+    return max_width;
+}
 #pragma endregion

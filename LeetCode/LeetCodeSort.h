@@ -10590,6 +10590,218 @@ public:
     /// </summary>
     long long maxSum(vector<int>& nums, int k, int mul);
 
+    /// <summary>
+    /// Leet code 4001. Aggregate Two Time Series
+    ///
+    /// Medium
+    ///
+    /// You are given two 2D integer arrays series1 and series2.
+    /// Each element in both series is of the form[timestamp, value], where:
+    /// timestamp is an integer representing the time.
+    /// value is an integer representing the value at that timestamp.
+    /// Each array is sorted in strictly increasing order of timestamp.
+    ///
+    /// For any timestamp not present in a series, its value is taken from the 
+    /// next available timestamp in the same series if one exists. 
+    /// Otherwise, its value is considered 0.
+    ///
+    /// The aggregated series is formed by summing the corresponding values 
+    /// from both series at every timestamp that appears in either series.
+    ///
+    /// Return the aggregated series as a 2D integer array of 
+    /// [timestamp, summedValue] pairs, sorted in strictly increasing order 
+    /// of timestamp.
+    ///
+    /// Example 1:
+    /// Input: series1 = [[1, 3], [4, 1]], series2 = [[2, 2], [5, 2]]
+    /// Output : [[1, 5], [2, 3], [4, 3], [5, 2]]
+    /// Explanation :
+    /// Timestamp->series1->series2->summedValue
+    /// 1->3->2->5
+    /// 2->1->2->3
+    /// 4->1->2->3
+    /// 5->0->2->2
+    /// Thus, the aggregated series is [[1, 5], [2, 3], [4, 3], [5, 2]] .
+    ///
+    /// Example 2:
+    /// Input: series1 = [[1, 5], [3, 1]], series2 = [[2, 2]]
+    /// Output : [[1, 7], [2, 3], [3, 1]]
+    /// Explanation :
+    /// Timestamp->series1->series2->summedValue
+    /// 1->5->2->7
+    /// 2->1->2->3
+    /// 3->1->0->1
+    /// Thus, the aggregated series is [[1, 7], [2, 3], [3, 1]] .
+    ///
+    /// Example 3:
+    /// Input: series1 = [[1, 5]], series2 = [[1000000000, 2]]
+    /// Output : [[1, 7], [1000000000, 2]]
+    /// Explanation :
+    /// At timestamp 1, the next available value in series2 is 2 
+    /// at timestamp 1000000000. At timestamp 1000000000, there 
+    /// is no later timestamp in series1, so its value is 0. 
+    /// Only timestamps that appear in at least one of the two 
+    /// series are included.
+    /// Thus, the aggregated series is [[1, 7], [1000000000, 2]] .
+    ///
+    /// Constraints:
+    /// 1. 1 <= series1.length, series2.length <= 10^5
+    /// 2. series1[i].length == series2[i].length == 2
+    /// 3. 1 <= series1[i][0], series2[i][0] <= 10^9
+    /// 4. 1 <= series1[i][1], series2[i][1] <= 10^9
+    /// 5. Each series is sorted in strictly increasing order of timestamp.
+    /// </summary>
+    vector<vector<int>> aggregateTimeSeries(vector<vector<int>>& series1, vector<vector<int>>& series2);
+
+    /// <summary>
+    /// Leet code #4014. Minimum Total Price After Applying Discounts
+    ///
+    /// Medium
+    ///
+    /// You are given two integer arrays prices and discounts.
+    /// The value prices[i] represents the price of the ith item, and 
+    /// discounts[j] represents a discount percentage.
+    ///
+    /// You may apply discounts subject to the following rules :
+    /// Each discount can be applied to at most one item.
+    /// Each item can receive at most one discount.
+    /// An item may also receive no discount.
+    /// If a discount of d percent is applied to an item with price p, 
+    /// its final price becomes(p* (100 - d)) / 100. The final price is 
+    /// not rounded.
+    ///
+    /// Return the minimum possible sum of final prices after assigning 
+    /// discounts optimally.Answers within 10 - 5 of the actual answer 
+    /// will be accepted.
+    ///
+    /// Example 1:
+    /// Input: prices = [10, 30, 21], discounts = [50, 60]
+    /// Output : 32.50000
+    /// Explanation :
+    /// Apply discounts[1] = 60 to prices[1] = 30, thus 
+    /// 30 * (100 - 60) / 100 = 12.
+    /// Apply discounts[0] = 50 to prices[2] = 21, thus 
+    /// 21 * (100 - 50) / 100 = 10.5.
+    /// prices[0] = 10 receives no discount, so it stays 10.
+    /// The total is 12 + 10.5 + 10 = 32.50000, which is the minimum possible.
+    ///
+    /// Example 2:
+    /// Input: prices = [100, 70], discounts = [10, 40, 50]
+    /// Output : 92.00000
+    /// Explanation :
+    /// Apply discounts[2] = 50 to prices[0] = 100, thus 
+    /// 100 * (100 - 50) / 100 = 50.
+    /// Apply discounts[1] = 40 to prices[1] = 70, thus 
+    /// 70 * (100 - 40) / 100 = 42.
+    /// The total is 50 + 42 = 92.00000, which is the minimum possible.
+    ///
+    /// Example 3:
+    /// Input: prices = [7, 3, 9], discounts = [100, 100]
+    /// Output : 3.00000
+    /// Explanation :
+    /// Apply discounts[0] = 100 to prices[2] = 9, thus 
+    /// 9 * (100 - 100) / 100 = 0.
+    /// Apply discounts[1] = 100 to prices[0] = 7, thus 
+    /// 7 * (100 - 100) / 100 = 0.
+    /// prices[1] = 3 receives no discount, so it stays 3.
+    /// The total is 0 + 0 + 3 = 3.00000, which is the minimum possible.
+    /// 
+    /// Constraints:
+    ///
+    /// 1. 1 <= prices.length, discounts.length <= 10^5
+    /// 2. 1 <= prices[i] <= 10^5
+    /// 3. 1 <= discounts[j] <= 100
+    /// </summary>
+    double minPrice(vector<int>& prices, vector<int>& discounts);
+ 
+    /// <summary>
+    /// Leet code #4025. Minimize the Maximum Waiting Time at Synchronized 
+    ///                  Traffic Lights
+    /// Medium
+    /// 
+    /// You are given an integer period and an integer array lights, where 
+    /// lights[i] is the duration, in seconds, of the green phase of the ith 
+    /// traffic light.
+    ///
+    /// At time 0, every traffic light starts at the beginning of its green 
+    /// phase.Their cycles are synchronized : every traffic light starts a new 
+    /// cycle at the same time, and every cycle lasts exactly period seconds.
+    /// Therefore, the red phase of the ith traffic light lasts for 
+    /// period - lights[i] seconds.
+    ///
+    /// You are also given an integer array arrivalTime, where arrivalTime[j] 
+    /// is the arrival time, in seconds, of the jth car.
+    ///
+    /// Each car must be assigned to exactly one traffic light.Multiple cars 
+    /// may be assigned to the same traffic light.Any number of cars may 
+    /// cross the same traffic light simultaneously while it is green.Cars 
+    /// do not block or delay one another.
+    ///
+    /// For a car j assigned to the ith traffic light, let 
+    /// r = arrivalTime[j] % period.If r < lights[i], its waiting time is 0. 
+    /// Otherwise, its waiting time is period - r.
+    /// The penalty of an assignment is the maximum waiting time among all 
+    /// cars.
+    ///
+    /// Return an integer denoting the minimum possible penalty.
+    ///
+    /// Example 1:
+    /// Input: period = 8, lights = [2, 3], arrivalTime = [2, 5, 8, 11]
+    /// Output : 5
+    /// Explanation :
+    ///
+    /// One optimal solution is :
+    /// Assign arrivalTime[0] to the traffic light with lights[1] = 3. 
+    /// Here, r = 2 % 8 = 2. Since 2 < 3, the waiting time is 0.
+    /// Assign arrivalTime[1] to the traffic light with lights[0] = 2. 
+    /// Here, r = 5 % 8 = 5. Since 5 >= 2, the waiting time is 8 - 5 = 3.
+    /// Assign arrivalTime[2] to the traffic light with lights[0] = 2. 
+    /// Here, r = 8 % 8 = 0. Since 0 < 2, the waiting time is 0.
+    /// Assign arrivalTime[3] to the traffic light with lights[0] = 2. 
+    /// Here, r = 11 % 8 = 3. Since 3 >= 2, the waiting time is 8 - 3 = 5.
+    /// The penalty of this assignment is 5, which is the minimum possible.
+    /// Other optimal assignments may exist.
+    ///
+    /// Example 2:
+    /// Input: period = 10, lights = [3, 6, 8], arrivalTime = [4, 9, 15]
+    /// Output : 1
+    /// Explanation :
+    /// One optimal solution is :
+    /// Assign arrivalTime[0] to the traffic light with lights[2] = 8. 
+    /// Here, r = 4 % 10 = 4. Since 4 < 8, the waiting time is 0.
+    /// Assign arrivalTime[1] to the traffic light with lights[2] = 8. 
+    /// Here, r = 9 % 10 = 9. Since 9 >= 8, the waiting time is 10 - 9 = 1.
+    /// Assign arrivalTime[2] to the traffic light with lights[2] = 8. 
+    /// Here, r = 15 % 10 = 5. Since 5 < 8, the waiting time is 0.
+    /// The penalty of this assignment is 1, which is the minimum possible.
+    ///
+    /// Example 3:
+    /// Input: period = 5, lights = [2], arrivalTime = [2, 3, 4, 5, 6]
+    /// Output : 3
+    /// Explanation :
+    /// One optimal solution is :
+    /// Assign arrivalTime[0] to the traffic light with lights[0] = 2. 
+    /// Here, r = 2 % 5 = 2. Since 2 >= 2, the waiting time is 5 - 2 = 3.
+    /// Assign arrivalTime[1] to the traffic light with lights[0] = 2. 
+    /// Here, r = 3 % 5 = 3. Since 3 >= 2, the waiting time is 5 - 3 = 2.
+    /// Assign arrivalTime[2] to the traffic light with lights[0] = 2. 
+    /// Here, r = 4 % 5 = 4. Since 4 >= 2, the waiting time is 5 - 4 = 1.
+    /// Assign arrivalTime[3] to the traffic light with lights[0] = 2. 
+    /// Here, r = 5 % 5 = 0. Since 0 < 2, the waiting time is 0.
+    /// Assign arrivalTime[4] to the traffic light with lights[0] = 2. 
+    /// Here, r = 6 % 5 = 1. Since 1 < 2, the waiting time is 0.
+    /// The penalty of this assignment is 3, which is the minimum possible.
+    ///
+    /// Constraints:
+    /// 1. 2 <= period <= 10^9
+    /// 2. 2 <= period <= 10^9
+    /// 3. 1 <= lights.length <= 10^4
+    /// 4. 1 <= lights[i] <= period - 1
+    /// 5. 1 <= arrivalTime.length <= 10^5
+    /// 6. 1 <= arrivalTime[i] <= 10^9
+    /// </summary>
+    int minPenalty(int period, vector<int>& lights, vector<int>& arrivalTime);
+ 
 #pragma endregion
 };
 #endif  // LeetCodeSort_H

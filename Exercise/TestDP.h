@@ -2,6 +2,7 @@
 #ifndef TestDP_H
 #define TestDP_H
 #include "..\LeetCode\LeetCodeDP.h"
+void TestLeetCodeDP(void);
 void TestLeetCode5(void);
 void TestLeetCode10(void);
 void TestLeetCode44(void);
@@ -236,5 +237,8 @@ void TestLeetCode3952(void);
 void TestLeetCode3956(void);
 void TestLeetCode3957(void);
 void TestLeetCode3976(void);
-void TestLeetCodeDP(void);
+void TestLeetCode4027(void);
+void TestLeetCode4027(void);
+void TestLeetCode4040(void);
+
 #endif  // TestMath

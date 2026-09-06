@@ -2480,8 +2480,45 @@ void TestLeetCode3868(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3978(void)
+{
+    Logger::WriteMessage("Test Leet Code 3978");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = { 1, 2, 3 };
+    bool result = leetCode.isMiddleElementUnique(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    nums = { 1, 2, 2 };
+    result = leetCode.isMiddleElementUnique(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode4007(void)
+{
+    Logger::WriteMessage("Test Leet Code 4007");
+    LeetCodeHashtable leetCode;
+    vector<int> planks = {1, 3, 2, 5, 7, 5, 4, 2, 1};
+    int result = leetCode.maximumWidth(planks);
+    Logger::WriteMessage(planks);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    planks = { 2,3,7 };
+    result = leetCode.maximumWidth(planks);
+    Logger::WriteMessage(planks);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    planks = {39, 14, 56, 96, 55, 56, 83, 38, 33, 27, 98, 71, 68, 1, 42, 31, 14, 42, 34, 23, 68, 81, 56, 33, 56, 59, 71, 59, 81, 56, 80, 15, 28, 42, 28, 56, 46, 46, 42, 14, 23, 72, 19, 6, 81, 56, 71, 56, 33, 58};
+    result = leetCode.maximumWidth(planks);
+    Logger::WriteMessage(planks);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode4007();
+    TestLeetCode3978();
     TestLeetCode3852();
     TestLeetCode3843();
     TestLeetCode3839();

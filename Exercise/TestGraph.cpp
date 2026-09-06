@@ -6992,8 +6992,99 @@ void TestLeetCode3977(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode3990(void)
+{
+    Logger::WriteMessage("Test Leet Code 3990");
+    LeetCodeGraph leetCode;
+    int k = 2;
+    vector<string> result = leetCode.createGridII(k);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+
+    k = 3;
+    result = leetCode.createGridII(k);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode4003(void)
+{
+    Logger::WriteMessage("Test Leet Code 4003");
+    LeetCodeGraph leetCode;
+    int m = 2, n = 2;
+    vector<vector<int>> penalty = {{5, 3}, {1, 4}};
+    long long result = leetCode.minCost(m, n, penalty);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage(penalty);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    m = 2, n = 2;
+    penalty = { {0, 7}, {3, 2} };
+    result = leetCode.minCost(m, n, penalty);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage(penalty);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    m = 2, n = 3;
+    penalty = { {8, 0, 9}, {7, 4, 1} };
+    result = leetCode.minCost(m, n, penalty);
+    Logger::WriteMessage("m = " + to_string(m) + "; n = " + to_string(n));
+    Logger::WriteMessage(penalty);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4004(void)
+{
+    Logger::WriteMessage("Test Leet Code 4004");
+    LeetCodeGraph leetCode;
+    vector<int> balance = { -1, 2, -1 };
+    long long result = leetCode.minMoves(balance);
+    Logger::WriteMessage(balance);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    balance = { 4,-1,-2 };
+    result = leetCode.minMoves(balance);
+    Logger::WriteMessage(balance);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    balance = { -3,-3,5 };
+    result = leetCode.minMoves(balance);
+    Logger::WriteMessage(balance);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4023(void)
+{
+    Logger::WriteMessage("Test Leet Code 4023");
+    LeetCodeGraph leetCode;
+    int n = 6, start = 4;
+    vector<int> requests = {1, 5};
+    long long result = leetCode.elevatorRequestsII(n, start, requests);
+    Logger::WriteMessage("n = " + to_string(n) + "; start = " + to_string(start));
+    Logger::WriteMessage(requests);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 8, start = 3;
+    requests = { 3, 7, 1 };
+    result = leetCode.elevatorRequestsII(n, start, requests);
+    Logger::WriteMessage("n = " + to_string(n) + "; start = " + to_string(start));
+    Logger::WriteMessage(requests);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 10, start = 5;
+    requests = { 0, 2, 9 };
+    result = leetCode.elevatorRequestsII(n, start, requests);
+    Logger::WriteMessage("n = " + to_string(n) + "; start = " + to_string(start));
+    Logger::WriteMessage(requests);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode4023();
+    TestLeetCode4004();
+    TestLeetCode4003();
+    TestLeetCode3990();
     TestLeetCode1928();
     TestLeetCode3977();
     TestLeetCode3970();

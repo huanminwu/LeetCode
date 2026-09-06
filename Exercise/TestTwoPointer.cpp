@@ -1205,8 +1205,69 @@ void TestLeetCode3960(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode3979(void)
+{
+    Logger::WriteMessage("Test Leet Code 3979");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = {1, 3, 5, 2, 8};
+    int k = 2;
+    int result = leetCode.maxValidPairSum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = {5, 1, 9};
+    k = 1;
+    result = leetCode.maxValidPairSum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 22, 99, 18 };
+    k = 2;
+    result = leetCode.maxValidPairSum(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
+void TestLeetCode4032(void)
+{
+    Logger::WriteMessage("Test Leet Code 4032");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 7, 6, 10, 12, 11 };
+    int k = 3;
+    int result = leetCode.longestSubarrayKMostPrimes(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,6,9,18 };
+    k = 4;
+    result = leetCode.longestSubarrayKMostPrimes(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 6,10,15 };
+    k = 2;
+    result = leetCode.longestSubarrayKMostPrimes(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 10,5,7,9,8,3 };
+    k = 2;
+    result = leetCode.longestSubarrayKMostPrimes(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode4032();
     TestLeetCode3960();
     TestLeetCode3884();
     TestLeetCode3859();

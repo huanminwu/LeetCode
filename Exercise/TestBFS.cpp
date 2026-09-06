@@ -1046,8 +1046,37 @@ void TestLeetCode3905(void)
     Logger::WriteMessage(result);
 }
 
+
+void TestLeetCode3991(void)
+{
+    Logger::WriteMessage("Test Leet Code 3991");
+    LeetCodeBFS leetCode;
+    vector<int> nums = { 2, 0, 1 };
+    vector<int> pre = { 2, 3 };
+    int result = leetCode.sortArray(nums, pre);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(pre);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,0,2 };
+    pre = { 1,3 };
+    result = leetCode.sortArray(nums, pre);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(pre);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0,1 };
+    pre = { 2 };
+    result = leetCode.sortArray(nums, pre);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(pre);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeBFS(void)
 {
+    TestLeetCode3991();
     TestLeetCode3905();
     TestLeetCode3863();
     TestLeetCode3666();
