@@ -252,7 +252,7 @@ public:
     string complexNumberMultiply(string a, string b);
 
     /// <summary>
-    /// Leet code #564. Find the Closest Palindrome   ?????? 
+    /// Leet code #564. Find the Closest Palindrome   
     /// 
     /// Given an integer n, find the closest integer (not including itself), which 
     /// is a palindrome. 
@@ -20117,5 +20117,58 @@ public:
     /// 2. 1 <= nums[i] <= 10^9
     /// </summary>
     int maxValidSplitsII(vector<int>& nums);
+
+    /// <summary> 
+    /// Leet Code #4053. Minimum Operations to Make Every Element Palindromic
+    /// 
+    /// Medium
+    ///
+    /// You are given an integer array nums.
+    ///
+    /// In one operation, you may choose an index i and either increment or 
+    /// decrement nums[i] by 2.
+    ///
+    /// Return the minimum number of operations required to make every element 
+    /// in nums a positive palindrome.Different elements may be changed into 
+    /// different palindromic integers.
+    ///
+    /// Example 1:
+    /// Input: nums = [10, 12, 14, 16]
+    /// Output : 9
+    /// Explanation :
+    /// One optimal sequence of operations is :
+    /// Decrement nums[0] by 2 once to change it from 10 to 8.
+    /// Decrement nums[1] by 2 twice to change it from 12 to 8.
+    /// Decrement nums[2] by 2 three times to change it from 14 to 8.
+    /// Increment nums[3] by 2 three times to change it from 16 to 22.
+    /// After 1 + 2 + 3 + 3 = 9 operations, nums = [8, 8, 8, 22], and every 
+    /// element is a positive palindromic integer.
+    ///
+    /// It can be shown that fewer than 9 operations cannot achieve this.
+    /// Example 2:
+    /// Input: nums = [9, 10, 11, 10]
+    /// Output : 2
+    /// Explanation :
+    /// Decrement nums[1] and nums[3] by 2 once each.
+    /// After 2 operations, nums = [9, 8, 11, 8], and every element is a 
+    /// positive palindromic integer.
+    ///
+    /// At least one operation is needed for each of these two elements, so 
+    /// the minimum number of operations is 2.
+    ///
+    /// Example 3:
+    /// Input: nums = [125]
+    /// Output : 2
+    /// Explanation :
+    /// Decrement nums[0] by 2 twice to change it from 125 to 121, which 
+    /// is a positive palindromic integer.
+    /// A single operation would change it to 123 or 127, neither of which 
+    /// is palindromic.Thus, the minimum number of operations is 2.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// </summary>
+    long long minOperationsIV(vector<int>& nums);
 };
 #endif

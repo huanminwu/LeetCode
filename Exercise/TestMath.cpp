@@ -9328,8 +9328,34 @@ void TestLeetCode4039(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode4053(void)
+{
+    Logger::WriteMessage("Test Leet Code 4053");
+    LeetCodeMath leetCode;
+    vector<int> nums = {10, 12, 14, 16};
+    long long result = leetCode.minOperationsIV(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 9,10,11,10 };
+    result = leetCode.minOperationsIV(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 125 };
+    result = leetCode.minOperationsIV(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 860 };
+    result = leetCode.minOperationsIV(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode4053();
     TestLeetCode4035();
     TestLeetCode4034();
     TestLeetCode4022();

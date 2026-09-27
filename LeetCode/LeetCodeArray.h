@@ -29499,5 +29499,405 @@ public:
     /// 3. 1 <= nums[i] <= 100
     /// </summary>
     int countSpecialIntegers(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code #4043. Count Rotations With Exactly K Equal Adjacent Pairs
+    /// 
+    /// Easy
+    /// 
+    /// You are given a string s of length n and an integer k.
+    ///
+    /// A cyclic rotation of s is obtained by choosing a prefix of s whose 
+    /// length is between 0 and n - 1 (inclusive), and moving it to the end of 
+    /// the string while preserving the order of all characters.
+    ///
+    /// For every cyclic rotation of s, let its score be the number of indices 
+    /// i such that 0 <= i < n - 1 and the characters at positions i 
+    /// and i + 1 are equal.
+    /// 
+    /// Return the number of cyclic rotations of s whose score equals k.
+    ///
+    /// Example 1:
+    /// Input: s = "aab", k = 1
+    ///
+    /// Output : 2
+    /// Explanation :
+    /// The cyclic rotations of s are :
+    /// "aab" : The characters at positions 0 and 1 are equal, so score = 1.
+    /// "aba" : No two adjacent characters are equal, so score = 0.
+    /// "baa" : The characters at positions 1 and 2 are equal, so score = 1.
+    /// Since score equals k for 2 cyclic rotations of s, the answer is 2.
+    ///
+    /// Example 2 :
+    ///
+    /// Input : s = "abca", k = 0
+    /// Output : 1
+    /// Explanation :
+    /// The cyclic rotations of s are :
+    /// "abca" : No two adjacent characters are equal, so score = 0.
+    /// "bcaa" : The characters at positions 2 and 3 are equal, so score = 1.
+    /// "caab" : The characters at positions 1 and 2 are equal, so score = 1.
+    /// "aabc" : The characters at positions 0 and 1 are equal, so score = 1.
+    /// Since score equals k for only 1 cyclic rotation of s, the answer is 1.
+    ///
+    /// Constraints:
+    /// 1. 2 <= n == s.length <= 100
+    /// 2. s only consists of lowercase English letters.
+    /// 3. 0 <= k <= n - 1
+    /// </summary>
+    int countRotations(string s, int k);
+
+    /// <summary>
+    /// Leet Code #4044. Count Good Cyclic Rotations
+    /// 
+    /// Medium
+    ///
+    /// You are given an integer array nums of even length n.
+    ///
+    /// A cyclic rotation of nums is obtained by choosing a prefix of nums 
+    /// whose length is between 0 and n - 1 (inclusive), and moving it to 
+    /// the end of the array while preserving the order of all elements.
+    ///
+    /// A cyclic rotation is good if the sum of its first n / 2 elements 
+    /// is strictly greater than the sum of its last n / 2 elements.
+    ///
+    /// Return the number of cyclic rotations of nums that are good.
+    /// 
+    /// Example 1:
+    /// Input: nums = [1, 2, 3, 4, 5, 6]
+    /// Output : 3
+    /// Explanation :
+    /// The cyclic rotations of nums are :
+    /// Cyclic rotation  Sum of first n / 2 elements  Sum of last n / 2 elements
+    /// [1, 2, 3, 4, 5, 6]  1 + 2 + 3 = 6  4 + 5 + 6 = 15
+    /// [2, 3, 4, 5, 6, 1]  2 + 3 + 4 = 9  5 + 6 + 1 = 12
+    /// [3, 4, 5, 6, 1, 2]  3 + 4 + 5 = 12  6 + 1 + 2 = 9
+    /// [4, 5, 6, 1, 2, 3]  4 + 5 + 6 = 15  1 + 2 + 3 = 6
+    /// [5, 6, 1, 2, 3, 4]  5 + 6 + 1 = 12  2 + 3 + 4 = 9
+    /// [6, 1, 2, 3, 4, 5]  6 + 1 + 2 = 9  3 + 4 + 5 = 12
+    /// The first half has a greater sum than the second half for 3 rotations.
+    /// Thus, the answer is 3.
+    ///
+    /// Example 2:
+    /// Input: nums = [1, 2, 1, 2]
+    /// Output : 0
+    /// Explanation :
+    /// The cyclic rotations of nums are :
+    ///
+    /// Cyclic rotation  Sum of first n / 2 elements  Sum of last n / 2 elements
+    /// [1, 2, 1, 2]  1 + 2 = 3  1 + 2 = 3
+    /// [2, 1, 2, 1]  2 + 1 = 3  2 + 1 = 3
+    /// [1, 2, 1, 2]  1 + 2 = 3  1 + 2 = 3
+    /// [2, 1, 2, 1]  2 + 1 = 3  2 + 1 = 3
+    /// No cyclic rotation is good because the two sums are equal for every 
+    /// rotation.
+    /// Thus, the answer is 0.
+    ///
+    /// Constraints:
+    /// 1. 2 <= n == nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// 3. n is even.
+    /// </summary>
+    int countGoodRotations(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code #4045. Count Robot Groups
+    /// 
+    /// Medium
+    ///
+    /// You are given a strictly increasing integer array position, where 
+    /// position[i] is the initial position of the ith robot at time t = 0.
+    ///
+    /// You are also given an integer array speed, where speed[i] is the 
+    /// constant speed of the ith robot in units per second, and an integer 
+    /// distance.
+    ///
+    /// Time is continuous and measured in seconds.A robot or group with speed 
+    /// v moves v * t units to the right over any interval of t seconds.
+    /// Whenever the distance between two robots or groups becomes at most 
+    /// distance, they merge into a single group.
+    ///
+    /// If multiple robots or groups satisfy the merging condition at the same 
+    /// time, all merges happen simultaneously.In particular, every connected 
+    /// collection of robots or groups whose consecutive positions differ by 
+    /// at most distance merges into one group.
+    ///
+    /// After a merge, the resulting group takes the current position and 
+    /// speed of the rightmost robot in that group.Once merged, robots never 
+    /// separate.
+    /// 
+    /// Example 1:
+    /// Input: position = [1, 5, 6, 20], speed = [4, 3, 2, 3], distance = 1 
+    /// Output : 2
+    /// Explanation :
+    /// Initially, the groups are{ R1 }, { R2 }, { R3 }, and { R4 }.
+    /// At t = 0, the robots R2 and R3 at positions 5 and 6, respectively, 
+    /// merge because they are 1 unit apart.The resulting group moves with the 
+    /// position and speed of the rightmost robot R3.The groups are now{ R1 }, 
+    /// { R2, R3 }, and { R4 }.
+    /// 
+    /// Later at t = 2, the robot R1 catches up to the group{ R2, R3 } and 
+    /// merges with it.The groups are now{ R1, R2, R3 } and {R4}.
+    /// Thus, the answer is 2.
+    ///
+    /// Example 2:
+    /// Input: position = [1, 5, 9], speed = [3, 2, 2], distance = 2
+    /// Output : 2
+    /// Explanation :
+    /// Initially, the groups are{ R1 }, { R2 }, and { R3 }.
+    /// At t = 2, the robot R1 catches up to the robot R2 and merges with it.
+    /// The resulting group moves with the position and speed of the rightmost 
+    /// robot R2.The groups are now{ R1, R2 } and {R3}.
+    /// Thus, the answer is 2.
+    ///
+    /// Example 3:
+    /// Input: position = [9], speed = [8], distance = 5
+    /// Output : 1
+    /// Explanation :
+    /// Initially, there is only one group.Therefore, the answer is 1.
+    ///
+    /// Constraints:
+    /// 1. 1 <= position.length == speed.length <= 10^5
+    /// 2. 1 <= position[i], speed[i], distance <= 10^9
+    /// 3. position is strictly increasing.
+    /// </summary>
+    int countGroups(vector<int>& position, vector<int>& speed, int distance);
+
+    /// <summary>
+    /// Leet Code #4048. Count Values With Equally Spaced Occurrences I
+    /// 
+    /// Easy
+    /// 
+    /// You are given an integer array nums.
+    /// An integer x is called special if:
+    ///
+    /// 1. x appears exactly three times in nums.
+    /// 2. All three occurrences of x are equally spaced in nums.In other 
+    /// words, if all occurrences of x are at indices i1 < i2 < i3, 
+    /// then i2 - i1 = i3 - i2.
+    /// 
+    /// Return the number of distinct special integers in nums.
+    ///
+    /// Example 1:
+    /// Input: nums = [1, 8, 1, 5, 1, 5, 8, 5]
+    /// Output : 2
+    /// Explanation :
+    /// 1 is special because it occurs exactly three times at equally 
+    /// spaced indices 0, 2, and 4.
+    /// 5 is special because it occurs exactly three times at equally 
+    /// spaced indices 3, 5, and 7.
+    /// 8 is not special because it occurs only twice.
+    /// Therefore, the answer is 2.
+    ///
+    /// Example 2:
+    /// Input: nums = [8, 8, 8, 8]
+    /// Output : 0
+    /// Explanation :
+    /// 8 is not special because it does not occur exactly three 
+    /// times.Therefore, the answer is 0.
+    ///
+    /// Example 3 :
+    /// Input : nums = [8, 6, 6, 8, 8]
+    /// Output : 0
+    /// Explanation :
+    /// 8 occurs at indices 0, 3, and 4, which are not equally 
+    /// spaced. 6 occurs only twice.Therefore, no integer is special.
+    ///
+    /// Constraints:
+    /// 1. 3 <= nums.length <= 100
+    /// 2. 1 <= nums[i] <= 100
+    /// </summary>
+    int countSpecialIntegersI(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code #4049. Count Values With Equally Spaced Occurrences II
+    /// 
+    /// Medium
+    ///
+    /// You are given an integer array nums.
+    /// An integer x is called special if:
+    /// x appears at least three times in nums.
+    /// All occurrences of x are equally spaced in nums.In other words, if 
+    /// all occurrences of x are at indices i1 < i2 < ... < im, then 
+    /// i2 - i1 = i3 - i2 = ... = im - im - 1.
+    /// Return the number of distinct special integers in nums.
+    ///
+    /// Example 1:
+    /// Input: nums = [1, 8, 1, 5, 1, 5, 8, 5]
+    /// Output : 2
+    /// Explanation :
+    /// 1. 1 is special because it occurs at equally spaced indices 0, 2, 
+    ///    and 4.
+    /// 2. 5 is special because it occurs at equally spaced indices 
+    ///    3, 5, and 7.
+    /// 3. 8 is not special because it occurs only twice.
+    /// Therefore, the answer is 2.
+    ///
+    /// Example 2:
+    /// Input: nums = [8, 8, 8, 8]
+    /// Output : 1
+    /// Explanation :
+    /// 1. 8 is special because it occurs at equally spaced indices 
+    ///    0, 1, 2, and 3. Therefore, the answer is 1.
+    ///
+    /// Example 3 :
+    /// Input : nums = [8, 6, 6, 8, 8]
+    /// Output : 0
+    /// Explanation :
+    /// 1. 8 occurs at indices 0, 3, and 4, which are not equally 
+    ///    spaced. 6 occurs only twice.Therefore, no integer is special.
+    ///
+    /// Constraints:
+    /// 1. 3 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// </summary>
+    int countSpecialIntegersII(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code #4052. Cyclically Shift Rows and Columns
+    /// 
+    /// Easy
+    ///
+    /// You are given an integer n, a 2D integer array grid of size n x n, 
+    /// and two integer arrays rowShift and colShift, each of length n, where:
+    ///
+    /// rowShift[i] represents the number of positions to cyclically shift 
+    /// the ith row of grid to the left.
+    /// colShift[j] represents the number of positions to cyclically shift 
+    /// the jth column of grid upward.
+    /// First, cyclically shift each row according to rowShift, then 
+    /// cyclically shift each column of the resulting grid according to 
+    /// colShift.
+    /// Return the resulting grid after performing all the shifts.
+    ///
+    /// A cyclic left shift of a row by k positions moves the element at 
+    /// column j to column(j - k + n) % n.All other rows remain unchanged.
+    ///
+    /// A cyclic upward shift of a column by k positions moves the element at 
+    /// row i to row(i - k + n) % n.All other columns remain unchanged.
+    ///
+    /// Example 1:
+    /// Input: n = 2, grid = [[1, 2], [3, 4]], rowShift = [1, 0], 
+    /// colShift = [0, 1]
+    /// Output : [[2, 4], [3, 1]]
+    /// Explanation :
+    /// The grid changes as follows :
+    ///
+    /// Example 2 :
+    /// Input : n = 3, grid = [[1, 2, 3], [4, 5, 6], [7, 8, 9]], 
+    /// rowShift = [1, 2, 0], colShift = [2, 2, 1]
+    /// Output : [[7, 8, 5], [2, 3, 9], [6, 4, 1]]
+    /// Explanation :
+    /// The grid changes as follows :
+    ///
+    /// Constraints:
+    /// 1. 1 <= n == grid.length == grid[i].length <= 10
+    /// 2. 1 <= grid[i][j] <= 100
+    /// 3. rowShift.length == colShift.length == n
+    /// 4. 0 <= rowShift[i], colShift[i] < n
+    /// </summary>
+    vector<vector<int>> cyclicShift(int n, vector<vector<int>>& grid, vector<int>& rowShift, vector<int>& colShift);
+
+    /// <summary>
+    /// Leet Code #4051. Count Subarrays with Distant Sums
+    /// 
+    /// Hard
+    ///
+    /// You are given an integer array nums and two integers goal and k.
+    ///
+    /// A subarray nums[i..j] is considered distant if the absolute difference 
+    /// between its sum and goal is at least k.
+    ///
+    /// Return the number of distant subarrays.
+    ///
+    /// Example 1:
+    /// Input: nums = [1, 2, 1], goal = 4, k = 1
+    /// Output : 5
+    /// Explanation :
+    /// The distant subarrays for k = 1 are :
+    /// i  j  nums[i..j]  Sum  abs(sum - goal)
+    /// 0  0[1]  1  3
+    /// 1  1[2]  2  2
+    /// 2  2[1]  1  3
+    /// 0  1[1, 2]  3  1
+    /// 1  2[2, 1]  3  1
+    /// Thus, the answer is 5.
+    ///
+    /// Example 2:
+    /// Input: nums = [2, -1, 3], goal = 2, k = 2
+    /// Output : 2
+    /// Explanation :
+    /// The distant subarrays for k = 2 are :
+    /// i  j  nums[i..j]  Sum  abs(sum - goal)
+    /// 1  1[-1] - 1  3
+    /// 0  2[2, -1, 3]  4  2
+    /// Thus, the answer is 2.
+    ///
+    /// Example 3:
+    /// Input: nums = [-3, 1, 2], goal = 0, k = 3
+    /// Output : 2
+    /// Explanation :
+    /// The distant subarrays for k = 3 are :
+    /// i  j  nums[i..j]  Sum  abs(sum - goal)
+    /// 0  0[-3] - 3  3
+    /// 1  2[1, 2]  3  3
+    /// Thus, the answer is 2.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. -10^9 <= nums[i] <= 10^9
+    /// 3. -10^9 <= goal <= 10^9
+    /// 4. 0 <= k <= 10^9
+    /// </summary>
+    long long distantSubarrays(vector<int>& nums, int goal, int k);
+
+    /// <summary>
+    /// Leet Code #4058. Maximum Pulse Value After One Subarray Rotation
+    /// 
+    /// Medium
+    ///
+    /// You are given an integer array nums of length n.
+    ///
+    /// Define the pulse value of an integer array arr as the alternating 
+    /// sum starting at index 0: pulse(arr) = arr[0] - arr[1] + 
+    /// arr[2] - arr[3] + ....
+    ///
+    /// You may perform at most one operation on nums :
+    /// Choose two indices l and r such that 0 <= l < r < n.
+    /// Left - rotate the subarray nums[l..r] by exactly one position.
+    /// For example, [a, b, c, d] becomes[b, c, d, a].
+    /// Return the maximum pulse value that can be obtained after performing 
+    /// at most one such operation.
+    ///
+    /// Example 1:
+    /// Input: nums = [1, 5, 2]
+    /// Output : 6
+    /// Explanation :
+    /// The original pulse value is 1 - 5 + 2 = -2.
+    /// Rotate the subarray nums[0..1] from[1, 5] to[5, 1].
+    /// The resulting array is[5, 1, 2] and its pulse value is 5 - 1 + 2 = 6, 
+    /// which is the maximum possible.
+    ///
+    /// Example 2 :
+    /// Input : nums = [6, 4, 3]
+    /// Output : 7
+    /// Explanation :
+    /// The original pulse value is 6 - 4 + 3 = 5.
+    /// Rotate the subarray nums[1..2] from[4, 3] to[3, 4].
+    /// The resulting array is[6, 3, 4] and its pulse value is 6 - 3 + 4 = 7, 
+    /// which is the maximum possible.
+    ///
+    /// Example 3 :
+    /// Input : nums = [9, 7]
+    /// Output : 2
+    /// Explanation :
+    /// The original pulse value is 9 - 7 = 2, which is already maximum.Thus, 
+    /// no rotation is required.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= n == nums.length <= 10^5
+    /// 2. -10^9 <= nums[i] <= 10^9
+    /// </summary>
+    long long maxValuePulse(vector<int>& nums);
 };
 #endif  // LeetCodeArray_H

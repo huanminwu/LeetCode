@@ -2333,7 +2333,7 @@ bool LeetCodeMath::validSquare(vector<int>& p1, vector<int>& p2, vector<int>& p3
 }
 
 /// <summary>
-/// Leet code #564. Find the Closest Palindrome   ?????? 
+/// Leet code #564. Find the Closest Palindrome   
 /// 
 /// Given an integer n, find the closest integer (not including itself), which 
 /// is a palindrome. 
@@ -2400,7 +2400,7 @@ string LeetCodeMath::nearestPalindromic(string n)
 }
 
 /// <summary>
-/// Leet code #587. Erect the Fence   ?????? 
+/// Leet code #587. Erect the Fence   
 /// </summary>
 int LeetCodeMath::orientation(Point p, Point q, Point r)
 {
@@ -31760,8 +31760,8 @@ int LeetCodeMath::sumDecoded(vector<long long>& nums)
         long long width = nums[i] % 10;
         long long d = nums[i] / 10;
         string str = to_string(d);
-        long long x = stoll(str.substr(0, width));
-        long long y = stoll(str.substr(width));
+        long long x = stoll(str.substr(0, (int)width));
+        long long y = stoll(str.substr((int)width));
         result = (result + (int)modPow(x, y, MOD)) % MOD;
     }
     return result;
@@ -31879,6 +31879,172 @@ int LeetCodeMath::maxValidSplitsII(vector<int>& nums)
     return result;
 }
 
+/// <summary> 
+/// Leet Code #4053. Minimum Operations to Make Every Element Palindromic
+/// 
+/// Medium
+///
+/// You are given an integer array nums.
+///
+/// In one operation, you may choose an index i and either increment or 
+/// decrement nums[i] by 2.
+///
+/// Return the minimum number of operations required to make every element 
+/// in nums a positive palindrome.Different elements may be changed into 
+/// different palindromic integers.
+///
+/// Example 1:
+/// Input: nums = [10, 12, 14, 16]
+/// Output : 9
+/// Explanation :
+/// One optimal sequence of operations is :
+/// Decrement nums[0] by 2 once to change it from 10 to 8.
+/// Decrement nums[1] by 2 twice to change it from 12 to 8.
+/// Decrement nums[2] by 2 three times to change it from 14 to 8.
+/// Increment nums[3] by 2 three times to change it from 16 to 22.
+/// After 1 + 2 + 3 + 3 = 9 operations, nums = [8, 8, 8, 22], and every 
+/// element is a positive palindromic integer.
+///
+/// It can be shown that fewer than 9 operations cannot achieve this.
+/// Example 2:
+/// Input: nums = [9, 10, 11, 10]
+/// Output : 2
+/// Explanation :
+/// Decrement nums[1] and nums[3] by 2 once each.
+/// After 2 operations, nums = [9, 8, 11, 8], and every element is a 
+/// positive palindromic integer.
+///
+/// At least one operation is needed for each of these two elements, so 
+/// the minimum number of operations is 2.
+///
+/// Example 3:
+/// Input: nums = [125]
+/// Output : 2
+/// Explanation :
+/// Decrement nums[0] by 2 twice to change it from 125 to 121, which 
+/// is a positive palindromic integer.
+/// A single operation would change it to 123 or 127, neither of which 
+/// is palindromic.Thus, the minimum number of operations is 2.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// </summary>
+long long LeetCodeMath::minOperationsIV(vector<int>& nums)
+{
+    long long result = 0;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        int parity = nums[i] % 2;
+        vector<long long> candidates;
+        string str_n = to_string(nums[i]);
+        // upper limit
+        string str;
+        if (parity == 0)
+        {
+            str = "2";
+            str.append(string(str_n.size() - 1, '0'));
+            str.append("2");
+        }
+        else
+        {
+            str = "1";
+            str.append(string(str_n.size() - 1, '0'));
+            str.append("1");
+        }
+        candidates.push_back(atol(str.c_str()));
+        // lower limit
+        if (str_n.size() >= 2)
+        {
+            if (parity == 0)
+            {
+                str = "8";
+                if (str_n.size() >= 3)
+                {
+                    str.append(string(str_n.size() - 3, '9'));
+                    str.append("8");
+                }
+            }
+            else
+            {
+                str = "9";
+                if (str_n.size() >= 3)
+                {
+                    str.append(string(str_n.size() - 3, '0'));
+                    str.append("9");
+                }
+            }
+            candidates.push_back(atol(str.c_str()));
+        }
+      
+        string high = str_n.substr(0, str_n.size() / 2);
+        string middle = "";
+        string low = high;
+        std::reverse(low.begin(), low.end());
+        if (str_n.size() % 2 == 1) middle.push_back(str_n[str_n.size() / 2]);
+        high = high + middle;
+        if (str_n.front() % 2 == str_n.back() % 2)
+        {
+            long long value = atol((high + low).c_str());
+            candidates.push_back(value);
+            if (value < (long long)nums[i])
+            {
+                high = to_string(atol(high.c_str()) + 1);
+            }
+            else if (value > (long long)nums[i])
+            {
+                high = to_string(atol(high.c_str()) - 1);
+            }
+            if (high.size() * 2 > str_n.size())
+            {
+                low = high.substr(0, high.size() - 1);
+            }
+            else
+            {
+                low = high;
+            }
+            std::reverse(low.begin(), low.end());
+            value = atol((high + low).c_str());
+            if (value%2 == nums[i] % 2) candidates.push_back(value);
+        }
+        else
+        {
+            int digit = high[0] - '0';
+            string str;
+            if (digit > 1)
+            {
+                str.push_back(digit - 1 + '0');
+                if (str_n.size() >= 2)
+                {
+                    str.append(string(str_n.size() - 2, '9'));
+                    str.push_back(digit - 1 + '0');
+                }
+                long long value = atol(str.c_str());
+                if (value % 2 == nums[i] % 2) candidates.push_back(value);
+            }
+            str.clear();
+            if (digit < 9)
+            {
+                str.push_back(digit + 1 + '0');
+                if (str_n.size() >= 2)
+                {
+                    str.append(string(str_n.size() - 2, '0'));
+                    str.push_back(digit + 1 + '0');
+                }
+                long long value = atol(str.c_str());
+                if (value % 2 == nums[i] % 2) candidates.push_back(value);
+            }
+        }
+
+        long long min_gap = LLONG_MAX;
+        for (size_t j = 0; j < candidates.size(); j++)
+        {
+            min_gap = min(std::abs(candidates[j] - (long long)nums[i]), min_gap);
+        }
+        result += min_gap / 2;
+    }
+    return result;
+}
 
 #pragma endregion
 

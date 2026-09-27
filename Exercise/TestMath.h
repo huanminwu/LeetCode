@@ -441,5 +441,6 @@ void TestLeetCode4022(void);
 void TestLeetCode4034(void);
 void TestLeetCode4035(void);
 void TestLeetCode4039(void);
+void TestLeetCode4053(void);
 void TestLeetCodeMath(void);
 #endif  // TestMath

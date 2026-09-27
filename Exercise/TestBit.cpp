@@ -1934,8 +1934,50 @@ void TestLeetCode3955(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode4047(void)
+{
+    Logger::WriteMessage("Test Leet Code 4047");
+    LeetCodeBit leetCode;
+    vector<int> nums = {8, 1, 4, 8, 2};
+    int result = leetCode.minOperationsXorZero(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = {1, 2, 3};
+    result = leetCode.minOperationsXorZero(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result ));
+
+    nums = { 1,2,4 };
+    result = leetCode.minOperationsXorZero(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4059(void)
+{
+    Logger::WriteMessage("Test Leet Code 4059");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 7,5 };
+    vector<int> result = leetCode.largestPower(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 3,1,7 };
+    result = leetCode.largestPower(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 6, 3 };
+    result = leetCode.largestPower(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode4059();
+    TestLeetCode4047();
     TestLeetCode3955();
     TestLeetCode3950();
     TestLeetCode3878();

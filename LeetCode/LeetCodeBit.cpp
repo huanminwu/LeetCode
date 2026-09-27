@@ -6611,4 +6611,195 @@ vector<string> LeetCodeBit::generateValidStrings(int n, int k)
     return result;
 }
 
+/// <summary>
+/// Leet code #4047. Minimum Operations to Make XOR of All Elements Zero
+///
+/// Hard
+///
+/// You are given an integer array nums consisting of positive integers.
+///
+/// You may perform the following operation any number of times :
+///
+/// Choose two distinct indices i and j such that nums[i] != nums[j], 
+/// and replace either nums[i] or nums[j] with nums[i] ^ nums[j], 
+/// where^ denotes the bitwise XOR.
+/// Return the minimum number of operations required to make the bitwise 
+/// XOR of all elements in nums equal to 0. If it is impossible, return -1.
+///
+/// Example 1:
+/// Input: nums = [8, 1, 4, 8, 2]
+/// Output : 3
+/// Explanation :
+/// One optimal sequence of operations is :
+/// Choose indices 0 and 1, and replace nums[0] with 8 ^ 1 = 9. 
+/// The array becomes[9, 1, 4, 8, 2].
+/// Choose indices 2 and 3, and replace nums[3] with 4 ^ 8 = 12. 
+/// The array becomes[9, 1, 4, 12, 2].
+/// Choose indices 0 and 4, and replace nums[0] with 9 ^ 2 = 11. 
+/// The array becomes[11, 1, 4, 12, 2].
+/// The XOR of all elements of nums is 11 ^ 1 ^ 4 ^ 12 ^ 2 = 0, 
+/// so the answer is 3.
+///
+/// Example 2:
+/// Input: nums = [1, 2, 3]
+/// Output : 0
+/// Explanation :
+/// The XOR of all elements of nums is 1 ^ 2 ^ 3 = 0, so no 
+/// operations are required.
+///
+/// Example 3 :
+/// Input : nums = [1, 2, 4]
+/// Output : -1
+/// Explanation :
+/// It is impossible to make the XOR of all elements of nums equal to 0, 
+/// so the answer is - 1.
+///
+/// Constraints:
+/// 1. 2 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 2000
+/// </summary>
+int LeetCodeBit::minOperationsXorZero(vector<int>& nums)
+{
+    int n = nums.size();
+    int xor_sum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        xor_sum ^= nums[i];
+    }
+    if (xor_sum == 0) return 0;
+    unordered_set<int> unique_nums(nums.begin(), nums.end());
+    if (unique_nums.size() == 1) return -1;
+    vector<int> arr(unique_nums.begin(), unique_nums.end());
+    unique_nums.clear();
+    unique_nums.insert(0);
+    queue<int> bfs;
+    bfs.push(0);
+    int result = 0;
+    while (!bfs.empty() && result < (int)nums.size())
+    {
+        size_t size = bfs.size();
+        for (size_t i = 0; i < size; i++)
+        {
+            int xor_num = bfs.front();
+            bfs.pop();
+            if (xor_num == xor_sum) return result;
+            for (size_t j = 0; j < arr.size(); j++)
+            {
+                int next_xor = xor_num ^ arr[j];
+                if (unique_nums.count(next_xor) == 0)
+                {
+                    unique_nums.insert(next_xor);
+                    bfs.push(next_xor);
+                }
+            }
+        }
+        result++;
+    }
+    return -1; 
+}
+
+/// <summary>
+/// Leet code #4059. Lexicographically Largest Power Array
+/// 
+/// Hard
+///
+/// You are given an integer array nums of length n.You may rearrange its 
+/// elements to form any permutation perm.
+/// Define an array power of length 15. For each 0 <= i < 15, power[i] is 
+/// the largest integer j, where 0 <= j <= n, such that the first j 
+/// elements of perm all have the(14 - i)th bit set.
+///
+/// Bit positions are indexed from right to left, starting with the 0th 
+/// bit.
+///
+/// Return the lexicographically largest possible power array.
+/// 
+/// Example 1:
+/// Input: nums = [7, 5]
+/// Output : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 2]
+/// Explanation :
+/// Choose perm = [7, 5].
+/// Both elements have bit 2 set, so power[12] = 2.
+/// The first element has bit 1 set, but the second does not, so 
+/// power[13] = 1.
+/// Both elements have bit 0 set, so power[14] = 2.
+/// All higher bits are unset in the first element, so the remaining 
+/// entries are 0.
+///
+/// Example 2:
+/// Input: nums = [3, 1, 7]
+/// Output : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3]
+/// Explanation :
+/// Choose perm = [7, 3, 1].
+/// The first element has bit 2 set, but the second does not, so 
+/// power[12] = 1.
+/// The first two elements have bit 1 set, but the third does not, 
+/// so power[13] = 2.
+/// All three elements have bit 0 set, so power[14] = 3.
+/// All higher bits are unset in the first element, so the remaining 
+/// entries are 0.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 5 * 10^4
+/// 2. 0 <= nums[i] < 2^15
+/// </summary>
+vector<int> LeetCodeBit::largestPower(vector<int>& nums)
+{
+    vector<int> result;
+    deque<deque<int>> arr_nums;
+    arr_nums.push_back(deque<int>());
+    for(size_t i = 0; i < nums.size(); i++)
+    {
+        arr_nums[0].push_back(nums[i]);
+    }
+    for (int i = 0; i < 15; i++)
+    {
+        int count = 0;
+        int bit = 1 << (14 - i);
+        deque<deque<int>> next_arr;
+        bool bComplete = false;
+        while (!bComplete)
+        {
+            deque<int> next_nums;
+            size_t size = arr_nums.front().size();
+            for (size_t j = 0; j < size; j++)
+            {
+                int num = arr_nums.front().front();
+                arr_nums.front().pop_front();
+                if ((num & bit) != 0)
+                {
+                    count++;
+                    next_nums.push_back(num);
+                }
+                else
+                {
+                    arr_nums.front().push_back(num);
+                }
+            }
+            if (arr_nums.front().empty())
+            {
+                arr_nums.pop_front();
+                if (arr_nums.empty())
+                {
+                    bComplete = true;
+                }
+            }
+            else
+            {
+                bComplete = true;
+            }
+            if (!next_nums.empty())
+            {
+                next_arr.push_back(next_nums);
+            }
+        }
+        result.push_back(count);
+        while (!next_arr.empty())
+        {
+            arr_nums.push_front(next_arr.back());
+            next_arr.pop_back();
+        }
+    }
+    return result;
+}
 #pragma endregion

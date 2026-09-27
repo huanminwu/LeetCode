@@ -6115,14 +6115,14 @@ long long LeetCodeBinarySearch::minInitialStrength(vector<int>& monsters, vector
     for (auto& b : boosts)
     {
         bonus[b[0]] += b[2];
-        if (b[1] + 1 < bonus.size()) bonus[b[1] + 1] -= b[2];
+        if (b[1] + 1 < (int)bonus.size()) bonus[b[1] + 1] -= b[2];
     }
-    for (int i = 1; i < bonus.size(); i++)
+    for (int i = 1; i < (int)bonus.size(); i++)
     {
         bonus[i] += bonus[i - 1];
     }
     long long left = 0, right = 0;
-    for (int i = 0; i < monsters.size(); i++)
+    for (int i = 0; i < (int)monsters.size(); i++)
     {
         right += monsters[i];
     }
@@ -6132,7 +6132,7 @@ long long LeetCodeBinarySearch::minInitialStrength(vector<int>& monsters, vector
         long long mid = left + (right - left) / 2;
         long long strength = mid;
         bool can_defeat = true;
-        for (int i = 0; i < monsters.size(); i++)
+        for (int i = 0; i < (int)monsters.size(); i++)
         {
             if (strength + bonus[i] < monsters[i])
             {

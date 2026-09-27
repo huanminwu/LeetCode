@@ -6915,6 +6915,54 @@ public:
     /// </summary>
     int minMaxWaitingTime(vector<int>& demand, vector<int>& fuel);
 
+    /// <summary>
+    /// Leet code #4060. Count Evenly Good Integers
+    /// </summary>
+    long long countEvenlyGoodIntegersDFS(string &str_n, int index, int is_limit, int is_leadingzero, 
+        int parity_even, vector<vector<long long>> &cache);
+
+    /// <summary>
+    /// Leet code #4060. Count Evenly Good Integers
+    /// 
+    /// Hard
+    ///
+    /// You are given two integers l and r.
+    /// An integer is called evenly good if it contains an even number of even 
+    /// digits.
+    ///
+    /// Return the number of evenly good integers in the inclusive range[l, r].
+    ///
+    /// Example 1:
+    /// Input: l = 18, r = 22
+    /// Output : 3
+    /// Explanation :
+    /// The evenly good integers in the range[18, 22] are :
+    /// 19, because it contains 0 even digits.
+    /// 20, because it contains 2 even digits.
+    /// 22, because it contains 2 even digits.
+    /// Thus, the answer is 3.
+    /// 
+    /// Example 2:
+    /// Input: l = 98, r = 101
+    /// Output : 2
+    /// Explanation :
+    /// The evenly good integers in the range[98, 101] are :
+    /// 99, because it contains 0 even digits.
+    /// 100, because it contains 2 even digits.
+    /// Thus, the answer is 2.
+    ///
+    /// Example 3:
+    /// Input: l = 1, r = 10
+    /// Output : 5
+    /// Explanation :
+    /// The evenly good integers in the range[1, 10] are 1, 3, 5, 7, and 9, 
+    /// because each of them contains 0 even digits.Thus, the answer is 5.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= l <= r <= 10^15
+    /// </summary>
+    long long countEvenlyGoodIntegers(long long l, long long r);
+
 #pragma endregion
 };
 

@@ -2195,7 +2195,7 @@ void TestLeetCode2801(void)
 {
     Logger::WriteMessage("Test Leet Code 2801");
     LeetCodeDFS leetCode;
-    string low = "1", high = "11";
+    string low = "1", high = "19";
     int result = leetCode.countSteppingNumbers(low,high);
     Logger::WriteMessage("low = " + low + "; high = " + high);
     Logger::WriteMessage("result = " + to_string(result));
@@ -3090,8 +3090,32 @@ void TestLeetCode4009(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode4060(void)
+{
+    Logger::WriteMessage("Test Leet Code 4060");
+    LeetCodeDFS leetCode;
+    long long l = 18, r = 22;
+    long long result = leetCode.countEvenlyGoodIntegers(l, r);
+    Logger::WriteMessage("l = " + to_string(l));
+    Logger::WriteMessage("r = " + to_string(r));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    l = 98, r = 101;
+    result = leetCode.countEvenlyGoodIntegers(l, r);
+    Logger::WriteMessage("l = " + to_string(l));
+    Logger::WriteMessage("r = " + to_string(r));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    l = 1, r = 10;
+    result = leetCode.countEvenlyGoodIntegers(l, r);
+    Logger::WriteMessage("l = " + to_string(l));
+    Logger::WriteMessage("r = " + to_string(r));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode4060();
     TestLeetCode4009();
     TestLeetCode3966();
     TestLeetCode3906();

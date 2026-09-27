@@ -13157,4 +13157,88 @@ int LeetCodeDFS::minMaxWaitingTime(vector<int>& demand, vector<int>& fuel)
     pair<int, int> result = minMaxWaitingTime(demand, 0, 0, 0, fuel[0], fuel[1], dp);
     return result.first ? result.second : -1;
 }
+
+/// <summary>
+/// Leet code #4060. Count Evenly Good Integers
+/// </summary>
+long long LeetCodeDFS::countEvenlyGoodIntegersDFS(string& str_n, int index, int is_limit, int is_leadingzero,
+    int parity_even, vector<vector<long long>>& cache)
+{
+    if (index == str_n.size())
+    {
+        if (is_leadingzero == 0 && parity_even % 2 == 0) return 1;
+        else return 0;
+    }
+    int offset = is_leadingzero * 4 + is_limit * 2 + parity_even;
+    if (cache[index][offset] != -1) return cache[index][offset];
+    long long result = 0;
+    for (int d = 0; d <= (is_limit ? str_n[index] - '0' : 9); d++)
+    {
+        int new_is_limit = (is_limit == 1 && d == str_n[index] - '0') ? 1 : 0;
+        int new_is_leadingzero = (is_leadingzero == 1 && d == 0) ? 1 : 0;
+        int new_parity_even = parity_even;
+        if (new_is_leadingzero == 0)
+        {
+            if (d % 2 == 0) 
+            {
+                new_parity_even = 1 - new_parity_even;
+            }
+        }
+        result += countEvenlyGoodIntegersDFS(str_n, index + 1, new_is_limit, new_is_leadingzero, new_parity_even, cache);
+    }
+    cache[index][offset] = result;
+    return result;
+}
+
+/// <summary>
+/// Leet code #4060. Count Evenly Good Integers
+/// 
+/// Hard
+///
+/// You are given two integers l and r.
+/// An integer is called evenly good if it contains an even number of even 
+/// digits.
+///
+/// Return the number of evenly good integers in the inclusive range[l, r].
+///
+/// Example 1:
+/// Input: l = 18, r = 22
+/// Output : 3
+/// Explanation :
+/// The evenly good integers in the range[18, 22] are :
+/// 19, because it contains 0 even digits.
+/// 20, because it contains 2 even digits.
+/// 22, because it contains 2 even digits.
+/// Thus, the answer is 3.
+/// 
+/// Example 2:
+/// Input: l = 98, r = 101
+/// Output : 2
+/// Explanation :
+/// The evenly good integers in the range[98, 101] are :
+/// 99, because it contains 0 even digits.
+/// 100, because it contains 2 even digits.
+/// Thus, the answer is 2.
+///
+/// Example 3:
+/// Input: l = 1, r = 10
+/// Output : 5
+/// Explanation :
+/// The evenly good integers in the range[1, 10] are 1, 3, 5, 7, and 9, 
+/// because each of them contains 0 even digits.Thus, the answer is 5.
+/// 
+/// Constraints:
+/// 1. 1 <= l <= r <= 10^15
+/// </summary>
+long long LeetCodeDFS::countEvenlyGoodIntegers(long long l, long long r)
+{
+    string str_l = to_string(l - 1);
+    string str_r = to_string(r);
+    vector<vector<long long>> cache1(str_r.size(), vector<long long>(8, -1));
+    vector<vector<long long>> cache2(str_l.size(), vector<long long>(8, -1));
+    long long count1 = countEvenlyGoodIntegersDFS(str_r, 0, 1, 1, 0, cache1);
+    long long count2 = countEvenlyGoodIntegersDFS(str_l, 0, 1, 1, 0, cache2);
+    return count1 - count2;
+}
+
 #pragma endregion

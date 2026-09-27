@@ -14086,8 +14086,167 @@ void TestLeetCode4038(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode4043(void)
+{
+    Logger::WriteMessage("Test Leet Code 4043");
+    LeetCodeArray leetCode;
+    string s = "aab";
+    int k = 1;
+    int result = leetCode.countRotations(s, k);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "abca";
+    k = 0;
+    result = leetCode.countRotations(s, k);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4044(void)
+{
+    Logger::WriteMessage("Test Leet Code 4044");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 3, 4, 5, 6 };
+    int result = leetCode.countGoodRotations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1, 2, 1, 2 };
+    result = leetCode.countGoodRotations(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4048(void)
+{
+    Logger::WriteMessage("Test Leet Code 4048");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1,8,1,5,1,5,8,5 };
+    int result = leetCode.countSpecialIntegersI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 8,8,8,8 };
+    result = leetCode.countSpecialIntegersI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 8,6,6,8,8 };
+    result = leetCode.countSpecialIntegersI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4049(void)
+{
+    Logger::WriteMessage("Test Leet Code 4049");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1,8,1,5,1,5,8,5 };
+    int result = leetCode.countSpecialIntegersII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 8,8,8,8 };
+    result = leetCode.countSpecialIntegersII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 8,6,6,8,8 };
+    result = leetCode.countSpecialIntegersII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4052(void)
+{
+    Logger::WriteMessage("Test Leet Code 4052");
+    LeetCodeArray leetCode;
+    int n = 2;
+    vector<vector<int>> grid = { {1, 2},{3, 4} };
+    vector<int> rowShift = { 1, 0 };
+    vector<int> colShift = { 0, 1 };
+    vector<vector<int>> result = leetCode.cyclicShift(n, grid, rowShift, colShift);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(rowShift);
+    Logger::WriteMessage(colShift);
+    Logger::WriteMessage(result);
+
+    n = 3;
+    grid = { {1, 2, 3},{4, 5, 6},{7, 8, 9} };
+    rowShift = { 1, 2, 0 };
+    colShift = { 2, 2, 1 };
+    result = leetCode.cyclicShift(n, grid, rowShift, colShift);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(rowShift);
+    Logger::WriteMessage(colShift);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode4051(void)
+{
+    Logger::WriteMessage("Test Leet Code 4051");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 1 };
+    int goal = 4, k = 1;
+    long long result = leetCode.distantSubarrays(nums, goal, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("goal = " + to_string(goal) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,-1,3 };
+    goal = 2, k = 2;
+    result = leetCode.distantSubarrays(nums, goal, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("goal = " + to_string(goal) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -3,1,2 };
+    goal = 0, k = 3;
+    result = leetCode.distantSubarrays(nums, goal, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("goal = " + to_string(goal) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -25, 18 };
+    goal = -7, k = 0;
+    result = leetCode.distantSubarrays(nums, goal, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("goal = " + to_string(goal) + "; k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4058(void)
+{
+    Logger::WriteMessage("Test Leet Code 4058");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 5, 2 };
+    long long result = leetCode.maxValuePulse(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 6,4,3 };
+    result = leetCode.maxValuePulse(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 9,7 };
+    result = leetCode.maxValuePulse(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode4058();
+    TestLeetCode4051();
+    TestLeetCode4052();
+    TestLeetCode4049();
+    TestLeetCode4048();
+    TestLeetCode4044();
+    TestLeetCode4043();
     TestLeetCode4038();
     TestLeetCode4033();
     TestLeetCode4021();

@@ -2311,9 +2311,30 @@ void TestLeetCode4031(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode4056(void)
+{
+    Logger::WriteMessage("Test Leet Code 4056");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> intervals = { {1, 2}, {2, 3}, {3, 4} };
+    int result = leetCode.countIntersectingIntervalsI(intervals);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage("result = " + to_string(result));
+ 
+    intervals = { {1, 5},{2, 4},{3, 6} };
+    result = leetCode.countIntersectingIntervalsI(intervals);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    intervals = { {1, 2},{3, 4},{5, 6} };
+    result = leetCode.countIntersectingIntervalsI(intervals);
+    Logger::WriteMessage(intervals);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGreedy(void)
 {
     Logger::WriteMessage("Test Leet Code Greedy");
+    TestLeetCode4056();
     TestLeetCode4031();
     TestLeetCode3975();
     TestLeetCode3964();

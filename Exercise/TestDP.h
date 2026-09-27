@@ -235,10 +235,10 @@ void TestLeetCode3915(void);
 void TestLeetCode3946(void);
 void TestLeetCode3952(void);
 void TestLeetCode3956(void);
-void TestLeetCode3957(void);
 void TestLeetCode3976(void);
 void TestLeetCode4027(void);
 void TestLeetCode4027(void);
 void TestLeetCode4040(void);
+void TestLeetCode4050(void);
 
 #endif  // TestMath

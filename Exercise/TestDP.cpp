@@ -6885,8 +6885,31 @@ void TestLeetCode4040(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+
+
+void TestLeetCode4050(void)
+{
+    Logger::WriteMessage("Test Leet Code 4050");
+    LeetCodeDP leetCode;
+    int n = 2;
+    int result = leetCode.minDaysII(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 17;
+    result = leetCode.minDaysII(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 57;
+    result = leetCode.minDaysII(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode4050();
     TestLeetCode4040();
     TestLeetCode4027();
     TestLeetCode3976();

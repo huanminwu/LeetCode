@@ -3640,7 +3640,7 @@ int LeetCodeBFS::sortArray(vector<int>& nums, vector<int>& pre)
             queue.pop();
             int num = atoi(num_str.c_str());
             if (num == target) return result;
-            for (int j = 0; j < pre.size(); j++)
+            for (int j = 0; j < (int)pre.size(); j++)
             {
                 string temp = num_str;
                 reverse(temp.begin(), temp.begin() + pre[j]);

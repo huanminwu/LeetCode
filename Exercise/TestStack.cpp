@@ -1142,7 +1142,6 @@ void TestLeetCode3703(void)
     Logger::WriteMessage("s = " + s + "; result = " + result);
 }
 
-
 void TestLeetCode3834(void)
 {
     Logger::WriteMessage("Test Leet Code 3834");
@@ -1163,8 +1162,29 @@ void TestLeetCode3834(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode4054(void)
+{
+    Logger::WriteMessage("Test Leet Code 4054");
+    LeetCodeStack leetCode;
+    vector<int> nums = { 3, 1, 4, 1, 5 };
+    long long result = leetCode.shadowPairsI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 6,7,6,6,7 };
+    result = leetCode.shadowPairsI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,3,4 };
+    result = leetCode.shadowPairsI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode4054();
     TestLeetCode3834();
     TestLeetCode3703();
     TestLeetCode3676();

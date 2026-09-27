@@ -7079,8 +7079,35 @@ void TestLeetCode4023(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode4046(void)
+{
+    Logger::WriteMessage("Test Leet Code 4046");
+    LeetCodeGraph leetCode;
+    vector<vector<int>> grid = { {2, 7, 3}, {1, 4, 5} };
+    int k = 1;
+    int result = leetCode.minCost(grid, k);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {4, 1, 9},{3, 2, 5},{4, 8, 6} };
+    k = 2;
+    result = leetCode.minCost(grid, k);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    grid = { {1, 9}, {3, 4} };
+    k = 0;
+    result = leetCode.minCost(grid, k);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode4046();
     TestLeetCode4023();
     TestLeetCode4004();
     TestLeetCode4003();
