@@ -14238,8 +14238,100 @@ void TestLeetCode4058(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode4064(void)
+{
+    Logger::WriteMessage("Test Leet Code 4064");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 4,1,2 };
+    int k = 3;
+    long long result = leetCode.longestSubarrayII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,3,4 };
+    k = 7;
+    result = leetCode.longestSubarrayII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 2,2,5 };
+    k = 6;
+    result = leetCode.longestSubarrayII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4072(void)
+{
+    Logger::WriteMessage("Test Leet Code 4072");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 5,-5,1 };
+    long long result = leetCode.maxAlternatingSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 10,-5,-100 };
+    result = leetCode.maxAlternatingSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,7 };
+    result = leetCode.maxAlternatingSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -94, 89 };
+    result = leetCode.maxAlternatingSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { -41, -75 };
+    result = leetCode.maxAlternatingSum(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4074(void)
+{
+    Logger::WriteMessage("Test Leet Code 4074");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 1, 2, 3, 4 };
+    int target = 5;
+    vector<int> result = leetCode.maxProductPair(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target));
+    Logger::WriteMessage(result);
+
+    nums = { -3,-1,4,2 };
+    target = 1;
+    result = leetCode.maxProductPair(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target));
+    Logger::WriteMessage(result);
+
+    nums = { 3,3,5 };
+    target = 6;
+    result = leetCode.maxProductPair(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target));
+    Logger::WriteMessage(result);
+
+    nums = { 4, 5, -6, -7 };
+    target = -2;
+    result = leetCode.maxProductPair(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("target = " + to_string(target));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode4074();
+    TestLeetCode4072();
+    TestLeetCode4064();
     TestLeetCode4058();
     TestLeetCode4051();
     TestLeetCode4052();

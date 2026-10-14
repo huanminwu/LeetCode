@@ -17569,4 +17569,207 @@ long long LeetCodeTree::interactionCostsII(int n, vector<vector<int>>& edges, ve
     return answer;
 }
 
+/// <summary>
+/// Leet Code #4077. Minimize Inversions in a Prefix Tree
+/// </summary>
+long long LeetCodeTree::minInversions_solve(int u, vector<int>& sortedRanks, vector<TriePrefixNode>& trie)
+{
+    vector<int> children;
+    for (int c = 0; c < 10; ++c) 
+    {
+        if (trie[u].child[c] != -1) 
+        {
+            children.push_back(trie[u].child[c]);
+        }
+    }
+
+    int d = children.size();
+    vector<vector<int>> ranks(d);
+
+    long long answer = 0;
+    for (int i = 0; i < d; ++i) 
+    {
+        answer += minInversions_solve(children[i], ranks[i], trie);
+    }
+
+    // The node's marked index is recorded before every descendant.
+    if (trie[u].terminal != -1) 
+    {
+        int r = trie[u].terminal;
+        for (const auto& childRanks : ranks) 
+        {
+            answer += lower_bound(childRanks.begin(), childRanks.end(), r) - childRanks.begin();
+        }
+    }
+
+    // Cross-subtree inversion costs.
+    long long cost[10][10] = {};
+    for (int i = 0; i < d; ++i) 
+    {
+        for (int j = 0; j < d; ++j) 
+        {
+            if (i == j) continue;
+            for (int r : ranks[i]) 
+            {
+                cost[i][j] += lower_bound(ranks[j].begin(), ranks[j].end(), r) - ranks[j].begin();
+            }
+        }
+    }
+
+    int states = 1 << d;
+    const long long INF = (1LL << 60);
+    vector<long long> dp(states, INF);
+    dp[0] = 0;
+
+    for (int mask = 0; mask < states; ++mask) 
+    {
+        if (dp[mask] == INF) continue;
+
+        for (int j = 0; j < d; ++j) 
+        {
+            if (mask & (1 << j)) continue;
+
+            long long added = 0;
+            for (int i = 0; i < d; ++i) 
+            {
+                if (mask & (1 << i)) 
+                {
+                    added += cost[i][j];
+                }
+            }
+
+            int nextMask = mask | (1 << j);
+            dp[nextMask] = min(dp[nextMask], dp[mask] + added);
+        }
+    }
+
+    if (d > 0) answer += dp[states - 1];
+
+    // Merge this node's marked index and all child subtree ranks.
+    sortedRanks.clear();
+    if (trie[u].terminal != -1) 
+    {
+        sortedRanks.push_back(trie[u].terminal);
+    }
+    for (const auto& childRanks : ranks) 
+    {
+        sortedRanks.insert(sortedRanks.end(), childRanks.begin(), childRanks.end());
+    }
+    sort(sortedRanks.begin(), sortedRanks.end());
+
+    return answer;
+}
+
+/// <summary>
+/// Leet Code #4077. Minimize Inversions in a Prefix Tree
+///
+/// Hard
+///
+/// You are given an array words of n unique strings containing only 
+/// lowercase English letters from 'a' to 'j'.You are also given an 
+/// integer array target containing each index from 0 to n - 1 exactly 
+/// once.
+///
+/// Build a prefix tree from words :
+///
+/// The root represents the empty string "".
+/// Each other node represents a different non - empty prefix of a word.
+/// The parent of a node is the prefix obtained by removing its last 
+/// character.
+/// The node representing the complete word words[i] is marked with 
+/// index i. A marked node may also have children.
+/// You may choose the order of the children of each node independently.
+/// You cannot change which node is a child's parent.
+///
+/// Traverse the tree starting at the root.When visiting a node, first 
+/// record its index if it is marked.Then visit its children in the 
+/// chosen order, completing the traversal of each child before moving 
+/// to the next.This is a pre - order traversal.
+///
+/// The recorded indices form an array traversal of length n.Let 
+/// pos[i] be the position of index i in target.
+///
+/// An inversion is a pair of positions(a, b) such that 
+/// 0 <= a < b < n and pos[traversal[a]] > pos[traversal[b]].
+///
+/// Return the minimum possible number of inversions over all choices of 
+/// child orderings.
+///
+/// Example 1: 
+/// Input : words = ["bad", "bag", "fig", "fed"], target = [3, 1, 0, 2]
+/// Output : 2
+/// Explanation :
+/// Visit the root's "f" child before its "b" child. Within the "f" branch,
+/// visit "fed" before "fig". Within the "b" branch, visit "bag" 
+/// before "bad".
+///
+/// This produces traversal = [3, 2, 1, 0] :
+/// Traversal position  Word index  Word  Position in target
+/// 0  3  "fed"  0
+/// 1  2  "fig"  3
+/// 2  1  "bag"  1
+/// 3  0  "bad"  2
+/// The positions in target are[0, 3, 1, 2].The inversions are the pairs 
+/// of traversal positions(1, 2) and (1, 3), since 3 > 1 and 3 > 2.
+/// No child ordering produces fewer than 2 inversions.
+///
+/// Example 2:
+/// Input: words = ["ab", "ac", "ba", "bc"], target = [0, 3, 1, 2]
+/// Output : 1
+/// Explanation :
+/// Visit the root's "a" child before its "b" child. Within these 
+/// branches, visit "ab" before "ac", and "bc" before "ba".
+/// This produces traversal = [0, 1, 3, 2] :
+/// Traversal position  Word index  Word  Position in target
+/// 0  0  "ab"  0
+/// 1  1  "ac"  2
+/// 2  3  "bc"  1
+/// 3  2  "ba"  3
+/// The positions in target are[0, 2, 1, 3].The only inversion is the 
+/// pair of traversal positions(1, 2), since 2 > 1.
+/// No child ordering produces zero inversions.
+///
+/// Constraints:
+/// 1. 1 <= n == words.length <= 10^4
+/// 2. 1 <= words[i].length <= 20
+/// 3. words[i] contains only lowercase English letters from 'a' to 'j'
+/// 4. All words[i] are unique
+/// 5. 0 <= target[i] <= n - 1
+/// 6. target is a permutation of integers from 0 to n - 1
+/// </summary>
+long long LeetCodeTree::minInversions(vector<string>& words, vector<int>& target)
+{
+    vector<TriePrefixNode> trie;
+    vector<int> rankInTarget;
+
+    int n = words.size();
+    rankInTarget.resize(n);
+    for (int i = 0; i < n; ++i) 
+    {
+        rankInTarget[target[i]] = i;
+    }
+
+    trie.clear();
+    trie.emplace_back();
+
+    for (int i = 0; i < n; ++i) 
+    {
+        int u = 0;
+        for (char ch : words[i]) 
+        {
+            int c = ch - 'a';
+            if (trie[u].child[c] == -1) 
+            {
+                trie[u].child[c] = trie.size();
+                trie.emplace_back();
+            }
+            u = trie[u].child[c];
+        }
+        trie[u].terminal = rankInTarget[i];
+    }
+
+    vector<int> sortedRanks;
+    return minInversions_solve(0, sortedRanks,trie);
+}
+
 #pragma endregion

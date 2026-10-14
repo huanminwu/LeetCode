@@ -240,5 +240,9 @@ void TestLeetCode4027(void);
 void TestLeetCode4027(void);
 void TestLeetCode4040(void);
 void TestLeetCode4050(void);
+void TestLeetCode4067(void);
+void TestLeetCode4069(void);
+void TestLeetCode4068(void);
+void TestLeetCode4081(void);
 
 #endif  // TestMath

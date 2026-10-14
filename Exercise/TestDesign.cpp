@@ -6206,8 +6206,97 @@ void TestLeetCode3885(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode4080(void)
+{
+    Logger::WriteMessage("Test Leet Code 4080");
+    vector<string> commands =
+    {
+       "BusBooking", "toggle", "toggle", "getTotalTime", "getMinTime", 
+       "toggle", "toggle", "getTotalTime", "getMinTime"
+    };
+    vector<string> parameters =
+    {
+       "20","B3","A3","","","C3","D3","",""
+    };
+    vector<string> result;
+    BusBooking* busBooking = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "BusBooking")
+        {
+            busBooking = new BusBooking(stoi(parameters[i]));
+            result.push_back("null");
+        }
+        else if (commands[i] == "toggle")
+        {
+            busBooking->toggle(parameters[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "getTotalTime")
+        {
+            int ret = busBooking->getTotalTime();
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "getMinTime")
+        {
+            int ret = busBooking->getMinTime();
+            result.push_back(to_string(ret));
+        }
+    }
+    delete busBooking;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        Logger::WriteMessage(parameters[i]);
+    }
+    Logger::WriteMessage(result);
+
+    commands =
+    {
+       "BusBooking", "toggle", "toggle", "getTotalTime", "toggle", 
+       "toggle", "toggle", "getTotalTime", "getMinTime"
+    };
+    parameters =
+    {
+        "10" ,"C7","D7","","D7","C7","D7","",""
+    };
+    result.clear();
+    busBooking = nullptr;
+    for (size_t i = 0; i < commands.size(); i++)
+    {
+        if (commands[i] == "BusBooking")
+        {
+            busBooking = new BusBooking(stoi(parameters[i]));
+            result.push_back("null");
+        }
+        else if (commands[i] == "toggle")
+        {
+            busBooking->toggle(parameters[i]);
+            result.push_back("null");
+        }
+        else if (commands[i] == "getTotalTime")
+        {
+            int ret = busBooking->getTotalTime();
+            result.push_back(to_string(ret));
+        }
+        else if (commands[i] == "getMinTime")
+        {
+            int ret = busBooking->getMinTime();
+            result.push_back(to_string(ret));
+        }
+    }
+    delete busBooking;
+    Logger::WriteMessage(commands);
+    for (size_t i = 0; i < parameters.size(); i++)
+    {
+        Logger::WriteMessage(parameters[i]);
+    }
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDesign(void)
 {
+    TestLeetCode4080();
     TestLeetCode3885();
     TestLeetCode3829();
     TestLeetCode3822();

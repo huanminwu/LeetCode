@@ -29899,5 +29899,150 @@ public:
     /// 2. -10^9 <= nums[i] <= 10^9
     /// </summary>
     long long maxValuePulse(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code #4064. Longest Subarray Divisible by K with At Most One 
+    ///                  Negation II
+    /// 
+    /// Hard
+    ///
+    /// You are given an integer array nums and an integer k.
+    /// A subarray is valid if its sum is divisible by k, or can become 
+    /// divisible by k by negating one element within that subarray.
+    /// Negating an element means replacing its value x with - x.
+    ///
+    /// Return the length of the longest valid subarray.If no valid subarray 
+    /// exists, return 0.
+    ///
+    /// A subarray is a contiguous, non - empty sequence of elements within an 
+    /// array.
+    ///
+    /// Example 1:
+    /// Input: nums = [4, 1, 2], k = 3
+    /// Output : 3
+    /// Explanation :
+    /// The sum of the entire array is 7, and 7 % 3 = 1, so it is not 
+    /// divisible by k = 3.
+    /// Negating nums[2] = 2 changes the sum to 4 + 1 − 2 = 3, which is 
+    /// divisible by k.
+    /// Therefore, the entire array is a valid subarray, giving a length of 3.
+    ///
+    /// Example 2 :
+    /// Input : nums = [5, 3, 4], k = 7
+    /// Output : 2
+    /// Explanation :
+    /// The sum of the entire array is 12, and negating any one of its 
+    /// elements does not make its sum divisible by 7.
+    /// However, the subarray[3, 4] has a sum of 7, which is divisible by 
+    /// k = 7 without any negation.
+    /// Therefore, the longest valid subarray has a length of 2.
+    ///
+    /// Example 3 :
+    /// Input : nums = [2, 2, 5], k = 6
+    /// Output : 2
+    /// Explanation :
+    /// The sum of the entire array is 9, and negating any one of its 
+    /// elements does not make its sum divisible by 6.
+    /// The subarray[2, 2] has a sum of 4. Negating either element changes 
+    /// it to[-2, 2] or [2, -2], both of which have a sum of 0.
+    /// Therefore, the longest valid subarray has a length of 2.
+    ///
+    /// Constraints :
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. -10^5 <= nums[i] <= 10^5
+    /// 3. 1 <= k <= 3000
+    /// </summary>
+    int longestSubarrayII(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code #4072. Maximum Alternating Subarray Sum With One Deletion 
+    /// 
+    /// Medium
+    ///
+    /// You are given an integer array nums.
+    /// You may delete at most one element from nums, then choose a subarray 
+    /// of the resulting array.
+    /// Return the maximum possible alternating sum of the chosen subarray.
+    /// The alternating sum of an array is the sum of its elements at even 
+    /// indices minus the sum of its elements at odd indices.The chosen 
+    /// subarray is reindexed starting from 0 before calculating its 
+    /// alternating sum.
+    ///
+    /// Example 1:
+    /// Input: nums = [5, -5, 1]
+    /// Output : 11
+    /// Explanation :
+    /// Choose not to delete an element and select the entire array.Its 
+    /// alternating sum is 5 - (-5) + 1 = 11, which is the maximum possible.
+    ///
+    /// Example 2 :
+    /// Input : nums = [10, -5, -100]
+    /// Output : 110
+    /// Explanation :
+    /// Delete nums[1] = -5 to obtain[10, -100], then select the entire 
+    /// resulting array.Its alternating sum is 10 - (-100) = 110, which 
+    /// is the maximum possible.
+    ///
+    /// Example 3 :
+    /// Input : nums = [4, 7]
+    /// Output : 7
+    /// Explanation :
+    /// Choose not to delete an element and select the subarray[7].Its 
+    /// alternating sum is 7, which is the maximum possible.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. -10^5 <= nums[i] <= 10^5
+    /// </summary>
+    long long maxAlternatingSum(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code #4074. Maximum Product Pair With Target Sum
+    /// 
+    /// Easy
+    ///
+    /// You are given an integer array nums and an integer target.
+    /// A pair of distinct indices(i, j) is valid if:
+    /// nums[i] + nums[j] == target
+    /// nums[i] > nums[j]
+    /// Return a valid pair[i, j] whose product nums[i] * nums[j] is maximum 
+    /// among all valid pairs.If no valid pair exists, return[-1, -1].
+    ///
+    /// If multiple valid pairs achieve the maximum product, you may return 
+    /// any of them.
+    ///
+    /// Example 1:
+    /// Input: nums = [1, 2, 3, 4], target = 5
+    /// Output : [2, 1]
+    /// Explanation :
+    /// There are 2 valid pairs :
+    /// No.  (i, j)  nums[i]  nums[j]  Sum  Product
+    /// 1  (3, 0)  4  1  5  4
+    /// 2  (2, 1)  3  2  5  6
+    /// Both pairs sum to 5 and satisfy nums[i] > nums[j].The second pair has 
+    /// the larger product, 3 * 2 = 6, so the answer is[2, 1].
+    ///
+    /// Example 2:
+    /// Input: nums = [-3, -1, 4, 2], target = 1
+    /// Output : [3, 1]
+    /// Explanation :
+    /// There are 2 valid pairs :
+    /// No.  (i, j)  nums[i]  nums[j]  Sum  Product
+    /// 1  (2, 0)  4 - 3  1 - 12
+    /// 2  (3, 1)  2 - 1  1 - 2
+    /// Since - 2 > -12, the pair at indices(3, 1) is chosen and the answer 
+    /// is[3, 1].
+    ///
+    /// Example 3:
+    /// Input: nums = [3, 3, 5], target = 6
+    /// Output : [-1, -1]
+    /// Explanation :
+    /// No valid pair exists, since nums[0] and nums[1] sum to 6 but are equal.
+    /// 
+    /// Constraints:
+    /// 1. 2 <= nums.length <= 100
+    /// 2. -100 <= nums[i], target <= 100
+    /// </summary>
+    vector<int> maxProductPair(vector<int>& nums, int target);
 };
 #endif  // LeetCodeArray_H

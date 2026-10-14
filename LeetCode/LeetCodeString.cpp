@@ -33253,7 +33253,7 @@ int LeetCodeString::minimumGroups_rotate_hashcode(string str)
     long long M = 1000000007;
     str = str + str;
     int result = INT_MAX;
-    for (int i = 0; i < str.size(); i++)
+    for (int i = 0; i < (int)str.size(); i++)
     {
         hashcode = (hashcode * 26 + str[i] - 'a') % M;
         if (i >= k - 1)
@@ -33618,7 +33618,7 @@ string LeetCodeString::mergeCharacters(string s, int k)
         }
         dq.push_back(s[i]);
         count[s[i] - 'a']++;
-        if (dq.size() > k)
+        if ((int)dq.size() > k)
         {
             result.push_back(dq.front());
             count[dq.front() - 'a']--;

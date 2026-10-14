@@ -4341,4 +4341,299 @@ int LeetCodeTwoPointer::longestSubarrayKMostPrimes(vector<int>& nums, int k)
     return result;
 }
 
+/// <summary>
+/// Leet Code #4063. Longest Subarray Divisible by K with At Most One 
+///                  Negation I
+///
+/// Medium
+/// 
+/// You are given an integer array nums and an integer k.
+/// 
+/// A subarray is valid if its sum is divisible by k, or can become 
+/// divisible by k by negating one element within that subarray.
+///
+/// Negating an element means replacing its value x with - x.
+///
+/// Return the length of the longest valid subarray.If no valid subarray 
+/// exists, return 0.
+///
+/// A subarray is a contiguous, non - empty sequence of elements within an 
+/// array.
+///
+/// Example 1:
+/// Input: nums = [4, 1, 2], k = 3
+/// Output : 3
+/// Explanation :
+/// The sum of the entire array is 7, and 7 % 3 = 1, so it is not 
+/// divisible by k = 3.
+/// Negating nums[2] = 2 changes the sum to 4 + 1 − 2 = 3, which is 
+/// divisible by k.
+/// Therefore, the entire array is a valid subarray, giving a length of 3.
+///
+/// Example 2 :
+/// Input : nums = [5, 3, 4], k = 7
+/// Output : 2
+/// Explanation :
+/// The sum of the entire array is 12, and negating any one of its 
+/// elements does not make its sum divisible by 7.
+/// However, the subarray[3, 4] has a sum of 7, which is divisible 
+/// by k = 7 without any negation.
+/// Therefore, the longest valid subarray has a length of 2.
+///
+/// Example 3 :
+/// Input : nums = [2, 2, 5], k = 6
+/// Output : 2
+/// Explanation :
+/// The sum of the entire array is 9, and negating any one of its 
+/// elements does not make its sum divisible by 6.
+/// The subarray[2, 2] has a sum of 4. Negating either element changes 
+/// it to[-2, 2] or [2, -2], both of which have a sum of 0.
+/// Therefore, the longest valid subarray has a length of 2.
+///
+/// Constraints :
+/// 1. 1 <= nums.length <= 1000
+/// 2. - 10^5 <= nums[i] <= 10^5
+/// 3. 1 <= k <= 10^5
+/// </summary>
+int LeetCodeTwoPointer::longestSubarrayI(vector<int>& nums, int k)
+{
+    int result = 0;
+    for (int i = 0; i < (int)nums.size(); i++)
+    {
+        int prefix_sum = 0;
+        unordered_set<int> remainder;
+        for (int j = i; j < (int)nums.size(); j++)
+        {
+            prefix_sum = (prefix_sum + (nums[j] % k + k)) % k;
+            remainder.insert((nums[j] * 2 % k + k) % k);
+            if (prefix_sum == 0 || remainder.count(prefix_sum) > 0)
+            {
+                result = max(result, j - i + 1);
+            }
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code #4066. Maximum Equal Adjacent Pairs After at Most One 
+///                  Replacement 
+///
+/// Medium
+/// 
+/// You are given a 1 - indexed integer array nums.
+///
+/// You can choose two distinct values x and y and perform the following 
+/// operation at most once :
+///
+/// Replace every occurrence of x in nums with y.
+/// Return the maximum possible number of pairs of adjacent elements that 
+/// are equal after performing the operation.
+///
+/// Example 1:
+/// Input: nums = [1, 2, 3, 2]
+/// Output : 2
+/// Explanation :
+/// One optimal solution is to choose x = 3 and y = 2.
+/// The resulting array is[1, 2, 2, 2].
+/// There are 2 pairs of adjacent elements that are equal : (nums[2], nums[3]) 
+/// and (nums[3], nums[4]).
+/// Therefore, the answer is 2.
+///
+/// Example 2 :
+/// Input : nums = [1, 2, 1, 2, 1]
+/// Output : 4
+/// Explanation :
+/// One optimal solution is to choose x = 1 and y = 2.
+/// The resulting array is[2, 2, 2, 2, 2].
+/// There are 4 pairs of adjacent elements that are equal : 
+/// (nums[1], nums[2]), (nums[2], nums[3]), (nums[3], nums[4]), and 
+/// (nums[4], nums[5]).
+/// Therefore, the answer is 4.
+///
+/// Example 3 :
+/// Input : nums = [1, 1, 1]
+/// Output : 2
+/// Explanation :
+/// One optimal solution is to perform no operation.
+/// Thus, the resulting array is[1, 1, 1].
+/// There are 2 pairs of adjacent elements that are equal : (nums[1], 
+/// nums[2]) and (nums[2], nums[3]).
+/// Therefore, the answer is 2.
+/// 
+/// Constraints :
+/// 1. 2 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// </summary>
+int LeetCodeTwoPointer::maxEqualAdjacentPairs(vector<int>& nums)
+{
+    map<pair<int, int>, int> count;
+    int same = 0;
+    int result = 0;
+    int n = nums.size();
+    for (int i = 0; i < n - 1; i++)
+    {
+        if (nums[i] == nums[i + 1])
+        {
+            same++;
+        }
+        else
+        {
+            int a = nums[i];
+            int b = nums[i + 1];
+            if (a > b) swap(a, b);
+            count[{a, b}]++;
+        }
+    }
+    result = same;
+    for (auto& [key, value] : count)
+    {
+        result = max(result, same + value);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code #4075. Longest Resilient Subarray I
+/// 
+/// Medium
+///
+/// You are given an integer array nums and an integer k.
+///
+/// A subarray is resilient if, for every position in it, deleting the 
+/// element at that position leaves the remaining elements with a sum 
+/// divisible by k.
+///
+/// For a subarray of length 1, the remaining sum is 0, which is divisible 
+/// by k.
+///
+/// Return the length of the longest resilient subarray.
+///
+/// Example 1:
+/// Input: nums = [2, 4, 6, 3], k = 2
+/// Output : 3
+/// Explanation :
+/// The subarray[2, 4, 6] sums to 12. Deleting 2, 4, or 6 leaves a sum 
+/// of 10, 8, or 6, respectively, each of which is divisible by 2. 
+/// Therefore, the answer is 3.
+///
+/// Example 2 :
+/// Input : nums = [1, 4, 7, 1], k = 3
+/// Output : 4
+/// Explanation :
+/// The subarray[1, 4, 7, 1] sums to 13. Deleting the first 1, the 4, 
+/// the 7, or the last 1 leaves a sum of 12, 9, 6, or 12, respectively, 
+/// each of which is divisible by 3. Therefore, the answer is 4.  
+/// 
+/// Example 3 :
+/// Input : nums = [5, 5, 4, 8], k = 4
+/// Output : 2
+/// Explanation :
+/// The subarray[5, 5] is not resilient, since deleting either 5 leaves 
+/// a sum of 5, which is not divisible by 4.
+/// The subarray[4, 8] sums to 12. Deleting 4 or 8 leaves a sum of 8 or 4, 
+/// respectively, each of which is divisible by 4. Therefore, the answer 
+/// is 2.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 2500
+/// 2. 1 <= nums[i] <= 10^5
+/// 3. 1 <= k <= 10^5
+/// </summary>
+int LeetCodeTwoPointer::resilientSubarrayI(vector<int>& nums, int k)
+{
+    int result = 0;
+    int n = nums.size();
+    long long sum = 0;
+    int left = -1;
+    int prev_d = -1;
+    for(int right = 0; right < n; right++)
+    {
+        int d = nums[right] % k;
+        if (prev_d != -1 && d != prev_d)
+        {
+            left = right - 1;
+            sum = 0;
+        }
+        prev_d = d;
+        sum = (sum + nums[right]) % k;
+        if (sum == d)
+        {
+            result = max(result, right - left);
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code #4076. Longest Resilient Subarray II
+/// 
+/// Medium
+///
+/// You are given an integer array nums and an integer k.
+///
+/// A subarray is resilient if, for every position in it, deleting the 
+/// element at that position leaves the remaining elements with a sum 
+/// divisible by k.
+///
+/// For a subarray of length 1, the remaining sum is 0, which is divisible 
+/// by k.
+///
+/// Return the length of the longest resilient subarray.
+///
+/// Example 1:
+/// Input: nums = [2, 4, 6, 3], k = 2
+/// Output : 3
+/// Explanation :
+/// The subarray[2, 4, 6] sums to 12. Deleting 2, 4, or 6 leaves a sum of 
+/// 10, 8, or 6, respectively, each of which is divisible by 2. Therefore, 
+/// the answer is 3.
+///
+/// Example 2 :
+/// Input : nums = [1, 4, 7, 1], k = 3
+/// Output : 4
+/// Explanation :
+/// The subarray[1, 4, 7, 1] sums to 13. Deleting the first 1, the 4, 
+/// the 7, or the last 1 leaves a sum of 12, 9, 6, or 12, respectively, 
+/// each of which is divisible by 3. Therefore, the answer is 4.
+///
+/// Example 3 :
+/// Input : nums = [5, 5, 4, 8], k = 4
+/// Output : 2
+/// Explanation :
+/// The subarray[5, 5] is not resilient, since deleting either 5 leaves 
+/// a sum of 5, which is not divisible by 4.
+/// The subarray[4, 8] sums to 12. Deleting 4 or 8 leaves a sum of 8 or 4, 
+/// respectively, each of which is divisible by 4. Therefore, the answer 
+/// is 2.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// 3. 1 <= k <= 10^5
+/// </summary>
+int LeetCodeTwoPointer::resilientSubarrayII(vector<int>& nums, int k)
+{
+    int result = 0;
+    int n = nums.size();
+    long long sum = 0;
+    int left = -1;
+    int prev_d = -1;
+    for (int right = 0; right < n; right++)
+    {
+        int d = nums[right] % k;
+        if (prev_d != -1 && d != prev_d)
+        {
+            left = right - 1;
+            sum = 0;
+        }
+        prev_d = d;
+        sum = (sum + nums[right]) % k;
+        if (sum == d)
+        {
+            result = max(result, right - left);
+        }
+    }
+    return result;
+}
 #pragma endregion

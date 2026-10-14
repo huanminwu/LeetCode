@@ -2515,8 +2515,24 @@ void TestLeetCode4007(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode4065(void)
+{
+    Logger::WriteMessage("Test Leet Code 4065");
+    LeetCodeHashtable leetCode;
+    vector<int> nums = {3, 1, 3, 2, 1, 3};
+    vector<int> result = leetCode.rearrangeArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+
+    nums = { 7,7,4,4,4 };
+    result = leetCode.rearrangeArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode4065();
     TestLeetCode4007();
     TestLeetCode3978();
     TestLeetCode3852();

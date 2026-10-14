@@ -6907,8 +6907,104 @@ void TestLeetCode4050(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode4067(void)
+{
+    Logger::WriteMessage("Test Leet Code 4067");
+    LeetCodeDP leetCode;
+    vector<int> nums = {2, 3, 5, 3, 2, 1};
+    int result = leetCode.maxSubarray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,4,5,6 };
+    result = leetCode.maxSubarray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 217, 286, 10, 227, 294, 122 };
+    result = leetCode.maxSubarray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4069(void)
+{
+    Logger::WriteMessage("Test Leet Code 4069");
+    LeetCodeDP leetCode;
+    vector<int> prices = { 1, 5, 3 };
+    int cooldown = 1;
+    vector<int> costs = {2, 0, 1};
+    int result = leetCode.maxProfitCoolDownII(prices, cooldown, costs);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("cooldown = " + to_string(cooldown));
+    Logger::WriteMessage(costs);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    prices = { 1, 2, 5 };
+    cooldown = 0;
+    costs = { 0, 2, 1 };
+    result = leetCode.maxProfitCoolDownII(prices, cooldown, costs);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("cooldown = " + to_string(cooldown));
+    Logger::WriteMessage(costs);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    prices = {4, 1, 7};
+    cooldown = 2;
+    costs = {3, 0, 1};
+    result = leetCode.maxProfitCoolDownII(prices, cooldown, costs);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("cooldown = " + to_string(cooldown));
+    Logger::WriteMessage(costs);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    prices = {3, 1, 4};
+    cooldown = 0;
+    costs = {2, 1, 0};
+    result = leetCode.maxProfitCoolDownII(prices, cooldown, costs);
+    Logger::WriteMessage(prices);
+    Logger::WriteMessage("cooldown = " + to_string(cooldown));
+    Logger::WriteMessage(costs);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4068(void)
+{
+    Logger::WriteMessage("Test Leet Code 4068");
+    LeetCodeDP leetCode;
+    vector<vector<int>> meetings = {{2, 5, 4}, {6, 8, 3}};
+    long long result = leetCode.maxEarnings(meetings);
+    Logger::WriteMessage(meetings);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    meetings = { {3, 5, 4},{4, 7, 8},{8, 10, 3} };
+    result = leetCode.maxEarnings(meetings);
+    Logger::WriteMessage(meetings);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    meetings = { {1, 2, 2}, {4, 5, 2}, {7, 9, 3} };
+    result = leetCode.maxEarnings(meetings);
+    Logger::WriteMessage(meetings);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4081(void)
+{
+    Logger::WriteMessage("Test Leet Code 4081");
+    LeetCodeDP leetCode;
+    int n = 7, s = 20;
+    vector<int> result = leetCode.maxPrimeSubsetII(n, s);
+    Logger::WriteMessage("n = " + to_string(n) );
+    Logger::WriteMessage("s = " + to_string(s));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode4081();
+    TestLeetCode4068();
+    TestLeetCode4069();
+    TestLeetCode4067();
     TestLeetCode4050();
     TestLeetCode4040();
     TestLeetCode4027();

@@ -6039,7 +6039,7 @@ int LeetCodeBinarySearch::maxTotalValue(vector<int>& value, vector<int>& decay, 
         }
         result = (result + M) % M;
     }
-    return result;
+    return (int)result;
 }
 
 /// <summary>

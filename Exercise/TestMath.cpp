@@ -9353,9 +9353,172 @@ void TestLeetCode4053(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode4061(void)
+{
+    Logger::WriteMessage("Test Leet Code 4061");
+    LeetCodeMath leetCode;
+    vector<int> source = {8, 1}, target = {1, 8};
+    int  result = leetCode.minQueenMoves(source, target);
+    Logger::WriteMessage(source);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    source = { 4, 2 };
+    target = { 1, 3 };
+    result = leetCode.minQueenMoves(source, target);
+    Logger::WriteMessage(source);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    source = { 1, 1 };
+    target = { 1, 1 };
+    result = leetCode.minQueenMoves(source, target);
+    Logger::WriteMessage(source);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4062(void)
+{
+    Logger::WriteMessage("Test Leet Code 4062");
+    LeetCodeMath leetCode;
+    vector<int> source = { 1, 2, 3 }, target = { 0, 2, 4 };
+    int  result = leetCode.canTransform(source, target);
+    Logger::WriteMessage(source);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    source = { -5, -5 };
+    target = { -15, 5 };
+    result = leetCode.canTransform(source, target);
+    Logger::WriteMessage(source);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    source = { 1, 2, 1 };
+    target = { 0, 2, 5 };
+    result = leetCode.canTransform(source, target);
+    Logger::WriteMessage(source);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode4070(void)
+{
+    Logger::WriteMessage("Test Leet Code 4070");
+    LeetCodeMath leetCode;
+    string s = "0192837465";
+    int result = leetCode.minRotationsI(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "1200210200";
+    result = leetCode.minRotationsI(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4071(void)
+{
+    Logger::WriteMessage("Test Leet Code 4071");
+    LeetCodeMath leetCode;
+    int n = 4;
+    string s = "1502";
+    int result = leetCode.minRotationsII(n, s);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 4;
+    s = "2916";
+    result = leetCode.minRotationsII(n, s);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 4;
+    s = "4219";
+    result = leetCode.minRotationsII(n, s);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4073(void)
+{
+    Logger::WriteMessage("Test Leet Code 4073");
+    LeetCodeMath leetCode;
+    int n = 4;
+    int result = leetCode.countGoodStrings(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3;
+    result = leetCode.countGoodStrings(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 2;
+    result = leetCode.countGoodStrings(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4078(void)
+{
+    Logger::WriteMessage("Test Leet Code 4078");
+    LeetCodeMath leetCode;
+    int n = 16;
+    bool result = leetCode.threeFibonacciSum(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    n = 8;
+    result = leetCode.threeFibonacciSum(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    n = 2;
+    result = leetCode.threeFibonacciSum(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    n = 5;
+    result = leetCode.threeFibonacciSum(n);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
+void TestLeetCode4079(void)
+{
+    Logger::WriteMessage("Test Leet Code 4079");
+    LeetCodeMath leetCode;
+    int n = 16, s = 20;
+    vector<int> result = leetCode.maxPrimesI(n, s);
+    Logger::WriteMessage("n = " + to_string(n) + ", s = " + to_string(s));
+    Logger::WriteMessage(result);
+
+    n = 15, s = 15;
+    result = leetCode.maxPrimesI(n, s);
+    Logger::WriteMessage("n = " + to_string(n) + ", s = " + to_string(s));
+    Logger::WriteMessage(result);
+
+
+    n = 5, s = 1;
+    result = leetCode.maxPrimesI(n, s);
+    Logger::WriteMessage("n = " + to_string(n) + ", s = " + to_string(s));
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeMath(void)
 {
-    TestLeetCode4053();
+    TestLeetCode4079();
+    TestLeetCode4078();
+    TestLeetCode4073();
+    TestLeetCode4071();
+    TestLeetCode4070();
+    TestLeetCode4062();
+    TestLeetCode4061();
     TestLeetCode4035();
     TestLeetCode4034();
     TestLeetCode4022();

@@ -1231,7 +1231,6 @@ void TestLeetCode3979(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-
 void TestLeetCode4032(void)
 {
     Logger::WriteMessage("Test Leet Code 4032");
@@ -1265,8 +1264,104 @@ void TestLeetCode4032(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode4063(void)
+{
+    Logger::WriteMessage("Test Leet Code 4063");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 4, 1, 2 };
+    int k = 3;
+    int result = leetCode.longestSubarrayI(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5, 3, 4 };
+    k = 7;
+    result = leetCode.longestSubarrayI(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+    
+    nums = { 2, 2, 5 };
+    k = 6;
+    result = leetCode.longestSubarrayI(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4066(void)
+{
+    Logger::WriteMessage("Test Leet Code 4066");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = {1, 2, 3, 2};
+    int result = leetCode.maxEqualAdjacentPairs(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2,1,2,1 };
+    result = leetCode.maxEqualAdjacentPairs(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,1 };
+    result = leetCode.maxEqualAdjacentPairs(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4075(void)
+{
+    Logger::WriteMessage("Test Leet Code 4075");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 2,4,6,3 };
+    int k = 2;
+    int result = leetCode.resilientSubarrayI(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,4,7,1 };
+    k = 3;
+    result = leetCode.resilientSubarrayI(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,5,4,8 };
+    k = 4;
+    result = leetCode.resilientSubarrayI(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4076(void)
+{
+    Logger::WriteMessage("Test Leet Code 4076");
+    LeetCodeTwoPointer leetCode;
+    vector<int> nums = { 2,4,6,3 };
+    int k = 2;
+    int result = leetCode.resilientSubarrayII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,4,7,1 };
+    k = 3;
+    result = leetCode.resilientSubarrayII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,5,4,8 };
+    k = 4;
+    result = leetCode.resilientSubarrayII(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeTwoPointer(void)
 {
+    TestLeetCode4076();
+    TestLeetCode4075();
+    TestLeetCode4066();
+    TestLeetCode4063();
     TestLeetCode4032();
     TestLeetCode3960();
     TestLeetCode3884();

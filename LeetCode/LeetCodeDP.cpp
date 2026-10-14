@@ -1623,7 +1623,7 @@ int LeetCodeDP::minCostII(vector<vector<int>>& costs)
             {
                 if (cost.first < curr_cost[k].first)
                 {
-                    swap(cost, curr_cost[k]);
+                    std::swap(cost, curr_cost[k]);
                 }
             }
         }
@@ -25263,7 +25263,7 @@ int LeetCodeDP::minDaysII(int n)
     dp[0] = 0;
     for (int i = 1; i <= n; i++)
     {
-        for (int j = 0; j < days.size(); j++)
+        for (int j = 0; j < (int)days.size(); j++)
         {
             if (i < days[j]) break;
             dp[i] = min(dp[i], dp[i - days[j]] + j + 2);
@@ -25271,4 +25271,403 @@ int LeetCodeDP::minDaysII(int n)
     }
     return dp[n] - 1;
 }
+
+/// <summary>
+/// Leet Code #4067. Longest Subarray With Restricted Pair Sums
+/// 
+/// Medium
+/// 
+/// You are given an integer array nums.
+///
+/// A subarray nums[l..r] is valid if there are no three distinct indices 
+/// i, j, and k such that l <= i, j, k <= r and :
+///
+/// nums[i] + nums[j] == nums[k]
+/// Return the maximum length of a valid subarray of nums.
+///
+/// A subarray is a contiguous non - empty sequence of elements within an 
+/// array.
+/// 
+/// Example 1:
+/// Input: nums = [2, 3, 5, 3, 2, 1]
+/// Output : 3
+///
+/// Explanation :
+///
+/// Consider the subarray[3, 5, 3].The pairs of elements at distinct 
+/// indices have the following sums :
+///
+/// 3 + 5 = 8
+/// 3 + 3 = 6, using the two different occurrences of 3
+/// 5 + 3 = 8
+/// None of these sums is an element at the remaining index, so the 
+/// subarray is valid.
+///
+/// Every subarray of length 4 contains 2, 3, and 5 at distinct indices, 
+/// where 2 + 3 = 5. Therefore, no longer valid subarray exists, and 
+/// the answer is 3.
+///
+/// Example 2:
+/// Input: nums = [3, 4, 5, 6]
+/// Output : 4
+/// Explanation :
+/// The sums obtained from every pair of elements at distinct indices 
+/// are 7, 8, 9, 9, 10, and 11. None of these values appears at the 
+/// remaining index, so the entire array is valid.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 1000 
+/// 2. 1 <= nums[i] <= 500
+/// </summary>
+int LeetCodeDP::maxSubarray(vector<int>& nums)
+{
+    int n = nums.size();
+    vector<vector<pair<int, int>>> dp(n, vector<pair<int, int>>(n, {INT_MIN, INT_MAX}));
+    vector<vector<int>> position(501);
+    int result = 1;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        position[nums[i]].push_back((int)i);
+    }
+    for (int l = 1; l < n; l++)
+    {
+        for (int i = 0; i + l < n; i++)
+        {
+            int sum = nums[i] + nums[i + l];
+            int prev_pos = INT_MIN;
+            int next_pos = INT_MAX;
+            if (sum <= 500)
+            {
+                int next = lower_bound(position[sum].begin(), position[sum].end(), i + 1) - position[sum].begin();
+                int prev = next - 1;
+                if (next != position[sum].size())
+                {
+                    next_pos = position[sum][next];
+                }
+                if (prev != -1)
+                {
+                    prev_pos = position[sum][prev];
+                }
+            }
+            prev_pos = max(prev_pos, dp[i][i + l - 1].first);
+            prev_pos = max(prev_pos, dp[i + 1][i + l].first);
+            next_pos = min(next_pos, dp[i][i + l - 1].second);
+            next_pos = min(next_pos, dp[i + 1][i + l].second);
+            if (prev_pos < i && next_pos > i + l)
+            {
+                result = max(result, l + 1);
+            }
+            dp[i][i + l] = { prev_pos, next_pos };
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code #4069. Best Time to Buy and Sell Stock with Cooldown II
+/// 
+/// Medium
+///
+/// You are given an integer array prices of length n, where prices[i] is 
+/// the price of a stock on day i.
+///
+/// You are also given an integer cooldown and an integer array costs of 
+/// length n.The value costs[k] is the total holding fee for a transaction 
+/// in which the stock is held for exactly k days.
+///
+/// You may perform any number of transactions, including zero, subject to 
+/// the following rules :
+///
+/// You may hold at most one share at a time.You must sell your current 
+/// share before buying another.
+/// If you sell on day j, the earliest day you may buy again is 
+/// j + cooldown + 1.
+/// If you buy on day i and sell on day j, the holding duration is 
+/// j - i days.You pay the fee costs[j - i] once for that transaction.
+/// The profit from buying on day i and selling on day j is 
+/// prices[j] - prices[i] - costs[j - i].
+///
+/// Return the maximum total profit you can achieve.If no profitable 
+/// transactions are possible, return 0.
+/// 
+/// Example 1:
+/// Input: prices = [1, 5, 3], cooldown = 1, costs = [2, 0, 1]
+/// Output : 4
+/// Explanation :
+/// The optimal strategy is :
+/// Buy on day 0 at prices[0] = 1.
+/// Sell on day 1 at prices[1] = 5. The holding duration is 1 day, so the 
+/// holding cost is costs[1] = 0.
+/// Therefore, the profit from this transaction is 5 - 1 - 0 = 4.
+/// After selling, cooldown = 1 prevents buying any stock on day 2, so no 
+/// further transactions are possible.
+/// Maximum profit achievable is 4.
+/// 
+/// Example 2:
+/// Input: prices = [1, 2, 5], cooldown = 0, costs = [0, 2, 1]
+/// Output : 3
+/// Explanation :
+/// The optimal strategy is :
+/// Buy on day 0 at prices[0] = 1.
+/// Sell on day 2 at prices[2] = 5. The holding duration is 2 days, so 
+/// the holding cost is costs[2] = 1.
+/// Therefore, the profit from this transaction is 5 - 1 - 1 = 3.
+/// No further transactions improve the profit.Maximum profit achievable 
+/// is 3.
+///
+/// Example 3:
+/// Input: prices = [4, 1, 7], cooldown = 2, costs = [3, 0, 1]
+/// Output : 6
+/// Explanation :
+/// The optimal strategy is :
+/// Buy on day 1 at prices[1] = 1.
+/// Sell on day 2 at prices[2] = 7. The holding duration is 1 day, so the 
+/// holding cost is costs[1] = 0.
+/// Profit from this transaction = 7 - 1 - 0 = 6.
+/// No further transactions are possible.Maximum profit achievable = 6.
+/// 
+/// Example 4:
+/// Input: prices = [3, 1, 4], cooldown = 0, costs = [2, 1, 0]
+/// Output : 2
+/// Explanation :
+/// The optimal strategy is :
+/// Buy on day 1 at prices[1] = 1.
+/// Sell on day 2 at prices[2] = 4. The holding duration is 1 day, 
+/// so the holding cost is costs[1] = 1.
+/// Therefore, the profit from this transaction is 4 - 1 - 1 = 2.
+/// No further transactions improve the profit.Maximum profit achievable 
+/// is 2.
+///
+/// Constraints :
+/// 1. 1 <= n == prices.length <= 1500
+/// 2. 1 <= prices[i] <= 10^5
+/// 3. 0 <= cooldown <= n - 1
+/// 4. costs.length == n
+/// 5. 0 <= costs[i] <= 10^5
+/// </summary>
+int LeetCodeDP::maxProfitCoolDownII(vector<int>& prices, int cooldown, vector<int>& costs)
+{
+    int n = prices.size();
+    vector<int> buy(n, INT_MIN);
+    vector<int> sell(n, 0);
+    for (int i = 0; i < n; i++)
+    {
+        int prev_sell = 0;
+        if (i - cooldown - 1 >= 0)
+        {
+            prev_sell = max(0, sell[i - cooldown - 1]);
+        }
+        buy[i] = max(buy[i], prev_sell - prices[i]);
+        for (int j = i - 1; j >= 0; j--)
+        {
+            sell[i] = max(sell[i], prices[i] + buy[j] - costs[i - j]);
+        }
+        if (i > 0)
+        {
+            sell[i] = max(sell[i], sell[i - 1]);
+        }
+    }
+    return sell[n - 1];
+}
+
+
+/// <summary>
+/// Leet Code #4068. Maximize Meeting Earnings with Idle Gaps
+/// 
+/// Hard
+/// 
+/// You are given a 2D integer array meetings, where 
+/// meetings[i] = [starti, endi, revenuei] represents a meeting starting 
+/// at time starti, ending at time endi, with revenue revenuei.
+///
+/// All meetings use half - open intervals[start, end), so meetings that 
+/// only touch at endpoints do not overlap.
+///
+/// You may select any non - empty subset of meetings such that no two 
+/// selected meetings overlap.You earn the revenue of each selected 
+/// meeting.
+///
+/// Arrange the selected meetings in increasing order of their start 
+/// times.For each pair of adjacent meetings in this order, you also 
+/// earn 1 unit of revenue per unit of idle time between them.This idle 
+/// time equals the later meeting's start time minus the earlier meeting's 
+/// end time.
+/// No idle revenue is earned before the earliest selected meeting starts 
+/// or after the latest selected meeting ends.If only one meeting is 
+/// selected, no idle revenue is earned.
+///
+/// Return the maximum total earnings achievable.
+/// A subset of an array is a selection of elements of the array.
+///
+/// Example 1:
+/// Input: meetings = [[2, 5, 4], [6, 8, 3]]
+/// Output : 8
+/// Explanation :
+/// Select both meetings.They do not overlap and earn 4 + 3 = 7 units of 
+/// meeting revenue.
+/// The first meeting ends at time 5, and the second starts at time 6. 
+/// This idle gap earns 6 - 5 = 1 additional unit.
+/// The maximum total earnings are 7 + 1 = 8.
+///
+/// Example 2 :
+/// Input : meetings = [[3, 5, 4], [4, 7, 8], [8, 10, 3]]
+/// Output : 12
+/// Explanation :
+/// Select the meetings at indices 1 and 2. They do not overlap and 
+/// earn 8 + 3 = 11 units of meeting revenue.
+/// In chronological order, these meetings run from time 4 to 7 and 
+/// from time 8 to 10. The idle gap earns 8 - 7 = 1 additional unit.
+/// The maximum total earnings are 11 + 1 = 12.
+/// 
+/// Example 3 :
+/// Input : meetings = [[1, 2, 2], [4, 5, 2], [7, 9, 3]]
+/// Output : 11
+/// Explanation :
+/// Select all three meetings.They do not overlap and earn 2 + 2 + 3 = 7 
+/// units of meeting revenue.
+/// The idle gap from time 2 to 4 earns 4 - 2 = 2 additional units.
+/// The idle gap from time 5 to 7 earns 7 - 5 = 2 additional units.
+/// The maximum total earnings are 7 + 2 + 2 = 11.
+///
+/// Constraints
+/// 1. 1 <= meetings.length <= 10^5
+/// 2. meetings[i] = [starti, endi, revenuei]
+/// 3. 0 <= starti < endi <= 10^9
+/// 4. 1 <= revenuei <= 10^9
+/// </summary>
+long long LeetCodeDP::maxEarnings(vector<vector<int>>& meetings)
+{
+    map<int, long long> revenue;
+    sort(meetings.begin(), meetings.end());
+    for (size_t i = 0; i < meetings.size(); i++)
+    {
+        int start = meetings[i][0];
+        int end = meetings[i][1];
+        long long value = meetings[i][2];
+        long long prev = 0;
+        while (!revenue.empty() && revenue.begin()->first <= start)
+        {
+            prev = max(prev, revenue.begin()->second + start - revenue.begin()->first);
+            revenue.erase(revenue.begin());
+        }
+        if (prev > 0)
+        {
+            revenue[start] = prev;
+        }
+        revenue[end] = max(revenue[end], prev+value);
+    }
+
+    long long result = 0;
+    for (const auto& kv : revenue)
+    {
+        result = max(result, kv.second);
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet Code #4081. Prime Subset Selection II
+/// 
+/// You are given two integers n and s.
+/// Consider all prime numbers less than or equal to n.Select a subset of 
+/// these primes such that :
+///
+/// Each prime can be selected at most once.
+/// The sum of the selected primes is as large as possible while remaining 
+/// less than or equal to s.
+/// Among subsets with the maximum sum, select one containing the fewest 
+/// primes.
+/// If multiple subsets remain tied, select the one whose elements, 
+/// written in increasing order, form the lexicographically smallest array.
+/// Return an integer array containing the selected primes in increasing 
+/// order.If no valid non - empty subset exists, return an empty array.
+///
+/// Example 1:
+/// Input: n = 7, s = 20
+/// Output : [2, 3, 5, 7]
+/// Explanation :
+/// The prime numbers less than or equal to n = 7 are 2, 3, 5, and 7.
+/// The sum of all these primes is 2 + 3 + 5 + 7 = 17, which is less than 
+/// or equal to s = 20.
+/// Thus, the answer is[2, 3, 5, 7].
+///
+/// Example 2 :
+/// Input : n = 15, s = 18
+/// Output : [5, 13]
+/// Explanation :
+/// The prime numbers less than or equal to 15 are 2, 3, 5, 7, 11, and 13.
+/// The subsets with sum 18 are[5, 13], [7, 11], [2, 3, 13], and 
+/// [2, 5, 11].Since this sum equals s, it is the maximum possible sum.
+/// Among these subsets, [5, 13] and [7, 11] contain the fewest 
+/// primes : two.
+/// Between these two subsets, [5, 13] is lexicographically smaller 
+/// because its first element, 5, is smaller than 7. Thus, the answer 
+/// is[5, 13].
+/// 
+/// Example 3 :
+/// Input : n = 5, s = 1
+/// Output : []
+/// Explanation :
+/// The smallest prime number is 2, which is greater than s = 1.
+/// Thus, no prime can be selected, so the answer is an empty array.
+///
+/// Constraints :
+/// 1. 1 <= n <= 1000
+/// 2. 1 <= s <= 1000
+/// </summary>
+vector<int> LeetCodeDP::maxPrimeSubsetII(int n, int s)
+{
+    vector<int> primes;
+    vector<bool> is_prime(n + 1, true);
+    for (int i = 2; i <= n; i++)
+    {
+        if (is_prime[i])
+        {
+            primes.push_back(i);
+            for (int j = i * 2; j <= n; j += i)
+            {
+                is_prime[j] = false;
+            }
+        }
+    }
+    int m = primes.size();
+    vector<vector<int>> dp(s + 1);
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = s; j >= primes[i]; j--)
+        {
+            if (!dp[j - primes[i]].empty() || j - primes[i] == 0)
+            {
+                if (dp[j].empty() || dp[j - primes[i]].size() + 1 < dp[j].size())
+                {
+                    dp[j] = dp[j - primes[i]];
+                    dp[j].push_back(primes[i]);
+                }
+                else
+                {
+                    if (dp[j - primes[i]].size() + 1 == dp[j].size())
+                    {
+                        vector<int> new_arr = dp[j - primes[i]];
+                        new_arr.push_back(primes[i]);
+                        if (new_arr < dp[j])
+                        {
+                            dp[j] = new_arr;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    vector<int> result;
+    for (int i = s; i >= 0; i--)
+    {
+        if (!dp[i].empty())
+        {
+            result = dp[i];
+            break;
+        }
+    }
+    return result;
+}
+
 #pragma endregion
