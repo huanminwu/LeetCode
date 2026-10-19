@@ -1974,8 +1974,24 @@ void TestLeetCode4059(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode4083(void)
+{
+    Logger::WriteMessage("Test Leet Code 4083");
+    LeetCodeBit leetCode;
+    vector<int> nums = { 1,1,2,2,2,3 };
+    int result = leetCode.minDeletions(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,4,9,4 };
+    result = leetCode.minDeletions(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeBit(void)
 {
+    TestLeetCode4083();
     TestLeetCode4059();
     TestLeetCode4047();
     TestLeetCode3955();

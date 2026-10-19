@@ -44,13 +44,13 @@
 
 int main(int argc, char* argv[])
 {
+    TestLeetCodeBit();
     TestLeetCodeDP();
     TestLeetCodeMath();
     TestLeetCodeTwoPointer();
     TestLeetCodeArray();
     TestLeetCodeHashtable();
     TestLeetCodeDFS();
-    TestLeetCodeBit();
     TestLeetCodeGreedy();
     TestLeetCodeStack();
     TestLeetCodeGraph();
