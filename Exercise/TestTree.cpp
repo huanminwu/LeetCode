@@ -5042,9 +5042,42 @@ void TestLeetCode4018(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode4085(void)
+{
+    Logger::WriteMessage("Test Leet Code 4085");
+    LeetCodeTree leetCode;
+    vector<vector<int>> edges = { {3, 1}, {3, 2}, {1, 4}, {2, 0} };
+    string colors = "BRRWB";
+    int result = leetCode.findColoredRoot(edges, colors);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(colors);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    edges = { {0, 1},{1, 2},{2, 3} };
+    colors = "BRRWB";
+    result = leetCode.findColoredRoot(edges, colors);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(colors);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    edges = { {0, 1} };
+    colors = "BB";
+    result = leetCode.findColoredRoot(edges, colors);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(colors);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    edges = { {0, 1}, {0, 2}, {0, 3} };
+    colors = "RBBB";
+    result = leetCode.findColoredRoot(edges, colors);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(colors);
+    Logger::WriteMessage("result = " + to_string(result));
+}
 
 void TestLeetCodeTree(void)
 {
+    TestLeetCode4085();
     TestLeetCode4018();
     TestLeetCode3997();
     TestLeetCode3241();

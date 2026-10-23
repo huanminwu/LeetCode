@@ -17315,4 +17315,92 @@ int LeetCodeSort::minPenalty(int period, vector<int>& lights, vector<int>& arriv
     }
     return result;
 }
+
+/// <summary>
+/// Leet code #4087. Maximum Subarray Sum of Fixed Length After at Most K 
+///                  Swaps
+///                  
+/// Medium
+///  
+///
+/// You are given an integer array nums and two integers length and k.
+///
+/// You may perform at most k swap operations on nums.
+///
+/// In one swap operation, you may choose two distinct indices i and j and 
+/// swap nums[i] and nums[j].
+///
+/// Return the maximum possible sum of a subarray of length exactly length 
+/// after performing the swaps.
+///
+/// Example 1:
+/// Input: nums = [1, -1, 0, 2], length = 2, k = 1
+/// Output : 3
+/// Explanation :
+/// Swap the elements at indices 1 and 3, resulting in[1, 2, 0, -1].
+/// The subarray[1, 2] has length 2 and sum 3.
+/// No subarray of length 2 can have a larger sum, since 1 and 2 
+/// are the two largest elements.
+///
+/// Example 2 :
+/// Input : nums = [4, 3, 2, 4], length = 3, k = 2
+/// Output : 11
+/// Explanation :
+/// Swap the elements at indices 2 and 3, resulting in[4, 3, 4, 2].
+//// The subarray[4, 3, 4] has length 3 and sum 11.
+/// This is the sum of the three largest elements, so no larger answer is 
+/// possible.Only one swap is needed.
+///
+/// Example 3 :
+/// Input : nums = [-1, -2], length = 2, k = 0
+/// Output : -3
+/// Explanation :
+/// No swaps are allowed.The only subarray of length 2 is[-1, -2], whose 
+/// sum is - 3.
+/// 
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. -10^9 <= nums[i] <= 10^9
+/// 3. 1 <= length <= nums.length
+/// 4. 0 <= k <= nums.length
+/// </summary>
+long long LeetCodeSort::maxSumWithKSwap(vector<int>& nums, int length, int k)
+{
+    set<pair<int, int>> in_heap, out_heap;
+    for (size_t i = 0; i < nums.size(); i++)
+    {
+        out_heap.insert({ nums[i], i });
+    }
+    long long sum = 0;
+    long long result = LLONG_MIN;
+    int n = nums.size();
+    for (int i = 0; i < n; i++)
+    {
+        in_heap.insert({ nums[i], i });
+        sum += nums[i];
+        out_heap.erase({ nums[i], i });
+        if (i >= (size_t)length)
+        {
+            int prev = i - length;
+            sum -= nums[prev];
+            in_heap.erase({ nums[prev], prev });
+            out_heap.insert({ nums[prev], prev });
+        }
+        if (i >= length - 1)
+        {
+            auto itr1 = in_heap.begin();
+            auto itr2 = out_heap.rbegin();
+            long long diff = 0;
+            for (int j = 0; j < k && itr1 != in_heap.end() && itr2 != out_heap.rend(); j++, itr1++, itr2++)
+            {
+                if (itr2->first > itr1->first)
+                {
+                    diff += itr2->first - itr1->first;
+                }
+            }
+            result = max(result, sum + diff);
+        }
+    }
+    return result;
+}
 #pragma endregion

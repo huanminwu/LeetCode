@@ -17772,4 +17772,135 @@ long long LeetCodeTree::minInversions(vector<string>& words, vector<int>& target
     return minInversions_solve(0, sortedRanks,trie);
 }
 
+/// <summary>
+/// Leet Code #4085. Find Root of a Colored Tree
+///
+/// Medium
+///
+/// You are given an undirected tree of n nodes labeled from 0 to n - 1, 
+/// represented by a 2D integer array edges of length n - 1, where 
+/// edges[i] = [ui, vi] indicates that there is an undirected edge between 
+/// nodes ui and vi.
+///
+/// You are also given a string colors of length n, where colors[i] is 
+/// one of 'R', 'B', or 'W', and denotes the color of node i.
+///
+/// A node chosen as root must satisfy both of the following conditions 
+/// once the tree is oriented away from it :
+///
+/// Binary - tree property : Every node has at most two children.
+/// Layered color pattern : All nodes at the same depth have the same 
+/// color.Starting at depth 0, these colors follow one of the three 
+/// repeating sequences :
+/// R->B->W->R->B->W -> ...
+/// B->W->R->B->W->R -> ...
+/// W->R->B->W->R->B -> ...
+/// Return the index of any root that satisfies both conditions, or -1 
+/// if no such root exists.
+///
+/// A tree is a connected undirected graph with no cycles.
+///
+/// The depth of a node is the number of edges on the path from the 
+/// root to that node.The root has depth 0. A child of a node is an 
+/// adjacent node whose depth is one greater.
+///
+/// The degree of a node is the number of edges incident to it.
+/// 
+/// Example 1:
+/// Input: edges = [[3, 1], [3, 2], [1, 4], [2, 0]], colors = "BRRWB"
+/// Output : 3
+/// Explanation :
+/// Rooting at node 3 gives each node at most two children and every 
+/// edge advances to the next color in the cycle(W->R->B), so return 3.
+///
+/// Example 2:
+/// Input: edges = [[0, 1], [1, 2], [2, 3]], colors = "RBRB"
+/// Output : -1
+/// Explanation :
+/// No root satisfies the required color step on every edge, so return -1.
+/// Constraints:
+/// 1. 2 <= n <= 10^5
+/// 2. edges.length == n - 1
+/// 3. edges[i] = [ui, vi]
+/// 4. 0 <= ui, vi < n
+/// 5. colors.length == n
+/// 6. colors[i] is one of 'R', 'B', 'W'.
+/// 7. The input graph is a tree and every node has degree at most three.
+/// </summary>
+int LeetCodeTree::findColoredRoot(vector<vector<int>>& edges, string colors)
+{
+    int n = colors.size();
+    vector<vector<int>> neighbors(n);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighbors[edges[i][0]].push_back(edges[i][1]);
+        neighbors[edges[i][1]].push_back(edges[i][0]);
+    }
+    int root = -1;
+    for (size_t i = 0; i < colors.size(); i++)
+    {
+        root = i;
+        for (size_t j = 0; j < neighbors[i].size(); j++)
+        {
+            if (colors[i] == 'R' && colors[neighbors[i][j]] != 'B')
+            {
+                root = -1;
+                break;
+            }
+            else if (colors[i] == 'B' && colors[neighbors[i][j]] != 'W')
+            {
+                root = -1;
+                break;
+            }
+            else if (colors[i] == 'W' && colors[neighbors[i][j]] != 'R')
+            {
+                root = -1;
+                break;
+            }
+        }
+        if (root != -1)
+        {
+            break;
+        }
+    }
+    if (root == -1) return -1;
+    queue<int> bfs;
+    bfs.push(root);
+    vector<int> visited(n);
+    while (!bfs.empty())
+    {
+        size_t size = bfs.size();
+        for (size_t k = 0; k < size; k++)
+        {
+            int node = bfs.front();
+            bfs.pop();
+            visited[node] = 1;
+            char node_color = colors[node];
+            int count = 0;
+            for (size_t i = 0; i < neighbors[node].size(); i++)
+            {
+                if (visited[neighbors[node][i]] == 1) continue;
+                if (node_color == 'R' && colors[neighbors[node][i]] != 'B')
+                {
+                    return -1;
+                }
+                else if (node_color == 'B' && colors[neighbors[node][i]] != 'W')
+                {
+                    return -1;
+                }
+                else if (node_color == 'W' && colors[neighbors[node][i]] != 'R')
+                {
+                    return -1;
+                }
+                count++;
+                bfs.push(neighbors[node][i]);
+            }
+            if (count > 2)
+            {
+                return -1;
+            }
+        }
+    }
+    return root;
+}
 #pragma endregion

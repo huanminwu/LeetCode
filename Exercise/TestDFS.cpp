@@ -3113,8 +3113,43 @@ void TestLeetCode4060(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode943(void)
+{
+    Logger::WriteMessage("Test Leet Code 943");
+    LeetCodeDFS leetCode;
+    vector<string> A = { "alex", "loves", "leetcode" };
+    string result = leetCode.shortestSuperstring(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + result);
+
+    A = { "catg","ctaagt","gcta","ttca","atgcatc" };
+    result = leetCode.shortestSuperstring(A);
+    Logger::WriteMessage(A);
+    Logger::WriteMessage("result = " + result);
+}
+
+void TestLeetCode2247(void)
+{
+    LeetCodeDFS leetCode;
+    int n = 5;
+    vector<vector<int>> highways = { {0, 1, 4},{2, 1, 3},{1, 4, 11},{3, 2, 3},{3, 4, 2} };
+    int k = 3;
+    int result = leetCode.maximumCost(n, highways, k);
+    Logger::WriteMessage(highways);
+    Logger::WriteMessage("n = " + to_string(n) + "k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 5;
+    highways = { {0, 1, 3},{2, 3, 2} };
+    k = 2;
+    result = leetCode.maximumCost(n, highways, k);
+    Logger::WriteMessage(highways);
+    Logger::WriteMessage("n = " + to_string(n) + "k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode2247();
+    TestLeetCode943();
     TestLeetCode4060();
     TestLeetCode4009();
     TestLeetCode3966();

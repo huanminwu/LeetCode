@@ -2530,8 +2530,24 @@ void TestLeetCode4065(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode4084(void)
+{
+    Logger::WriteMessage("Test Leet Code 4084");
+    LeetCodeHashtable leetCode;
+    vector <vector<char>> grid = { {'R', 'D'},{'U', 'L'} };
+    vector<int> result = leetCode.lastVisitedCell(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+
+    grid = { {'R', 'R', 'R'} };
+    result = leetCode.lastVisitedCell(grid);
+    Logger::WriteMessage(grid);
+    Logger::WriteMessage(result);
+}
+
 void TestLeetCodeHashtable(void)
 {
+    TestLeetCode4084();
     TestLeetCode4065();
     TestLeetCode4007();
     TestLeetCode3978();

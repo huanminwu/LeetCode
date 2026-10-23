@@ -6963,6 +6963,91 @@ public:
     /// </summary>
     long long countEvenlyGoodIntegers(long long l, long long r);
 
+    /// <summary>
+    /// Leet code #943. Find the Shortest Superstring
+    /// </summary>
+    string calculateOverlapString(string& string1, string& string2);
+
+    /// <summary>
+    /// Leet code #943. Find the Shortest Superstring
+    /// 
+    /// Given an array A of strings, find any smallest string that contains each 
+    /// string in A as a substring.
+    ///
+    /// We may assume that no string in A is substring of another string in A.
+    ///
+    /// Example 1:
+    /// Input: ["alex","loves","leetcode"]
+    /// Output: "alexlovesleetcode"
+    /// Explanation: All permutations of "alex","loves","leetcode" would also be 
+    /// accepted.
+    ///
+    /// Example 2:
+    /// Input: ["catg","ctaagt","gcta","ttca","atgcatc"]
+    /// Output: "gctaagttcatgcatc"
+    /// 
+    /// Note:
+    /// 1. 1 <= A.length <= 12
+    /// 2. 1 <= A[i].length <= 20
+    /// </summary>
+    string shortestSuperstring(vector<string>& A);
+
+    /// <summary>
+    /// Leet Code 2247. Maximum Cost of Trip With K Highways
+    /// </summary>
+    int maximumCost(int city, vector<vector<pair<int, int>>>& neighbors, vector<vector<int>>& cache, int bit_mask, int remaining);
+
+    /// <summary>
+    /// Leet Code 2247. Maximum Cost of Trip With K Highways
+    ///                                                                                      
+    /// Hard
+    /// 
+    /// A series of highways connect n cities numbered from 0 to n - 1. You 
+    /// are given a 2D integer array highways where highways[i] = [city1i, 
+    /// city2i, tolli] indicates that there is a highway that connects city1i 
+    /// and city2i, allowing a car to go from city1i to city2i and vice versa 
+    /// for a cost of tolli.
+    ///
+    /// You are also given an integer k. You are going on a trip that crosses 
+    /// exactly k highways. You may start at any city, but you may only visit 
+    /// each city at most once during your trip.
+    ///
+    /// Return the maximum cost of your trip. If there is no trip that meets 
+    /// the requirements, return -1.
+    /// 
+    /// Example 1:
+    /// Input: n = 5, highways = [[0,1,4],[2,1,3],[1,4,11],[3,2,3],[3,4,2]], 
+    /// k = 3
+    /// Output: 17
+    /// Explanation:
+    /// One possible trip is to go from 0 -> 1 -> 4 -> 3. The cost of this 
+    /// trip is 4 + 11 + 2 = 17.
+    /// Another possible trip is to go from 4 -> 1 -> 2 -> 3. The cost of 
+    /// this trip is 11 + 3 + 3 = 17.
+    /// It can be proven that 17 is the maximum possible cost of any valid 
+    /// trip.
+    ///
+    /// Note that the trip 4 -> 1 -> 0 -> 1 is not allowed because you visit 
+    /// the city 1 twice.
+    ///
+    /// Example 2:
+    /// Input: n = 4, highways = [[0,1,3],[2,3,2]], k = 2
+    /// Output: -1
+    /// Explanation: There are no valid trips of length 2, so return -1.
+    ///
+    /// Constraints:
+    /// 1. 2 <= n <= 15
+    /// 2. 1 <= highways.length <= 50
+    /// 3. highways[i].length == 3
+    /// 4. 0 <= city1i, city2i <= n - 1
+    /// 5. city1i != city2i
+    /// 6. 0 <= tolli <= 100
+    /// 7. 1 <= k <= 50
+    /// 8. There are no duplicate highways.
+    /// </summary>
+    int maximumCost(int n, vector<vector<int>>& highways, int k);
+
+
 #pragma endregion
 };
 

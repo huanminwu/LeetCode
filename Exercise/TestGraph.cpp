@@ -819,21 +819,6 @@ void TestLeetCode913(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-void TestLeetCode943(void)
-{
-    Logger::WriteMessage("Test Leet Code 943");
-    LeetCodeGraph leetCode;
-    vector<string> A = { "alex", "loves", "leetcode" };
-    string result = leetCode.shortestSuperstring(A);
-    Logger::WriteMessage(A);
-    Logger::WriteMessage("result = " + result);
-
-    A = { "catg","ctaagt","gcta","ttca","atgcatc" };
-    result = leetCode.shortestSuperstring(A);
-    Logger::WriteMessage(A);
-    Logger::WriteMessage("result = " + result);
-}
-
 void TestLeetCode959(void)
 {
     Logger::WriteMessage("Test Leet Code 959");
@@ -4401,24 +4386,6 @@ void TestLeetCode2242(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-void TestLeetCode2247(void)
-{
-    LeetCodeGraph leetCode;
-    int n = 5; 
-    vector<vector<int>> highways = { {0, 1, 4},{2, 1, 3},{1, 4, 11},{3, 2, 3},{3, 4, 2} };
-    int k = 3;
-    int result = leetCode.maximumCost(n, highways, k);
-    Logger::WriteMessage(highways);
-    Logger::WriteMessage("n = " + to_string(n) + "k = " + to_string(k) + "; result = " + to_string(result));
-
-    n = 5;
-    highways = { {0, 1, 3},{2, 3, 2} };
-    k = 2;
-    result = leetCode.maximumCost(n, highways, k);
-    Logger::WriteMessage(highways);
-    Logger::WriteMessage("n = " + to_string(n) + "k = " + to_string(k) + "; result = " + to_string(result));
-}
-
 void TestLeetCode2258(void)
 {
     LeetCodeGraph leetCode;
@@ -7208,7 +7175,6 @@ void TestLeetCodeGraph(void)
     TestLeetCode2290();
     TestLeetCode2257();
     TestLeetCode2258();
-    TestLeetCode2247();
     TestLeetCode2242();
     TestLeetCode2204();
     TestLeetCode2203();
@@ -7342,7 +7308,6 @@ void TestLeetCodeGraph(void)
     TestLeetCode871();
     TestLeetCode886();
     TestLeetCode913();
-    TestLeetCode943();
     TestLeetCode959();
     TestLeetCode1057();
     TestLeetCode1059();

@@ -2331,9 +2331,79 @@ void TestLeetCode4056(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode4086(void)
+{
+    Logger::WriteMessage("Test Leet Code 4086");
+    LeetCodeGreedy leetCode;
+    vector<vector<int>> availableIntervals = { {1, 4}, {1, 7}, {3, 9}, {5, 10}, {10, 15} };
+    vector<vector<int>> targetIntervals = { {1, 3}, {2, 5}, {7, 8}, {10, 13}, {11, 15}, {12, 13} };
+    int result = leetCode.minSelection(availableIntervals, targetIntervals);
+    Logger::WriteMessage(availableIntervals);
+    Logger::WriteMessage(targetIntervals);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    availableIntervals = { {4, 6}, {1, 4}, {2, 5} };
+    targetIntervals = { {3, 4}, {2, 5}, {6, 7} };
+    result = leetCode.minSelection(availableIntervals, targetIntervals);
+    Logger::WriteMessage(availableIntervals);
+    Logger::WriteMessage(targetIntervals);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    availableIntervals = { {1, 2}, {3, 4} };
+    targetIntervals = { {1, 4} };
+    result = leetCode.minSelection(availableIntervals, targetIntervals);
+    Logger::WriteMessage(availableIntervals);
+    Logger::WriteMessage(targetIntervals);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    availableIntervals = { {3, 29}, {2, 2}, {30, 30} };
+    targetIntervals = 
+    { 
+        {3, 9}, {2, 2}, {28, 28}, {7, 7}, {20, 25}, {5, 28}, {29, 29}, {16, 16}, 
+        {10, 10}, {16, 29}, {23, 23}, {20, 20}, {12, 12}, {11, 11}, {26, 26}, 
+        {30, 30}, {3, 3}, {13, 13}, {21, 21} 
+    };
+    result = leetCode.minSelection(availableIntervals, targetIntervals);
+    Logger::WriteMessage(availableIntervals);
+    Logger::WriteMessage(targetIntervals);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    availableIntervals = 
+    { 
+        {6, 24}, {22, 27}, {12, 13}, {19, 19}, {14, 26}, {10, 30}, {9, 10}, {9, 10}, 
+        {17, 24}, {7, 18}, {10, 19}, {22, 28}, {1, 4}, {12, 21}, {12, 12}, {20, 22} 
+    };
+    targetIntervals =
+    {
+        {9,10} ,{15,15},{12,13},{19,19}
+    };
+    result = leetCode.minSelection(availableIntervals, targetIntervals);
+    Logger::WriteMessage(availableIntervals);
+    Logger::WriteMessage(targetIntervals);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    availableIntervals =
+    {
+        {20,25} ,{30,30},{22,22},{11,12},{8,13},{6,8},{8,30},{30,30},{19,30},
+        {1,17},{10,19},{6,13},{9,9},{2,22},{27,30},{5,15},{18,19},{9,23}
+    };
+    targetIntervals =
+    {
+        {28, 29},{1, 6},{19, 19},{6, 13},{4, 7},{28, 30},{9, 11},
+        {15, 16},{20, 23},{11, 29},{29, 29},{5, 6},{12, 13},{6, 6},
+        {8, 16},{24, 24},{19, 29}
+    };
+    result = leetCode.minSelection(availableIntervals, targetIntervals);
+    Logger::WriteMessage(availableIntervals);
+    Logger::WriteMessage(targetIntervals);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeGreedy(void)
 {
     Logger::WriteMessage("Test Leet Code Greedy");
+    TestLeetCode4086();
     TestLeetCode4056();
     TestLeetCode4031();
     TestLeetCode3975();
