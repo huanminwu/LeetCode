@@ -18033,4 +18033,238 @@ int LeetCodeTree::minActivationCost(vector<vector<int>>& edges, vector<int>& val
     return result_cost[0] == LLONG_MAX ? -1 : (int)result_cost[0];
 }
 
+/// <summary>
+/// Leet code #4108. Minimum Cost to Make Red Nodes Connected
+/// </summary>
+vector<long long> LeetCodeTree::minCostRed(int parent, int node, string& colors, vector<vector<int>>& neighbors)
+{
+    long long red_cost = 0;
+    long long blue_cost = 0;
+    long long blue_with_red_cost = 0;
+    long long total_child_nodes = 0;
+    long long min_diff = LLONG_MAX;
+    for (size_t i = 0; i < neighbors[node].size(); i++)
+    {
+        int child = neighbors[node][i];
+        if (child == parent) continue;
+        vector<long long> ret_vals = minCostRed(node, child, colors, neighbors);
+        red_cost += min(ret_vals[0], ret_vals[1]);
+        blue_cost += ret_vals[1];
+        blue_with_red_cost = min(blue_with_red_cost, min(ret_vals[0], ret_vals[2]) - ret_vals[1]);
+        total_child_nodes += ret_vals[3];
+    }
+    total_child_nodes++;
+    if (colors[node] == 'R')
+    {
+        blue_cost += total_child_nodes;
+    }
+    else
+    {
+        red_cost += total_child_nodes;
+    }
+    blue_with_red_cost = blue_cost + blue_with_red_cost;
+    return { red_cost, blue_cost, blue_with_red_cost, total_child_nodes};
+}
+
+
+/// <summary>
+/// Leet code #4108. Minimum Cost to Make Red Nodes Connected
+/// 
+/// Medium
+///
+/// You are given an integer n representing a tree with n nodes, where 
+/// the nodes are numbered from 0 to n - 1 and the tree is rooted at 
+/// node 0. The tree is represented by a 2D array edges of length n - 1, 
+/// where edges[i] = [ui, vi] indicates an undirected edge between nodes 
+/// ui and vi.
+///
+/// You are also given a string colors of length n, where colors[i] 
+/// represents the color of node i : 'R' if it is Red, or 'B' if it is 
+/// Blue.
+///
+/// You may flip the color of any node : from 'R' to 'B', or from 'B' 
+/// to 'R'.Flipping node u incurs a cost equal to the size of the 
+/// subtree of node u.
+///
+/// Your goal is to perform flips so the Red nodes form a single 
+/// connected component in the tree.Blue nodes may be disconnected.A 
+/// configuration with no Red nodes is also considered valid.
+/// Return the minimum total cost required to achieve this.
+///
+/// In a rooted tree, the subtree of a node v is the set of all nodes 
+/// whose path to the root contains v.
+///
+/// Example 1:
+/// Input: n = 3, colors = "RBR", edges = [[0, 1], [1, 2]]
+/// Output : 1
+/// Explanation :
+/// There are two Red nodes(0 and 2) that are not connected to each other.
+/// We can flip node 2 from 'R' (Red)to 'B' (Blue).The subtree size of 
+/// node 2 is 1, so the cost is 1.
+/// After this flip only node 0 remains Red, forming exactly one connected 
+/// Red component.
+/// 
+/// Example 2:
+/// Input: n = 3, colors = "RBR", edges = [[0, 1], [0, 2]]
+/// Output : 0
+/// Explanation : 
+/// There are two Red nodes(0 and 2) that are already connected to each 
+/// other.
+/// No flips are needed since all Red nodes already form a single 
+/// connected group.Thus, the minimum total cost is 0.
+/// 
+/// Example 3:
+/// Input: n = 4, colors = "BRRR", edges = [[0, 1], [0, 2], [0, 3]]
+/// Output : 2
+/// Explanation : 
+/// There are three Red nodes(1, 2 and 3), which are not connected to each 
+/// other.
+/// All three Red nodes are leaves and are disconnected from one another.
+/// To obtain a single Red group, we keep one Red leaf and flip the other 
+/// two to Blue.
+/// Each leaf subtree size is 1, so flipping any two costs 2.
+///
+/// Example 4:
+/// Input: n = 3, colors = "BBB", edges = [[0, 1], [1, 2]]
+/// Output : 0
+/// Explanation :
+/// All nodes are Blue, so there are no Red nodes.
+/// An empty Red group is considered a single connected group, so this 
+/// state is already valid.Thus, the cost is 0.
+/// Constraints :
+///
+/// 1. 1 <= n <= 10^5
+/// 2. n == colors.length
+/// 3. colors[i] is either 'R' or 'B'.
+/// 4. edges.length == n - 1
+/// 5. edges[i] = [ui, vi]
+/// 6. 0 <= ui, vi <= n - 1
+/// 7. The input is generated such that edges represents a valid tree.
+/// </summary>
+long long LeetCodeTree::minCostRed(int n, string colors, vector<vector<int>>& edges)
+{
+    vector<vector<int>> neighors(n);
+    for (size_t i = 0; i < edges.size(); i++)
+    {
+        neighors[edges[i][0]].push_back(edges[i][1]);
+        neighors[edges[i][1]].push_back(edges[i][0]);
+    }
+    vector<long long> ret_vals = minCostRed(-1, 0, colors, neighors);
+    long long result = min(ret_vals[0], min(ret_vals[1], ret_vals[2]));
+    return result;
+}
+
+/// <summary>
+/// Leet code #4112. Maximize Score After Zeroing Subtrees
+/// </summary>
+int LeetCodeTree::maxScore(int node, vector<vector<int>>& children, vector<int>& op, vector<int>& score)
+{
+    int min_score = INT_MAX;
+    int sum_score = score[node];
+    for (size_t i = 0; i < children[node].size(); i++)
+    {
+        int child = children[node][i];
+        int child_score = maxScore(child, children, op, score);
+        sum_score += child_score;
+        min_score = min(min_score, child_score);
+    }
+    if (min_score == INT_MAX) min_score = 0;
+    if (op[node] == 1)
+    {
+        sum_score = sum_score - min_score;
+    }
+    else
+    {
+        if (min_score < 0)
+        {
+            sum_score = sum_score - min_score;
+        }
+    }
+    return sum_score;
+}
+
+/// <summary>
+/// Leet code #4112. Maximize Score After Zeroing Subtrees
+/// 
+/// Medium
+///
+/// You are given an integer array parent of length n representing a 
+/// rooted tree with nodes labeled from 0 to n - 1, where parent[i] 
+/// denotes the parent of node i.The tree is rooted at node 0, so 
+/// parent[0] = -1.
+///
+/// You are also given two integer arrays op and score, both of length 
+/// n, where op[i] determines the operation allowed at node i, and 
+/// score[i] represents its score.
+///
+/// You need to process each non - leaf node i according to the following 
+/// rules :
+///
+/// If op[i] = 0, you can choose at most one child of node i and set the 
+/// scores of all nodes in that child's subtree to 0.
+/// If op[i] = 1, you must choose exactly one child of node i and set the 
+/// scores of all nodes in that child's subtree to 0.
+/// Each non - leaf node must be processed exactly once.You may process 
+/// the nodes in any order.
+///
+/// Return the maximum possible sum of the scores after performing the 
+/// operations.
+/// 
+/// Example 1:
+/// Input : parent = [-1, 0, 0, 0, 1, 2, 3, 3], 
+/// op = [1, 1, 0, 0, 1, 1, 0, 1], score = [5, 6, 1, 2, 3, 2, 3, -3]
+/// Output : 16
+/// Explanation :
+/// One optimal way is to process the nodes in the following order :
+/// Nodes 4, 5, 6, and 7 : They are leaf nodes, so no operations are 
+/// performed on them.
+/// Node 1 : Since op[1] = 1, we must select one of its children.Choose 
+/// node 4, setting the scores of all nodes in its subtree(node 4) to 0.
+/// Node 2 : Since op[2] = 0, we may choose a child or do nothing.For 
+/// this node, we do nothing.
+/// Node 3 : Since op[3] = 0, we may choose a child or do nothing.Choose 
+/// node 7, setting the scores of all nodes in its subtree(node 7) to 0.
+/// Node 0 : Since op[0] = 1, we must select one of its children.
+/// Choose node 2, setting the scores of all nodes in its 
+/// subtree(nodes 2 and 5) to 0.
+/// After performing these operations, the scores are
+/// [5, 6, 0, 2, 0, 0, 3, 0], giving a total sum of 16.
+/// No valid sequence of operations can produce a larger sum.Therefore, 
+/// the answer is 16.
+///
+/// Example 2 :
+/// Input : parent = [-1, 0, 0], op = [0, 0, 0], score = [1, 2, 3]
+/// Output : 6
+/// Explanation :
+/// We only need to process node 0, since node 1 and node 2 are leaves.
+/// Since op[0] = 0, we can choose to do nothing.
+/// Therefore, all scores are preserved, giving the maximum possible 
+/// sum of 6.
+/// 
+/// Example 3 :
+/// Input : parent = [-1], op = [1], score = [-10]
+/// Output : -10
+/// Explanation :
+/// The only node in the tree is a leaf, so we can't process any node.
+/// Therefore, the maximum possible score sum is - 10.
+///
+/// Constraints :
+/// 1. 1 <= n <= 10^5
+/// 2. n == parent.length == op.length == score.length
+/// 3. parent[0] == -1
+/// 4. 0 <= parent[i] <= n - 1 for all i in[1, n - 1]
+/// 5. 0 <= op[i] <= 1
+/// 6. -10^4 <= score[i] <= 10^4
+/// </summary>
+int LeetCodeTree::maxScore(vector<int>& parent, vector<int>& op, vector<int>& score)
+{
+    int n = parent.size();
+    vector<vector<int>> children(n);
+    for (int i = 1; i < n; i++)
+    {
+        children[parent[i]].push_back(i);
+    }
+    return maxScore(0, children, op, score);
+}
+
 #pragma endregion

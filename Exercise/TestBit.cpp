@@ -2009,9 +2009,36 @@ void TestLeetCode4092(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode4119(void)
+{
+    Logger::WriteMessage("Test Leet Code 4119");
+    LeetCodeBit leetCode;
+    vector<int> nums = {6, 7, 3};
+    int k = 2;
+    int result = leetCode.minSetBits(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = {3, 5, 12};
+    k = 1;
+    result = leetCode.minSetBits(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = {2, 1};
+    k = 2;
+    result = leetCode.minSetBits(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 
 void TestLeetCodeBit(void)
 {
+    TestLeetCode4119();
     TestLeetCode4083();
     TestLeetCode4059();
     TestLeetCode4047();

@@ -6917,4 +6917,114 @@ int LeetCodeBit::calculateScore(int a, int b)
     if (s1 >= s2) return s1 * s2;
     else return s2 / s1;
 }
+
+/// <summary>
+/// Leet code #4119. Minimum Set Bits in a Valid Integer
+///
+/// Hard
+///
+/// You are given an integer array nums of length n and an integer k.
+///
+/// Let x1, x2, ..., xn - k + 1 denote the bitwise AND of each subarray 
+/// of length k in nums, in order from left to right.
+///
+/// A positive integer y is called valid if (y & xi) != 0 for 
+/// every 1 <= i <= n - k + 1.
+///
+/// Return the minimum number of set bits in any valid integer y.If no 
+/// valid integer exists, return -1.
+///
+/// Example 1:
+/// Input: nums = [6, 7, 3], k = 2
+/// Output : 1
+/// Explanation :
+/// The two subarrays of length k = 2 are[6, 7] and [7, 3].
+/// Their bitwise ANDs are x1 = 6 & 7 = 6 and x2 = 7 & 3 = 3.
+/// y = 2 is valid, since 2 & 6 = 2 and 2 & 3 = 2, both non - zero.
+/// y = 2 has 1 set bit("010"), so the answer is 1.
+///
+/// Example 2:
+/// Input: nums = [3, 5, 12], k = 1
+/// Output : 2
+/// Explanation :
+/// Since k = 1, each subarray has one element, so x1 = 3, x2 = 5, 
+/// and x3 = 12.
+/// y = 9 is valid, since 9 & 3 = 1, 9 & 5 = 1, and 9 & 12 = 8, all 
+/// non - zero.
+/// y = 9 has 2 set bits("1001"), so the answer is 2.
+///
+/// Example 3 :
+/// Input : nums = [2, 1], k = 2
+/// Output : -1
+/// Explanation :
+/// The only subarray of length k = 2 is[2, 1], with bitwise AND 
+/// x1 = 2 & 1 = 0.
+/// Since x1 = 0, no y is valid.Thus, the answer is - 1.
+///
+/// Constraints :
+/// 1. 1 <= n == nums.length <= 10^5
+/// 2. 1 <= k <= n
+/// 3. 0 <= nums[i] <= 10^5
+/// </summary>
+int LeetCodeBit::minSetBits(vector<int>& nums, int k)
+{
+    int n = nums.size();
+    int max_val = *max_element(nums.begin(), nums.end());
+    int bit_count = 0;
+    while ((1 << bit_count) <= max_val) bit_count++;
+    vector<int> dp(bit_count, INT_MIN);
+    int full_mask = (1 << bit_count) - 1;
+    int bit_mask = full_mask;
+    vector<int> invalid_mask(1 << bit_count);
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < bit_count; j++)
+        {
+            if ((nums[i] & (1 << j)) == 0)
+            {
+                dp[j] = i;
+                bit_mask &= ~(1 << j);
+            }
+        }
+        if (i + 1 >= k)
+        {
+            for (int j = 0; j < bit_count; j++)
+            {
+                if (dp[j] == i - k)
+                {
+                    bit_mask |= (1 << j);
+                }
+            }
+            if (bit_mask == 0) return -1;
+            int invalid = full_mask ^ bit_mask;
+            invalid_mask[invalid] = 1;
+        }
+    }
+    for (int i = full_mask; i >= 0; i--)
+    {
+        if (invalid_mask[i] == 0) continue;
+        for (int j = 0; j < bit_count; j++)
+        {
+            if ((i & (1 << j)) != 0)
+            {
+                int sub_mask = i ^ (1 << j);
+                invalid_mask[sub_mask] = 1;
+            }
+        }
+    }
+    int result = bit_count;
+    for (int i = 1; i <= full_mask; i++)
+    {
+        if (invalid_mask[i] == 0)
+        {
+            int count = 0;
+            for (int j = 0; j < bit_count; j++)
+            {
+                if ((i & (1 << j)) != 0) count++;
+            }
+            result = min(result, count);
+        }
+    }
+    return result;
+}
 #pragma endregion

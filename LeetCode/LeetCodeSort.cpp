@@ -7094,18 +7094,18 @@ int LeetCodeSort::reductionOperations(vector<int>& nums)
 /// </summary>
 vector<int> LeetCodeSort::assignTasks(vector<int>& servers, vector<int>& tasks)
 {
-    set<pair<int, int>> free_servers;
-    set<pair<int, int>> busy_servers;
+    set<pair<long long, int>> free_servers;
+    set<pair<long long, int>> busy_servers;
     for (size_t i = 0; i < servers.size(); i++)
     {
         free_servers.insert(make_pair(servers[i], i));
     }
 
     vector<int> result;
-    int time = 0;
+    long long time = 0;
     for (size_t i = 0; i < tasks.size(); i++)
     {
-        if (time <= (int)i) time = i;
+        if (time <= i) time = i;
         int server_id = -1;
         if (free_servers.empty())
         {
@@ -7120,7 +7120,7 @@ vector<int> LeetCodeSort::assignTasks(vector<int>& servers, vector<int>& tasks)
         server_id = free_servers.begin()->second;
         result.push_back(server_id);
         free_servers.erase(free_servers.begin());
-        busy_servers.insert(make_pair(time + tasks[i], server_id));
+        busy_servers.insert(make_pair((long long)time + tasks[i], server_id));
     }
     return result;
 }
@@ -17479,5 +17479,186 @@ int LeetCodeSort::minOperationsSortLockedIndices(vector<int>& nums, vector<int>&
     }
     if (lock_sumcount > k) return -1;
     return result + lock_sumcount;
+}
+
+/// <summary>
+/// Leet code #4123. Minimum Cost to Delete Array
+///
+/// Hard
+///
+/// You are given an integer array nums.
+///
+/// In one operation, choose any subarray of the current array with length 
+/// at least two and delete it.The cost of this operation is the sum of 
+/// the first and last elements of the chosen subarray.
+///
+/// After each operation, the remaining elements are concatenated in their 
+/// original order.
+///
+/// Return the minimum total cost required to delete the entire array.
+///
+/// Example 1:
+/// Input: nums = [2, -7, 3, -5]
+/// Output : -7
+/// Explanation :
+/// Delete[-7, 3] with cost - 7 + 3 = -4. The array becomes[2, -5].
+/// Delete[2, -5] with cost 2 + (-5) = -3.
+/// The total cost is - 4 + (-3) = -7.
+///
+/// Example 2 :
+/// Input : nums = [4, 0, -5, 2]
+/// Output : 1
+/// Explanation :
+/// Delete[0, -5] with cost 0 + (-5) = -5. The array becomes[4, 2].
+/// Delete[4, 2] with cost 4 + 2 = 6.
+/// The total cost is - 5 + 6 = 1.
+///
+/// Example 3 :
+/// Input : nums = [7, -8, 1]
+/// Output : 8
+/// Explanation :
+/// To delete the entire array, all three elements must be deleted 
+/// in one operation.Deleting only two elements would leave one element, 
+/// which cannot be deleted.
+/// Deleting[7, -8, 1] costs 7 + 1 = 8.
+///
+/// Constraints :
+/// 1. 2 <= nums.length <= 10^5
+/// 2. -10^9 <= nums[i] <= 10^9
+/// </summary>
+long long LeetCodeSort::minCostToDeleteArray(vector<int>& nums)
+{
+    int n = nums.size();
+    long long result = nums[0] + nums[n - 1];
+    int max_negative = INT_MIN;
+    int min_positive = INT_MAX;
+    int count_negative = 0;
+    long long sum = 0;
+    for (int i = 1; i < n - 1; i++)
+    {
+        if (nums[i] < 0)
+        {
+            max_negative = max(max_negative, nums[i]);
+            count_negative++;
+            sum += nums[i];
+        }
+        else
+        {
+            min_positive = min(min_positive, nums[i]);
+        }
+    }
+    if (count_negative % 2 == 0)
+    {
+        result += sum;
+    }
+    else
+    {
+        if (min_positive != INT_MAX && max_negative + min_positive <= 0)
+        {
+            result += sum + min_positive;
+        }
+        else
+        {
+            result += sum - max_negative;
+        }
+    }
+    return result;
+}
+
+/// <summary>
+/// Leet code #4124. Minimum Operations to Make Mountain Array II
+///
+/// Hard
+///
+/// You are given an integer array nums of length n.
+///
+/// In one operation, you may increment or decrement any element 
+/// of nums by 1. Elements are not required to stay positive.
+///
+/// An array is called a mountain array if there exists an index 
+/// peak such that 0 < peak < n - 1 and :
+///
+/// nums[0] < nums[1] < ... < nums[peak]
+/// nums[peak] > nums[peak + 1] > ... > nums[n - 1]
+/// Return the minimum number of operations required to transform 
+/// nums into a mountain array.If it is impossible, return -1.
+///
+/// Example 1:
+/// Input: nums = [2, 2, 3]
+/// Output : 2
+/// Explanation :
+/// One optimal way is to :
+/// Increment nums[1] by 1 and decrement nums[2] by 1.
+/// The resulting array is[2, 3, 2], which is a mountain array with 
+/// peak = 1.
+/// Therefore, the total number of operations is 1 + 1 = 2.
+/// 
+/// Example 2 :
+/// Input : nums = [3, 1, 2, 5, 4]
+/// Output : 3
+/// Explanation :
+/// One optimal way is to :
+/// Decrement nums[0] by 1 three times, making it 0.
+/// The resulting array is[0, 1, 2, 5, 4], which is a mountain array with 
+/// peak = 3.
+/// Therefore, the total number of operations is 3.
+/// 
+/// Example 3 :
+/// Input : nums = [5, 7, 7, 4]
+/// Output : 1
+/// Explanation :
+/// One optimal way is to :
+/// Decrement nums[1] by 1.
+/// The resulting array is[5, 6, 7, 4], which is a mountain array 
+/// with peak = 2.
+/// Therefore, the total number of operations is 1.
+/// 
+/// Constraints :
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^5
+/// </summary>
+long long LeetCodeSort::minOperationsMountainII(vector<int>& nums)
+{
+    int n = nums.size();
+    if (n < 3) return -1;
+    vector<long long> left_cost(n), right_cost(n);
+    vector<long long> left_value(n), right_value(n);
+    priority_queue<long long> pq;
+    long long cost = 0;
+    for (int i = 0; i < n; i++)
+    {
+        int x = nums[i] - i;
+        pq.push(x);
+        if (pq.top() > x)
+        {
+            cost += pq.top() - x;
+            pq.pop();
+            pq.push(x);
+        }
+        left_cost[i] = cost;
+        left_value[i] = pq.top() + i;
+    }
+    cost = 0;
+    pq = priority_queue<long long>();
+    for (int i = n - 1; i >= 0; i--)
+    {
+        int x = nums[i] - (n - 1 - i);
+        pq.push(x);
+        if (pq.top() > x)
+        {
+            cost += pq.top() - x;
+            pq.pop();
+            pq.push(x);
+        }
+        right_cost[i] = cost;
+        right_value[i] = pq.top() + n - 1 -i;
+    }
+    long long result = LLONG_MAX;
+    for (int i = 1; i < n - 1; i++)
+    {
+        long long height = max(left_value[i - 1], right_value[i + 1]) + 1;
+        result = min(result, left_cost[i - 1] + right_cost[i + 1] + max(0LL, height - (long long)nums[i]));
+    }
+    return result;
 }
 #pragma endregion

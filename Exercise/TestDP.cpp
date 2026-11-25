@@ -6999,8 +6999,34 @@ void TestLeetCode4081(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode4118(void)
+{
+    Logger::WriteMessage("Test Leet Code 4118");
+    LeetCodeDP leetCode;
+    vector<int> nums = { 2, 2, 3 };
+    int result = leetCode.minOperationsMountainI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 9,4,9 };
+    result = leetCode.minOperationsMountainI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,7,7,4 };
+    result = leetCode.minOperationsMountainI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,2 };
+    result = leetCode.minOperationsMountainI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
 void TestLeetCodeDP(void)
 {
+    TestLeetCode4118();
     TestLeetCode4081();
     TestLeetCode4068();
     TestLeetCode4069();

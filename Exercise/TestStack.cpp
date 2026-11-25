@@ -1182,8 +1182,42 @@ void TestLeetCode4054(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode4103(void)
+{
+    Logger::WriteMessage("Test Leet Code 4103");
+    LeetCodeStack leetCode;
+    vector<int> types = { 0, 1, 1, 0 };
+    vector<int> colors = { 5, 3, 3, 5 };
+    vector<int> groupSize = { 2, 2 };
+    bool result = leetCode.canRemoveAll(types, colors, groupSize);
+    Logger::WriteMessage(types);
+    Logger::WriteMessage(colors);
+    Logger::WriteMessage(groupSize);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    types = { 0, 1, 0 };
+    colors = { 9, 9, 9 };
+    groupSize = { 3, 2 };
+    result = leetCode.canRemoveAll(types, colors, groupSize);
+    Logger::WriteMessage(types);
+    Logger::WriteMessage(colors);
+    Logger::WriteMessage(groupSize);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    types = { 2, 0, 1, 2 };
+    colors = { 7, 5, 4, 7 };
+    groupSize = { 3, 1, 2 };
+    result = leetCode.canRemoveAll(types, colors, groupSize);
+    Logger::WriteMessage(types);
+    Logger::WriteMessage(colors);
+    Logger::WriteMessage(groupSize);
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
+
 void TestLeetCodeStack(void)
 {
+    TestLeetCode862();
+    TestLeetCode4103();
     TestLeetCode4054();
     TestLeetCode3834();
     TestLeetCode3703();

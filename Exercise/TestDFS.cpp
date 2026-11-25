@@ -3146,8 +3146,45 @@ void TestLeetCode2247(void)
     Logger::WriteMessage("n = " + to_string(n) + "k = " + to_string(k) + "; result = " + to_string(result));
 }
 
+void TestLeetCode4113(void)
+{
+    LeetCodeDFS leetCode;
+    vector<int> nums = { 3, 6, 4 };
+    long long result = leetCode.maxDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 6,1,2,1,2 };
+    result = leetCode.maxDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,3,4,5 };
+    result = leetCode.maxDifference(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4115(void)
+{
+    LeetCodeDFS leetCode;
+    long long n = 2, k = 3;
+    int result = leetCode.sumOfGoodIntegers(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 5, k = 1;
+    result = leetCode.sumOfGoodIntegers(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+
+    n = 20, k = 10;
+    result = leetCode.sumOfGoodIntegers(n, k);
+    Logger::WriteMessage("n = " + to_string(n) + "; k = " + to_string(k) + "; result = " + to_string(result));
+}
+
 void TestLeetCodeDFS(void)
 {
+    TestLeetCode4115();
+    TestLeetCode4113();
     TestLeetCode2247();
     TestLeetCode943();
     TestLeetCode4060();

@@ -5213,8 +5213,51 @@ void TestLeetCode4099(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode4123(void)
+{
+    Logger::WriteMessage("Test Leet Code 4123");
+    LeetCodeSort leetCode;
+    vector<int> nums = {2, -7, 3, -5};
+    long long result = leetCode.minCostToDeleteArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 4,0,-5,2 };
+    result = leetCode.minCostToDeleteArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 7,-8,1 };
+    result = leetCode.minCostToDeleteArray(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4124(void)
+{
+    Logger::WriteMessage("Test Leet Code 4124");
+    LeetCodeSort leetCode;
+    vector<int> nums = { 2, 2, 3 };
+    long long result = leetCode.minOperationsMountainII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,1,2,5,4 };
+    result = leetCode.minOperationsMountainII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5,7,7,4 };
+    result = leetCode.minOperationsMountainII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeSort(void)
 {
+    TestLeetCode4124();
+    TestLeetCode4123();
     TestLeetCode4099();
     TestLeetCode4025();
     TestLeetCode4014();

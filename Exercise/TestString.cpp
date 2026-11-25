@@ -9201,9 +9201,101 @@ void TestLeetCode4036(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode4102(void)
+{
+    Logger::WriteMessage("Test Leet Code 4102");
+    LeetCodeString leetCode;
+    string s = "abac";
+    long long result = leetCode.countValidSubstringsI(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "abc";
+    result = leetCode.countValidSubstringsI(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "ac";
+    result = leetCode.countValidSubstringsI(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4104(void)
+{
+    Logger::WriteMessage("Test Leet Code 4104");
+    LeetCodeString leetCode;
+    string s = "abac";
+    long long result = leetCode.countValidSubstringsII(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "abc";
+    result = leetCode.countValidSubstringsII(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    s = "ac";
+    result = leetCode.countValidSubstringsII(s);
+    Logger::WriteMessage("s = " + s);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4106(void)
+{
+    Logger::WriteMessage("Test Leet Code 4106");
+    LeetCodeString leetCode;
+    string s1 = "earth", s2 = "empty";
+    vector<vector<string>> result = leetCode.findMismatchedSegments(s1, s2);
+    Logger::WriteMessage("s1 = " + s1);
+    Logger::WriteMessage("s2 = " + s2);
+    Logger::WriteMessage(result);
+
+    s1 = "action", s2 = "nation";
+    result = leetCode.findMismatchedSegments(s1, s2);
+    Logger::WriteMessage("s1 = " + s1);
+    Logger::WriteMessage("s2 = " + s2);
+    Logger::WriteMessage(result);
+
+    s1 = "hot", s2 = "hot";
+    result = leetCode.findMismatchedSegments(s1, s2);
+    Logger::WriteMessage("s1 = " + s1);
+    Logger::WriteMessage("s2 = " + s2);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode4105(void)
+{
+    Logger::WriteMessage("Test Leet Code 4105");
+    LeetCodeString leetCode;
+    string a = "ab", b = "abab";
+    int x = 2, y = 1;
+    bool result = leetCode.repeatedStringMatchII(a, b, x, y);
+    Logger::WriteMessage("a = " + a + ", x = " + to_string(x));
+    Logger::WriteMessage("b = " + b + ", y = " + to_string(y));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    a = "abc", b = "bc";
+    x = 2, y = 3;
+    result = leetCode.repeatedStringMatchII(a, b, x, y);
+    Logger::WriteMessage("a = " + a + ", x = " + to_string(x));
+    Logger::WriteMessage("b = " + b + ", y = " + to_string(y));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+
+    a = "abcd", b = "cdab"; 
+    x = 2, y = 1;
+    result = leetCode.repeatedStringMatchII(a, b, x, y);
+    Logger::WriteMessage("a = " + a + ", x = " + to_string(x));
+    Logger::WriteMessage("b = " + b + ", y = " + to_string(y));
+    Logger::WriteMessage("result = " + (string)(result ? "true" : "false"));
+}
 
 void TestLeetCodeString(void)
 {
+    TestLeetCode4105();
+    TestLeetCode4106();
+    TestLeetCode4104();
+    TestLeetCode4102();
     TestLeetCode4036();
     TestLeetCode4030();
     TestLeetCode4026();

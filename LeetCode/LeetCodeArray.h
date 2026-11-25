@@ -30350,5 +30350,415 @@ public:
     /// 2. s consists of lowercase English letters.
     /// </summary>
     long long countMagicalPairsII(string s);
+
+    /// <summary>
+    /// Leet Code #4107. Count Valid Suffix Sorts I
+    /// 
+    /// Medium
+    ///     
+    /// You are given two integer arrays nums and target, both of length n.
+    ///
+    /// For each index i, consider sorting the suffix nums[i..n - 1] of the 
+    /// original array in non - increasing order.
+    ///
+    /// Return the number of indices i for which the resulting array is equal 
+    /// to target.
+    ///
+    /// A subarray is a contiguous non - empty sequence of elements within 
+    /// an array.
+    ///
+    /// A suffix of an array is a subarray that begins at any index and 
+    /// extends to the end of the array.
+    ///
+    /// Example 1:
+    /// Input: nums = [1, 2, 3], target = [3, 2, 1]
+    /// Output : 1
+    /// Explanation :
+    /// i = 0 : The resulting array is[3, 2, 1], which equals target.
+    /// i = 1 : The resulting array is[1, 3, 2].
+    /// i = 2 : The resulting array is[1, 2, 3].
+    /// Only i = 0 is valid, so the answer is 1.
+    ///
+    /// Example 2 :
+    /// Input : nums = [1, 5, 6, 4, 6], target = [1, 5, 6, 6, 4]
+    /// Output : 2
+    /// Explanation :
+    /// Choosing either i = 2 or i = 3 results in[1, 5, 6, 6, 4].
+    /// No other index produces target.Therefore, the answer is 2.
+    ///
+    /// Example 3 :
+    /// Input : nums = [7, 6, 8], target = [8, 6, 7]
+    /// Output : 0
+    /// Explanation :
+    /// Sorting the suffix starting at indices 0, 1, and 2 produces[8, 7, 6], 
+    /// [7, 8, 6], and [7, 6, 8], respectively.None equals target, so the 
+    /// answer is 0.
+    ///
+    /// Constraints:
+    /// 1. 1 <= n == nums.length == target.length <= 10^5
+    /// 2. 1 <= nums[i], target[i] <= 10^5
+    /// </summary>
+    int countSuffixI(vector<int>& nums, vector<int>& target);
+
+    /// <summary>
+    /// Leet Code #4109. Count Valid Suffix Sorts II
+    /// 
+    /// Hard
+    /// 
+    /// You are given two integer arrays nums and target of lengths n and m, 
+    /// respectively, where n <= m.
+    ///
+    /// For each index i, consider sorting the suffix nums[i..n - 1] of the 
+    /// original array in non - increasing order.
+    ///
+    /// Return an integer array ans of length m - n + 1, where ans[k] is the 
+    /// number of indices i for which the resulting array equals 
+    /// target[k..k + n - 1].
+    ///
+    /// A subarray is a contiguous non - empty sequence of elements within an 
+    /// array.
+    /// A suffix of an array is a subarray that begins at any index and 
+    /// extends to its end.
+    ///
+    /// Example 1:
+    /// Input: nums = [2, 2, 3], target = [2, 2, 3, 2, 1, 3, 2, 2]
+    /// Output : [1, 1, 0, 0, 0, 1]
+    /// Explanation :
+    /// Sorting the suffix starting at indices 0, 1, and 2 produces[3, 2, 2], 
+    /// [2, 3, 2], and [2, 2, 3], respectively.
+    /// k = 0 : [2, 2, 3] is produced by i = 2.
+    /// k = 1 : [2, 3, 2] is produced by i = 1.
+    /// k = 2, 3, 4 : None of the corresponding subarrays can be produced.
+    /// k = 5 : [3, 2, 2] is produced by i = 0.
+    /// Therefore, the answer is[1, 1, 0, 0, 0, 1].
+    ///
+    /// Example 2 :
+    /// Input : nums = [5, 6, 5], target = [5, 6, 5, 5, 6, 5]
+    /// Output : [2, 1, 0, 2]
+    /// Explanation :
+    /// Sorting the suffix starting at index 0 produces[6, 5, 5], while 
+    /// starting at either index 1 or 2 produces[5, 6, 5].
+    /// k = 0 : [5, 6, 5] is produced by i = 1 and i = 2.
+    /// k = 1 : [6, 5, 5] is produced by i = 0.
+    /// k = 2 : [5, 5, 6] cannot be produced.
+    /// k = 3 : [5, 6, 5] is produced by i = 1 and i = 2.
+    /// Therefore, the answer is[2, 1, 0, 2].
+    /// 
+    /// Constraints:
+    /// 1. n == nums.length
+    /// 2. m == target.length
+    /// 3. 1 <= n <= m <= 10^5
+    /// 4. 1 <= nums[i], target[i] <= 10^5
+    /// </summary>
+    vector<int> countSuffixII(vector<int>& nums, vector<int>& target);
+
+    /// <summary>
+    /// Leet Code #4110. Find the Maximum Length of Valid Subsequence III
+    /// 
+    /// Medium
+    ///
+    /// You are given an integer array nums and a positive integer k.
+    ///
+    /// A subsequence of nums is valid if the sum of every pair of adjacent 
+    /// elements in the subsequence is divisible by k.
+    ///
+    /// A subsequence of length 1 is always valid.
+    ///
+    /// Return the length of the longest valid subsequence of nums.
+    ///
+    /// Example 1:
+    /// Input: nums = [1, 2, 3, 4, 5], k = 3
+    /// Output : 4
+    /// Explanation :
+    /// Pick the subsequence[1, 2, 4, 5].
+    /// The adjacent sums are 1 + 2 = 3, 2 + 4 = 6, and 4 + 5 = 9, all 
+    /// divisible by 3.
+    /// No valid subsequence longer than 4 exists.
+    /// 
+    /// Example 2 :
+    /// Input : nums = [5, 10, 15], k = 5
+    /// Output : 3
+    /// Explanation :
+    /// Pick the whole array[5, 10, 15].
+    /// The adjacent sums are 5 + 10 = 15 and 10 + 15 = 25, both divisible by 5.
+    /// Every element is a multiple of 5, so any two elements can be adjacent 
+    /// in a valid subsequence, and the answer is 3.
+    ///
+    /// Example 3 :
+    /// Input : nums = [1, 3, 5, 7, 9], k = 4
+    /// Output : 5
+    /// Explanation :
+    /// Pick the whole array[1, 3, 5, 7, 9].
+    /// The adjacent sums are 1 + 3 = 4, 3 + 5 = 8, 5 + 7 = 12, and 7 + 9 = 16, 
+    /// all divisible by 4.
+    /// The remainders alternate between 1 and 3, which add to 4, so the answer is 5.
+    ///
+    /// Constraints :
+    /// 1. 1 <= nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// 3. 1 <= k <= 10^5
+    /// </summary>
+    int maximumLengthDivisible(vector<int>& nums, int k);
+
+    /// <summary>
+    /// Leet Code #4111. Count Consistent Subarrays I
+    /// 
+    /// Easy
+    ///
+    /// You are given an integer array nums.
+    /// A subarray is called consistent if the bitwise AND of all its elements 
+    /// is equal to the minimum value of the subarray.
+    ///
+    /// Return the number of consistent subarrays in nums.
+    /// 
+    /// Example 1:
+    /// Input: nums = [5, 3, 1, 2]
+    /// Output : 6
+    /// Explanation :
+    /// The following subarrays are consistent :
+    /// Subarray  Values  Bitwise AND  Minimum Value
+    /// nums[0..0][5]  5  5
+    /// nums[1..1][3]  3  3
+    /// nums[2..2][1]  1  1
+    /// nums[3..3][2]  2  2
+    /// nums[1..2][3, 1]  3 AND 1 = 1  1
+    /// nums[0..2][5, 3, 1]  5 AND 3 AND 1 = 1  1
+    /// Therefore, the number of consistent subarrays is 6.
+    /// 
+    /// Example 2:
+    /// Input: nums = [1, 1, 1]
+    /// Output : 6
+    /// Explanation :
+    /// For every subarray, both the bitwise AND and the minimum value are 
+    /// equal to 1. Therefore, the answer is 6.
+    ///
+    /// Example 3 :
+    /// Input : nums = [0]
+    /// Output : 1
+    /// Explanation :
+    /// The only subarray is[0], whose bitwise AND and minimum value are 
+    /// both 0. Therefore, the answer is 1.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. 0 <= nums[i] <= 100
+    /// </summary>
+    int countConsistentI(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code #4114. Count Consistent Subarrays II
+    /// 
+    /// Hard
+    ///
+    /// You are given an integer array nums.
+    ///
+    /// A subarray is called consistent if the bitwise AND of all its elements 
+    /// is equal to the minimum value of the subarray.
+    ///
+    /// Return the number of consistent subarrays in nums.
+    /// 
+    /// Example 1:
+    /// Input: nums = [5, 3, 1, 2]
+    /// Output : 6
+    /// Explanation :
+    /// The following subarrays are consistent :
+    /// Subarray  Values  Bitwise AND  Minimum Value
+    /// nums[0..0][5]  5  5
+    /// nums[1..1][3]  3  3
+    /// nums[2..2][1]  1  1
+    /// nums[3..3][2]  2  2
+    /// nums[1..2][3, 1]  3 AND 1 = 1  1
+    /// nums[0..2][5, 3, 1]  5 AND 3 AND 1 = 1  1
+    /// Therefore, the number of consistent subarrays is 6.
+    ///
+    /// Example 2:
+    /// Input: nums = [1, 1, 1]
+    /// Output : 6
+    /// Explanation :
+    /// For every subarray, both the bitwise AND and the minimum value are 
+    /// equal to 1. Therefore, the answer is 6.
+    ///
+    /// Example 3 :
+    /// Input : nums = [0]
+    /// Output : 1
+    /// Explanation :
+    /// The only subarray is[0], whose bitwise AND and minimum value are 
+    /// both 0. Therefore, the answer is 1.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 2 * 10^5
+    /// 2. 0 <= nums[i] <= 10^6
+    /// </summary>
+    long long countConsistentII(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code #4116. Assign Umbrella on Rainy Days
+    /// 
+    /// Easy
+    /// 
+    /// You are given a binary array rain of length n, where rain[i] == 1 
+    /// means it rains on day i, and rain[i] == 0 means it does not.
+    ///
+    /// Alice and Bob share a single umbrella over these n days.On each day i :
+    ///
+    /// Alice needs the umbrella on day i if rain[i] == rain[i + 1] == 1 for 0 <= i < n - 1.
+    /// Bob needs the umbrella if rain[i] == 1.
+    /// At most one of them can receive the umbrella.
+    /// If only one person needs it, that person receives it.
+    /// If both need it, it goes to whoever has received it fewer times so far.
+    /// If they are tied, it goes to Alice.
+    /// If neither needs it, no one receives it.
+    /// A person's count increases only on a day they receive the umbrella. 
+    /// Initially, both counts are 0.
+    ///
+    /// Return a string array answer of length n, where answer[i] is "Alice", 
+    /// "Bob", or "None", denoting who receives the umbrella on day i.
+    /// A binary array is an array that contains only 0 and 1.
+    ///
+    /// Example 1:
+    /// Input: rain = [1, 1, 0, 1, 1]
+    /// Output : ["Alice", "Bob", "None", "Alice", "Bob"]
+    /// Explanation :
+    /// Day 0 : rain[0] == 1 and rain[1] == 1, so both need it.Counts are 
+    /// tied, so Alice receives it.
+    /// Day 1 : rain[1] == 1, so Bob needs it, but rain[2] == 0, so Alice 
+    /// does not need it.Therefore Bob receives it.
+    /// Day 2 : No rain, so no one receives it.
+    /// Day 3 : rain[3] == 1 and rain[4] == 1, so both need it.Counts are 
+    /// tied at 1, so Alice receives it.
+    /// Day 4 : Last day, so only Bob needs it, and he receives it.
+    /// Therefore, answer = ["Alice", "Bob", "None", "Alice", "Bob"].
+    ///
+    /// Example 2 :
+    /// Input : rain = [0, 1, 0, 1]
+    /// Output : ["None", "Bob", "None", "Bob"]
+    /// Explanation :
+    /// It never rains on two consecutive days, so Alice never needs the 
+    /// umbrella.
+    /// Bob receives it on days 1 and 3, and no one receives it on 
+    /// days 0 and 2.
+    /// Therefore, answer = ["None", "Bob", "None", "Bob"].
+    ///
+    /// Constraints :
+    /// 1. 1 <= n == rain.length <= 100
+    /// 2. rain[i] is either 0 or 1.
+    /// </summary>
+    vector<string> assignUmbrella(vector<int>& rain);
+
+    /// <summary>
+    /// Leet Code #4120. Count Dominant Elements
+    /// 
+    /// Easy
+    /// 
+    /// You are given an integer array nums.
+    /// An element in nums is called dominant if it is greater than or equal 
+    /// to the average of its immediate neighbors.
+    /// The immediate neighbors of nums[i] are nums[i - 1] and nums[i + 1], 
+    /// when those indices exist.
+    /// A single element with no neighbors is considered dominant.
+    /// Return the number of dominant elements in nums.
+    ///
+    /// Example 1:
+    /// Input: nums = [1, 10, 2]
+    /// Output : 1
+    /// Explanation :
+    /// For nums[0] = 1, its only neighbor is 10. Since 1 < 10, it is not 
+    /// dominant.
+    /// For nums[1] = 10, its neighbors are 1 and 2. Their average is
+    /// (1 + 2) / 2 = 1.5.Since 10 > 1.5, it is dominant.
+    /// For nums[2] = 2, its only neighbor is 10. Since 2 < 10, it is not 
+    /// dominant.
+    /// Therefore, the answer is 1.
+    ///
+    /// Example 2:
+    /// Input: nums = [6, 4, 2]
+    /// Output : 2
+    /// Explanation :
+    /// For nums[0] = 6, its only neighbor is 4. Since 6 > 4, it is dominant.
+    /// For nums[1] = 4, its neighbors are 6 and 2. Their average is 
+    /// (6 + 2) / 2 = 4. Since 4 = 4, it is dominant.
+    /// For nums[2] = 2, its only neighbor is 4. Since 2 < 4, it is not 
+    /// dominant.
+    /// Therefore, the answer is 2.
+    ///
+    /// Example 3:
+    /// Input: nums = [7]
+    /// Output : 1
+    /// Explanation :
+    /// For nums[0] = 7, it has no neighbors, so it is dominant.
+    /// Therefore, the answer is 1.
+    ///
+    /// Constraints:
+    /// 1. 1 <= nums.length <= 100
+    /// 2. 1 <= nums[i] <= 100
+    /// </summary>
+    int countDominantElements(vector<int>& nums);
+
+    /// <summary>
+    /// Leet Code #4121. Minimum Cost to Make All Array Elements Equal
+    /// 
+    /// Medium
+    ///
+    /// You are given an integer array nums of length n.
+    ///
+    /// You may perform any of the following operations any number of times, 
+    /// in any order.
+    ///
+    /// Prefix operation : Choose an index i such that 0 < i < n - 1, and set 
+    /// all elements from index 0 to i - 1 to nums[i].The cost of this 
+    /// operation is i * nums[i].
+    /// Suffix operation : Choose an index i such that 0 < i < n - 1, and set 
+    /// all elements from index i + 1 to n - 1 to nums[i].The cost of this 
+    /// operation is(n - i - 1) * nums[i].
+    /// The cost is based on the current value of nums[i] and includes every 
+    /// element in the chosen prefix or suffix, even if it already equals 
+    /// nums[i].
+    ///
+    /// Return the minimum total cost required to make all elements of nums
+    /// equal.
+    ///
+    /// Example 1:
+    /// Input: nums = [1, 2, 3]
+    /// Output : 4
+    /// Explanation :
+    /// One sequence of operations that achieves the minimum cost is as 
+    /// follows :
+    /// 
+    /// nums  Operation  i  Modified nums  Cost
+    /// [1, 2, 3]  Suffix  1[1, 2, 2](3 - 1 - 1) * 2 = 2
+    /// [1, 2, 2]  Prefix  1[2, 2, 2]  1 * 2 = 2
+    /// Hence, the total cost is 2 + 2 = 4.
+    ///
+    /// Example 2:
+    /// Input: nums = [3, 3, 3, 6, 3, 3]
+    /// Output : 9
+    /// Explanation :
+    /// One sequence of operations that achieves the minimum cost is as 
+    /// follows :
+    ///
+    /// nums  Operation  i  Modified nums  Cost
+    /// [3, 3, 3, 6, 3, 3]  Suffix  2[3, 3, 3, 3, 3, 3](6 - 2 - 1) * 3 = 9
+    /// Hence, the total cost is 9.
+    ///
+    /// Example 3:
+    /// Input: nums = [3, 4, 4, 5, 4, 4, 3]
+    /// Output : 20
+    /// Explanation :
+    /// One sequence of operations that achieves the minimum cost is as 
+    /// follows :
+    /// 
+    /// nums  Operation  i  Modified nums  Cost
+    /// [3, 4, 4, 5, 4, 4, 3]  Prefix  4[4, 4, 4, 4, 4, 4, 3]  4 * 4 = 16
+    /// [4, 4, 4, 4, 4, 4, 3]  Suffix  5[4, 4, 4, 4, 4, 4, 4]
+    /// (7 - 5 - 1) * 4 = 4
+    /// Hence, the total cost is 16 + 4 = 20.
+    ///
+    /// Constraints:
+    /// 1. 3 <= n == nums.length <= 10^5
+    /// 2. 1 <= nums[i] <= 10^9
+    /// </summary>
+    long long minCostEqual(vector<int>& nums);
+
+
 };
 #endif  // LeetCodeArray_H

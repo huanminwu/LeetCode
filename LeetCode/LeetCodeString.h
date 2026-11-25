@@ -19940,6 +19940,222 @@ public:
     /// </summary>
     vector<string> largestString(vector<int>& nums);
 
+    /// <summary> 
+    /// Leet Code #4102. Count Valid Substrings I 
+    /// 
+    /// Medium
+    /// 
+    /// You are given a string s consisting only of the characters 
+    /// 'a', 'b', and 'c'.
+    ///
+    /// A string is called valid if it does not contain "abc" as a substring.
+    ///
+    /// Return the number of valid substrings in s.Substrings with different 
+    /// starting or ending indices are counted separately.
+    ///
+    /// A substring is a contiguous non - empty sequence of characters within 
+    /// a string.
+    ///
+    /// Example 1:
+    /// Input: s = "abac"
+    /// Output : 10
+    /// Explanation :
+    /// The following substrings don't contain "abc" as a substring:
+    /// s[0..0] = "a"
+    /// s[0..1] = "ab"
+    /// s[0..2] = "aba"
+    /// s[0..3] = "abac"
+    /// s[1..1] = "b"
+    /// s[1..2] = "ba"
+    /// s[1..3] = "bac"
+    /// s[2..2] = "a"
+    /// s[2..3] = "ac"
+    /// s[3..3] = "c"
+    /// Thus, the answer is 10.
+    /// 
+    /// Example 2:
+    /// Input: s = "abc"
+    /// Output : 5
+    /// 
+    /// Explanation :
+    /// The following substrings don't contain "abc" as a substring:
+    ///
+    /// s[0..0] = "a"
+    /// s[0..1] = "ab"
+    /// s[1..1] = "b"
+    /// s[1..2] = "bc"
+    /// s[2..2] = "c"
+    /// Thus, the answer is 5.
+    ///
+    /// Example 3:
+    /// Input: s = "ac" 
+    /// Output : 3
+    /// Explanation :
+    /// All substrings in s don't contain "abc" as a substring. 
+    /// Thus, the answer is 3.
+    ///
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s only consists of 'a', 'b', and 'c' characters.
+    /// </summary>
+    long long countValidSubstringsI(string s);
+
+    /// <summary> 
+    /// Leet Code #4104. Count Valid Substrings II
+    /// 
+    /// Medium
+    /// 
+    /// You are given a string s consisting only of the characters 'a', 'b', 
+    /// and 'c'.
+    ///
+    /// A string is called valid if it does not contain "abc" as a subsequence.
+    /// Return the number of valid substrings in s.Substrings with different 
+    /// starting or ending indices are counted separately.
+    ///
+    /// A substring is a contiguous non - empty sequence of characters within 
+    /// a string.
+    ///
+    /// A subsequence is a string that can be derived from another string by 
+    /// deleting some or no characters without changing the order of the 
+    /// remaining characters.
+    ///
+    /// Example 1:
+    /// Input: s = "abac"
+    /// Output : 9
+    /// Explanation :
+    /// The following substrings don't contain "abc" as a subsequence:
+    /// s[0..0] = "a"
+    /// s[0..1] = "ab"
+    /// s[0..2] = "aba"
+    /// s[1..1] = "b"
+    /// s[1..2] = "ba"
+    /// s[1..3] = "bac"
+    /// s[2..2] = "a"
+    /// s[2..3] = "ac"
+    /// s[3..3] = "c"
+    /// Thus, the answer is 9.
+    ///
+    /// Example 2:
+    /// Input: s = "abc"
+    /// Output : 5
+    /// Explanation :
+    /// The following substrings don't contain "abc" as a subsequence:
+    /// s[0..0] = "a"
+    /// s[0..1] = "ab"
+    /// s[1..1] = "b"
+    /// s[1..2] = "bc"
+    /// s[2..2] = "c"
+    /// Thus, the answer is 5.
+    ///
+    /// Example 3:
+    /// Input: s = "ac"
+    /// Output : 3
+    /// Explanation :
+    /// All substrings in s don't contain "abc" as a subsequence. Thus, the answer is 3.
+    /// 
+    /// Constraints:
+    /// 1. 1 <= s.length <= 10^5
+    /// 2. s only consists of 'a', 'b', and 'c' characters.
+    /// </summary>
+    long long countValidSubstringsII(string s);
+
+    /// <summary> 
+    /// Leet Code #4106. Find Mismatched Segments Between Two Strings
+    /// 
+    /// Medium
+    /// 
+    /// You are given two strings s1 and s2 of the same length.
+    ///
+    /// A mismatched segment is a maximal contiguous range of indices where 
+    /// the characters of s1 and s2 differ at every index.
+    ///
+    /// Return a 2D array containing[sub1, sub2] for each mismatched segment, 
+    /// where sub1 and sub2 are the corresponding substrings from s1 and s2, 
+    /// respectively.Return the segments in increasing order of their starting 
+    /// indices.If there are no mismatched segments, return an empty array.
+    ///
+    /// A substring is a contiguous non - empty sequence of characters within 
+    /// a string.
+    ///
+    /// Example 1:
+    /// Input: s1 = "earth", s2 = "empty"
+    /// Output : [["ar", "mp"], ["h", "y"]]
+    /// Explanation :
+    /// The characters at indices 1 and 2 differ, forming the mismatched 
+    /// segment["ar", "mp"].
+    /// The characters at index 4 differ, forming the mismatched 
+    /// segment["h", "y"].
+    /// 
+    /// Example 2 :
+    /// Input : s1 = "action", s2 = "nation"
+    /// Output : [["ac", "na"]]
+    /// Explanation :
+    /// The characters at indices 0 and 1 differ, forming the mismatched 
+    /// segment["ac", "na"].All remaining characters are equal in both 
+    /// strings.
+    ///
+    /// Example 3 :
+    /// Input : s1 = "hot", s2 = "hot"
+    /// Output : []
+    /// Explanation :
+    /// The two strings are identical, so there are no mismatched segments.
+    ///
+    /// Constraints:
+    /// 1. 1 <= s1.length == s2.length <= 100
+    /// 2. s1 and s2 consist of lowercase English letters.
+    /// </summary>
+    vector<vector<string>> findMismatchedSegments(string s1, string s2);
+
+    /// <summary> 
+    /// Leet Code #4105. Repeated String Match II
+    /// 
+    /// Hard
+    /// 
+    /// You are given two strings a and b consisting of lowercase English 
+    /// letters, and two integers x and y.
+    ///
+    /// Return true if the string formed by repeating b exactly y times(b * y) 
+    /// is a substring of the string formed by repeating a exactly x 
+    /// times(a * x).Otherwise, return false.
+    ///
+    /// A substring is a contiguous non - empty sequence of characters within 
+    /// a string.
+    ///
+    /// Example 1:
+    /// Input: a = "ab", b = "abab", x = 2, y = 1
+    /// Output : true
+    /// Explanation :
+    /// a * x = "ab" * 2 = "abab"
+    /// b * y = "abab" * 1 = "abab"
+    /// They are identical, so b * y is a substring of a * x.Thus, the answer 
+    /// is true.
+    ///
+    /// Example 2 :
+    /// Input : a = "abc", b = "bc", x = 2, y = 3
+    /// Output : false
+    /// Explanation :
+    /// a * x = "abc" * 2 = "abcabc"
+    /// b * y = "bc" * 3 = "bcbcbc"
+    /// The answer is false as b * y = "bcbcbc" is not a substring of 
+    /// a * x = "abcabc".
+    /// 
+    /// Example 3 :
+    /// Input : a = "abcd", b = "cdab", x = 2, y = 1
+    /// Output : true
+    /// Explanation :
+    /// a * x = "abcd" * 2 = "abcdabcd"
+    /// b * y = "cdab" appears in a * x = "abcdabcd" at indices[2..5].
+    /// Thus, the answer is true.
+    ///
+    /// Constraints :
+    /// 1. 1 <= a.length <= 100
+    /// 2. 1 <= b.length <= 100
+    /// 3. 1 <= x <= 10^9
+    /// 4. 1 <= y <= 10^9
+    /// 5. a and b consist of lowercase English letters.
+    /// </summary>
+    bool repeatedStringMatchII(string a, string b, int x, int y); 
+
 #pragma endregion
 };
 

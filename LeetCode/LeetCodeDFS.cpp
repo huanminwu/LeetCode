@@ -13404,4 +13404,212 @@ int LeetCodeDFS::maximumCost(int n, vector<vector<int>>& highways, int k)
     return result;
 }
 
+/// <summary>
+/// Leet Code #4113. Game of Divisible Sums
+/// </summary>
+long long LeetCodeDFS::maxDifference(vector<int>& nums, int index, int turn, vector<vector<long long>>& dp)
+{
+    if (index == nums.size())
+    {
+        return 0;
+    }
+    if (dp[index][turn] != LLONG_MIN)
+    {
+        return dp[index][turn];
+    }
+    long long result = LLONG_MIN;
+    long long sum = 0;
+    for (int j = index; j < index + 2 && j < (int)nums.size(); j++)
+    {
+        sum += nums[j];
+        if (sum % 3 == 0)
+        {
+            result = max(result, sum - maxDifference(nums, j + 1, 1 - turn, dp));
+        }
+        else
+        {
+            result = max(result, sum + maxDifference(nums, j + 1, turn, dp));
+        }
+    }
+    dp[index][turn] = result;
+    return result;
+}
+
+/// <summary>
+/// Leet Code #4113. Game of Divisible Sums
+/// 
+/// Medium
+/// 
+/// Alice and Bob are playing a game with an integer array nums.Alice 
+/// goes first.
+///
+/// On each turn, the current player takes and removes either the leftmost 
+/// element or , if at least two elements remain, the two leftmost 
+/// elements.
+///
+/// The sum of the elements taken in that turn determines who plays next :
+///
+/// If the sum is divisible by 3, the other player plays next.
+/// Otherwise, the same player plays again.
+/// The score of a player is the sum of the values of all elements that 
+/// player takes.
+///
+/// Both players play optimally, with each player trying to maximize 
+/// their own score.
+///
+/// The game ends when all elements have been taken.
+///
+/// Return Alice's score minus Bob's score.
+///
+/// Example 1:
+/// Input: nums = [3, 6, 4]
+/// Output : 5
+/// Explanation :
+/// One sequence of optimal turns is as follows :
+/// Alice takes the two leftmost elements.Their sum is 3 + 6 = 9, which 
+/// is divisible by 3, so Bob plays next.Alice's score is now 9, and the 
+/// remaining array is [4].
+/// 
+/// Bob takes the only remaining element.His score is 4, and the game ends.
+/// Alice's score minus Bob's score is 9 - 4 = 5, so the answer is 5.
+///
+/// Example 2:
+/// Input: nums = [6, 1, 2, 1, 2]
+/// Output : 12
+/// Explanation :
+/// One sequence of optimal turns is as follows :
+/// Alice takes the two leftmost elements.Their sum is 6 + 1 = 7, which 
+/// is not divisible by 3, so Alice plays again.Her score is now 7, and 
+/// the remaining array is[2, 1, 2].
+/// Alice takes the leftmost element.Its value is 2, which is not 
+/// divisible by 3, so Alice plays again.Her score is now 7 + 2 = 9, and 
+/// the remaining array is[1, 2].
+/// Alice takes both remaining elements.Her score is now 9 + 1 + 2 = 12, 
+/// and the game ends.
+/// Bob takes no elements, so his score is 0. Alice's score minus Bob's 
+/// score is 
+/// 12 - 0 = 12, so the answer is 12.
+///
+/// Example 3:
+/// Input: nums = [3, 3, 4, 5]
+/// Output : -3
+/// Explanation :
+/// One sequence of optimal turns is as follows :
+/// Alice takes the two leftmost elements.Their sum is 3 + 3 = 6, which 
+/// is divisible by 3, so Bob plays next.Alice's score is now 6, and the 
+/// remaining array is [4, 5].
+/// Bob takes both remaining elements.His score is 4 + 5 = 9, and the 
+/// game ends.
+/// Alice's score minus Bob's score is 6 - 9 = -3, so the answer is -3.
+///
+/// Constraints:
+/// 1. 1 <= nums.length <= 10^5
+/// 2. 1 <= nums[i] <= 10^9
+/// </summary>
+long long LeetCodeDFS::maxDifference(vector<int>& nums)
+{
+    vector<vector<long long>> dp(nums.size(), vector<long long>(2, LLONG_MIN));
+    return maxDifference(nums, 0, 0, dp);
+}
+
+/// <summary>
+/// Leet Code #4115. Sum of Compatible Numbers in Range II
+/// </summary>
+pair<long long, long long> LeetCodeDFS::sumOfGoodIntegers(string str_bits, int pos, long long n, int is_limit, 
+    vector<vector<pair<long long, long long>>> &cache)
+{
+    long long M = 1000000007;
+    if (pos == str_bits.size())
+    {
+        return make_pair(1, 0);
+    }
+    int offset = is_limit;
+    if (cache[pos][is_limit].first != -1)
+    {
+        return cache[pos][is_limit];
+    }
+    pair<long long, long long> result = make_pair(0, 0);
+    for (int d = 0; d <= (is_limit ? str_bits[pos] - '0' : 1); d++)
+    {
+        int new_is_limit = (is_limit == 1 && d == str_bits[pos] - '0') ? 1 : 0;
+        long long bit_value = (long long)d << (str_bits.size() - pos - 1);
+        if ((bit_value & n) != 0)
+        {
+            continue;
+        }
+        pair<long long, long long> sub_result;
+        sub_result = sumOfGoodIntegers(str_bits, pos + 1, n, new_is_limit, cache);
+        result.first = (result.first + sub_result.first) % M;
+        result.second = (result.second + (bit_value % M * sub_result.first % M + sub_result.second) % M) % M;
+    }
+    cache[pos][offset] = result;
+    return result;
+}
+
+/// <summary>
+/// Leet Code #4115. Sum of Compatible Numbers in Range II
+/// 
+/// Hard
+/// 
+/// You are given two integers n and k.
+///
+/// A positive integer x is called compatible if it satisfies both of the 
+/// following conditions :
+///
+/// abs(n - x) <= k
+/// (n & x) == 0
+/// Return the sum of all compatible integers x.
+///
+/// Since the answer may be very large, return it modulo 10^9 + 7.
+/// Note:
+/// Here, & denotes the bitwise AND operator.
+/// The absolute difference between integers i and j is defined as abs(i - j).
+/// Example 1:
+/// Input: n = 2, k = 3
+/// Output : 10
+/// Explanation :
+/// The compatible integers are :
+/// x = 1, since abs(2 - 1) = 1 and 2 & 1 = 0.
+/// x = 4, since abs(2 - 4) = 2 and 2 & 4 = 0.
+/// x = 5, since abs(2 - 5) = 3 and 2 & 5 = 0.
+/// Thus, the answer is 1 + 4 + 5 = 10.
+///
+/// Example 2:
+/// Input: n = 5, k = 1
+/// Output : 0
+/// Explanation :
+/// There are no compatible integers in the range[4, 6].Thus, the answer is 0.
+///
+/// Constraints:
+/// 1. 1 <= n <= 10^15
+/// 2. 0 <= k <= 10^15
+/// </summary>
+int LeetCodeDFS::sumOfGoodIntegers(long long n, long long k)
+{
+    long long max_val = n + k;
+    long long min_val = max(1LL, n - k) - 1;
+    string str_min_val;
+    while (min_val > 0)
+    {
+        str_min_val.push_back('0' + min_val % 2);
+        min_val /= 2;
+    }
+    std::reverse(str_min_val.begin(), str_min_val.end());
+
+    string str_max_val;
+    while (max_val > 0)
+    {
+        str_max_val.push_back('0' + max_val % 2);
+        max_val /= 2;
+    }
+    std::reverse(str_max_val.begin(), str_max_val.end());
+
+    long long M = 1000000007;
+    vector<vector<pair<long long, long long>>> cache1(str_max_val.size(), vector<pair<long long, long long>>(2, make_pair(-1, -1)));
+    long long sum_max = sumOfGoodIntegers( str_max_val, 0, n, 1, cache1).second;
+    vector<vector<pair<long long, long long>>> cache2(str_min_val.size(), vector<pair<long long, long long>>(2, make_pair(-1, -1)));
+    long long sum_min = sumOfGoodIntegers(str_min_val, 0, n, 1, cache2).second;
+    return (int)((sum_max - sum_min + M) % M);
+}
+
 #pragma endregion

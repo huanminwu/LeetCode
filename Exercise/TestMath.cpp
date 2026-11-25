@@ -9570,8 +9570,30 @@ void TestLeetCode4098(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode4117(void)
+{
+    Logger::WriteMessage("Test Leet Code 4117");
+    LeetCodeMath leetCode;
+    int a = 9, b = 2, c = 5;
+    int result = leetCode.minRange(a, b, c);
+    Logger::WriteMessage("a = " + to_string(a) + ", b = " + to_string(b) +", c = " + to_string(c));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    a = 5, b = 7, c = 6;
+    result = leetCode.minRange(a, b, c);
+    Logger::WriteMessage("a = " + to_string(a) + ", b = " + to_string(b) + ", c = " + to_string(c));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    a = 3, b = 3, c = 3;
+    result = leetCode.minRange(a, b, c);
+    Logger::WriteMessage("a = " + to_string(a) + ", b = " + to_string(b) + ", c = " + to_string(c));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeMath(void)
 {
+    TestLeetCode4117();
     TestLeetCode4098();
     TestLeetCode4097();
     TestLeetCode4093();

@@ -14407,8 +14407,193 @@ void TestLeetCode4091(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode4107(void)
+{
+    Logger::WriteMessage("Test Leet Code 4107");
+    LeetCodeArray leetCode;
+    vector<int> nums = {1, 2, 3};
+    vector<int> target = {3, 2, 1};
+    int result = leetCode.countSuffixI(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,5,6,4,6 };
+    target = { 1,5,6,6,4 };
+    result = leetCode.countSuffixI(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 7,6,8 };
+    target = { 8,6,7 };
+    result = leetCode.countSuffixI(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4109(void)
+{
+    Logger::WriteMessage("Test Leet Code 4109");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 2, 2, 3 };
+    vector<int> target = { 2, 2, 3, 2, 1, 3, 2, 2 };
+    vector<int> result = leetCode.countSuffixII(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage(result);
+
+    nums = { 5, 6, 5 };
+    target = { 5, 6, 5, 5, 6, 5 };
+    result = leetCode.countSuffixII(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage(result);
+
+    nums = { 7,6,8 };
+    target = { 8,6,7 };
+    result = leetCode.countSuffixII(nums, target);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage(target);
+    Logger::WriteMessage(result);
+}
+
+
+void TestLeetCode4110(void)
+{
+    Logger::WriteMessage("Test Leet Code 4110");
+    LeetCodeArray leetCode;
+    vector<int> nums = {1, 2, 3, 4, 5};
+    int k = 3;
+    int result = leetCode.maximumLengthDivisible(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 5, 10, 15 };
+    k = 5;
+    result = leetCode.maximumLengthDivisible(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,3,5,7,9 };
+    k = 4;
+    result = leetCode.maximumLengthDivisible(nums, k);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("k = " + to_string(k));
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4111(void)
+{
+    Logger::WriteMessage("Test Leet Code 4111");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 5, 3, 1, 2 };
+    int result = leetCode.countConsistentI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,1 };
+    result = leetCode.countConsistentI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0 };
+    result = leetCode.countConsistentI(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4114(void)
+{
+    Logger::WriteMessage("Test Leet Code 4114");
+    LeetCodeArray leetCode;
+    vector<int> nums = { 5, 3, 1, 2 };
+    long long result = leetCode.countConsistentII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 1,1,1 };
+    result = leetCode.countConsistentII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 0 };
+    result = leetCode.countConsistentII(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4116(void)
+{
+    Logger::WriteMessage("Test Leet Code 4116");
+    LeetCodeArray leetCode;
+    vector<int> rain = { 1,1,0,1,1 };
+    vector<string> result = leetCode.assignUmbrella(rain);
+    Logger::WriteMessage(rain);
+    Logger::WriteMessage(result);
+
+    rain = { 0,1,0,1 };
+    result = leetCode.assignUmbrella(rain);
+    Logger::WriteMessage(rain);
+    Logger::WriteMessage(result);
+}
+
+void TestLeetCode4120(void)
+{
+    Logger::WriteMessage("Test Leet Code 4120");
+    LeetCodeArray leetCode;
+    vector<int>  nums = { 1, 10, 2 };
+    int result = leetCode.countDominantElements(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 6,4,2 };
+    result = leetCode.countDominantElements(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 7 };
+    result = leetCode.countDominantElements(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
+void TestLeetCode4121(void)
+{
+    Logger::WriteMessage("Test Leet Code 4121");
+    LeetCodeArray leetCode;
+    vector<int>  nums = { 1,2,3 };
+    long long result = leetCode.minCostEqual(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,3,3,6,3,3 };
+    result = leetCode.minCostEqual(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    nums = { 3,4,4,5,4,4,3 };
+    result = leetCode.minCostEqual(nums);
+    Logger::WriteMessage(nums);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeArray(void)
 {
+    TestLeetCode1063();
+    TestLeetCode4121();
+    TestLeetCode4120();
+    TestLeetCode4116();
+    TestLeetCode4114();
+    TestLeetCode4111();
+    TestLeetCode4110();
+    TestLeetCode4109();
+    TestLeetCode4107();
     TestLeetCode4091();
     TestLeetCode4090();
     TestLeetCode4094();

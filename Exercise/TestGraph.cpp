@@ -7103,9 +7103,51 @@ void TestLeetCode4096(void)
     Logger::WriteMessage(result);
 }
 
+void TestLeetCode4122(void)
+{
+    Logger::WriteMessage("Test Leet Code 4122");
+    LeetCodeGraph leetCode;
+    int n = 3;
+    vector<vector<int>> edges = { {0, 1, 1}, {0, 2, 1} };
+    vector<int> requiredSignals = { 1, 1, 2 };
+    vector<long long> result = leetCode.earliestActivationTimes(n, edges, requiredSignals);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(requiredSignals);
+    Logger::WriteMessage(result);
+
+    n = 4;  
+    edges = { {0, 1, 1}, {0, 2, 1}, {1, 3, 2}, {2, 3, 2} }; 
+    requiredSignals = { 3, 1, 1, 2 };
+    result = leetCode.earliestActivationTimes(n, edges, requiredSignals);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(requiredSignals);
+    Logger::WriteMessage(result);
+
+    n = 4;
+    edges = { {0, 1, 2}, {1, 2, 3}, {0, 2, 5}, {2, 3, 1} };
+    requiredSignals = {3, 1, 2, 1};
+    result = leetCode.earliestActivationTimes(n, edges, requiredSignals);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(requiredSignals);
+    Logger::WriteMessage(result);
+
+    n = 4;
+    edges = { {0, 1, 2}, {1, 0, 1}, {1, 2, 1}, {2, 3, 1}, {3, 2, 1} };
+    requiredSignals = {3, 1, 2, 1};
+    result = leetCode.earliestActivationTimes(n, edges, requiredSignals);
+    Logger::WriteMessage("n = " + to_string(n));
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(requiredSignals);
+    Logger::WriteMessage(result);
+}
+
 
 void TestLeetCodeGraph(void)
 {
+    TestLeetCode4122();
     TestLeetCode4096();
     TestLeetCode4046();
     TestLeetCode4023();

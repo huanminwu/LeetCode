@@ -5075,7 +5075,6 @@ void TestLeetCode4085(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
-
 void TestLeetCode4100(void)
 {
     Logger::WriteMessage("Test Leet Code 4100");
@@ -5117,8 +5116,75 @@ void TestLeetCode4100(void)
     Logger::WriteMessage("result = " + to_string(result));
 }
 
+void TestLeetCode4108(void)
+{
+    Logger::WriteMessage("Test Leet Code 4108");
+    LeetCodeTree leetCode;
+    int n = 3;
+    string colors = "RBR";
+    vector<vector<int>> edges = { {0, 1},{1, 2} };
+    long long result = leetCode.minCostRed(n, colors, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(colors);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3, colors = "RBR";
+    edges = { {0, 1}, {0, 2} };
+    result = leetCode.minCostRed(n, colors, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(colors);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 4, colors = "BRRR", edges = { {0,1},{0,2},{0,3} };
+    result = leetCode.minCostRed(n, colors, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(colors);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    n = 3, colors = "BBB", edges = { {0, 1}, {1, 2} };
+    result = leetCode.minCostRed(n, colors, edges);
+    Logger::WriteMessage(edges);
+    Logger::WriteMessage(colors);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+void TestLeetCode4112(void)
+{
+    Logger::WriteMessage("Test Leet Code 4112");
+    LeetCodeTree leetCode;
+    vector<int> parent = { -1, 0, 0, 0, 1, 2, 3, 3 };
+    vector<int> op = { 1, 1, 0, 0, 1, 1, 0, 1 };
+    vector<int> score = { 5, 6, 1, 2, 3, 2, 3, -3 };
+    int result = leetCode.maxScore(parent, op, score);
+    Logger::WriteMessage(parent);
+    Logger::WriteMessage(op);
+    Logger::WriteMessage(score);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    parent = { -1, 0, 0 };
+    op = { 0, 0, 0 };
+    score = { 1, 2, 3 };
+    result = leetCode.maxScore(parent, op, score);
+    Logger::WriteMessage(parent);
+    Logger::WriteMessage(op);
+    Logger::WriteMessage(score);
+    Logger::WriteMessage("result = " + to_string(result));
+
+    parent = { -1 };
+    op = { 1 };
+    score = { -10 };
+    result = leetCode.maxScore(parent, op, score);
+    Logger::WriteMessage(parent);
+    Logger::WriteMessage(op);
+    Logger::WriteMessage(score);
+    Logger::WriteMessage("result = " + to_string(result));
+}
+
+
 void TestLeetCodeTree(void)
 {
+    TestLeetCode4112();
+    TestLeetCode4108();
     TestLeetCode4100();
     TestLeetCode4085();
     TestLeetCode4018();
